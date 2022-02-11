@@ -4,6 +4,8 @@ A fridge and grocery manager app that allows users to keep track of their food p
 
 ## To Setup This Project
 
+Both the server and client code should be running in seperate terminals
+
 ### Server Code
 
 1. Clone this repo with
