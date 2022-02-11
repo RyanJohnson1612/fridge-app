@@ -5,7 +5,10 @@ module.exports = (db) => {
   
   /* GET users listing. */
   router.get('/', function(req, res, next) {
-    res.send('respond with a resource');
+    const command = "SELECT * FROM users";
+    db.query(command).then(data => {
+      res.json(data.rows);
+    })
   });
 
   return router;
