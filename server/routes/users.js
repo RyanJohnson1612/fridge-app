@@ -10,5 +10,13 @@ module.exports = (db) => {
     })
   });
 
+  router.get('/fridges', function(req, res, next) {
+    const command = "SELECT * FROM fridge_items";
+    db.query(command).then(data => {
+      res.json(data.rows);
+    })
+  });
+  
+
   return router;
 }
