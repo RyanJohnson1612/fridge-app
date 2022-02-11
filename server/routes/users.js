@@ -1,5 +1,4 @@
-var express = require('express').Router();
-var router = express.Router();
+const router = require('express').Router();
 
 module.exports = (db) => {
   
