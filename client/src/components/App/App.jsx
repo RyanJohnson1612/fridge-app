@@ -1,10 +1,15 @@
-import React from 'react';
-import './App.scss';
+import React from "react";
+import "./App.scss";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Navbar } from "react-bootstrap";
 
 function App() {
   return (
     <div className="App">
-      Fridge App (Name WIP)
+      <Navbar bg="myTeal" variant="dark" fixed="top">
+        <Navbar.Brand href="/">FridgeApp</Navbar.Brand>
+      </Navbar>
+      <div className="content">Placeholder content...</div>
     </div>
   );
 }
