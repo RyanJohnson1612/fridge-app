@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const bcrypt = require('bcrypt');
 
 module.exports = (db) => {
 
@@ -20,6 +21,11 @@ module.exports = (db) => {
         res.json(data.rows[0]);
       })
       .catch(err => err);
+  });
+
+  /* POST create new user */
+  router.post('/', (req, res) => {
+
   });
 
   return router;
