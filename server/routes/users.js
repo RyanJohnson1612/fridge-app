@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 module.exports = (db) => {
 
-  /* GET users listing. */
+  /* GET list of users. */
   router.get('/', (req, res) => {
     const command = "SELECT * FROM users";
     db.query(command)
@@ -12,6 +12,7 @@ module.exports = (db) => {
       .catch(err => err);
   });
 
+  /* GET user by id. */
   router.get('/:id', (req, res) => {
     const command = "SELECT * FROM users WHERE id = $1";
     db.query(command, [req.params.id])
