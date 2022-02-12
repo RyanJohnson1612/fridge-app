@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "local": "node ./node_modules/nodemon/bin/nodemon.js",
     "db:reset": "node db/scripts/resetdb.js",
-    "test": "jest"
+    "test": "NODE_ENV=test jest --testTimeout=10000 --forceExit"
   },
   "jest": {
     "testEnvironment": "node",
@@ -24,7 +24,9 @@
     "request-promise": "^4.2.6"
   },
   "devDependencies": {
+    "axios": "^0.25.0",
     "jest": "^27.5.1",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
   }
 }
