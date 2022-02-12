@@ -1,0 +1,79 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background:rgb(241, 241, 241)
+}
+
+.shopping-list {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  min-height: 600px;
+  background: #ffffff;
+  text-align: center;
+  margin: 128px auto;
+  border: 2px solid #000000;
+  padding-bottom: 32px;
+  box-shadow: 5px 10px gray
+}
+
+h1 {
+  margin: 32px 0;
+  color: rgb(15, 15, 15);
+  font-size: 24px;
+}
+
+.complete {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.item-form {
+  margin-bottom: 32px;
+}
+
+.item-input {
+  padding: 14px 32px 14px 16px;
+  border: 2px solid #1aacb1;
+  outline: none;
+  width: 300px;
+  box-shadow: 1px 2px gray
+}
+
+.item-button {
+  padding: 16px;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  outline: none;
+  background: #1aacb1;
+  color: #fff;
+  box-shadow: 1px 2px gray
+}
+
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px auto;
+  padding: 16px;
+  border: 1px solid #000000;
+  width: 90%;
+  box-shadow: 1px 2px gray;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.delete-icon {
+  margin-right: 10px;
+}
+
+
