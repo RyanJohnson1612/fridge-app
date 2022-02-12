@@ -4,8 +4,16 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
+    "test": "NODE_ENV=test jest --testTimeout=10000 --forceExit",
     "local": "node ./node_modules/nodemon/bin/nodemon.js",
-    "db:reset": "node db/scripts/resetdb.js"
+    "db:reset": "node db/scripts/resetdb.js",
+    "test-db:reset": "NODE_ENV=test node db/scripts/resetdb.js"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "dependencies": {
     "cookie-session": "^2.0.0",
@@ -13,9 +21,13 @@
     "dotenv": "^16.0.0",
     "express": "~4.16.1",
     "morgan": "~1.9.1",
-    "pg": "^8.7.3"
+    "pg": "^8.7.3",
+    "request-promise": "^4.2.6"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "axios": "^0.25.0",
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
   }
 }
