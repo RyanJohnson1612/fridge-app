@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import ShoppingListForm from "./ShoppingListForm";
-import { RiCloseCircleLine } from "react-icons/ri";
+import { RiCloseCircleLine, RiFridgeLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
 
 function ShoppingListItem(props) {
-  const { items, completeItem, removeItem, updateItem } = props;
+  const { items, completeItem, removeItem, updateItem, addToFridge } = props;
 
   const [edit, setEdit] = useState({
     id: null,
@@ -44,6 +44,10 @@ function ShoppingListItem(props) {
         <TiEdit
           onClick={() => setEdit({ id: item.id, value: item.text })}
           className="delete-icon"
+        />
+        <RiFridgeLine
+          onClick={() => addToFridge(item.id)}
+          className="fridge-icon"
         />
       </div>
     </div>
