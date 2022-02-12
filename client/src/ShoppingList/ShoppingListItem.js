@@ -43,7 +43,7 @@ function ShoppingListItem(props) {
         />
         <TiEdit
           onClick={() => setEdit({ id: item.id, value: item.text })}
-          className="delete-icon"
+          className="edit-icon"
         />
         <RiFridgeLine
           onClick={() => addToFridge(item.id)}
