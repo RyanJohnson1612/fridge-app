@@ -5,7 +5,7 @@ module.exports = (db) => {
 
   /* GET list of users. */
   router.get('/', (req, res) => {
-    const command = "SELECT * FROM users";
+    const command = "SELECT * FROM users;";
     db.query(command)
       .then(data => {
         res.json(data.rows);
@@ -19,7 +19,7 @@ module.exports = (db) => {
 
   /* GET user by id. */
   router.get('/:id', (req, res) => {
-    const command = "SELECT * FROM users WHERE id = $1";
+    const command = "SELECT * FROM users WHERE id = $1;";
     db.query(command, [req.params.id])
       .then(data => {
         res.json(data.rows[0]);
@@ -44,6 +44,25 @@ module.exports = (db) => {
       })
       .catch(err => {
         res.status(400)
+        res.json(err).end();
+      });
+  });
+
+  /* POST validate user login */
+  router.post('/login', (req, res) => {
+    const command = "SELECT * FROM users WHERE email = $1;"
+    db.query(command, [req.body.email])
+      .then(data => {
+        const user = data.rows[0];
+        if (user && bcrypt.compareSync(req.body.password, user.password)) {
+          res.status(200);
+          res.json(user).end();
+          return;
+        }
+        res.status(401).end();
+      })
+      .catch(err => {
+        res.status(401);
         res.json(err).end();
       });
   });
