@@ -82,8 +82,35 @@ describe("Users routes", () => {
       .send(user)
       .set('Accept', 'application/json')
       .expect(400)
-    console.log(res.body);
 
     expect(res.body.detail).toContain('Failing row contains');
+  });
+
+  it('should login a user give the correct email and password', async () => {
+    const user = {
+      email: 'jim@testman.com',
+      password: 'password'
+    }
+
+    const res = await request(app)
+      .post('/users/login')
+      .send(user)
+      .set('Accept', 'application/json')
+      .expect(200);
+
+    expect(res.body.first_name).toBe('Jim');
+  });
+
+  it('should not login a user give the wrong password', (done) => {
+    const user = {
+      email: 'jim@testman.com',
+      password: 'incorrectpassword'
+    }
+
+    request(app)
+      .post('/users/login')
+      .send(user)
+      .set('Accept', 'application/json')
+      .expect(401, done);
   });
 });
