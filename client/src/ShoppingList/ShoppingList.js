@@ -12,6 +12,14 @@ function ShoppingList() {
     console.log(...items);
   };
 
+  //Function to update item in shopping list, will be passed to ShoppingListItem component
+  const updateItem = (itemId, newValue) => {
+    setItems((prev) =>
+      //if the item.id matches, set it to newValue, otherwise set it back to item
+      prev.map((item) => (item.id === itemId ? newValue : item))
+    );
+  };
+
   //Function to remove item from shopping list,will be passed to ShoppingListItem component
   const removeItem = (id) => {
     //Check items array for the target item, and filter it out to remove
@@ -40,6 +48,7 @@ function ShoppingList() {
         items={items}
         completeItem={completeItem}
         removeItem={removeItem}
+        updateItem={updateItem}
       />
     </div>
   );
