@@ -3,11 +3,25 @@ import ShoppingListForm from "./ShoppingListForm";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
 
-function ShoppingListItem() {
+function ShoppingListItem({ items, completeItem, removeItem, updateItem }) {
   const [edit, setEdit] = useState({
     id: null,
     value: "",
   });
+
+  const submitUpdate = (value) => {
+    updateItem(edit.id, value);
+    setEdit({
+      id: null,
+      value: "",
+    });
+  };
+
+  /*  If state variable edit.id is true (which occurs after edit icon is clicked),
+  return ShoppingListForm while passing submitUpdate function onSubmit */
+  if (edit.id) {
+    return <ShoppingListForm onSubmit={submitUpdate}></ShoppingListForm>;
+  }
 
   return items.map((item, index) => (
     // class of item is assigned based on whether item was purchased or not
@@ -21,8 +35,14 @@ function ShoppingListItem() {
       </div>
 
       <div className="icons">
-        <RiCloseCircleLine />
-        <TiEdit />
+        <RiCloseCircleLine
+          onClick={() => removeItem(item.id)}
+          className="delete-icon"
+        />
+        <TiEdit
+          onClick={() => setEdit({ id: item.id, value: item.text })}
+          className="delete-icon"
+        />
       </div>
     </div>
   ));
