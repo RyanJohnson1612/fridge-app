@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import ShoppingListForm from "./ShoppingListForm";
+import { RiCloseCircleLine } from "react-icons/ri";
+import { TiEdit } from "react-icons/ti";
 
 function ShoppingListItem() {
   const [edit, setEdit] = useState({
@@ -17,6 +19,11 @@ function ShoppingListItem() {
       <div key={item.id} onClick={() => completeItem(item.id)}>
         {item.text}
       </div>
+
+      <div className="icons">
+        <RiCloseCircleLine />
+        <TiEdit />
+      </div>
     </div>
   ));
 }
@@ -26,5 +33,3 @@ export default ShoppingListItem;
 {
   /* Function to check if item has been purchased or not */
 }
-
-Map through items in ShoppingListItem component, WIP
