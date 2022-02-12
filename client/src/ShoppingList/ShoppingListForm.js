@@ -11,13 +11,13 @@ function ShoppingListForm(props) {
     //Stop from refreshing page on submit
     e.preventDefault();
 
-    /*     props.onSubmit({
-      //Temporary way to generate unique id between 1-10,000
+    props.onSubmit({
+      //Temporary way to generate unique item id between 1-10,000 --> to be replaced
       id: Math.floor(Math.random() * 10000),
       text: input,
-    }); */
+    });
 
-    //Clears input form after clicking submit
+    //Clear input form after clicking submit
     setInput("");
   };
 
@@ -25,13 +25,13 @@ function ShoppingListForm(props) {
     <form className="shopping-form" onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Add a todo"
+        placeholder="Add an item"
         value={input}
         name="text"
         className="shopping-input"
         onChange={handleChange}
       />
-      <button className="todo-button"> Add todo</button>
+      <button className="item-button"> Add Item </button>
     </form>
   );
 }
