@@ -17,7 +17,6 @@ describe("Users routes", () => {
       .get('/users/1')
 
     expect(res.statusCode).toBe(200);
-    console.log(res.body)
     expect(Object.prototype.toString.call(res.body)).toBe('[object Object]');
   });
 
