@@ -28,13 +28,13 @@ function ShoppingListForm(props) {
   };
 
   return (
-    <form className="shopping-form" onSubmit={handleSubmit}>
+    <form className="item-form" onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Add an item"
         value={input}
         name="text"
-        className="shopping-input"
+        className="item-input"
         onChange={handleChange}
         ref={inputRefFocus}
       />

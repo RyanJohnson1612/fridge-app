@@ -29,7 +29,8 @@ h1 {
 
 .complete {
   text-decoration: line-through;
-  opacity: 0.6;
+  text-decoration-thickness: 2px;
+
 }
 
 .item-form {
@@ -68,7 +69,7 @@ h1 {
 .icons {
   display: flex;
   align-items: center;
-  font-size: 24px;
+  font-size: 20px;
   cursor: pointer;
 }
 
@@ -76,4 +77,11 @@ h1 {
   margin-right: 10px;
 }
 
+.fridge-icon {
+  color: rgb(8, 34, 149);
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
+  font-size: 28px;
+}
 
