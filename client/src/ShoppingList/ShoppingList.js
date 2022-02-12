@@ -32,8 +32,8 @@ function ShoppingList() {
   const completeItem = (id) => {
     let updatedItems = items.map((item) => {
       if (item.id === id) {
-        /* toggles isComplete between true and false */
-        item.isComplete = !item.isComplete;
+        /* toggles isPurchased between true and false */
+        item.isPurchased = !item.isPurchased;
       }
       return item;
     });
