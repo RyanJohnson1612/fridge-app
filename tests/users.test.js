@@ -1,6 +1,13 @@
 const request = require('supertest');
 const app = require("../app");
 
+const testUser1 = {
+  first_name: 'Jim',
+  last_name: 'Testman',
+  email: 'jim@testman.com',
+  password: 'password'
+}
+
 describe("Users routes", () => {
 
   xit('should return a list of users', async () => {
@@ -28,24 +35,16 @@ describe("Users routes", () => {
     const res = await request(app)
       .get('/users/420')
       .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
       .expect(200);
 
     expect(res.body).toBe('');
   });
 
-  it('should create a new user in the database, given all fields', (done) => {
-    const data = {
-      first_name: 'Jim',
-      last_name: 'Testman',
-      email: 'jim@testman.com',
-      password: 'password'
-    }
+  xit('should create a new user in the database, given all fields', (done) => {
     request(app)
       .post('/users')
       .send(data)
       .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
       .expect(201)
       .end((err) => {
         if (err) return done(err);
