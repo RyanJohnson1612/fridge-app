@@ -3,7 +3,9 @@ import ShoppingListForm from "./ShoppingListForm";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
 
-function ShoppingListItem({ items, completeItem, removeItem, updateItem }) {
+function ShoppingListItem(props) {
+  const { items, completeItem, removeItem, updateItem } = props;
+
   const [edit, setEdit] = useState({
     id: null,
     value: "",
@@ -20,7 +22,7 @@ function ShoppingListItem({ items, completeItem, removeItem, updateItem }) {
   /*  If state variable edit.id is true (which occurs after edit icon is clicked),
   return ShoppingListForm while passing submitUpdate function onSubmit */
   if (edit.id) {
-    return <ShoppingListForm onSubmit={submitUpdate}></ShoppingListForm>;
+    return <ShoppingListForm onSubmit={submitUpdate} />;
   }
 
   return items.map((item, index) => (
@@ -47,9 +49,4 @@ function ShoppingListItem({ items, completeItem, removeItem, updateItem }) {
     </div>
   ));
 }
-
 export default ShoppingListItem;
-
-{
-  /* Function to check if item has been purchased or not */
-}
