@@ -11,7 +11,10 @@ module.exports = (db) => {
         res.json(data.rows);
         res.end();
       })
-      .catch(err => err);
+      .catch(err => {
+        res.status(400)
+        res.json(err).end();
+      });
   });
 
   /* GET user by id. */
@@ -22,7 +25,10 @@ module.exports = (db) => {
         res.json(data.rows[0]);
         res.end()
       })
-      .catch(err => err);
+      .catch(err => {
+        res.status(400)
+        res.json(err).end();
+      });
   });
 
   /* POST create new user */
@@ -36,7 +42,10 @@ module.exports = (db) => {
       .then(data => {
         res.status(201).end();
       })
-      .catch(err => err);
+      .catch(err => {
+        res.status(400)
+        res.json(err).end();
+      });
   });
 
   return router;
