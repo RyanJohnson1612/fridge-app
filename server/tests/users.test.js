@@ -1,13 +1,6 @@
 const request = require('supertest');
 const app = require("../app");
 
-const testUser1 = {
-  first_name: 'Jim',
-  last_name: 'Testman',
-  email: 'jim@testman.com',
-  password: 'password'
-}
-
 describe("Users routes", () => {
 
   xit('should return a list of users', async () => {
@@ -41,14 +34,44 @@ describe("Users routes", () => {
   });
 
   xit('should create a new user in the database, given all fields', (done) => {
+    const user = {
+      first_name: 'Jim',
+      last_name: 'Testman',
+      email: 'jim@testman.com',
+      password: 'password'
+    }
+
     request(app)
       .post('/users')
-      .send(data)
+      .send(user)
       .set('Accept', 'application/json')
       .expect(201)
       .end((err) => {
         if (err) return done(err);
         done();
       });
+  });
+
+  it('should not create a new user in the database if email already exists in database', async () => {
+    const user = {
+      first_name: 'Jim',
+      last_name: 'Testman',
+      email: 'jim@testman.com',
+      password: 'password'
+    }
+
+    await request(app)
+      .post('/users')
+      .send(user)
+      .set('Accept', 'application/json')
+      .expect(201)
+
+    const res = await request(app)
+      .post('/users')
+      .send(user)
+      .set('Accept', 'application/json')
+      .expect(400)
+
+    expect(res.body.detail).toEqual('Key (email)=(jim@testman.com) already exists.');
   });
 });
