@@ -9,7 +9,7 @@ const cors = require('cors');
 const db = require('./configs/db.config');
 
 const usersRouter = require('./routes/users');
-const foodRouter = require('./routes/food');
+const fridgeItemsRouter = require('./routes/fridgeItems');
 
 const app = express();
 
@@ -20,6 +20,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', usersRouter(db));
-app.use('/food', foodRouter(db));
+app.use('/fridge_items', fridgeItemsRouter(db));
 
 module.exports = app;
