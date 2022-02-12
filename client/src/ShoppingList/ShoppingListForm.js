@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 function ShoppingListForm(props) {
   const [input, setInput] = useState("");
+
+  //Input form ref attribute will call inputRefFocus to focus cursor on form
+  const inputRefFocus = useRef(null);
+  useEffect(() => {
+    inputRefFocus.current.focus();
+  });
 
   const handleChange = (e) => {
     setInput(e.target.value);
@@ -30,6 +36,7 @@ function ShoppingListForm(props) {
         name="text"
         className="shopping-input"
         onChange={handleChange}
+        ref={inputRefFocus}
       />
       <button className="item-button"> Add Item </button>
     </form>
