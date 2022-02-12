@@ -12,6 +12,7 @@
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "sass": "^1.49.7",
@@ -29,8 +30,6 @@
     "workbox-strategies": "^5.1.4",
     "workbox-streams": "^5.1.4"
   },
-
-
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
