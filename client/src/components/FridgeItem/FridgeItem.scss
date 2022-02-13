@@ -1,9 +1,43 @@
+body {
+  position: static;
+}
 .image {
-  width: 50%;
+  width: 80%;
   height: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .properties {
-  display: flex;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: separate;
+  border-spacing: 15px 10px;
+  background-color: rgb(218, 230, 240);
+  border: 0.1em solid;
+  border-color: rgb(138, 138, 138);
+  font-family: 'Raleway', sans-serif;
+}
 
+td {
+  border-bottom: 0.5px dotted;
+}
+
+@media screen and (min-width: 650px) {
+  .body {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+  }
+
+  .image {
+    margin-right: 10px;
+    width: 35%;
+  }
+
+  .properties {
+    width: 50%;
+  }
 }
