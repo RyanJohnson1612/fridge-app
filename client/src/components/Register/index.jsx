@@ -3,7 +3,7 @@ import "./register.scss";
 
 function RegisterIndex() {
   return (
-    <div className="login">
+    <div className="register">
       <Register />
     </div>
   );
