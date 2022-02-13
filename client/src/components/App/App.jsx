@@ -34,7 +34,7 @@ function App() {
         </NavbarCollapse>
       </Navbar>
 
-      <div className="content">Placeholder content...</div>
+      <div className="content">
       <FridgeItem
         key={fridgeItem.id}
         name={fridgeItem.name}
@@ -47,6 +47,7 @@ function App() {
         storedSince={fridgeItem.stored_since}
         dateRemoved={fridgeItem.date_removed}
       />
+      </div>
     </div>
   );
 }
