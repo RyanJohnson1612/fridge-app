@@ -7,7 +7,7 @@ function Recipe(props) {
   console.log("ingredients", ingredientsArray);
 
   return (
-    <div>
+    <div className="Recipe">
       <h1> {title} </h1>
       <ol>
         {ingredients.map((ingredient) => (

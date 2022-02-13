@@ -1,0 +1,39 @@
+.Recipes {
+  min-height: 100vh;
+}
+
+.search-form{
+  min-height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.search-bar{
+  padding: 14px 32px 14px 16px;
+  border: 2px solid #1aacb1;
+  outline: none;
+  width: 300px;
+  box-shadow: 1px 2px gray
+}
+
+.search-button{
+  padding: 16px;
+  height: 55px;
+  width: 50px;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  outline: none;
+  background: #1aacb1;
+  color: #fff;
+  box-shadow: 1px 2px gray
+}
+
+.recipes-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+}

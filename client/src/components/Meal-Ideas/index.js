@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Recipe from "./Recipe";
+import "./Recipe.scss";
 
 function MealIdeas() {
   const APP_ID = "c91c9bd4";
@@ -49,7 +50,7 @@ function MealIdeas() {
   };
 
   return (
-    <div>
+    <div className="Recipes">
       <form className="search-form" onSubmit={getSearch}>
         <input
           className="search-bar"
@@ -59,16 +60,18 @@ function MealIdeas() {
         />
         <button className="search-button" type="submit"></button>
       </form>
-      {recipes.map((recipe) => (
-        <Recipe
-          key={recipe.recipe.label}
-          title={recipe.recipe.label}
-          calories={recipe.recipe.calories}
-          image={recipe.recipe.image}
-          ingredients={recipe.recipe.ingredients}
-          recipeURL={recipe.recipe.url}
-        />
-      ))}
+      <div className="recipes-list">
+        {recipes.map((recipe) => (
+          <Recipe
+            key={recipe.recipe.label}
+            title={recipe.recipe.label}
+            calories={recipe.recipe.calories}
+            image={recipe.recipe.image}
+            ingredients={recipe.recipe.ingredients}
+            recipeURL={recipe.recipe.url}
+          />
+        ))}
+      </div>
     </div>
   );
 }
