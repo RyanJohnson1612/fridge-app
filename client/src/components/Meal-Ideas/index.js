@@ -50,7 +50,8 @@ function MealIdeas() {
   };
 
   return (
-    <div className="Recipes">
+    <div className="Recipes-index">
+      <h3>Here are some recipe ideas for you based on your fridge items! </h3>
       <form className="search-form" onSubmit={getSearch}>
         <input
           className="search-bar"

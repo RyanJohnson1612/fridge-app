@@ -1,5 +1,10 @@
-.Recipes {
+.Recipes-index {
   min-height: 100vh;
+}
+
+.Recipes-index h3 {
+  display: flex;
+  justify-content: center;
 }
 
 .search-form{
@@ -35,5 +40,16 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+}
 
+.Recipe {
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px black;
+  margin: 40px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 40%;
 }

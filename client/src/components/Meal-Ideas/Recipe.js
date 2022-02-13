@@ -10,10 +10,12 @@ function Recipe(props) {
     <div className="Recipe">
       <h1> {title} </h1>
       <ol>
+        <h6> Ingredients: </h6>
         {ingredients.map((ingredient) => (
           <li>{ingredient.text}</li>
         ))}
       </ol>
+      <h6> Calories: </h6>
       <p> {calories} </p>
       <img src={image} alt="recipe-image" />
       <a href={recipeURL}>Get Full Recipe</a>
