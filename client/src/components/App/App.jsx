@@ -6,6 +6,7 @@ import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import ShoppingList from '../ShoppingList/';
 import Login from '../Login/';
+import Register from '../Register/';
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
           <Route path="/grocery-list" element={<ShoppingList />} />
           <Route path="/recipes" element={<h1>Recipes Index</h1>} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<h1>Register</h1>} />
+          <Route path="/register" element={<Register />} />
         </Routes>
         </div>
       </div>

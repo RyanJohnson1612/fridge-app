@@ -1,5 +1,5 @@
 import Login from "./Login";
-import "./Login.scss";
+import "./login.scss";
 
 function LoginIndex() {
   return (
