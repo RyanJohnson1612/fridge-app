@@ -3,23 +3,48 @@ import axios from 'axios';
 import { Alert, Button, Form } from 'react-bootstrap';
 
 function Register() {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [password, setPassword] = useState();
+  const [passwordConfirm, setPasswordConfirm] = useState();
   const [error, setError] = useState('');
 
-  const handleSubmit = () => {
-    console.log(passwordConfirm, password)
-    if (password === passwordConfirm) {
-      axios.post(`${process.env.REACT_APP_API_URL}/api/users`, {firstName, lastName, email, password})
-        .then(res => {
-          console.log(res);
-        });
-    } else {
-      setError('Passwords don\'t match');
+  const validateForm = () => {
+    setError('')
+    if(!firstName) {
+      setError('First name is required');
+      return;
     }
+    if(!lastName) {
+      setError('Last name is required');
+      return;
+    }
+    if(!email) {
+      setError('Email is required');
+      return;
+    }
+    if(!password) {
+      setError('Password is required');
+      return;
+    }
+    if(password !== passwordConfirm) {
+      setError('Passwords don\'t match');
+      return
+    }
+
+    submitForm();
+  }
+
+  const submitForm = () => {
+    axios.post(`${process.env.REACT_APP_API_URL}/api/users`, {firstName, lastName, email, password})
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+        setError('Error submitting registration, please try again');
+      });
   }
 
   return (
@@ -41,7 +66,7 @@ function Register() {
             className="register__input"
             type="text"
             value={lastName}
-            onChange={e => setFirstName(e.currentTarget.value)}
+            onChange={e => setLastName(e.currentTarget.value)}
           />
         </Form.Group>
         <Form.Group>
@@ -75,7 +100,7 @@ function Register() {
           className="register__button"
           type="submit"
           variant={'primary'}
-          onClick={() => handleSubmit()}>
+          onClick={() => validateForm()}>
             Register
         </Button>
         { error && <Alert variant={'danger'}>{error}</Alert>}

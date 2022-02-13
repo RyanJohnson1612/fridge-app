@@ -10,8 +10,8 @@ import Register from '../Register/';
 
 function App() {
   return (
-    <Router>
-      <main className="App">
+    <main className="App">
+        <Router>
         <Navbar bg="myTeal" variant="dark" fixed="top" expand="sm">
           <Navbar.Brand href="/">FridgeApp</Navbar.Brand>
           <Navbar.Toggle />
@@ -35,8 +35,8 @@ function App() {
             <Route path="/register" element={<Register />} />
           </Routes>
         </section>
-      </main>
-    </Router>
+      </Router>
+    </main>
   );
 }
 
