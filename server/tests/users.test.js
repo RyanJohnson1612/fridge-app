@@ -101,7 +101,7 @@ describe("Users routes", () => {
     expect(res.body.first_name).toBe('Jim');
   });
 
-  it('should not login a user give the wrong password', (done) => {
+  it('should not login a user given the wrong password', (done) => {
     const user = {
       email: 'jim@testman.com',
       password: 'incorrectpassword'
