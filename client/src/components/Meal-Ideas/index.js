@@ -20,7 +20,7 @@ function MealIdeas() {
     getRecipes();
   }, [query]);
 
-  //Function responsible for getting recipe data from API
+  //Function that gets recipe data from Edamam API using axios call
   const getRecipes = () => {
     axios
       .get(
@@ -43,6 +43,9 @@ function MealIdeas() {
   const getSearch = (e) => {
     e.preventDefault();
     setQuery(search);
+
+    //Clear input bar after each search
+    setSearch("");
   };
 
   return (
@@ -62,6 +65,8 @@ function MealIdeas() {
           title={recipe.recipe.label}
           calories={recipe.recipe.calories}
           image={recipe.recipe.image}
+          ingredients={recipe.recipe.ingredients}
+          recipeURL={recipe.recipe.url}
         />
       ))}
     </div>
