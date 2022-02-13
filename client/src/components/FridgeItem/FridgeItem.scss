@@ -1,6 +1,11 @@
-body {
-  position: static;
+html {
+  background-color: #e2cae963;
 }
+
+.App {
+  background-color: #e2cae963;
+}
+
 .image {
   width: 80%;
   height: 50%;
@@ -21,20 +26,26 @@ body {
   font-family: 'Raleway', sans-serif;
 }
 
-td {
-  border-bottom: 0.5px dotted;
+// td {
+//   border-bottom: 0.5px dotted;
+// }
+
+.click-from-item {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
 }
 
-@media screen and (min-width: 650px) {
+@media screen and (min-width: 576px) {
   .body {
     display: flex;
     align-items: center;
-    margin: 20px;
+    margin: 10px;
   }
 
   .image {
     margin-right: 10px;
-    width: 35%;
+    width: 40%;
   }
 
   .properties {
