@@ -16,6 +16,7 @@ const FridgeItem = (props) => {
   return (
     <div className='body'>
       <img src={props.image} className='image' />
+      <br />
       <table className='properties'>
         <tbody>
           <tr>
@@ -31,7 +32,7 @@ const FridgeItem = (props) => {
             <td>{props.dateStored}</td>
           </tr>
           <tr>
-            <td>Been in the Fridge since how long: </td>
+            <td>Been in the Fridge since: </td>
             <td>{daysAgo(props.storedSince)}</td>
           </tr>
           { props.expiry ?
@@ -42,7 +43,7 @@ const FridgeItem = (props) => {
           : "" }
           { props.expiry ?
             <tr>
-              <td>Time Remaining: </td>
+              <td>Days Until Expiry: </td>
               <td>{props.expireIn} Days</td>
             </tr>
           : ""}
