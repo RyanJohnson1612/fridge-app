@@ -15,8 +15,7 @@ function Recipe(props) {
           <li>{ingredient.text}</li>
         ))}
       </ol>
-      <h6> Calories: </h6>
-      <p> {calories} </p>
+      <h6> Calories: {Math.round(calories)} </h6>
       <img src={image} alt="recipe-image" />
       <a href={recipeURL}>Get Full Recipe</a>
     </div>

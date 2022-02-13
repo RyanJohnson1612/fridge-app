@@ -25,7 +25,7 @@
 
 .search-button{
   padding: 16px;
-  height: 55px;
+  height: 56px;
   width: 50px;
   border: none;
   border-radius: 0 4px 4px 0;
@@ -52,4 +52,22 @@
   justify-content: space-around;
   align-items: center;
   width: 40%;
+}
+
+.Recipe img {
+  border: 2px groove rgb(0, 0, 0);
+
+}
+
+.Recipe a {
+  background-color: #1aacb1;
+  color: white;
+  text-decoration: none;
+  margin: 10px;
+  padding: 1em 1.5em;
+  border-radius: 4px;
+}
+
+.Recipe a:active {
+  transform: scale(0.98);
 }
