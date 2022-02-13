@@ -11,7 +11,7 @@ import Register from '../Register/';
 function App() {
   return (
     <Router>
-      <div className="App">
+      <main className="App">
         <Navbar bg="myTeal" variant="dark" fixed="top" expand="sm">
           <Navbar.Brand href="/">FridgeApp</Navbar.Brand>
           <Navbar.Toggle />
@@ -26,16 +26,16 @@ function App() {
           </NavbarCollapse>
         </Navbar>
 
-        <div className="content">
-        <Routes>
-          <Route path="/fridge" element={<h1>Fridge Index</h1>} />
-          <Route path="/grocery-list" element={<ShoppingList />} />
-          <Route path="/recipes" element={<h1>Recipes Index</h1>} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-        </div>
-      </div>
+        <section className="content">
+          <Routes>
+            <Route path="/fridge" element={<h1>Fridge Index</h1>} />
+            <Route path="/grocery-list" element={<ShoppingList />} />
+            <Route path="/recipes" element={<h1>Recipes Index</h1>} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </section>
+      </main>
     </Router>
   );
 }
