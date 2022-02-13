@@ -14,7 +14,11 @@ module.exports = (db) => {
   // GET specific food
   router.get('/:id', function(req, res, next) {
     const queryString =
-      `SELECT fridge_items.*, to_char(date_stored, 'YYYY/MM/DD') as modified_date, to_char(expiry, 'YYYY/MM/DD') as modified_expiry, (expiry - date_stored) as expire_in, (CURRENT_DATE - date_stored) as stored_since
+      `SELECT name, category, image_URL, notes, date_removed,
+       to_char(date_stored, 'Mon DD, YYYY') as date_stored,
+       to_char(expiry, 'Mon DD, YYYY') as expiry,
+       (expiry - date_stored) as expire_in,
+       (CURRENT_DATE - date_stored) as stored_since
        FROM fridge_items
        WHERE id = $1`;
     const queryParams = [req.params.id]
