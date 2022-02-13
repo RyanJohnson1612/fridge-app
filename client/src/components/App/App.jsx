@@ -5,14 +5,14 @@ import axios from 'axios'
 
 function App() {
 
-  const [food, setFood] = useState({});
+  const [fridgeItem, setFridgeItem] = useState({});
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/food/6`)
+    axios.get(`http://localhost:8080/fridge_items/10`)
       .then((results) => {
-        const food = results.data[0]
-        console.log(food);
-        setFood(food);
+        const fridgeItem = results.data[0]
+        console.log(fridgeItem);
+        setFridgeItem(fridgeItem);
       }).catch(error => console.log(`Error: ${error.message}`));
   }, []);
 
@@ -20,13 +20,16 @@ function App() {
     <div className="App">
       <p>Fridge App (Name WIP)</p>
       <FridgeItem
-        key={food.id}
-        name={food.name}
-        dateStored={food.date_stored}
-        expiry={food.expiry}
-        category={food.category}
-        image={food.image_url}
-        notes={food.notes}
+        key={fridgeItem.id}
+        name={fridgeItem.name}
+        dateStored={fridgeItem.date_stored}
+        expiry={fridgeItem.expiry}
+        category={fridgeItem.category}
+        image={fridgeItem.image_url}
+        notes={fridgeItem.notes}
+        expireIn={fridgeItem.expire_in}
+        storedSince={fridgeItem.stored_since}
+        dateRemoved={fridgeItem.date_removed}
       />
     </div>
   );
