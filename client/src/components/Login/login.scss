@@ -1,8 +1,43 @@
 .login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    margin: 20px 0 0;
+  }
 
   &__form {
     display: flex;
     flex-direction: column;
+    width: 100%;
     max-width: 500px;
   }
+
+  &__label {
+    font-size: 14px;
+    position: relative;
+    top: 20px;
+    left: 7px;
+    background: white;
+    padding: 0 5px;
+  }
+
+  &__input {
+    padding: 0.75rem;
+    border: 1px solid #979797;
+  }
+
+  &__button {
+    margin: 25px 0;
+    padding: 10px;
+    font-weight: bold;
+    background-color: #008080;
+    border: teal;
+
+    &:hover {
+      background-color: darken(#008080, 10%);
+    }
+  }
 }
+

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { Alert, Button, Form } from 'react-bootstrap';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -15,13 +16,29 @@ function Login() {
   return (
     <>
       <h1>Login to Fridge App</h1>
-      <form className="login__form" onSubmit={e => e.preventDefault()}>
-        <label className="login__label">Email</label>
-        <input className="login__input" type="email" name="email" value={email} onChange={e => setEmail(e.currentTarget.value)}/>
-        <label className="login__label">Password</label>
-        <input className="login__input" type="password" name="password" value={password} onChange={e => setPassword(e.currentTarget.value)}/>
-        <button type="submit" onClick={() => handleSubmit()}>Login</button>
-      </form>
+      <Form className="login__form" onSubmit={e => e.preventDefault()}>
+        <Form.Group>
+          <Form.Label className="login__label">Email</Form.Label>
+          <Form.Control
+            className="login__input"
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.currentTarget.value)}
+          />
+        </Form.Group>
+
+        <Form.Group>
+          <Form.Label className="login__label">Password</Form.Label>
+          <Form.Control
+            className="login__input"
+            type="password"
+            value={password}
+            onChange={e => setPassword(e.currentTarget.value)}
+          />
+        </Form.Group>
+
+        <Button className="login__button" type="submit" onClick={() => handleSubmit()}>Login</Button>
+      </Form>
     </>
   );
 }
