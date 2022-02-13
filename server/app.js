@@ -10,6 +10,7 @@ const db = require('./configs/db.config');
 
 const usersRouter = require('./routes/users');
 const fridgeItemsRouter = require('./routes/fridgeItems');
+const groceryListsRouter = require('./routes/groceryLists');
 
 const app = express();
 
@@ -21,5 +22,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', usersRouter(db));
 app.use('/fridge_items', fridgeItemsRouter(db));
+app.use('/grocery_lists', groceryListsRouter(db));
 
 module.exports = app;
