@@ -35,7 +35,7 @@ module.exports = (db) => {
   router.post('/', async (req, res) => {
     // Hash and salt password
     req.body.password = await bcrypt.hash(req.body.password, 10);
-
+    // console.log(req.body.password)
     const params = Object.values(req.body);
     const command = "INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4);"
     db.query(command, params)

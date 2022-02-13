@@ -5,7 +5,7 @@ describe("Users routes", () => {
 
   it('should return a list of users', async () => {
     const res = await request(app)
-      .get('/users')
+      .get('/api/users')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200);
@@ -15,7 +15,7 @@ describe("Users routes", () => {
 
   it('should return a single user', async () => {
     const res = await request(app)
-      .get('/users/1')
+      .get('/api/users/1')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200);
@@ -26,7 +26,7 @@ describe("Users routes", () => {
 
   it('should return an empty string if user isn\'t found', async () => {
     const res = await request(app)
-      .get('/users/420')
+      .get('/api/users/420')
       .set('Accept', 'application/json')
       .expect(200);
 
@@ -42,7 +42,7 @@ describe("Users routes", () => {
     }
 
     request(app)
-      .post('/users')
+      .post('/api/users')
       .send(user)
       .set('Accept', 'application/json')
       .expect(201)
@@ -61,7 +61,7 @@ describe("Users routes", () => {
     }
 
     const res = await request(app)
-      .post('/users')
+      .post('/api/users')
       .send(user)
       .set('Accept', 'application/json')
       .expect(400)
@@ -78,7 +78,7 @@ describe("Users routes", () => {
     }
 
     const res = await request(app)
-      .post('/users')
+      .post('/api/users')
       .send(user)
       .set('Accept', 'application/json')
       .expect(400)
@@ -93,7 +93,7 @@ describe("Users routes", () => {
     }
 
     const res = await request(app)
-      .post('/users/login')
+      .post('/api/users/login')
       .send(user)
       .set('Accept', 'application/json')
       .expect(200);
@@ -108,7 +108,7 @@ describe("Users routes", () => {
     }
 
     request(app)
-      .post('/users/login')
+      .post('/api/users/login')
       .send(user)
       .set('Accept', 'application/json')
       .expect(401, done);
