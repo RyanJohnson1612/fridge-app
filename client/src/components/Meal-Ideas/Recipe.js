@@ -1,10 +1,13 @@
 import React from "react";
 
-function Recipe() {
+function Recipe(props) {
+  const { title, calories, image } = props;
+
   return (
     <div>
-      <h1> Title </h1>
-      <p> Calories </p>
+      <h1> {title} </h1>
+      <p> {calories} </p>
+      <img src={image} alt="recipe-image" />
     </div>
   );
 }
