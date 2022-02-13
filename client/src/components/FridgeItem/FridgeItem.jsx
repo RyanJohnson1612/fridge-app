@@ -1,6 +1,7 @@
 import React from 'react';
 import './FridgeItem.scss';
 import { BsCart4, BsTrash } from 'react-icons/bs';
+import axios from 'axios';
 
 const FridgeItem = (props) => {
 
@@ -13,6 +14,16 @@ const FridgeItem = (props) => {
       return `${days} days ago`;
     }
   };
+
+  const onAdd = (event) => {
+    event.preventDefault();
+
+    axios.post('http://localhost:8080/grocery_lists/3', { name: props.name, grocery_list_id: 3 })
+      .then((results) => {
+        console.log(results);
+        alert(`${props.name} was added to your grocery list`);
+      }).catch(err => console.log(err));
+  }
 
   return (
     <>
@@ -61,7 +72,9 @@ const FridgeItem = (props) => {
       <div className='click-from-item'>
         <div>
           <p>Add to Grocery List?</p>
-          <BsCart4 size={40} />
+          <a href=''>
+            <BsCart4 size={40} onClick={onAdd} />
+          </a>
         </div>
         <div>
           <p>Clear item from Fridge?</p>
