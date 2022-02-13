@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import FridgeItem from '../FridgeItem/FridgeItem';
 import './App.scss';
 import axios from 'axios'
-import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Nav, Navbar } from "react-bootstrap";
 import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
