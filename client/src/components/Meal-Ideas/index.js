@@ -66,7 +66,6 @@ function MealIdeas() {
           <Recipe
             key={recipe.recipe.label}
             title={recipe.recipe.label}
-            calories={recipe.recipe.calories}
             image={recipe.recipe.image}
             ingredients={recipe.recipe.ingredients}
             recipeURL={recipe.recipe.url}
