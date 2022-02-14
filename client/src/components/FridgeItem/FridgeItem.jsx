@@ -25,10 +25,20 @@ const FridgeItem = (props) => {
       }).catch(err => console.log(err));
   }
 
+  const onDelete = (event) => {
+    event.preventDefault();
+
+    console.log(props.id)
+    axios.delete(`http://localhost:8080/fridge_items/${props.id}`)
+      .then(() => {
+        alert(`${props.name} has been removed from your fridge`);
+      }).catch(err => console.log(err));
+  }
+
   return (
     <>
       <div className='body'>
-        <img src={props.image} className='image' />
+        <img src={props.image} className='image' alt="" />
         <br />
         <table className='properties'>
           <tbody>
@@ -72,13 +82,15 @@ const FridgeItem = (props) => {
       <div className='click-from-item'>
         <div>
           <p>Add to Grocery List?</p>
-          <a href=''>
+          <button>
             <BsCart4 size={40} onClick={onAdd} />
-          </a>
+          </button>
         </div>
         <div>
           <p>Clear item from Fridge?</p>
-          <BsTrash size={40} />
+          <button>
+            <BsTrash size={40} onClick={onDelete} />
+          </button>
         </div>
       </div>
     </>
