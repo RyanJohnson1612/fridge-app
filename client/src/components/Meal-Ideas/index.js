@@ -5,14 +5,16 @@ import "./Recipe.scss";
 import Spinner from "react-bootstrap/Spinner";
 
 function MealIdeas() {
-  const filters = ["vegeterian", "vegan", "banana"];
+  const dietRestrictions = ["vegeterian", "vegan", "banana"];
   const APP_ID = "c91c9bd4";
   const APP_KEY = "988029de8e29a4a1503fea286388dfef";
 
   //State to manage multiple checkboxes used for recipe filters
   const [checkedState, setCheckedState] = useState(
-    new Array(filters.length).fill(false)
+    new Array(dietRestrictions.length).fill(false)
   );
+
+  const [filters, setFilters] = useState("");
 
   console.log("checkedState", checkedState);
 
@@ -35,9 +37,27 @@ function MealIdeas() {
     getRecipes();
   }, []);
 
-  const handleOnChange = (index) => {
-    console.log(index);
+  const handleOnChange = (position) => {
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setCheckedState(updatedCheckedState);
+
+    const allFilters = updatedCheckedState.reduce(
+      (combined, currentState, index) => {
+        if (currentState === true) {
+          return combined + " " + dietRestrictions[index];
+        }
+        return combined;
+      },
+      " "
+    );
+
+    setFilters(allFilters);
+    console.log("these are the filters you selected:", filters);
   };
+
   //Temporarily hardcode, in future pull from DB
   const expiringFoodItems = "milk, strawberry";
 
@@ -89,7 +109,7 @@ function MealIdeas() {
         <button className="search-button" type="submit"></button>
       </form> */}
       <div className="filters">
-        {filters.map((name, index) => {
+        {dietRestrictions.map((name, index) => {
           return (
             <li key={index}>
               <input
