@@ -14,7 +14,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 32px;
+  margin-bottom: 20px;
 }
 
 .search-bar{
@@ -47,27 +47,34 @@
 .Recipe {
   border-radius: 10px;
   box-shadow: 0px 5px 20px black;
-  margin: 40px;
-  padding: 40px;
+  margin: 20px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 40%;
+  width: 30%;
 }
 
 .Recipe img {
   border: 2px groove rgb(0, 0, 0);
+  width: 50%;
+}
 
+.recipe-card-footer {
+  display: flex;
+  justify-content:space-evenly;
+  align-items: center;
 }
 
 .Recipe a {
   background-color: #1aacb1;
   color: white;
   text-decoration: none;
-  margin: 10px;
-  padding: 1em 1.5em;
+  margin: 5px;
+  padding: 1em;
   border-radius: 4px;
+  height: 55px;
 }
 
 .Recipe a:active {
@@ -99,3 +106,4 @@ li:before {
   text-align: center;
   display: inline-block;
 }
+

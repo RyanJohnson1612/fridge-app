@@ -15,8 +15,10 @@ function Recipe(props) {
           <li>{ingredient.text}</li>
         ))}
       </ol>
-      <img src={image} alt="recipe-image" />
-      <a href={recipeURL}>Get Full Recipe</a>
+      <div className="recipe-card-footer">
+        <img src={image} alt="recipe-image" />
+        <a href={recipeURL}>Get Full Recipe</a>
+      </div>
     </div>
   );
 }
