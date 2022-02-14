@@ -5,8 +5,23 @@ import { Alert, Button, Form } from 'react-bootstrap';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSubmit = () => {
+  const validateForm = () => {
+    setError('')
+    if(!email) {
+      setError('Email is required');
+      return;
+    }
+    if(!password) {
+      setError('Password is required');
+      return;
+    }
+
+    submitForm();
+  }
+
+  const submitForm = () => {
     axios.post(`${process.env.REACT_APP_API_URL}/api/users/login`, {email, password})
       .then(res => {
         console.log(res);
@@ -36,8 +51,8 @@ function Login() {
             onChange={e => setPassword(e.currentTarget.value)}
           />
         </Form.Group>
-
-        <Button className="login__button" type="submit" onClick={() => handleSubmit()}>Login</Button>
+        <Button className="login__button" type="submit" onClick={() => validateForm()}>Login</Button>
+        { error && <Alert variant={'danger'}>{error}</Alert> }
       </Form>
     </>
   );
