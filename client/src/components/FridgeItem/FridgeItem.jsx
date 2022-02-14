@@ -2,6 +2,7 @@ import React from 'react';
 import './FridgeItem.scss';
 import { BsCart4, BsTrash } from 'react-icons/bs';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 const FridgeItem = (props) => {
 
@@ -21,8 +22,12 @@ const FridgeItem = (props) => {
     axios.post('http://localhost:8080/grocery_lists/3', { name: props.name, grocery_list_id: 3 })
       .then((results) => {
         console.log(results);
-        alert(`${props.name} was added to your grocery list`);
-      }).catch(err => console.log(err));
+        swal("Success!", `${props.name} has been added to your grocery list.`, "success");
+      })
+      .catch(err => {
+        console.log(err)
+        swal("Oops!", "There was an error with your request. Please try again in a few minutes.", "error");
+      });
   }
 
   const onDelete = (event) => {
@@ -31,8 +36,12 @@ const FridgeItem = (props) => {
     console.log(props.id)
     axios.delete(`http://localhost:8080/fridge_items/${props.id}`)
       .then(() => {
-        alert(`${props.name} has been removed from your fridge`);
-      }).catch(err => console.log(err));
+        swal("Success!", `${props.name} has been removed from your fridge.`, "success");
+      })
+      .catch(err => {
+        console.log(err)
+        swal("Oops!", "There was an error with your request. Please try again in a few minutes.", "error");
+      });
   }
 
   return (
@@ -67,7 +76,7 @@ const FridgeItem = (props) => {
             { props.expiry &&
               <tr>
                 <td>Days Until Expiry:</td>
-                <td><strong>{props.expireIn} Days</strong></td>
+                <td><strong>{props.expireIn} days</strong></td>
               </tr>
             }
             <tr>
