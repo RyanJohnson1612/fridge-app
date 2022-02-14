@@ -1,14 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Alert, Button, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { auth } from '../../helpers/helpers';
 axios.defaults.withCredentials = true;
-
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  let navigate = useNavigate();
+
+  // useEffect(() => {
+  //   if(auth()) return navigate('/fridge');
+  // },[navigate])
 
   const validateForm = () => {
     setError('')
@@ -27,7 +32,7 @@ function Login() {
   const submitForm = () => {
     axios.post(`${process.env.REACT_APP_API_URL}/api/users/login`, {email, password})
       .then(res => {
-        console.log(auth());
+        if(auth()) return navigate('/fridge');
       })
       .catch(err => {
         if (err.responsew) {
