@@ -33,7 +33,7 @@ describe("Users routes", () => {
     expect(res.body.message).toBe('User not found');
   });
 
-  it('should create a new user in the database, given all fields', (done) => {
+  it('should create a new user in the database, given all fields', async () => {
     const user = {
       first_name: 'Jim',
       last_name: 'Testman',
@@ -41,15 +41,13 @@ describe("Users routes", () => {
       password: 'password'
     }
 
-    request(app)
+    const res = await request(app)
       .post('/api/users')
       .send(user)
       .set('Accept', 'application/json')
       .expect(201)
-      .end((err) => {
-        if (err) return done(err);
-        done();
-      });
+
+      expect(res.body).toBe('User created');
   });
 
   it('should not create a new user in the database if email already exists in database', async () => {
@@ -66,7 +64,7 @@ describe("Users routes", () => {
       .set('Accept', 'application/json')
       .expect(400)
 
-    expect(res.body.detail).toBe('Key (email)=(jim@testman.com) already exists.');
+    expect(res.body.error.detail).toBe('Key (email)=(jim@testman.com) already exists.');
   });
 
   it('should not create a new user in the database if a field is missing', async () => {
@@ -83,7 +81,7 @@ describe("Users routes", () => {
       .set('Accept', 'application/json')
       .expect(400)
 
-    expect(res.body.detail).toContain('Failing row contains');
+    expect(res.body.error.detail).toContain('Failing row contains');
   });
 
   it('should login a user give the correct email and password', async () => {

@@ -45,11 +45,12 @@ module.exports = (db) => {
     const command = "INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4);"
     db.query(command, params)
       .then(data => {
-        res.status(201).end();
+        res.status(201)
+        res.json('User created').end();
       })
       .catch(err => {
         res.status(400)
-        res.json(err).end();
+        res.json({error: err}).end();
       });
   });
 
