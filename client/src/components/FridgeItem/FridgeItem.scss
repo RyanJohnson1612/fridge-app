@@ -36,6 +36,12 @@ html {
   text-align: center;
 }
 
+button {
+  border:none;
+  background-color:transparent;
+  outline:none;
+}
+
 @media screen and (min-width: 576px) {
   .body {
     display: flex;
