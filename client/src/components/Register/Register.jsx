@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
 import { Alert, Button, Form } from 'react-bootstrap';
 import { auth } from '../../helpers/helpers';
 import { useNavigate } from 'react-router-dom';
+import { authContext } from '../../providers/AuthProvider';
+
 axios.defaults.withCredentials = true;
 
 function Register(props) {
@@ -13,6 +15,7 @@ function Register(props) {
   const [passwordConfirm, setPasswordConfirm] = useState();
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const { login, register } = useContext(authContext);
 
   const validateForm = () => {
     setErrors({})
@@ -41,11 +44,15 @@ function Register(props) {
   }
 
   const submitForm = async () => {
-    const valid = await validateForm()
+    const valid = await validateForm();
+
     if (valid) {
-      axios.post(`${process.env.REACT_APP_API_URL}/api/users`, {firstName, lastName, email, password})
+      register(firstName, lastName, email, password)
         .then(res => {
-          loginUser();
+          return login(email, password);
+        })
+        .then(res => {
+          if(auth()) return navigate('/fridge');
         })
         .catch(err => {
           if (err.response) {
@@ -53,16 +60,6 @@ function Register(props) {
           }
         });
     }
-  }
-
-  const loginUser = () => {
-    axios.post(`${process.env.REACT_APP_API_URL}/api/users/login`, {email, password})
-      .then(res => {
-        if(auth()) return navigate('/fridge');
-      })
-      .catch(err => {
-        console.log(err);
-      })
   }
 
   const parsedErrors = [...new Set(Object.values(errors))].map((error, index) => <li className="register__error_message" key={index}>{error}</li>);

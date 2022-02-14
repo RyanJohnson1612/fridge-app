@@ -1,15 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
 import { Alert, Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../helpers/helpers';
+import { authContext } from '../../providers/AuthProvider';
+
 axios.defaults.withCredentials = true;
 
 function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const { login } = useContext(authContext);
 
   const validateForm = () => {
     setErrors({})
@@ -30,7 +33,7 @@ function Login(props) {
     const valid = await validateForm();
 
     if(valid) {
-      axios.post(`${process.env.REACT_APP_API_URL}/api/users/login`, {email, password})
+      login(email, password)
         .then(res => {
           if(auth()) return navigate('/fridge');
         })
