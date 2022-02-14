@@ -18,7 +18,7 @@ function Recipe(props) {
       result.push(
         <div>
           <Button variant="link" onClick={() => setOpen(!open)} size="sm">
-            ...See More
+            ...{ingredientsArray.length - 5} more ingredients
           </Button>
           <Collapse in={open}>
             {/* Display ingredients #6... to last ingredient */}
