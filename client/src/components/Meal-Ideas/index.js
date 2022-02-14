@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Recipe from "./Recipe";
 import "./Recipe.scss";
+import Spinner from "react-bootstrap/Spinner";
 
 function MealIdeas() {
   const APP_ID = "c91c9bd4";
@@ -11,6 +12,8 @@ function MealIdeas() {
   //state will be set to data that comes back from edamam API
   const [recipes, setRecipes] = useState([]);
   //const [search, setSearch] = useState("");
+
+  const [loading, setLoading] = useState(true);
 
   /* If useEffect were to run everytime search state is updated,
   there would be be an API call for every keystroke.
@@ -36,6 +39,7 @@ function MealIdeas() {
       .then((res) => {
         setRecipes(res.data.hits);
         console.log(res.data.hits);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -58,6 +62,7 @@ function MealIdeas() {
   return (
     <div className="Recipes-index">
       <h3>Here are some recipe ideas for you based on your fridge items! </h3>
+      {loading && <Spinner animation="border" />}
       {/*       <form className="search-form" onSubmit={getSearch}>
         <input
           className="search-bar"
