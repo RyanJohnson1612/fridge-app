@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import FridgeItem from '../FridgeItem/FridgeItem';
+import ShoppingList from '../ShoppingList/ShoppingList';
 import './App.scss';
 import axios from 'axios'
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -11,7 +12,7 @@ function App() {
   const [fridgeItem, setFridgeItem] = useState({});
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/fridge_items/10`)
+    axios.get(`http://localhost:8080/fridge_items/7`)
       .then((results) => {
         const fridgeItem = results.data[0]
         console.log(fridgeItem);
@@ -35,18 +36,20 @@ function App() {
       </Navbar>
 
       <div className="content">
-      <FridgeItem
-        key={fridgeItem.id}
-        name={fridgeItem.name}
-        dateStored={fridgeItem.date_stored}
-        expiry={fridgeItem.expiry}
-        category={fridgeItem.category}
-        image={fridgeItem.image_url}
-        notes={fridgeItem.notes}
-        expireIn={fridgeItem.expire_in}
-        storedSince={fridgeItem.stored_since}
-        dateRemoved={fridgeItem.date_removed}
-      />
+        <FridgeItem
+          key={fridgeItem.id}
+          id={fridgeItem.id}
+          name={fridgeItem.name}
+          dateStored={fridgeItem.date_stored}
+          expiry={fridgeItem.expiry}
+          category={fridgeItem.category}
+          image={fridgeItem.image_url}
+          notes={fridgeItem.notes}
+          expireIn={fridgeItem.expire_in}
+          storedSince={fridgeItem.stored_since}
+          dateRemoved={fridgeItem.date_removed}
+        />
+        <ShoppingList />
       </div>
     </div>
   );
