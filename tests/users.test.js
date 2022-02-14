@@ -24,13 +24,13 @@ describe("Users routes", () => {
     expect(Object.prototype.toString.call(res.body)).toBe('[object Object]');
   });
 
-  it('should return an empty string if user isn\'t found', async () => {
+  it('should return a 404 if user isn\'t found', async () => {
     const res = await request(app)
       .get('/api/users/420')
       .set('Accept', 'application/json')
-      .expect(200);
+      .expect(404);
 
-    expect(res.body).toBe('');
+    expect(res.body.message).toBe('User not found');
   });
 
   it('should create a new user in the database, given all fields', (done) => {
@@ -66,7 +66,7 @@ describe("Users routes", () => {
       .set('Accept', 'application/json')
       .expect(400)
 
-    expect(res.body.detail).toEqual('Key (email)=(jim@testman.com) already exists.');
+    expect(res.body.detail).toBe('Key (email)=(jim@testman.com) already exists.');
   });
 
   it('should not create a new user in the database if a field is missing', async () => {
@@ -101,16 +101,33 @@ describe("Users routes", () => {
     expect(res.body.first_name).toBe('Jim');
   });
 
-  it('should not login a user given the wrong password', (done) => {
+  it('should not login a user given the wrong password', async () => {
     const user = {
       email: 'jim@testman.com',
       password: 'incorrectpassword'
     }
 
-    request(app)
+    const res = await request(app)
       .post('/api/users/login')
       .send(user)
       .set('Accept', 'application/json')
-      .expect(401, done);
+      .expect(401);
+
+    expect(res.body.message).toBe('Email or password is incorrect');
+  });
+
+  it('should not login and  return a 404 if user isn\'t found', async () => {
+    const user = {
+      email: 'notauser',
+      password: 'password'
+    }
+
+    const res = await request(app)
+      .post('/api/users/login')
+      .send(user)
+      .set('Accept', 'application/json')
+      .expect(404);
+
+    expect(res.body.message).toBe('User not found');
   });
 });
