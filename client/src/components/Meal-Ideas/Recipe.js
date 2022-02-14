@@ -37,7 +37,7 @@ function Recipe(props) {
   return (
     <div className="Recipe">
       <h4> {title} </h4>
-      <ol>
+      <ol className="round-numbers">
         <h6> Ingredients: </h6>
         {ingredientsMapped}
       </ol>

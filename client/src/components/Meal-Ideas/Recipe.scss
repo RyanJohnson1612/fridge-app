@@ -88,16 +88,16 @@
   text-align: center;
 }
 
-ol {
+.round-numbers {
   list-style: none;
   counter-reset: item;
 }
-li {
+.round-numbers li {
   counter-increment: item;
   margin-bottom: 5px;
 }
 
-li:before {
+.round-numbers li:before {
   margin-right: 10px;
   content: counter(item);
   background: lightblue;
@@ -161,3 +161,5 @@ li:before {
   }
 
 }
+
+
