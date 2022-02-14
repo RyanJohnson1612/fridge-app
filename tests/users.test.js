@@ -30,7 +30,7 @@ describe("Users routes", () => {
       .set('Accept', 'application/json')
       .expect(404);
 
-    expect(res.body.message).toBe('User not found');
+    expect(res.body.error).toBe('User not found');
   });
 
   it('should create a new user in the database, given all fields', async () => {
@@ -111,7 +111,7 @@ describe("Users routes", () => {
       .set('Accept', 'application/json')
       .expect(401);
 
-    expect(res.body.message).toBe('Email or password is incorrect');
+    expect(res.body.error).toBe('Email or password is incorrect');
   });
 
   it('should not login and  return a 404 if user isn\'t found', async () => {
@@ -126,6 +126,6 @@ describe("Users routes", () => {
       .set('Accept', 'application/json')
       .expect(404);
 
-    expect(res.body.message).toBe('User not found');
+    expect(res.body.error).toBe('User not found');
   });
 });
