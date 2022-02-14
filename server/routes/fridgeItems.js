@@ -28,9 +28,10 @@ module.exports = (db) => {
   });
 
   // DELETE specific food
-  router.delete('/:id', function(req, res, next) {
+  router.put('/:id', function(req, res, next) {
     const queryString =
-      `DELETE FROM fridge_items
+      `UPDATE fridge_items
+       SET date_removed = CURRENT_DATE
        WHERE id = $1 RETURNING *;`;
     const queryParams = [req.params.id];
 
@@ -39,6 +40,20 @@ module.exports = (db) => {
       res.json(data);
     });
   });
+
+  // changed delete to updating the fridge item instead b/c we want to
+  // still be able to use the item's info for food wastage tracking ?
+  // router.delete('/:id', function(req, res, next) {
+  //   const queryString =
+  //     `DELETE FROM fridge_items
+  //      WHERE id = $1 RETURNING *;`;
+  //   const queryParams = [req.params.id];
+
+  //   db.query(queryString, queryParams).then((data) => {
+  //     console.log("HI");
+  //     res.json(data);
+  //   });
+  // });
 
   return router;
 }
