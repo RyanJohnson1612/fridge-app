@@ -13,6 +13,7 @@ function MealIdeas() {
   const [recipes, setRecipes] = useState([]);
   //const [search, setSearch] = useState("");
 
+  //Use to determine if loading spinner should be displayed
   const [loading, setLoading] = useState(true);
 
   /* If useEffect were to run everytime search state is updated,
@@ -62,7 +63,11 @@ function MealIdeas() {
   return (
     <div className="Recipes-index">
       <h3>Here are some recipe ideas for you based on your fridge items! </h3>
-      {loading && <Spinner animation="border" />}
+      {loading && (
+        <div>
+          <Spinner animation="border" variant="secondary" />
+        </div>
+      )}
       {/*       <form className="search-form" onSubmit={getSearch}>
         <input
           className="search-bar"

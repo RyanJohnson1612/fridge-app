@@ -9,6 +9,11 @@
   margin: 20px;
 }
 
+.Recipes-index div {
+  display: flex;
+  justify-content: center;
+}
+
 .search-form{
   min-height: 10vh;
   display: flex;
@@ -107,3 +112,8 @@ li:before {
   display: inline-block;
 }
 
+.spinner {
+  display: flex;
+  justify-content: center;
+
+}
