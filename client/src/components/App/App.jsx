@@ -1,14 +1,17 @@
-import React from "react";
+import { useContext } from "react";
 import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Nav, Navbar } from "react-bootstrap";
 import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { authContext } from "../../providers/AuthProvider";
 import ShoppingList from '../ShoppingList/';
 import Login from '../Login/';
 import Register from '../Register/';
 
 function App() {
+  const { logout } = useContext(authContext);
+
   return (
     <main className="App">
         <Router>
@@ -22,6 +25,9 @@ function App() {
               <Nav.Link as={Link} to="/recipes">Recipe Ideas</Nav.Link>
               <Nav.Link as={Link} to="/login">Login</Nav.Link>
               <Nav.Link as={Link} to="/register">Register</Nav.Link>
+              <Nav.Link onClick={() => logout()}>
+                Logout
+              </Nav.Link>
             </Nav>
           </NavbarCollapse>
         </Navbar>

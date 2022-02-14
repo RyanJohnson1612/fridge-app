@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext } from "react";
 import axios from 'axios';
-import { auth } from "../helpers/helpers";
+import { auth, deleteCookie } from "../helpers/helpers";
 
 export const authContext = createContext();
 
@@ -26,7 +26,17 @@ const AuthProvider = function(props) {
     return axios.post(`${process.env.REACT_APP_API_URL}/api/users`, {firstName, lastName, email, password});
   }
 
-  const data = { user, login, register };
+  const logout = () => {
+    deleteCookie('user');
+    return axios
+      .post(`${process.env.REACT_APP_API_URL}/api/users/logout`)
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch(err => console.log(err));
+  }
+
+  const data = { user, login, register, logout };
 
   return (
     <authContext.Provider value={data}>

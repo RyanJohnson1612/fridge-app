@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const createToken = require('../helpers/createToken');
+const validateToken = require('../middleware/validateToken');
 
 module.exports = (db) => {
 
@@ -64,9 +65,9 @@ module.exports = (db) => {
         if (user && bcrypt.compareSync(req.body.password, user.password)) {
           const token = createToken(user);
           // create cookie for access token that lasts 30 days
-          res.cookie("access-token", token, { maxAge: 2592000000, httpOnly: true });
+          res.cookie('access-token', token, { maxAge: 2592000000, httpOnly: true });
           res.cookie(
-            "user",
+            'user',
             JSON.stringify({
               id: user.id,
               email: user.email,
@@ -90,6 +91,18 @@ module.exports = (db) => {
       .catch(err => {
         return res.status(500).json({error: 'Error logging in, please try again', err}).end();
       });
+  });
+
+  router.post('/logout', (req, res) => {
+    console.log('log out')
+    res.cookie(
+      'access-token',
+      'expired',
+      {
+        expires: new Date(Date.now() + 3000)
+      }
+    );
+    res.status(200).json('Logged out');
   });
 
   return router;
