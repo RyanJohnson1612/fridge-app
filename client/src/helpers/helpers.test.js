@@ -1,4 +1,9 @@
-import { auth, getCookie } from './helpers';
+import { auth, getCookie, deleteCookie } from './helpers';
+
+beforeEach(() => {
+  // deletes all cookies
+  document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+})
 
 describe('#auth', () => {
   it('should return user object if logged in', () => {
@@ -7,8 +12,6 @@ describe('#auth', () => {
   });
 
   it('should return null if not logged in', () => {
-    // Remove all cookies
-    document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
     expect(auth()).toBeNull();
   });
 });
@@ -16,6 +19,18 @@ describe('#auth', () => {
 describe('#getCookie', () => {
   it('should return a cookie if it exists',() => {
     document.cookie='test=this is a test cookie';
-    expect(getCookie('test')).toBe('this is a test cookie')
-  })
-})
+    expect(getCookie('test')).toBe('this is a test cookie');
+  });
+});
+
+describe('#deleteCookie', () => {
+  it('should delete a cookie if it exists',() => {
+    document.cookie='test=this is a test cookie';
+    deleteCookie('test');
+    expect(getCookie('test')).toBeUndefined();
+  });
+
+  it('should return undefined cookie if doesn\'t exists',() => {
+    expect(deleteCookie('test')).toBeUndefined();
+  });
+});
