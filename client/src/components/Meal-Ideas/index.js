@@ -5,8 +5,16 @@ import "./Recipe.scss";
 import Spinner from "react-bootstrap/Spinner";
 
 function MealIdeas() {
+  const filters = ["vegeterian", "vegan", "banana"];
   const APP_ID = "c91c9bd4";
   const APP_KEY = "988029de8e29a4a1503fea286388dfef";
+
+  //State to manage multiple checkboxes used for recipe filters
+  const [checkedState, setCheckedState] = useState(
+    new Array(filters.length).fill(false)
+  );
+
+  console.log("checkedState", checkedState);
 
   /////NOTE: UNCOMMENT if want to use searchbar functionality
   //state will be set to data that comes back from edamam API
@@ -27,6 +35,9 @@ function MealIdeas() {
     getRecipes();
   }, []);
 
+  const handleOnChange = (index) => {
+    console.log(index);
+  };
   //Temporarily hardcode, in future pull from DB
   const expiringFoodItems = "milk, strawberry";
 
@@ -77,6 +88,23 @@ function MealIdeas() {
         />
         <button className="search-button" type="submit"></button>
       </form> */}
+      <div className="filters">
+        {filters.map((name, index) => {
+          return (
+            <li key={index}>
+              <input
+                type="checkbox"
+                id={`custom-checkbox-${index}`}
+                name={name}
+                value={name}
+                checked={checkedState[index]}
+                onChange={() => handleOnChange(index)}
+              />
+              <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
+            </li>
+          );
+        })}
+      </div>
       <div className="recipes-list">
         {recipes.map((recipe) => (
           <Recipe
