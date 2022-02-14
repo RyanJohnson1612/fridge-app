@@ -16,11 +16,15 @@ function App() {
   useEffect(() => {
     axios.get(`http://localhost:8080/fridge_items/7`)
       .then((results) => {
-        const fridgeItem = results.data[0]
-        console.log(fridgeItem);
-        setFridgeItem(fridgeItem);
-      }).catch(error => console.log(`Error: ${error.message}`));
-  }, []);
+        const item = results.data[0]
+        console.log(item);
+
+        if (JSON.stringify(fridgeItem) !== JSON.stringify(item)) {
+          setFridgeItem(item);
+        }
+      })
+      .catch(error => console.log(`Error: ${error.message}`));
+  }, [fridgeItem]);
 
   return (
     <Router>
@@ -43,8 +47,9 @@ function App() {
             <Route path="/grocery-list" element={<ShoppingList />} />
             <Route path="/recipes" element={<h1>Recipes Index</h1>} />
           </Routes>
-          </div>
-          <FridgeItem
+
+          { (!fridgeItem.date_removed && fridgeItem) && (
+            <FridgeItem
             key={fridgeItem.id}
             id={fridgeItem.id}
             name={fridgeItem.name}
@@ -56,7 +61,10 @@ function App() {
             expireIn={fridgeItem.expire_in}
             storedSince={fridgeItem.stored_since}
             dateRemoved={fridgeItem.date_removed}
-          />
+            setFridgeItem={setFridgeItem}
+            />
+            )}
+        </div>
       </div>
     </Router>
   );
