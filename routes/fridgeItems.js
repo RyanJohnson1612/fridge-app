@@ -14,7 +14,7 @@ module.exports = (db) => {
   // GET specific food
   router.get('/:id', function(req, res, next) {
     const queryString =
-      `SELECT name, category, image_URL, notes, date_removed,
+      `SELECT id, name, category, image_URL, notes, date_removed,
        to_char(date_stored, 'Mon DD, YYYY') as date_stored,
        to_char(expiry, 'Mon DD, YYYY') as expiry,
        (expiry - date_stored) as expire_in,
@@ -24,6 +24,19 @@ module.exports = (db) => {
     const queryParams = [req.params.id]
     db.query(queryString, queryParams).then(data => {
       res.json(data.rows);
+    }).catch(error => console.log(`Error: ${error.message}`));
+  });
+
+  // DELETE specific food
+  router.delete('/:id', function(req, res, next) {
+    const queryString =
+      `DELETE FROM fridge_items
+       WHERE id = $1 RETURNING *;`;
+    const queryParams = [req.params.id];
+
+    db.query(queryString, queryParams).then((data) => {
+      console.log("HI");
+      res.json(data);
     }).catch(error => console.log(`Error: ${error.message}`));
   });
 
