@@ -9,10 +9,6 @@
   margin: 20px;
 }
 
-.Recipes-index div {
-  display: flex;
-  justify-content: center;
-}
 
 .search-form{
   min-height: 10vh;
@@ -110,6 +106,13 @@ li:before {
   width: 1.5em;
   text-align: center;
   display: inline-block;
+}
+
+.extra-ingredients {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .spinner {
