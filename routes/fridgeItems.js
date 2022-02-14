@@ -24,7 +24,7 @@ module.exports = (db) => {
     const queryParams = [req.params.id]
     db.query(queryString, queryParams).then(data => {
       res.json(data.rows);
-    }).catch(error => console.log(`Error: ${error.message}`));
+    });
   });
 
   // DELETE specific food
@@ -37,7 +37,7 @@ module.exports = (db) => {
     db.query(queryString, queryParams).then((data) => {
       console.log("HI");
       res.json(data);
-    }).catch(error => console.log(`Error: ${error.message}`));
+    });
   });
 
   return router;
