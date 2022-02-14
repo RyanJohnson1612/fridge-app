@@ -3,8 +3,11 @@ import './FridgeItem.scss';
 import { BsCart4, BsTrash } from 'react-icons/bs';
 import axios from 'axios';
 import swal from 'sweetalert';
+import { useNavigate } from 'react-router-dom'
 
 const FridgeItem = (props) => {
+
+  const navigate = useNavigate();
 
   const daysAgo = (days) => {
     if (days === 0) {
@@ -23,6 +26,7 @@ const FridgeItem = (props) => {
       .then((results) => {
         console.log(results);
         swal("Success!", `${props.name} has been added to your grocery list.`, "success");
+
       })
       .catch(err => {
         console.log(err)
@@ -30,13 +34,14 @@ const FridgeItem = (props) => {
       });
   }
 
-  const onDelete = (event) => {
-    event.preventDefault();
+  const onDelete = () => {
 
     console.log(props.id)
-    axios.delete(`http://localhost:8080/fridge_items/${props.id}`)
+    axios.put(`http://localhost:8080/fridge_items/${props.id}`)
       .then(() => {
         swal("Success!", `${props.name} has been removed from your fridge.`, "success");
+        props.setFridgeItem({});
+        navigate('/fridge');
       })
       .catch(err => {
         console.log(err)
