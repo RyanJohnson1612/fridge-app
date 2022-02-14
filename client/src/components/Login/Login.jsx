@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { Alert, Button, Form } from 'react-bootstrap';
+import { auth } from '../../helpers/helpers';
 axios.defaults.withCredentials = true;
 
 
@@ -26,7 +27,7 @@ function Login() {
   const submitForm = () => {
     axios.post(`${process.env.REACT_APP_API_URL}/api/users/login`, {email, password})
       .then(res => {
-        console.log(res);
+        console.log(auth());
       })
       .catch(err => {
         if (err.response.data.error) {

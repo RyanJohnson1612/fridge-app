@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { Alert, Button, Form } from 'react-bootstrap';
+axios.defaults.withCredentials = true;
 
 function Register() {
   const [firstName, setFirstName] = useState();
@@ -103,7 +104,7 @@ function Register() {
           onClick={() => validateForm()}>
             Register
         </Button>
-        { error && <Alert variant={'danger'}>{error}</Alert>}
+        { error && <Alert variant={'danger'}>{error}</Alert> }
       </Form>
     </>
   );

@@ -61,7 +61,17 @@ module.exports = (db) => {
         if (user && bcrypt.compareSync(req.body.password, user.password)) {
           const token = createToken(user);
           // create cookie for access token that lasts 30 days
-          res.cookie("access-token", token, {maxAge: 2592000000, httpOnly: true});
+          res.cookie("access-token", token, { maxAge: 2592000000, httpOnly: true });
+          res.cookie(
+            "user",
+            {
+              id: user.id,
+              email: user.email,
+              firstName: user.first_name,
+              lastName: user.last_name
+            },
+            { maxAge: 2592000000 }
+          );
 
           return res.status(200).json({
             id: user.id,
