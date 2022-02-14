@@ -100,12 +100,32 @@ function MealIdeas() {
 
   return (
     <div className="Recipes-index">
-      <h3>Here are some recipe ideas for you based on your fridge items! </h3>
-      {loading && (
-        <div>
-          <Spinner animation="border" variant="secondary" />
+      <div className="top-page">
+        <h3>Here are some recipe ideas for you based on your fridge items! </h3>
+        {loading && (
+          <div>
+            <Spinner animation="border" variant="secondary" />
+          </div>
+        )}
+        <div className="filters">
+          <b>Dietary Filters</b>
+          {dietRestrictions.map((name, index) => {
+            return (
+              <div key={index}>
+                <input
+                  type="checkbox"
+                  id={`custom-checkbox-${index}`}
+                  name={name}
+                  value={name}
+                  checked={checkedState[index]}
+                  onChange={() => handleOnChange(index)}
+                />
+                <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
+              </div>
+            );
+          })}
         </div>
-      )}
+      </div>
       {/*       <form className="search-form" onSubmit={getSearch}>
         <input
           className="search-bar"
@@ -115,23 +135,6 @@ function MealIdeas() {
         />
         <button className="search-button" type="submit"></button>
       </form> */}
-      <div className="filters">
-        {dietRestrictions.map((name, index) => {
-          return (
-            <li key={index}>
-              <input
-                type="checkbox"
-                id={`custom-checkbox-${index}`}
-                name={name}
-                value={name}
-                checked={checkedState[index]}
-                onChange={() => handleOnChange(index)}
-              />
-              <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
-            </li>
-          );
-        })}
-      </div>
       <div className="recipes-list">
         {recipes.map((recipe) => (
           <Recipe

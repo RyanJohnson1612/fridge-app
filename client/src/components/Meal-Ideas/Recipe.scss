@@ -1,5 +1,16 @@
+* {
+  box-sizing: border-box;
+  padding: 5px;
+}
+
 .Recipes-index {
   min-height: 100vh;
+}
+.top-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .Recipes-index h3 {
@@ -9,6 +20,25 @@
   margin: 20px;
 }
 
+.spinner {
+  display: flex;
+  justify-content: center;
+}
+
+.filters {
+  background: #EDF6F9;
+  padding: 15px;
+  margin: 15px;
+  border-width:1px;
+  border-style: solid;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  flex-wrap: wrap;
+  box-shadow: 1px 2px gray;
+}
 
 .search-form{
   min-height: 10vh;
@@ -113,11 +143,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.spinner {
-  display: flex;
-  justify-content: center;
 }
 
 @media (max-width: 480px) {
