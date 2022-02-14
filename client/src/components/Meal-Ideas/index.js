@@ -7,25 +7,31 @@ function MealIdeas() {
   const APP_ID = "c91c9bd4";
   const APP_KEY = "988029de8e29a4a1503fea286388dfef";
 
+  /////NOTE: UNCOMMENT if want to use searchbar functionality
   //state will be set to data that comes back from edamam API
   const [recipes, setRecipes] = useState([]);
-  const [search, setSearch] = useState("");
+  //const [search, setSearch] = useState("");
 
   /* If useEffect were to run everytime search state is updated,
   there would be be an API call for every keystroke.
   Therefore, create query state which only updates after search button is clicked */
 
-  const [query, setQuery] = useState("");
+  /////NOTE: UNCOMMENT if want to use searchbar functionality, and place "query" in array
+  //const [query, setQuery] = useState("");
 
   useEffect(() => {
     getRecipes();
-  }, [query]);
+  }, []);
+
+  //Temporarily hardcode, in future pull from DB
+  const expiringFoodItems = "milk, strawberry";
 
   //Function that gets recipe data from Edamam API using axios call
+  /////**NOTE: For searchbar functionality, replace expiringFoodItem with query
   const getRecipes = () => {
     axios
       .get(
-        `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`
+        `https://api.edamam.com/search?q=${expiringFoodItems}&app_id=${APP_ID}&app_key=${APP_KEY}`
       )
       .then((res) => {
         setRecipes(res.data.hits);
@@ -36,7 +42,7 @@ function MealIdeas() {
       });
   };
   //Function that will run everytime there is an onChange event in form
-  const updateSearch = (e) => {
+  /*  const updateSearch = (e) => {
     setSearch(e.target.value);
   };
 
@@ -47,12 +53,12 @@ function MealIdeas() {
 
     //Clear input bar after each search
     setSearch("");
-  };
+  }; */
 
   return (
     <div className="Recipes-index">
       <h3>Here are some recipe ideas for you based on your fridge items! </h3>
-      <form className="search-form" onSubmit={getSearch}>
+      {/*       <form className="search-form" onSubmit={getSearch}>
         <input
           className="search-bar"
           type="text"
@@ -60,7 +66,7 @@ function MealIdeas() {
           onChange={updateSearch}
         />
         <button className="search-button" type="submit"></button>
-      </form>
+      </form> */}
       <div className="recipes-list">
         {recipes.map((recipe) => (
           <Recipe
