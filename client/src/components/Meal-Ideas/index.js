@@ -5,7 +5,13 @@ import "./Recipe.scss";
 import Spinner from "react-bootstrap/Spinner";
 
 function MealIdeas() {
-  const dietRestrictions = ["vegeterian", "vegan", "banana"];
+  const dietRestrictions = [
+    "Vegetarian",
+    "Vegan",
+    "Pescatarian",
+    "Gluten-Free",
+    "Pork-Free",
+  ];
   const APP_ID = "c91c9bd4";
   const APP_KEY = "988029de8e29a4a1503fea286388dfef";
 
@@ -35,7 +41,7 @@ function MealIdeas() {
 
   useEffect(() => {
     getRecipes();
-  }, []);
+  }, [filters]);
 
   const handleOnChange = (position) => {
     const updatedCheckedState = checkedState.map((item, index) =>
@@ -59,7 +65,8 @@ function MealIdeas() {
   };
 
   //Temporarily hardcode, in future pull from DB
-  const expiringFoodItems = "milk, strawberry";
+
+  const expiringFoodItems = "Peas" + filters;
 
   //Function that gets recipe data from Edamam API using axios call
   /////**NOTE: For searchbar functionality, replace expiringFoodItem with query
@@ -125,6 +132,7 @@ function MealIdeas() {
           );
         })}
       </div>
+      <h1>{expiringFoodItems}</h1>
       <div className="recipes-list">
         {recipes.map((recipe) => (
           <Recipe
