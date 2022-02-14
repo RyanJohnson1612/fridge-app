@@ -64,7 +64,7 @@ describe("Users routes", () => {
       .set('Accept', 'application/json')
       .expect(400)
 
-    expect(res.body.error.detail).toBe('Key (email)=(jim@testman.com) already exists.');
+    expect(res.body.error).toBe('A user with email \'jim@testman.com\' already exists');
   });
 
   it('should not create a new user in the database if a field is missing', async () => {
@@ -81,7 +81,7 @@ describe("Users routes", () => {
       .set('Accept', 'application/json')
       .expect(400)
 
-    expect(res.body.error.detail).toContain('Failing row contains');
+    expect(res.body.error).toBe('Error creating new user');
   });
 
   it('should login a user give the correct email and password', async () => {
@@ -127,5 +127,12 @@ describe("Users routes", () => {
       .expect(404);
 
     expect(res.body.error).toBe('User not found');
+  });
+
+  it('should log a user out', async () => {
+    const res = await request(app)
+      .post('/api/users/logout')
+      .set('Accept', 'application/json')
+      .expect(200);
   });
 });
