@@ -1,110 +1,142 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { Alert, Button, Form } from 'react-bootstrap';
+import { auth } from '../../helpers/helpers';
+import { useNavigate } from 'react-router-dom';
 axios.defaults.withCredentials = true;
 
-function Register() {
+function Register(props) {
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [passwordConfirm, setPasswordConfirm] = useState();
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const validateForm = () => {
-    setError('')
+    setErrors({})
     if(!firstName) {
-      setError('First name is required');
-      return;
+      setErrors(prev => ({...prev, firstName: 'First name is required'}));
     }
     if(!lastName) {
-      setError('Last name is required');
-      return;
+      setErrors(prev => ({...prev, lastName: 'Last name is required'}));
     }
     if(!email) {
-      setError('Email is required');
-      return;
+      setErrors(prev => ({...prev, email: 'Email is required'}));
     }
     if(!password) {
-      setError('Password is required');
-      return;
+      setErrors(prev => ({...prev, password: 'Password is required'}));
+    }
+    if(!passwordConfirm) {
+      setErrors(prev => ({...prev, passwordConfirm: 'Password is required'}));
     }
     if(password !== passwordConfirm) {
-      setError('Passwords don\'t match');
-      return
+      setErrors(prev => ({...prev, password: 'Passwords don\'t match', passwordConfirm: 'Passwords don\'t match'}));
     }
 
-    submitForm();
+    if(Object.keys(errors).length === 0) return true;
+
+    return false
   }
 
-  const submitForm = () => {
-    axios.post(`${process.env.REACT_APP_API_URL}/api/users`, {firstName, lastName, email, password})
+  const submitForm = async () => {
+    const valid = await validateForm()
+    if (valid) {
+      axios.post(`${process.env.REACT_APP_API_URL}/api/users`, {firstName, lastName, email, password})
+        .then(res => {
+          loginUser();
+        })
+        .catch(err => {
+          if (err.response) {
+            setErrors(prev => ({...prev, server: err.response.data.error}))
+          }
+        });
+    }
+  }
+
+  const loginUser = () => {
+    axios.post(`${process.env.REACT_APP_API_URL}/api/users/login`, {email, password})
       .then(res => {
-        console.log(res);
+        if(auth()) return navigate('/fridge');
       })
       .catch(err => {
         console.log(err);
-        setError('Error submitting registration, please try again');
-      });
+      })
   }
+
+  const parsedErrors = [...new Set(Object.values(errors))].map((error, index) => <li className="register__error_message" key={index}>{error}</li>);
 
   return (
     <>
       <h1>Register for Fridge App</h1>
       <Form className="register__form" onSubmit={e => e.preventDefault()}>
         <Form.Group>
-          <Form.Label className="register__label">First Name</Form.Label>
+          <Form.Label className={errors.firstName ? 'register__label register__label--error' : 'register__label'}>First Name</Form.Label>
           <Form.Control
-            className="register__input"
+            className={errors.firstName ? 'register__input register__input--error' : 'register__input'}
             type="text"
             value={firstName}
             onChange={e => setFirstName(e.currentTarget.value)}
           />
         </Form.Group>
+
         <Form.Group>
-          <Form.Label className="register__label">Last Name</Form.Label>
+          <Form.Label className={errors.lastName ? 'register__label register__label--error' : 'register__label'}>Last Name</Form.Label>
           <Form.Control
-            className="register__input"
+            className={errors.lastName ? 'register__input register__input--error' : 'register__input'}
             type="text"
             value={lastName}
             onChange={e => setLastName(e.currentTarget.value)}
           />
         </Form.Group>
+
         <Form.Group>
-          <Form.Label className="register__label">Email</Form.Label>
+          <Form.Label className={errors.email ? 'register__label register__label--error' : 'register__label'}>Email</Form.Label>
           <Form.Control
-            className="register__input"
+            className={errors.email ? 'register__input register__input--error' : 'register__input'}
             type="email"
             value={email}
             onChange={e => setEmail(e.currentTarget.value)}
           />
         </Form.Group>
+
         <Form.Group>
-          <Form.Label className="register__label">Password</Form.Label>
+          <Form.Label className={errors.password ? 'register__label register__label--error' : 'register__label'}>Password</Form.Label>
           <Form.Control
-            className="register__input"
+            className={errors.password ? 'register__input register__input--error' : 'register__input'}
             type="password"
             value={password}
             onChange={e => setPassword(e.currentTarget.value)}
           />
         </Form.Group>
+
         <Form.Group>
-          <Form.Label className="register__label">Confirm Password</Form.Label>
+          <Form.Label className={errors.passwordConfirm ? 'register__label register__label--error' : 'register__label'}>Confirm Password</Form.Label>
           <Form.Control
-            className="register__input"
+            className={errors.passwordConfirm ? 'register__input register__input--error' : 'register__input'}
             type="password"
             value={passwordConfirm}
             onChange={e => setPasswordConfirm(e.currentTarget.value)}
           />
         </Form.Group>
+
         <Button
           className="register__button"
           type="submit"
           variant={'primary'}
-          onClick={() => validateForm()}>
+          onClick={() => submitForm()}>
             Register
         </Button>
-        { error && <Alert variant={'danger'}>{error}</Alert> }
+
+        {
+          Object.keys(errors).length > 0 &&
+          <Alert className="register__error" variant={'danger'}>
+            <ul className="register__error_list">
+              {parsedErrors}
+            </ul>
+          </Alert>
+        }
       </Form>
     </>
   );

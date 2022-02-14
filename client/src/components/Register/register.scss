@@ -21,11 +21,19 @@
     left: 7px;
     background: white;
     padding: 0 5px;
+
+    &--error {
+      color: #af3f48;
+    }
   }
 
   &__input {
     padding: 0.75rem;
     border: 1px solid #979797;
+
+    &--error {
+      border: 1px solid #af3f48;
+    }
   }
 
   &__button {
@@ -37,6 +45,17 @@
 
     &:hover {
       background-color: darken(#008080, 10%);
+    }
+
+    &:focus {
+      background-color: #008080;
+    }
+  }
+
+  &__error {
+    &_list {
+      margin-bottom: 0;
+      padding-left: 1em;
     }
   }
 }

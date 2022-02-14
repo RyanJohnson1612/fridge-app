@@ -43,7 +43,10 @@ module.exports = (db) => {
         return res.status(201).json('User created').end();
       })
       .catch(err => {
-        return res.status(400).json({error: err}).end();
+        if (err.constraint === 'users_email_key') {
+          return res.status(400).json({error: `A user with email '${req.body.email}' already exists`, err}).end();
+        }
+        return res.status(400).json({error: 'Error creating new user', err: err}).end();
       });
   });
 
