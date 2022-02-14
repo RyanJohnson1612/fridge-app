@@ -22,8 +22,13 @@ module.exports = (db) => {
     const command = "SELECT * FROM users WHERE id = $1;";
     db.query(command, [req.params.id])
       .then(data => {
-        res.json(data.rows[0]);
-        res.end()
+        if(data.rows[0]) {
+          res.json(data.rows[0]);
+          res.end()
+        } else {
+          res.status(404);
+          res.json({ message: 'User not found' }).end();
+        }
       })
       .catch(err => {
         res.status(400)
@@ -54,16 +59,24 @@ module.exports = (db) => {
     db.query(command, [req.body.email])
       .then(data => {
         const user = data.rows[0];
+
+        if (!user) {
+          res.status(404);
+          res.json({message: 'User not found'}).end();
+          return;
+        }
+
         if (user && bcrypt.compareSync(req.body.password, user.password)) {
           res.status(200);
           res.json(user).end();
           return;
+        } else {
+          res.status(401);
+          res.json({message: 'Email or password is incorrect'}).end();
         }
-        res.status(401).end();
       })
       .catch(err => {
-        res.status(401);
-        res.json(err).end();
+        res.json({message: 'Error logging in, please try again', error: err}).end();
       });
   });
 
