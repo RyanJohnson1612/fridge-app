@@ -57,27 +57,45 @@ function MealIdeas() {
         }
         return combined;
       },
-      " "
+      ""
     );
 
     setFilters(allFilters);
     console.log("these are the filters you selected:", filters);
   };
 
-  //Temporarily hardcode, in future pull from DB
+  const healthLabels = () => {
+    //Convert string of filters to an array
+    let result = "";
+    if (filters !== "") {
+      let filtersArray = filters.slice(1).split(" ");
+      filtersArray.forEach((filter) => {
+        result += `&health=${filter}`;
+      });
+    }
+    return result.toLowerCase();
+  };
 
-  const expiringFoodItems = "Peas" + filters;
+  const healthLabelz = healthLabels();
+  console.log("THESE ARE THE HEALTH LABELS:", healthLabelz);
+
+  //Temporarily hardcode, in future pull from DB
+  const expiringFoodItems = "Peas";
 
   //Function that gets recipe data from Edamam API using axios call
   /////**NOTE: For searchbar functionality, replace expiringFoodItem with query
   const getRecipes = () => {
     axios
       .get(
-        `https://api.edamam.com/search?q=${expiringFoodItems}&app_id=${APP_ID}&app_key=${APP_KEY}`
+        `https://api.edamam.com/search?q=${expiringFoodItems}&app_id=${APP_ID}&app_key=${APP_KEY}${healthLabelz}`
       )
       .then((res) => {
         setRecipes(res.data.hits);
         console.log(res.data.hits);
+        console.log(
+          "AXIOS GET ROUTE:",
+          `https://api.edamam.com/search?q=${expiringFoodItems}&app_id=${APP_ID}&app_key=${APP_KEY}&health=Vegan&health=Pork-Free`
+        );
         setLoading(false);
       })
       .catch((err) => {
@@ -132,7 +150,7 @@ function MealIdeas() {
           );
         })}
       </div>
-      <h1>{expiringFoodItems}</h1>
+      <h1>{healthLabelz}</h1>
       <div className="recipes-list">
         {recipes.map((recipe) => (
           <Recipe
