@@ -8,7 +8,7 @@ function Recipe(props) {
 
   return (
     <div className="Recipe">
-      <h1> {title} </h1>
+      <h4> {title} </h4>
       <ol>
         <h6> Ingredients: </h6>
         {ingredients.map((ingredient) => (

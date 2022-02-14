@@ -5,6 +5,8 @@
 .Recipes-index h3 {
   display: flex;
   justify-content: center;
+  opacity: 0.75;
+  margin: 20px;
 }
 
 .search-form{
@@ -26,7 +28,7 @@
 .search-button{
   padding: 16px;
   height: 56px;
-  width: 50px;
+  width: 60px;
   border: none;
   border-radius: 0 4px 4px 0;
   cursor: pointer;
@@ -70,4 +72,30 @@
 
 .Recipe a:active {
   transform: scale(0.98);
+}
+
+.Recipe h4 {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+ol {
+  list-style: none;
+  counter-reset: item;
+}
+li {
+  counter-increment: item;
+  margin-bottom: 5px;
+}
+
+li:before {
+  margin-right: 10px;
+  content: counter(item);
+  background: lightblue;
+  border-radius: 100%;
+  color: white;
+  width: 1.5em;
+  text-align: center;
+  display: inline-block;
 }
