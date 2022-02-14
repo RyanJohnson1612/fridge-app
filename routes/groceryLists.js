@@ -2,6 +2,17 @@ const router = require('express').Router();
 
 module.exports = (db) => {
 
+  // GET grocery lists
+  router.get('/', function(req, res, next) {
+    const queryString =
+      `SELECT *
+       FROM grocery_lists;`
+    db.query(queryString).then(data => {
+      console.log(data.rows)
+      res.json(data.rows);
+    }).catch(error => console.log(`Error: ${error.message}`));
+  })
+
   // GET grocery list
   router.get('/:id', function(req, res, next) {
     const queryString =
