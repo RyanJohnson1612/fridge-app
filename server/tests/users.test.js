@@ -96,7 +96,7 @@ describe("Users routes", () => {
       .set('Accept', 'application/json')
       .expect(200);
 
-    expect(res.body.first_name).toBe('Jim');
+    expect(res.body.firstName).toBe('Jim');
   });
 
   it('should not login a user given the wrong password', async () => {
