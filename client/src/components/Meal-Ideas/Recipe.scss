@@ -115,5 +115,46 @@ li:before {
 .spinner {
   display: flex;
   justify-content: center;
+}
+
+@media (max-width: 480px) {
+  body {
+    background-color: rgb(233, 203, 214);
+  }
+
+  .Recipes-index h3 {
+    margin: 5px;
+    font-size: medium;
+    text-align: center;
+  }
+
+  .Recipe {
+    border-radius: 2px;
+    box-shadow: 0px 2px 6px black;
+    margin: 10px;
+    padding: 5px;
+    display: flex;
+    width: 90%;
+    font-size: smaller;
+  }
+
+  .Recipe a {
+    margin-left: 20px;
+    padding: 1em;
+    border-radius: 4px;
+    height: 36px;
+    font-size: smaller;
+  }
+
+  li {
+    counter-increment: item;
+    margin-bottom: 1px;
+    font-size: smaller;
+  }
+
+  li:before {
+    margin-right: 5px;
+    width: 1.5em;
+  }
 
 }
