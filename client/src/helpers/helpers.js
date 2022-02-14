@@ -9,7 +9,7 @@ module.exports.getCookie = getCookie;
 const auth = () => {
   const user = getCookie('user');
   if(!user) return null;
-  return JSON.parse(user);
+  return JSON.parse(unescape(user));
 }
 
 module.exports.auth = auth;

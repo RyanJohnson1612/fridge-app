@@ -30,7 +30,7 @@ function Login() {
         console.log(auth());
       })
       .catch(err => {
-        if (err.response.data.error) {
+        if (err.responsew) {
           setError(err.response.data.error)
         }
         console.log(err);

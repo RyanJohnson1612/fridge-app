@@ -64,12 +64,12 @@ module.exports = (db) => {
           res.cookie("access-token", token, { maxAge: 2592000000, httpOnly: true });
           res.cookie(
             "user",
-            {
+            JSON.stringify({
               id: user.id,
               email: user.email,
               firstName: user.first_name,
               lastName: user.last_name
-            },
+            }),
             { maxAge: 2592000000 }
           );
 
