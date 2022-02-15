@@ -78,9 +78,10 @@ function Register(props) {
       <h1>Register for Fridge App</h1>
       <Form className="register__form" onSubmit={e => e.preventDefault()}>
         <Form.Group className="register__form-group">
-          <Form.Label className={errors.firstName ? 'register__label register__label--error' : 'register__label'}>First Name</Form.Label>
+          <Form.Label className={errors.firstName ? 'register__label register__label--error' : 'register__label'} htmlFor="firstName">First Name</Form.Label>
           <Form.Control
             className={errors.firstName ? 'register__input register__input--error' : 'register__input'}
+            id="firstName"
             type="text"
             value={firstName}
             onChange={e => setFirstName(e.currentTarget.value)}
@@ -89,9 +90,10 @@ function Register(props) {
         </Form.Group>
 
         <Form.Group className="register__form-group">
-          <Form.Label className={errors.lastName ? 'register__label register__label--error' : 'register__label'}>Last Name</Form.Label>
+          <Form.Label className={errors.lastName ? 'register__label register__label--error' : 'register__label'} htmlFor="lastName">Last Name</Form.Label>
           <Form.Control
             className={errors.lastName ? 'register__input register__input--error' : 'register__input'}
+            id="lastName"
             type="text"
             value={lastName}
             onChange={e => setLastName(e.currentTarget.value)}
@@ -100,9 +102,10 @@ function Register(props) {
         </Form.Group>
 
         <Form.Group className="register__form-group">
-          <Form.Label className={errors.email ? 'register__label register__label--error' : 'register__label'}>Email</Form.Label>
+          <Form.Label className={errors.email ? 'register__label register__label--error' : 'register__label'} htmlFor="email">Email</Form.Label>
           <Form.Control
             className={errors.email ? 'register__input register__input--error' : 'register__input'}
+            id="email"
             type="email"
             value={email}
             onChange={e => setEmail(e.currentTarget.value)}
@@ -111,9 +114,10 @@ function Register(props) {
         </Form.Group>
 
         <Form.Group className="register__form-group">
-          <Form.Label className={errors.password ? 'register__label register__label--error' : 'register__label'}>Password</Form.Label>
+          <Form.Label className={errors.password ? 'register__label register__label--error' : 'register__label'} htmlFor="password">Password</Form.Label>
           <Form.Control
             className={errors.password ? 'register__input register__input--error' : 'register__input'}
+            id="password"
             type="password"
             value={password}
             onChange={e => setPassword(e.currentTarget.value)}
@@ -122,9 +126,10 @@ function Register(props) {
         </Form.Group>
 
         <Form.Group className="register__form-group">
-          <Form.Label className={errors.passwordConfirm ? 'register__label register__label--error' : 'register__label'}>Confirm Password</Form.Label>
+          <Form.Label className={errors.passwordConfirm ? 'register__label register__label--error' : 'register__label'} htmlFor="passwordConfirm">Confirm Password</Form.Label>
           <Form.Control
             className={errors.passwordConfirm ? 'register__input register__input--error' : 'register__input'}
+            id="passwordConfirm"
             type="password"
             value={passwordConfirm}
             onChange={e => setPasswordConfirm(e.currentTarget.value)}
@@ -136,7 +141,8 @@ function Register(props) {
           className="register__button"
           type="submit"
           variant={'primary'}
-          onClick={() => submitForm()}>
+          onClick={() => submitForm()}
+          data-testid="submit-btn">
             Register
         </Button>
 
