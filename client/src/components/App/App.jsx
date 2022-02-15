@@ -12,6 +12,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
 
   const [fridgeItem, setFridgeItem] = useState({});
+  const [groceryList, setGroceryList] = useState(1);
+  const [allGroceryLists, setAllGroceryLists] = useState([]);
 
   useEffect(() => {
     axios.get(`http://localhost:8080/fridge_items/7`)
@@ -24,6 +26,14 @@ function App() {
         }
       })
       .catch(error => console.log(`Error: ${error.message}`));
+
+    axios.get('http://localhost:8080/grocery_lists')
+      .then((results) => {
+        console.log(results);
+        setAllGroceryLists(results.data);
+      })
+      .catch(err => console.log(err));
+
   }, [fridgeItem]);
 
   return (
@@ -50,18 +60,22 @@ function App() {
 
           { (!fridgeItem.date_removed && fridgeItem) && (
             <FridgeItem
-            key={fridgeItem.id}
-            id={fridgeItem.id}
-            name={fridgeItem.name}
-            dateStored={fridgeItem.date_stored}
-            expiry={fridgeItem.expiry}
-            category={fridgeItem.category}
-            image={fridgeItem.image_url}
-            notes={fridgeItem.notes}
-            expireIn={fridgeItem.expire_in}
-            storedSince={fridgeItem.stored_since}
-            dateRemoved={fridgeItem.date_removed}
-            setFridgeItem={setFridgeItem}
+              key={fridgeItem.id}
+              // id={fridgeItem.id}
+              // name={fridgeItem.name}
+              // dateStored={fridgeItem.date_stored}
+              // expiry={fridgeItem.expiry}
+              // category={fridgeItem.category}
+              // image={fridgeItem.image_url}
+              // notes={fridgeItem.notes}
+              // expireIn={fridgeItem.expire_in}
+              // storedSince={fridgeItem.stored_since}
+              // dateRemoved={fridgeItem.date_removed}
+              fridgeItem={fridgeItem}
+              setFridgeItem={setFridgeItem}
+              setGroceryList={setGroceryList}
+              groceryList={groceryList}
+              allGroceryLists={allGroceryLists}
             />
             )}
         </div>
