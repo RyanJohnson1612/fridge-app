@@ -14,7 +14,7 @@ function MealIdeas() {
   ];
 
   const APP_ID = "c91c9bd4";
-  const APP_KEY = "988029de8e29a4a1503fea286388dfef";
+  const APP_KEY = "7ae365e1618e6d8602d4cdc9427c5035";
 
   //State to manage multiple checkboxes used for dietRestrictions recipe filters
   const [checkedState, setCheckedState] = useState(

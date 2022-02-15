@@ -3,6 +3,7 @@ import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Nav, Navbar } from "react-bootstrap";
 import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
+import MealIdeas from "../Meal-Ideas";
 
 function App() {
   return (
@@ -19,7 +20,9 @@ function App() {
         </NavbarCollapse>
       </Navbar>
 
-      <div className="content">Placeholder content...</div>
+      <div className="content">
+        <MealIdeas />
+      </div>
     </div>
   );
 }
