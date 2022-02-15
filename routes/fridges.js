@@ -1,11 +1,10 @@
 const router = require('express').Router();
-const { verify } = require('jsonwebtoken');
-const protected = require('../middleware/protected');
+const protectedRoute = require('../middleware/protectedRoute');
 
 module.exports = (db) => {
 
   /* GET fridge by user id */
-  router.get('/:id/fridge', protected, (req, res) => {
+  router.get('/:id/fridge', protectedRoute, (req, res) => {
     if (!req.authenticated) {
       return res.status(401).json({message: 'Unauthorized'}).end();
     }
