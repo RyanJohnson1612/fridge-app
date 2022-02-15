@@ -34,5 +34,20 @@ module.exports = (db) => {
     });
   });
 
+  //UPDATE specific grocery item
+  //req.params includes: id, obtained
+  router.put('/:id', function(req, res, next) {
+    const queryString =
+      `UPDATE grocery_items
+       SET obtained = $1
+       WHERE id = $2 RETURNING *;`;
+    const queryParams = [req.body.obtained, req.params.id];
+
+    db.query(queryString, queryParams).then((data) => {
+      console.log("HI");
+      res.json(data);
+    });
+  });
+
   return router;
 };
