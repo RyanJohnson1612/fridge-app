@@ -1,13 +1,15 @@
 const { verify } = require('jsonwebtoken');
 
-const validateToken = (req, res, next) => {
-  const accessToken = req.cookie["access-token"];
+const protected = (req, res, next) => {
+  console.log(req.cookies)
+  const accessToken = req.cookies['access-token'];
 
   if (!accessToken) {
-    return res.status(400).json({error: 'User not authenticated'})
+    return res.status(401).send('Unauthorized')
   }
 
   try {
+    console.log('valid', valid)
     if(verify(accessToken, process.env.JWT_SECRET)) {
       req.authenticated = true;
       return next();
@@ -17,4 +19,4 @@ const validateToken = (req, res, next) => {
   }
 }
 
-module.exports = validateToken;
+module.exports = protected;

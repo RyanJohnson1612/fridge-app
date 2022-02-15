@@ -23,17 +23,16 @@ const AuthProvider = function(props) {
   }
 
   const register = (firstName, lastName, email, password) => {
-    return axios.post(`${process.env.REACT_APP_API_URL}/api/users`, {firstName, lastName, email, password});
+    return axios
+      .post(`${process.env.REACT_APP_API_URL}/api/users`, {firstName, lastName, email, password})
+      .catch(err => err);
   }
 
   const logout = () => {
     deleteCookie('user');
     return axios
       .post(`${process.env.REACT_APP_API_URL}/api/users/logout`)
-      .then(res => {
-        console.log(res.data)
-      })
-      .catch(err => console.log(err));
+      .catch(err => err);
   }
 
   const data = { user, login, register, logout };
