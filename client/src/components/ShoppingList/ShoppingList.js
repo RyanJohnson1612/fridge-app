@@ -19,6 +19,7 @@ function ShoppingList() {
       .post("http://localhost:8080/grocery_lists/3", {
         name: item.text,
         grocery_list_id: 3,
+        obtained: false,
       })
       .then((res) => {
         const newItems = [{ id: res.data.id, text: res.data.name }, ...items];
@@ -70,6 +71,7 @@ function ShoppingList() {
         /* toggles isPurchased between true and false */
         item.isPurchased = !item.isPurchased;
       }
+      console.log("this is the ID of the completed item:", id);
       return item;
     });
     setItems(updatedItems);

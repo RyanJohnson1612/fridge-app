@@ -26,8 +26,8 @@ module.exports = (db) => {
   // GET specific grocery list item
   router.get("/:id", function (req, res, next) {
     const queryString = `SELECT id, name, grocery_list_id, obtained
-       FROM grocery_items
-       WHERE id = $1`;
+    FROM grocery_items
+    WHERE id = $1`;
     const queryParams = [req.params.id];
     db.query(queryString, queryParams).then((data) => {
       res.json(data.rows);

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ShoppingListForm from "./ShoppingListForm";
 import { RiCloseCircleLine, RiFridgeLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
-import axios from "axios";
 
 function ShoppingListItem(props) {
   const { items, completeItem, removeItem, updateItem, addToFridge } = props;
