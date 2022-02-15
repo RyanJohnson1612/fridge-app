@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import axios from 'axios';
 import { Alert, Button, Form } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { authContext } from '../../providers/AuthProvider';
 axios.defaults.withCredentials = true;
 
@@ -88,6 +88,7 @@ function Login(props) {
 
         { errors.server && <Alert variant={'danger'}>{errors.server}</Alert>}
       </Form>
+      <p>Don't have an account? Register <Link to="/register">here</Link></p>
     </>
   );
 }
