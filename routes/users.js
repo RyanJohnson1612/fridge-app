@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const createToken = require('../helpers/createToken');
-const validateToken = require('../middleware/validateToken');
 
 module.exports = (db) => {
 
