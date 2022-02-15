@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ShoppingListForm from "./ShoppingListForm";
 import ShoppingListItem from "./ShoppingListItem";
+import axios from "axios";
 
 function ShoppingList() {
   const [items, setItems] = useState([]);
@@ -44,6 +45,19 @@ function ShoppingList() {
     });
     setItems(updatedItems);
   };
+
+  const testAxiosGet = () => {
+    axios
+      .get(`http://localhost:8080/grocery_lists/3`)
+      .then((res) => {
+        console.log("Get grocery list 3:", res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  testAxiosGet();
 
   return (
     <div>
