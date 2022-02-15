@@ -7,9 +7,7 @@ function ShoppingList() {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    testAxiosGet();
     console.log("I run everytime this component rerenders");
-    addItem({ id: Math.floor(Math.random() * 10000), text: "pig" });
   }, []);
 
   //Function to add items to shopping list, will be passed to ShoppingListForm
@@ -50,17 +48,6 @@ function ShoppingList() {
       return item;
     });
     setItems(updatedItems);
-  };
-
-  const testAxiosGet = () => {
-    axios
-      .get(`http://localhost:8080/grocery_lists/3`)
-      .then((res) => {
-        console.log("Get grocery list 3:", res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
   return (

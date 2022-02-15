@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ShoppingListForm from "./ShoppingListForm";
 import { RiCloseCircleLine, RiFridgeLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
-
+import axios from "axios";
 function ShoppingListItem(props) {
   const { items, completeItem, removeItem, updateItem, addToFridge } = props;
 
@@ -18,6 +18,22 @@ function ShoppingListItem(props) {
       value: "",
     });
   };
+
+  const testAxiosGet = () => {
+    axios
+      .get(`http://localhost:8080/grocery_lists/3`)
+      .then((res) => {
+        res.data.forEach((data, index) => {
+          console.log("index", index);
+        });
+        console.log("Get grocery list 3:", res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  testAxiosGet();
 
   /*  If state variable edit.id is true (which occurs after edit icon is clicked),
   return ShoppingListForm while passing submitUpdate function onSubmit */
@@ -52,6 +68,6 @@ function ShoppingListItem(props) {
     </div>
   ));
 
-  return itemsMapped;
+  return [...itemsMapped];
 }
 export default ShoppingListItem;
