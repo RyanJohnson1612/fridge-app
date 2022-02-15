@@ -53,6 +53,6 @@ function ShoppingListItem(props) {
     </div>
   ));
 
-  return [...itemsMapped];
+  return itemsMapped;
 }
 export default ShoppingListItem;

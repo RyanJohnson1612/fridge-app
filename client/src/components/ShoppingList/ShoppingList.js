@@ -54,11 +54,15 @@ function ShoppingList() {
     axios
       .get(`http://localhost:8080/grocery_lists/3`)
       .then((res) => {
-        const result = [];
-        res.data.forEach((data) => {
-          result.push(data.name);
+        const results = [];
+        res.data.forEach((data, index) => {
+          results.push({
+            id: data.id,
+            text: data.name,
+          });
         });
-        setItems([{ id: Math.floor(Math.random() * 10000), text: "pig" }]);
+        console.log("results", results);
+        setItems([...items, ...results]);
       })
       .catch((err) => {
         console.log(err);
