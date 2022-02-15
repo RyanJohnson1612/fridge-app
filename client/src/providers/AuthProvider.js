@@ -36,6 +36,14 @@ const AuthProvider = function(props) {
     return axios
       .post(`${process.env.REACT_APP_API_URL}/api/users`, {firstName, lastName, email, password})
       .then(() => login(email, password))
+      .then(() => createFridge(user.id, user.firstName))
+      .catch(err => err);
+  }
+
+  const createFridge = (id, name) => {
+    return axios
+      .post(`${process.env.REACT_APP_API_URL}/api/fridges`, {id, name})
+      .then((res) => res)
       .catch(err => err);
   }
 

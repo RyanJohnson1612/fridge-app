@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react';
-import axios from 'axios';
 import { Alert, Button, Form } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 import { authContext } from '../../providers/AuthProvider';
+import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 function Register(props) {
@@ -58,7 +58,8 @@ function Register(props) {
     if (validateForm()) {
       register(firstName, lastName, email, password)
         .then(res => {
-          if (res && res.response.status !== 201) {
+          console.log(res);
+          if (res && res.status !== 201) {
             setErrors(prev => ({...prev, server: res.response.data.error}));
             return false;
           } else {
