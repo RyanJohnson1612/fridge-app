@@ -18,8 +18,6 @@ function ShoppingListForm(props) {
     e.preventDefault();
 
     props.onSubmit({
-      //Temporary way to generate unique item id between 1-10,000 --> to be replaced
-      id: Math.floor(Math.random() * 10000),
       text: input,
     });
 
