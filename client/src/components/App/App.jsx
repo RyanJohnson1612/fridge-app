@@ -17,7 +17,6 @@ function App() {
     axios.get(`${process.env.REACT_APP_API_URL}/fridge_items/7`)
       .then((results) => {
         const item = results.data[0]
-        console.log(item);
 
         if (JSON.stringify(fridgeItem) !== JSON.stringify(item)) {
           setFridgeItem(item);

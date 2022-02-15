@@ -12,6 +12,10 @@
     flex-direction: column;
     width: 100%;
     max-width: 500px;
+
+    &-group {
+      margin-top: -10px;
+    }
   }
 
   &__label {
@@ -36,6 +40,11 @@
     }
   }
 
+  &__error {
+    font-size: 0.75rem;
+    color: #af3f48;
+  }
+
   &__button {
     margin: 25px 0;
     padding: 10px;
@@ -46,12 +55,9 @@
     &:hover {
       background-color: darken(#008080, 10%);
     }
-  }
 
-  &__error {
-    &_list {
-      margin-bottom: 0;
-      padding-left: 1em;
+    &:focus {
+      background-color: #008080;
     }
   }
 }

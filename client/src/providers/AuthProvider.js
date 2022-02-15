@@ -22,8 +22,7 @@ const AuthProvider = function(props) {
       .post(`${process.env.REACT_APP_API_URL}/api/users/login`, {email, password})
       .then(res => {
         setUser(getUser());
-      })
-      .catch(err => err);
+      });
   }
 
   /* Sends register request to API
@@ -36,16 +35,20 @@ const AuthProvider = function(props) {
   const register = (firstName, lastName, email, password) => {
     return axios
       .post(`${process.env.REACT_APP_API_URL}/api/users`, {firstName, lastName, email, password})
+      .then(() => login(email, password))
       .catch(err => err);
   }
 
-  /* Sends logout request to API, and delete user cookie
+  /* Sends logout request to API, delete user cookie and set user to null
    * @return {Promise}
    */
   const logout = () => {
-    deleteCookie('user');
     return axios
       .post(`${process.env.REACT_APP_API_URL}/api/users/logout`)
+      .then(res => {
+        deleteCookie('user');
+        setUser(null);
+      })
       .catch(err => err);
   }
 
