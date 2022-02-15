@@ -58,9 +58,10 @@ function Login(props) {
       <h1>Login to Fridge App</h1>
       <Form className="login__form" onSubmit={e => e.preventDefault()}>
         <Form.Group className="login__form-group">
-          <Form.Label className={errors.email ? 'login__label login__label--error' : 'login__label'}>Email</Form.Label>
+          <Form.Label className={errors.email ? 'login__label login__label--error' : 'login__label'} htmlFor="email">Email</Form.Label>
           <Form.Control
             className={errors.email ? 'login__input login__input--error' : 'login__input'}
+            id="email"
             type="email"
             value={email}
             onChange={e => setEmail(e.currentTarget.value)}
@@ -69,9 +70,10 @@ function Login(props) {
         </Form.Group>
 
         <Form.Group className="login__form-group">
-          <Form.Label className={errors.password ? 'login__label login__label--error' : 'login__label'}>Password</Form.Label>
+          <Form.Label className={errors.password ? 'login__label login__label--error' : 'login__label'} htmlFor="password">Password</Form.Label>
           <Form.Control
             className={errors.password ? 'register__input register__input--error' : 'register__input'}
+            id="password"
             type="password"
             value={password}
             onChange={e => setPassword(e.currentTarget.value)}
@@ -82,7 +84,8 @@ function Login(props) {
         <Button
           className="login__button"
           type="submit"
-          onClick={() => submitForm()}>
+          onClick={() => submitForm()}
+          data-testid="submit-btn">
             Login
         </Button>
 
