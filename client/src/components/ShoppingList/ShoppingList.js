@@ -16,7 +16,7 @@ function ShoppingList() {
   //item paramater in format: [ {id: #, text: string }, {id: #, text: string }, ...]
   const addItem = (item) => {
     axios
-      .post("http://localhost:8080/grocery_lists/3", {
+      .post("http://localhost:8080/grocery_lists/1", {
         name: item.text,
         grocery_list_id: 3,
         obtained: false,
@@ -70,6 +70,16 @@ function ShoppingList() {
       if (item.id === id) {
         /* toggles isPurchased between true and false */
         item.isPurchased = !item.isPurchased;
+
+        axios.put(`http://localhost:8080/grocery_items/${id}`, { obtained: item.isPurchased })
+        .then(() => {
+          swal("Success!", ` item marked as complete`, "success");
+        })
+        .catch(err => {
+          console.log(err)
+          swal("Oops!", "There was an error with your request. Please try again in a few minutes.", "error");
+        });
+
       }
       console.log("this is the ID of the completed item:", id);
       return item;
@@ -79,7 +89,7 @@ function ShoppingList() {
 
   const getPreviousItems = () => {
     axios
-      .get(`http://localhost:8080/grocery_lists/3`)
+      .get(`http://localhost:8080/grocery_lists/1`)
       .then((res) => {
         const results = [];
         res.data.forEach((data, index) => {

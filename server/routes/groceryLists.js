@@ -31,7 +31,7 @@ module.exports = (db) => {
     const queryString =
       `INSERT INTO grocery_items (name, grocery_list_id, obtained)
        VALUES ($1, $2, $3) RETURNING *;`;
-    const queryParams = [req.body.name, req.body.grocery_list_id, req.body.obtained,]
+    const queryParams = [req.body.name, req.body.grocery_list_id, req.body.obtained]
 
     db.query(queryString, queryParams).then(data => {
       console.log(data.rows[0]);
