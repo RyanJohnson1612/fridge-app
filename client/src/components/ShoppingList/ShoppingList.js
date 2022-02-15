@@ -24,14 +24,6 @@ function ShoppingList() {
         name: item.text,
         grocery_list_id: 3,
       })
-      .then((results) => {
-        console.log(results);
-        swal(
-          "Success!",
-          `${item.text} has been added to your grocery list.`,
-          "success"
-        );
-      })
       .catch((err) => {
         console.log(err);
         swal(
