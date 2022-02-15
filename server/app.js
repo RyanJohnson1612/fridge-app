@@ -1,4 +1,5 @@
-require('dotenv').config();
+require("dotenv").config();
+
 
 const express = require('express');
 const path = require('path');
@@ -7,13 +8,15 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 // db connection
-const db = require('./configs/db.config');
+const db = require("./configs/db.config");
 
-const usersRouter = require('./routes/users');
-const fridgeItemsRouter = require('./routes/fridgeItems');
-const groceryListsRouter = require('./routes/groceryLists');
+const usersRouter = require("./routes/users");
+const fridgeItemsRouter = require("./routes/fridgeItems");
+const groceryListsRouter = require("./routes/groceryLists");
+const groceryListItemsRouter = require("./routes/groceryListItems");
 
 const app = express();
+
 
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', process.env.CLIENT_URL);
@@ -28,10 +31,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
+
 
 app.use('/api/users', usersRouter(db));
 app.use('/fridge_items', fridgeItemsRouter(db));
 app.use('/grocery_lists', groceryListsRouter(db));
+app.use("/grocery_items", groceryListItemsRouter(db));
+
 
 module.exports = app;

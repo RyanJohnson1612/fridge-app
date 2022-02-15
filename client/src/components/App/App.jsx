@@ -4,22 +4,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from '../Navbar/'
 import FridgeItem from '../FridgeItem/FridgeItem';
-import ShoppingList from '../ShoppingList/';
+import ShoppingListIndex from "../ShoppingList";
 import Login from '../Login/';
 import Register from '../Register/';
 import axios from 'axios'
 
 function App() {
-
   const [fridgeItem, setFridgeItem] = useState({});
   const [groceryList, setGroceryList] = useState(1);
   const [allGroceryLists, setAllGroceryLists] = useState([]);
 
   useEffect(() => {
+
     axios.get(`${process.env.REACT_APP_API_URL}/fridge_items/7`)
       .then((results) => {
         const item = results.data[0]
-
         if (JSON.stringify(fridgeItem) !== JSON.stringify(item)) {
           setFridgeItem(item);
         }
@@ -62,12 +61,13 @@ function App() {
             />
             )} />
             <Route path="/fridge" element={<h1>Fridge Index</h1>} />
-            <Route path="/grocery-list" element={<ShoppingList />} />
+            <Route path="/grocery-list" element={<ShoppingListIndex />} />
             <Route path="/recipes" element={<h1>Recipes Index</h1>} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>
         </section>
+
 
 
       </Router>

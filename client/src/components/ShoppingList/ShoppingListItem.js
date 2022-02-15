@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ShoppingListForm from "./ShoppingListForm";
 import { RiCloseCircleLine, RiFridgeLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
+import axios from "axios";
 
 function ShoppingListItem(props) {
   const { items, completeItem, removeItem, updateItem, addToFridge } = props;
@@ -24,8 +25,7 @@ function ShoppingListItem(props) {
   if (edit.id) {
     return <ShoppingListForm onSubmit={submitUpdate} />;
   }
-
-  return items.map((item, index) => (
+  const itemsMapped = items.map((item, index) => (
     // class of item is assigned based on whether item was purchased or not
     <div
       className={item.isPurchased ? "item-row complete" : "item-row"}
@@ -52,5 +52,7 @@ function ShoppingListItem(props) {
       </div>
     </div>
   ));
+
+  return itemsMapped;
 }
 export default ShoppingListItem;

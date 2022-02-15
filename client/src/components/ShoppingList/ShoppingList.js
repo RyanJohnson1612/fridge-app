@@ -1,15 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ShoppingListForm from "./ShoppingListForm";
 import ShoppingListItem from "./ShoppingListItem";
+import axios from "axios";
+import swal from "sweetalert";
 
 function ShoppingList() {
+  //the state items in format: [ {id: #, text: string }, {id: #, text: string }, ...]
   const [items, setItems] = useState([]);
 
+  useEffect(() => {
+    getPreviousItems();
+  }, []);
+
   //Function to add items to shopping list, will be passed to ShoppingListForm
+  //item paramater in format: [ {id: #, text: string }, {id: #, text: string }, ...]
   const addItem = (item) => {
-    const newItems = [item, ...items];
-    setItems(newItems);
-    console.log(...items);
+    axios
+      .post("http://localhost:8080/grocery_lists/3", {
+        name: item.text,
+        grocery_list_id: 3,
+      })
+      .then((res) => {
+        const newItems = [{ id: res.data.id, text: res.data.name }, ...items];
+        setItems(newItems);
+      })
+      .catch((err) => {
+        console.log(err);
+        swal(
+          "Oops!",
+          "There was an error with your request. Please try again in a few minutes.",
+          "error"
+        );
+      });
   };
 
   //Function to update item in shopping list, will be passed to ShoppingListItem component
@@ -26,6 +48,14 @@ function ShoppingList() {
     const removeArr = [...items].filter((item) => item.id !== id);
 
     setItems(removeArr);
+    axios.delete(`http://localhost:8080/grocery_items/${id}`).catch((err) => {
+      console.log(err);
+      swal(
+        "Oops!",
+        "There was an error with your request. Please try again in a few minutes.",
+        "error"
+      );
+    });
   };
 
   //Placeholder --> replace with function that adds item to user's fridge
@@ -43,6 +73,24 @@ function ShoppingList() {
       return item;
     });
     setItems(updatedItems);
+  };
+
+  const getPreviousItems = () => {
+    axios
+      .get(`http://localhost:8080/grocery_lists/3`)
+      .then((res) => {
+        const results = [];
+        res.data.forEach((data, index) => {
+          results.unshift({
+            id: data.id,
+            text: data.name,
+          });
+        });
+        setItems([...items, ...results]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

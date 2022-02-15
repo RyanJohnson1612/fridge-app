@@ -65,17 +65,20 @@ h1 {
   display: flex;
   justify-content: space-between;
   margin: 4px auto;
-  padding: 16px;
+  padding: 10px;
   border: 1px solid #000000;
   width: 90%;
   box-shadow: 1px 2px gray;
+}
+
+.item-row div {
+  cursor: pointer;
 }
 
 .icons {
   display: flex;
   align-items: center;
   font-size: 20px;
-  cursor: pointer;
   transform: scale(0.98);
 }
 
