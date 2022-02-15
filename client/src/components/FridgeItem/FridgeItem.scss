@@ -24,6 +24,7 @@ html {
   border: 0.1em solid;
   border-color: rgb(138, 138, 138);
   font-family: 'Raleway', sans-serif;
+  box-shadow: 400px 10px solid;
 }
 
 // td {
@@ -40,6 +41,12 @@ button {
   border:none;
   background-color:transparent;
   outline:none;
+}
+
+select {
+  border-radius: 5px;
+  background-color: rgb(218, 230, 240);
+  border-style: groove;
 }
 
 @media screen and (min-width: 576px) {
