@@ -20,20 +20,6 @@ function ShoppingListItem(props) {
     });
   };
 
-  const testAxiosGet = axios
-    .get(`http://localhost:8080/grocery_lists/3`)
-    .then((res) => {
-      const result = [];
-      res.data.forEach((data) => {
-        result.push(data.name);
-      });
-      return result;
-    })
-    .then({})
-    .catch((err) => {
-      console.log(err);
-    });
-
   /*  If state variable edit.id is true (which occurs after edit icon is clicked),
   return ShoppingListForm while passing submitUpdate function onSubmit */
   if (edit.id) {

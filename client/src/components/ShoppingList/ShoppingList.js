@@ -7,7 +7,7 @@ function ShoppingList() {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    console.log("I run everytime this component rerenders");
+    getPreviousItems();
   }, []);
 
   //Function to add items to shopping list, will be passed to ShoppingListForm
@@ -48,6 +48,21 @@ function ShoppingList() {
       return item;
     });
     setItems(updatedItems);
+  };
+
+  const getPreviousItems = () => {
+    axios
+      .get(`http://localhost:8080/grocery_lists/3`)
+      .then((res) => {
+        const result = [];
+        res.data.forEach((data) => {
+          result.push(data.name);
+        });
+        setItems([{ id: Math.floor(Math.random() * 10000), text: "pig" }]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
