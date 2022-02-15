@@ -10,6 +10,7 @@ const cookieParser = require('cookie-parser');
 const db = require('./configs/db.config');
 
 const usersRouter = require('./routes/users');
+const fridgesRouter = require('./routes/fridges');
 const fridgeItemsRouter = require('./routes/fridgeItems');
 const groceryListsRouter = require('./routes/groceryLists');
 
@@ -31,6 +32,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/users', usersRouter(db));
+app.use('/api/fridges', fridgesRouter(db));
 app.use('/fridge_items', fridgeItemsRouter(db));
 app.use('/grocery_lists', groceryListsRouter(db));
 
