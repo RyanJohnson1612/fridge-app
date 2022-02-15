@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ShoppingListForm from "./ShoppingListForm";
 import ShoppingListItem from "./ShoppingListItem";
 import axios from "axios";
 
 function ShoppingList() {
   const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    testAxiosGet();
+    console.log("I run everytime this component rerenders");
+    addItem({ id: Math.floor(Math.random() * 10000), text: "pig" });
+  }, []);
 
   //Function to add items to shopping list, will be passed to ShoppingListForm
   const addItem = (item) => {
@@ -56,8 +62,6 @@ function ShoppingList() {
         console.log(err);
       });
   };
-
-  testAxiosGet();
 
   return (
     <div>
