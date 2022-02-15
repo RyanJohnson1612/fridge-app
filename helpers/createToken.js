@@ -1,5 +1,10 @@
 const { sign } = require('jsonwebtoken')
 
+/* Create signed jsonwebtoken for user
+ * @param {object} user object passed from login route
+ * @return {string} the jsonwebtoken
+ */
+
 const createToken = (user) => {
   const accessToken = sign(
     {

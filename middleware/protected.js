@@ -1,5 +1,7 @@
 const { verify } = require('jsonwebtoken');
 
+/* Route protection middleware, requires a jsonwebtoken (access-token) to be set to access route */
+
 const protected = (req, res, next) => {
   console.log(req.cookies)
   const accessToken = req.cookies['access-token'];
