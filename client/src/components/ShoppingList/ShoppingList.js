@@ -15,14 +15,15 @@ function ShoppingList() {
   //Function to add items to shopping list, will be passed to ShoppingListForm
   //item paramater in format: [ {id: #, text: string }, {id: #, text: string }, ...]
   const addItem = (item) => {
-    const newItems = [item, ...items];
-    setItems(newItems);
-    console.log(...items);
-
     axios
       .post("http://localhost:8080/grocery_lists/3", {
         name: item.text,
         grocery_list_id: 3,
+      })
+      .then((res) => {
+        const newItems = [{ id: res.data.text, text: res.data.id }, ...items];
+        setItems(newItems);
+        console.log(...items);
       })
       .catch((err) => {
         console.log(err);
@@ -49,8 +50,9 @@ function ShoppingList() {
 
     setItems(removeArr);
     //NEED TO TEST
+    console.log("the deleting ID:", id);
     axios
-      .delete(`http://localhost:8080/grocery_items/${id}`)
+      .delete(`http://localhost:8080/grocery_items/3`)
       .then(() => {
         swal("Success!", `Item has been removed from your fridge.`, "success");
       })
