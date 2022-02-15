@@ -7,6 +7,7 @@ import FridgeItem from '../FridgeItem/FridgeItem';
 import ShoppingList from '../ShoppingList/';
 import Login from '../Login/';
 import Register from '../Register/';
+import FridgeIndex from '../FridgeIndex';
 import axios from 'axios'
 
 function App() {
@@ -47,7 +48,7 @@ function App() {
             setFridgeItem={setFridgeItem}
             />
             )} />
-            <Route path="/fridge" element={<h1>Fridge Index</h1>} />
+            <Route path="/fridge" element={<FridgeIndex />} />
             <Route path="/grocery-list" element={<ShoppingList />} />
             <Route path="/recipes" element={<h1>Recipes Index</h1>} />
             <Route path="/login" element={<Login />} />
