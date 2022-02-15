@@ -45,7 +45,7 @@ const FridgeItem = (props) => {
       if (confirm) {
         axios.put(`http://localhost:8080/fridge_items/${props.fridgeItem.id}`)
           .then(() => {
-            swal("Success!", `${props.name} has been removed from your fridge.`, "success");
+            swal("Success!", `${props.fridgeItem.name} has been removed from your fridge.`, "success");
             props.setFridgeItem({});
             navigate('/fridge');
           })
