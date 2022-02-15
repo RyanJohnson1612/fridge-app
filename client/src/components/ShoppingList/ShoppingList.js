@@ -48,6 +48,20 @@ function ShoppingList() {
     const removeArr = [...items].filter((item) => item.id !== id);
 
     setItems(removeArr);
+    //NEED TO TEST
+    axios
+      .delete(`http://localhost:8080/grocery_items/${id}`)
+      .then(() => {
+        swal("Success!", `Item has been removed from your fridge.`, "success");
+      })
+      .catch((err) => {
+        console.log(err);
+        swal(
+          "Oops!",
+          "There was an error with your request. Please try again in a few minutes.",
+          "error"
+        );
+      });
   };
 
   //Placeholder --> replace with function that adds item to user's fridge
