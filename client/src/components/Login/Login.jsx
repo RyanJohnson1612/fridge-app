@@ -2,9 +2,7 @@ import { useState, useContext } from 'react';
 import axios from 'axios';
 import { Alert, Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../helpers/helpers';
 import { authContext } from '../../providers/AuthProvider';
-
 axios.defaults.withCredentials = true;
 
 function Login(props) {
@@ -14,6 +12,9 @@ function Login(props) {
   const navigate = useNavigate();
   const { login } = useContext(authContext);
 
+  /* Validate form fields
+   * @return {boolean}
+   */
   const validateForm = () => {
     setErrors({})
 
@@ -29,13 +30,16 @@ function Login(props) {
     return false
   }
 
+  /* Call validateForm, then login user in, if successful redirect
+   * @return {function} call useNavigate hook
+   */
   const submitForm = async () => {
     const valid = await validateForm();
 
     if(valid) {
       login(email, password)
         .then(res => {
-          if(auth()) return navigate('/fridge');
+          return navigate('/fridge');
         })
         .catch(err => {
           if (err.response) {
@@ -46,7 +50,8 @@ function Login(props) {
     }
   }
 
-  const parsedErrors = [...new Set(Object.values(errors))].map((error, index) => <li className="register__error_message" key={index}>{error}</li>);
+  // Format form errors
+  const parseErrors = [...new Set(Object.values(errors))].map((error, index) => <li className="register__error_message" key={index}>{error}</li>);
 
   return (
     <>
@@ -77,7 +82,7 @@ function Login(props) {
           Object.keys(errors).length > 0 &&
           <Alert className="login__error" variant={'danger'}>
             <ul className="login__error_list">
-              {parsedErrors}
+              {parseErrors}
             </ul>
           </Alert>
         }

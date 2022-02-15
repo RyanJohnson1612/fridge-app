@@ -1,10 +1,8 @@
 import { useState, useContext } from 'react';
 import axios from 'axios';
 import { Alert, Button, Form } from 'react-bootstrap';
-import { auth } from '../../helpers/helpers';
 import { useNavigate } from 'react-router-dom';
 import { authContext } from '../../providers/AuthProvider';
-
 axios.defaults.withCredentials = true;
 
 function Register(props) {
@@ -15,8 +13,12 @@ function Register(props) {
   const [passwordConfirm, setPasswordConfirm] = useState();
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+
   const { login, register } = useContext(authContext);
 
+  /* Validate form fields
+   * @return {boolean}
+   */
   const validateForm = () => {
     setErrors({})
     if(!firstName) {
@@ -43,6 +45,9 @@ function Register(props) {
     return false
   }
 
+  /* Call validateForm, then send register post request, then login user in if successful and redirect
+   * @return {function} call useNavigate hook
+   */
   const submitForm = async () => {
     const valid = await validateForm();
 
@@ -52,7 +57,7 @@ function Register(props) {
           return login(email, password);
         })
         .then(res => {
-          if(auth()) return navigate('/fridge');
+          return navigate('/fridge');
         })
         .catch(err => {
           if (err.response) {
@@ -62,7 +67,8 @@ function Register(props) {
     }
   }
 
-  const parsedErrors = [...new Set(Object.values(errors))].map((error, index) => <li className="register__error_message" key={index}>{error}</li>);
+  // Format form errors
+  const parseErrors = [...new Set(Object.values(errors))].map((error, index) => <li className="register__error_message" key={index}>{error}</li>);
 
   return (
     <>
@@ -130,7 +136,7 @@ function Register(props) {
           Object.keys(errors).length > 0 &&
           <Alert className="register__error" variant={'danger'}>
             <ul className="register__error_list">
-              {parsedErrors}
+              {parseErrors}
             </ul>
           </Alert>
         }

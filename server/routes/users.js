@@ -65,6 +65,7 @@ module.exports = (db) => {
           const token = createToken(user);
           // create cookie for access token that lasts 30 days
           res.cookie('access-token', token, { maxAge: 2592000000, httpOnly: true });
+          // create cookie with basic user info
           res.cookie(
             'user',
             JSON.stringify({
@@ -92,8 +93,9 @@ module.exports = (db) => {
       });
   });
 
+  /* POST logout user */
   router.post('/logout', (req, res) => {
-    console.log('log out')
+    // Set access token to expire
     res.cookie(
       'access-token',
       'expired',

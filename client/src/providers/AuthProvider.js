@@ -1,33 +1,47 @@
 import { useState, useEffect, createContext } from "react";
 import axios from 'axios';
-import { auth, deleteCookie } from "../helpers/helpers";
+import { getUser, deleteCookie } from "../helpers/helpers";
 
 export const authContext = createContext();
 
 const AuthProvider = function(props) {
   const [user, setUser] = useState(null);
 
+  // Set user on initial render
   useEffect(() => {
-    const user = auth();
-    setUser(user);
+    setUser(getUser());
   }, []);
 
+  /* Sends login request to API
+   * @param {string} user email
+   * @param {string} user password
+   * @return {Promise}
+   */
   const login = (email, password) => {
     return axios
       .post(`${process.env.REACT_APP_API_URL}/api/users/login`, {email, password})
       .then(res => {
-        const user = auth();
-        setUser(user);
+        setUser(getUser());
       })
       .catch(err => err);
   }
 
+  /* Sends register request to API
+   * @param {string} user firstName
+   * @param {string} user lastName
+   * @param {string} user email
+   * @param {string} user password
+   * @return {Promise}
+   */
   const register = (firstName, lastName, email, password) => {
     return axios
       .post(`${process.env.REACT_APP_API_URL}/api/users`, {firstName, lastName, email, password})
       .catch(err => err);
   }
 
+  /* Sends logout request to API, and delete user cookie
+   * @return {Promise}
+   */
   const logout = () => {
     deleteCookie('user');
     return axios
