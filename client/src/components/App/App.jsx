@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import FridgeItem from "../FridgeItem/FridgeItem";
-import ShoppingList from "../ShoppingList/ShoppingList";
+import ShoppingListIndex from "../ShoppingList";
 import axios from "axios";
 import { Nav, Navbar } from "react-bootstrap";
 import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
@@ -50,7 +50,7 @@ function App() {
         <div className="content">
           <Routes>
             <Route path="/fridge" element={<h1>Fridge Index</h1>} />
-            <Route path="/grocery-list" element={<ShoppingList />} />
+            <Route path="/grocery-list" element={<ShoppingListIndex />} />
             <Route path="/recipes" element={<h1>Recipes Index</h1>} />
           </Routes>
 
