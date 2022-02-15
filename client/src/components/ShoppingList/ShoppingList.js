@@ -21,7 +21,7 @@ function ShoppingList() {
         grocery_list_id: 3,
       })
       .then((res) => {
-        const newItems = [{ id: res.data.text, text: res.data.id }, ...items];
+        const newItems = [{ id: res.data.id, text: res.data.name }, ...items];
         setItems(newItems);
         console.log(...items);
       })
