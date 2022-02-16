@@ -47,6 +47,7 @@ function ShoppingList() {
       if (item.id === itemId) {
         axios
           .put(`http://localhost:8080/grocery_items/${itemId}`, {
+            name: newValue,
             obtained: item.isPurchased,
           })
           .then(() => {})
@@ -92,6 +93,7 @@ function ShoppingList() {
 
         axios
           .put(`http://localhost:8080/grocery_items/${id}`, {
+            name: item.text,
             obtained: item.isPurchased,
           })
           .then(() => {})
