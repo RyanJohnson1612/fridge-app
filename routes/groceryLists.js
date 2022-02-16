@@ -16,9 +16,9 @@ module.exports = (db) => {
   // GET grocery list
   router.get('/:id', function(req, res, next) {
     const queryString =
-      `SELECT *
-       FROM grocery_items
-       WHERE grocery_list_id = $1;`;
+      `SELECT * FROM grocery_items
+       WHERE grocery_list_id = $1
+       ORDER BY ID;`;
     const queryParams = [req.params.id]
 
     db.query(queryString, queryParams).then(data => {
@@ -29,9 +29,9 @@ module.exports = (db) => {
 
   router.post('/:id', function(req, res, next) {
     const queryString =
-      `INSERT INTO grocery_items (name, grocery_list_id)
-       VALUES ($1, $2) RETURNING *;`;
-    const queryParams = [req.body.name, req.body.grocery_list_id]
+      `INSERT INTO grocery_items (name, grocery_list_id, obtained)
+       VALUES ($1, $2, $3) RETURNING *;`;
+    const queryParams = [req.body.name, req.body.grocery_list_id, req.body.obtained]
 
     db.query(queryString, queryParams).then(data => {
       console.log(data.rows[0]);
