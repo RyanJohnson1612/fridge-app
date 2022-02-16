@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import FridgeCard from "../FridgeCard/";
+import FridgeList from "../FridgeList/";
+import FridgeFilters from "../FridgeFilters/";
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
@@ -14,11 +15,11 @@ function FridgeIndex() {
       .catch(err => console.log(err));
   }, []);
 
-  const parsedItems = items.map((item) => <FridgeCard item={item} key={item.id}/>);
 
   return (
     <section className="fridge-index">
-      {parsedItems}
+      <FridgeFilters />
+      <FridgeList items={items} />
     </section>
   )
 }

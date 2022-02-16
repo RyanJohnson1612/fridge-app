@@ -1,0 +1,11 @@
+@import '../../styles/mediaqueries.scss';
+
+.fridge-index {
+  display: flex;
+  flex-direction: column;
+
+  @include for-md-up {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
