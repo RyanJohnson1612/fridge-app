@@ -3,15 +3,6 @@
 .fridge-filters {
   padding: 10px;
 
-  @include for-md-up {
-    height: calc(100vh - 55px);
-    position: fixed;
-    top: 55px;
-    left: 0;
-    width: 300px;
-    background: #eeeeee;
-  }
-
   h2, h3 {
     margin: 10px 0;
     font-weight: bold;

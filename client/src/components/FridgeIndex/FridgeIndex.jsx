@@ -32,8 +32,13 @@ function FridgeIndex() {
 
   return (
     <section className="fridge-index">
-      <FridgeFilters onSearch={handleSearch} onSelect={handleSelect}/>
-      <FridgeList items={items} />
+      <aside class="fridge-index__sidebar">
+        <FridgeFilters onSearch={handleSearch} onSelect={handleSelect}/>
+      </aside>
+      <div class="fridge-index__content">
+        <h1>My Fridge</h1>
+        <FridgeList items={items} />
+      </div>
     </section>
   )
 }

@@ -4,10 +4,4 @@
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-
-  @include for-md-up {
-    position: relative;
-    left: 275px;
-    max-width: calc(100vw - 311px);
-  }
 }
