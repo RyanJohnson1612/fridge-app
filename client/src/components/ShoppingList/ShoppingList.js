@@ -5,7 +5,7 @@ import axios from "axios";
 import swal from "sweetalert";
 
 function ShoppingList() {
-  //the state items in format: [ {id: #, text: string }, {id: #, text: string }, ...]
+  //the state items in format: [ {id: #, text: string, isPurchased: boolean }, ...]
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -13,7 +13,6 @@ function ShoppingList() {
   }, []);
 
   //Function to add items to shopping list, will be passed to ShoppingListForm
-  //item paramater in format: [ {id: #, text: string }, {id: #, text: string }, ...]
   const addItem = (item) => {
     axios
       .post("http://localhost:8080/grocery_lists/1", {
@@ -41,6 +40,26 @@ function ShoppingList() {
       //if the item.id matches, set it to newValue, otherwise set it back to item
       prev.map((item) => (item.id === itemId ? newValue : item))
     );
+
+    console.log("this is the item id you are editing:", itemId);
+
+    items.forEach((item) => {
+      if (item.id === itemId) {
+        axios
+          .put(`http://localhost:8080/grocery_items/${itemId}`, {
+            obtained: item.isPurchased,
+          })
+          .then(() => {})
+          .catch((err) => {
+            console.log(err);
+            swal(
+              "Oops!",
+              "There was an error with your request. Please try again in a few minutes.",
+              "error"
+            );
+          });
+      }
+    });
   };
 
   //Function to remove item from shopping list,will be passed to ShoppingListItem component
@@ -71,15 +90,19 @@ function ShoppingList() {
         /* toggles isPurchased between true and false */
         item.isPurchased = !item.isPurchased;
 
-        axios.put(`http://localhost:8080/grocery_items/${id}`, { obtained: item.isPurchased })
-        .then(() => {
-          swal("Success!", ` item marked as complete`, "success");
-        })
-        .catch(err => {
-          console.log(err)
-          swal("Oops!", "There was an error with your request. Please try again in a few minutes.", "error");
-        });
-
+        axios
+          .put(`http://localhost:8080/grocery_items/${id}`, {
+            obtained: item.isPurchased,
+          })
+          .then(() => {})
+          .catch((err) => {
+            console.log(err);
+            swal(
+              "Oops!",
+              "There was an error with your request. Please try again in a few minutes.",
+              "error"
+            );
+          });
       }
       console.log("this is the ID of the completed item:", id);
       return item;
@@ -96,7 +119,7 @@ function ShoppingList() {
           results.unshift({
             id: data.id,
             text: data.name,
-            isPurchased: data.obtained
+            isPurchased: data.obtained,
           });
         });
         setItems([...items, ...results]);
