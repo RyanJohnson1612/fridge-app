@@ -7,10 +7,13 @@ import swal from "sweetalert";
 function ShoppingList() {
   //the state items in format: [ {id: #, text: string, isPurchased: boolean }, ...]
   const [items, setItems] = useState([]);
+  const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
     getPreviousItems();
-  }, []);
+  }, [editMode]);
+
+  console.log("edit state!", editMode);
 
   //Function to add items to shopping list, will be passed to ShoppingListForm
   const addItem = (item) => {
@@ -156,6 +159,7 @@ function ShoppingList() {
         removeItem={removeItem}
         updateItem={updateItem}
         addToFridge={addToFridge}
+        editMode={setEditMode}
       />
     </div>
   );

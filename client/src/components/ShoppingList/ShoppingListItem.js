@@ -4,8 +4,8 @@ import { RiCloseCircleLine, RiFridgeLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
 
 function ShoppingListItem(props) {
-  const { items, completeItem, removeItem, updateItem, addToFridge } = props;
-
+  const { items, completeItem, removeItem, updateItem, addToFridge, editMode } =
+    props;
 
   const [edit, setEdit] = useState({
     id: null,
@@ -18,11 +18,13 @@ function ShoppingListItem(props) {
       id: null,
       value: "",
     });
+    editMode(false);
   };
 
   /*  If state variable edit.id is true (which occurs after edit icon is clicked),
   return ShoppingListForm while passing submitUpdate function onSubmit */
   if (edit.id) {
+    editMode(true);
     return <ShoppingListForm onSubmit={submitUpdate} />;
   }
   const itemsMapped = items.map((item, index) => (
