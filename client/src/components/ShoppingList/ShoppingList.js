@@ -25,7 +25,7 @@ function ShoppingList() {
     }
 
     axios
-      .post("http://localhost:8080/grocery_lists/1", {
+      .post(`${process.env.REACT_APP_API_URL}/grocery_lists/1`, {
         name: item.text,
         grocery_list_id: 3,
         obtained: false,
@@ -64,7 +64,7 @@ function ShoppingList() {
     items.forEach((item) => {
       if (item.id === itemId) {
         axios
-          .put(`http://localhost:8080/grocery_items/${itemId}`, {
+          .put(`${process.env.REACT_APP_API_URL}/grocery_items/${itemId}`, {
             name: newValue.text,
             obtained: item.isPurchased,
           })
@@ -96,14 +96,16 @@ function ShoppingList() {
     const removeArr = [...items].filter((item) => item.id !== id);
 
     setItems(removeArr);
-    axios.delete(`http://localhost:8080/grocery_items/${id}`).catch((err) => {
-      console.log(err);
-      swal(
-        "Oops!",
-        "There was an error with your request. Please try again in a few minutes.",
-        "error"
-      );
-    });
+    axios
+      .delete(`${process.env.REACT_APP_API_URL}/grocery_items/${id}`)
+      .catch((err) => {
+        console.log(err);
+        swal(
+          "Oops!",
+          "There was an error with your request. Please try again in a few minutes.",
+          "error"
+        );
+      });
   };
 
   //Placeholder --> replace with function that adds item to user's fridge
@@ -118,7 +120,7 @@ function ShoppingList() {
         /* toggles isPurchased between true and false */
         item.isPurchased = !item.isPurchased;
         axios
-          .put(`http://localhost:8080/grocery_items/${id}`, {
+          .put(`${process.env.REACT_APP_API_URL}/grocery_items/${id}`, {
             name: item.text,
             obtained: item.isPurchased,
           })
@@ -139,7 +141,7 @@ function ShoppingList() {
 
   const getPreviousItems = () => {
     axios
-      .get(`http://localhost:8080/grocery_lists/3`)
+      .get(`${process.env.REACT_APP_API_URL}/grocery_lists/3`)
       .then((res) => {
         const results = [];
         res.data.forEach((data, index) => {
