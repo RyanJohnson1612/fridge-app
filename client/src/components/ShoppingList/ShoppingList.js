@@ -13,8 +13,6 @@ function ShoppingList() {
     getPreviousItems();
   }, []);
 
-  console.log("edit state!", editMode);
-
   //Function to add items to shopping list, will be passed to ShoppingListForm
   const addItem = (item) => {
     axios
@@ -46,7 +44,6 @@ function ShoppingList() {
 
   //Function to update item in shopping list, will be passed to ShoppingListItem component
   const updateItem = (itemId, newValue) => {
-    console.log("NEWVALUE", newValue);
     setItems((prev) =>
       //if the item.id matches, set it to newValue, otherwise set it back to item
       prev.map((item) =>
@@ -55,8 +52,6 @@ function ShoppingList() {
           : item
       )
     );
-
-    console.log("editing id:", itemId, "text value:", newValue.text);
 
     items.forEach((item) => {
       if (item.id === itemId) {
@@ -124,7 +119,6 @@ function ShoppingList() {
             );
           });
       }
-      console.log("this is the ID of the completed item:", id);
       return item;
     });
     setItems(updatedItems);
