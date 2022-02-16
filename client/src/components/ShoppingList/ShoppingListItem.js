@@ -2,10 +2,16 @@ import React, { useState } from "react";
 import ShoppingListForm from "./ShoppingListForm";
 import { RiCloseCircleLine, RiFridgeLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
-import axios from "axios";
 
 function ShoppingListItem(props) {
-  const { items, completeItem, removeItem, updateItem, addToFridge } = props;
+  const {
+    items,
+    completeItem,
+    removeItem,
+    updateItem,
+    addToFridge,
+    setEditMode,
+  } = props;
 
   const [edit, setEdit] = useState({
     id: null,
@@ -18,12 +24,20 @@ function ShoppingListItem(props) {
       id: null,
       value: "",
     });
+    setEditMode(false);
   };
 
   /*  If state variable edit.id is true (which occurs after edit icon is clicked),
   return ShoppingListForm while passing submitUpdate function onSubmit */
   if (edit.id) {
-    return <ShoppingListForm onSubmit={submitUpdate} />;
+    setEditMode(true);
+    return (
+      <ShoppingListForm
+        onSubmit={submitUpdate}
+        input={edit.value}
+        editMode={true}
+      />
+    );
   }
   const itemsMapped = items.map((item, index) => (
     // class of item is assigned based on whether item was purchased or not
