@@ -56,3 +56,19 @@ const createQueryString = (obj) => {
 }
 
 module.exports.createQueryString = createQueryString;
+
+const decodeQueryString = (queryString) => {
+  const queryArr = queryString.replace('?', '').split('&');
+  let queryObj = {};
+  queryArr.forEach(item => {
+    const parts = item.split('=');
+    if(parts[1].includes(',')) {
+      queryObj[parts[0]] = parts[1].split(',');
+    } else {
+      queryObj[parts[0]] = parts[1];
+    }
+  });
+  return queryObj;
+}
+
+module.exports.decodeQueryString = decodeQueryString;
