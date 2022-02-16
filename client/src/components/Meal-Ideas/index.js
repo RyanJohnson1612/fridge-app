@@ -13,8 +13,8 @@ function MealIdeas() {
     "Pork-Free",
   ];
 
-  const APP_ID = "c91c9bd4";
-  const APP_KEY = "7ae365e1618e6d8602d4cdc9427c5035";
+  const APP_ID = process.env.REACT_APP_APP_ID;
+  const APP_KEY = process.env.REACT_APP_APP_KEY;
 
   //State to manage multiple checkboxes used for dietRestrictions recipe filters
   const [checkedState, setCheckedState] = useState(
