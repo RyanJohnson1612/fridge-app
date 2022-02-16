@@ -33,7 +33,10 @@ function FridgeCard(props) {
         </div>
         <div className="fridge-card__footer">
           <h4 className="fridge-card__name">{props.item.name}</h4>
-          <h5 className="fridge-card__date"><BsFillClockFill />{moment(props.item.date_stored).fromNow()}</h5>
+          <h5 className="fridge-card__date">
+            <BsFillClockFill />
+            <span>Added {moment(props.item.date_stored).fromNow()}</span>
+          </h5>
         </div>
       </Link>
     </article>

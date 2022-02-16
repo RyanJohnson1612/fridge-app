@@ -1,7 +1,15 @@
+@import '../../styles/mediaqueries.scss';
+
 .fridge-card {
-  max-width: 500px;
-  border-radius: 10px;
-  box-shadow: 1px 2px 6px 2px rgba(0,0,0,0.2);
+  width: calc(100% - 30px);
+  margin: 15px;
+  border-radius: 3px;
+  box-shadow: 2px 3px 5px 2px rgba(0,0,0,0.15);
+  transition: box-shadow 0.25s;
+
+  &:hover {
+    box-shadow: 2px 3px 5px 2px rgba(0,0,0,0.2);
+  }
 
   a {
     text-decoration: none;
@@ -18,17 +26,18 @@
 
   &__image {
     width: 100%;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
   }
 
   &__status {
     position: absolute;
     bottom: 10px;
     right: 10px;
-    padding: 3px 25px;
+    padding: 3px 20px;
     font-weight: bold;
     border-radius: 20px;
+    color: white;
 
     &--fresh {
       background-color: #76bb4e;
@@ -44,17 +53,33 @@
   }
 
   &__footer {
-    padding: 10px;
+    padding: 10px 15px 12px;
   }
 
   &__name {
-    font-size: 1.4em;
-    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    font-weight: 700;
     text-transform: capitalize;
   }
 
   &__date {
+    display: flex;
+    align-items: center;
     margin-bottom: 0;
-    font-size: 1em;
+    font-size: 1rem;
+
+    svg {
+      margin-bottom: 1px;
+      margin-right: 5px;
+    }
+  }
+
+  @include for-sm-up {
+    width: calc(50% - 30px);
+  }
+
+  @include for-xl-up {
+    width: calc(33% - 30px);
   }
 }
