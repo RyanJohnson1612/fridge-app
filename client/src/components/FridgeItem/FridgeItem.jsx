@@ -22,7 +22,7 @@ const FridgeItem = (props) => {
   const onAdd = () => {
     const selectedGroceryList = props.allGroceryLists.filter((groceryList) => groceryList.id === props.groceryList);
 
-    axios.post(`http://localhost:8080/grocery_lists/${props.groceryList}`, { name: props.fridgeItem.name, grocery_list_id: props.groceryList })
+    axios.post(`http://localhost:8080/grocery_lists/${props.groceryList}`, { name: props.fridgeItem.name, grocery_list_id: props.groceryList, obtained: false })
       .then((results) => {
         console.log(results);
         swal("Success!", `${props.fridgeItem.name} has been added to your ${selectedGroceryList[0].name} grocery list.`, "success");
