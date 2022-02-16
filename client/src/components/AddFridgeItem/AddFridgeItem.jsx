@@ -1,7 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, /*useContext*/ } from "react";
+import axios from "axios";
 import { Button, Card, Form } from 'react-bootstrap';
 import CardHeader from "react-bootstrap/esm/CardHeader";
-import './AddFridgeItem.scss'
+import swal from 'sweetalert';
+import './AddFridgeItem.scss';
+// import { authContext } from '../../providers/AuthProvider';
+
+axios.defaults.withCredentials = false;
 
 const AddFridgeItem = (props) => {
 
@@ -10,11 +15,65 @@ const AddFridgeItem = (props) => {
   const [category, setCategory] = useState("Grain");
   const [notes, setNotes] = useState("");
 
+  // const { user } = useContext(authContext);
+
+  const foodApiKey = '7d6a61fad9b24db6985482b1ae5a6954';
+
+  const submitItem = (event) => {
+    event.preventDefault();
+    console.log(name, expiry, category, notes);
+
+    let queryExpiry = expiry;
+
+    if (expiry === "") {
+      queryExpiry = null;
+    }
+
+    axios.get(`https://api.spoonacular.com/food/ingredients/search?apiKey=${foodApiKey}&query=${name}`)
+      .then((response) => {
+        console.log(response.data.results);
+        console.log(response.data.results[0].image);
+        const itemList = response.data.results;
+        let image = response.data.results[0].image;
+
+        if (image.includes("png")) {
+          image = response.data.results[1].image;
+        }
+
+        for (const item of itemList) {
+          if (item.image !== "no.jpg" && item.image !== "no.png" && item.image.includes(name)) {
+            image = item.image;
+            break;
+          }
+        }
+        const formatImage = image.slice(0, -3);
+        const image_URL = `https://spoonacular.com/cdn/ingredients_500x500/${formatImage}jpg`;
+        axios.post(`${process.env.REACT_APP_API_URL}/fridge_items`, { name, expiry: queryExpiry, category, image_URL, notes })
+          .then((results) => {
+            console.log(results.data);
+            swal("Success!", `${name} has been added to your fridge.`, "success");
+
+          })
+          .catch(err => {
+            console.log(err)
+            swal("Oops!", "There was an error with your request. Please try again in a few minutes.", "error");
+          });
+      }).catch((error) => console.log("Error:", error.message))
+  };
+
+  const list = ["Grain", "Vegetable", "Fruit", "Dairy", "Meat", "Seafood", "Alternative Protein", "Dessert", "Condiment", "Other"];
+
+  const categoryList = list.map(category => {
+    return (
+      <option key={category} value={category}>{category}</option>
+    )
+  });
+
   return (
     <Card className="add-item-card">
       <CardHeader className="add-item-header"><strong>Add a Fridge Item</strong></CardHeader>
       <Card.Body>
-        <Form onSubmit={event => event.preventDefault()}>
+        <Form onSubmit={submitItem}>
           <Form.Group className="mb-3" controlId="formGroupName">
             <Form.Label>Food Item</Form.Label>
             <Form.Control
@@ -35,18 +94,9 @@ const AddFridgeItem = (props) => {
           </Form.Group>
           <Form.Group className="mb-3" controlId="formGroupCategory">
             <Form.Label>Food Category</Form.Label>
-            <Form.Select required onChange={(event) => setCategory(event.target.value)}>
-              <option value="" disabled selected hidden>Select a category:</option>
-              <option value="Grain">Grain</option>
-              <option value="Vegetable">Vegetable</option>
-              <option value="Fruit">Fruit</option>
-              <option value="Dairy">Dairy</option>
-              <option value="Meat">Meat</option>
-              <option value="Seafood">Seafood</option>
-              <option value="Alternative Protein">Alternative Protein</option>
-              <option value="Dessert">Dessert</option>
-              <option value="Condiment">Condiment</option>
-              <option value="Other">Other</option>
+            <Form.Select defaultValue="" required onChange={(event) => setCategory(event.target.value)}>
+              <option value="" disabled hidden>Select a category:</option>
+              {categoryList}
             </Form.Select>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formGroupNotes">
@@ -61,8 +111,9 @@ const AddFridgeItem = (props) => {
           <Button
             className="add-item-button"
             type="submit"
-            variant={'primary'}>
-              Add to Fridge
+            variant={'primary'}
+          >
+            Add to Fridge
           </Button>
         </Form>
       </Card.Body>
