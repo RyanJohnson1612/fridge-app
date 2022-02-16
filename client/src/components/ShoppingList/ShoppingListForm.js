@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 function ShoppingListForm(props) {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(props.input ? props.input : "");
 
   //Input form ref attribute will call inputRefFocus to focus cursor on form
   const inputRefFocus = useRef(null);
@@ -24,9 +24,6 @@ function ShoppingListForm(props) {
     //Clear input form after clicking submit
     setInput("");
   };
-
-  console.log("Is edit mode in the form?", props.editMode);
-
   return (
     <form className="item-form" onSubmit={handleSubmit}>
       <input
@@ -38,7 +35,10 @@ function ShoppingListForm(props) {
         onChange={handleChange}
         ref={inputRefFocus}
       />
-      <button className="item-button"> Add Item </button>
+      <button className="item-button">
+        {" "}
+        {props.editMode ? "Edit Item" : "Add Item"}{" "}
+      </button>
     </form>
   );
 }

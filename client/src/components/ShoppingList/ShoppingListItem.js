@@ -31,7 +31,13 @@ function ShoppingListItem(props) {
   return ShoppingListForm while passing submitUpdate function onSubmit */
   if (edit.id) {
     setEditMode(true);
-    return <ShoppingListForm editMode={true} onSubmit={submitUpdate} />;
+    return (
+      <ShoppingListForm
+        editMode={true}
+        onSubmit={submitUpdate}
+        input={edit.value}
+      />
+    );
   }
   const itemsMapped = items.map((item, index) => (
     // class of item is assigned based on whether item was purchased or not
