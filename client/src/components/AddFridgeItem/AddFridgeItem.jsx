@@ -21,9 +21,10 @@ const AddFridgeItem = (props) => {
 
   const submitItem = (event) => {
     event.preventDefault();
-    console.log(name, expiry, category, notes);
+    // console.log(name, expiry, category, notes);
 
     let queryExpiry = expiry;
+    const capName = name[0].toUpperCase() + name.slice(1);
 
     if (expiry === "") {
       queryExpiry = null;
@@ -31,8 +32,7 @@ const AddFridgeItem = (props) => {
 
     axios.get(`https://api.spoonacular.com/food/ingredients/search?apiKey=${foodApiKey}&query=${name}`)
       .then((response) => {
-        console.log(response.data.results);
-        console.log(response.data.results[0].image);
+        // console.log(response.data.results);
         const itemList = response.data.results;
         let image = response.data.results[0].image;
 
@@ -46,12 +46,13 @@ const AddFridgeItem = (props) => {
             break;
           }
         }
+
         const formatImage = image.slice(0, -3);
         const image_URL = `https://spoonacular.com/cdn/ingredients_500x500/${formatImage}jpg`;
-        axios.post(`${process.env.REACT_APP_API_URL}/fridge_items`, { name, expiry: queryExpiry, category, image_URL, notes })
-          .then((results) => {
-            console.log(results.data);
-            swal("Success!", `${name} has been added to your fridge.`, "success");
+
+        axios.post(`${process.env.REACT_APP_API_URL}/fridge_items`, { name: capName, expiry: queryExpiry, category, image_URL, notes })
+          .then(() => {
+            swal("Success!", `${capName} has been added to your fridge.`, "success");
 
           })
           .catch(err => {
