@@ -33,9 +33,9 @@ function ShoppingListItem(props) {
     setEditMode(true);
     return (
       <ShoppingListForm
-        editMode={true}
         onSubmit={submitUpdate}
         input={edit.value}
+        editMode={true}
       />
     );
   }

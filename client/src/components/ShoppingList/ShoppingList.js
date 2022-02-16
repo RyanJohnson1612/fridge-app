@@ -16,6 +16,14 @@ function ShoppingList() {
 
   //Function to add items to shopping list, will be passed to ShoppingListForm
   const addItem = (item) => {
+    if (!item.text || /^\s*$/.test(item.text)) {
+      return swal(
+        "Oops!",
+        "You can't add an empty item to your shopping list. Please try again.",
+        "error"
+      );
+    }
+
     axios
       .post("http://localhost:8080/grocery_lists/1", {
         name: item.text,
@@ -45,6 +53,14 @@ function ShoppingList() {
 
   //Function to update item in shopping list, will be passed to ShoppingListItem component
   const updateItem = (itemId, newValue) => {
+    if (!newValue.text || /^\s*$/.test(newValue.text)) {
+      return swal(
+        "Oops!",
+        "You can't edit an item to be an emply value.",
+        "error"
+      );
+    }
+
     items.forEach((item) => {
       if (item.id === itemId) {
         axios
