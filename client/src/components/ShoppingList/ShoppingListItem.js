@@ -6,6 +6,7 @@ import { TiEdit } from "react-icons/ti";
 function ShoppingListItem(props) {
   const { items, completeItem, removeItem, updateItem, addToFridge } = props;
 
+
   const [edit, setEdit] = useState({
     id: null,
     value: "",

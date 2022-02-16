@@ -89,13 +89,14 @@ function ShoppingList() {
 
   const getPreviousItems = () => {
     axios
-      .get(`http://localhost:8080/grocery_lists/1`)
+      .get(`http://localhost:8080/grocery_lists/3`)
       .then((res) => {
         const results = [];
         res.data.forEach((data, index) => {
           results.unshift({
             id: data.id,
             text: data.name,
+            isPurchased: data.obtained
           });
         });
         setItems([...items, ...results]);
