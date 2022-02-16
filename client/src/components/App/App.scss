@@ -3,7 +3,8 @@
 }
 
 .content {
+  height: calc(100vh - 40px);
   margin-top: 40px;
   padding: 24px;
-  height: 5000px;
+  background-color: #FFFFFF;
 }
