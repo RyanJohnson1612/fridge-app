@@ -11,7 +11,7 @@ function ShoppingList() {
 
   useEffect(() => {
     getPreviousItems();
-  }, [editMode]);
+  }, []);
 
   console.log("edit state!", editMode);
 
@@ -152,7 +152,9 @@ function ShoppingList() {
   return (
     <div>
       <h1> My Grocery List</h1>
-      <ShoppingListForm onSubmit={addItem} />
+
+      {!editMode && <ShoppingListForm onSubmit={addItem} />}
+
       <ShoppingListItem
         items={items}
         completeItem={completeItem}
