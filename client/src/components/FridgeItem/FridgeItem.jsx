@@ -22,7 +22,7 @@ const FridgeItem = (props) => {
   const onAdd = () => {
     const selectedGroceryList = props.allGroceryLists.filter((groceryList) => groceryList.id === props.groceryList);
 
-    axios.post(`http://localhost:8080/grocery_lists/${props.groceryList}`, { name: props.fridgeItem.name, grocery_list_id: props.groceryList })
+    axios.post(`${process.env.REACT_APP_API_URL}/grocery_lists/${props.groceryList}`, { name: props.fridgeItem.name, grocery_list_id: props.groceryList })
       .then((results) => {
         console.log(results);
         swal("Success!", `${props.fridgeItem.name} has been added to your ${selectedGroceryList[0].name} grocery list.`, "success");
@@ -43,7 +43,7 @@ const FridgeItem = (props) => {
     })
     .then((confirm) => {
       if (confirm) {
-        axios.put(`http://localhost:8080/fridge_items/${props.fridgeItem.id}`)
+        axios.put(`${process.env.REACT_APP_API_URL}/fridge_items/${props.fridgeItem.id}`)
           .then(() => {
             swal("Success!", `${props.fridgeItem.name} has been removed from your fridge.`, "success");
             props.setFridgeItem({});
