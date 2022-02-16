@@ -43,15 +43,24 @@ function ShoppingList() {
 
   //Function to update item in shopping list, will be passed to ShoppingListItem component
   const updateItem = (itemId, newValue) => {
+    console.log("NEWVALUE", newValue);
     setItems((prev) =>
       //if the item.id matches, set it to newValue, otherwise set it back to item
-      prev.map((item) => (item.id === itemId ? newValue : item))
+      prev.map((item) =>
+        item.id === itemId
+          ? { id: itemId, text: newValue.text, isPurchased: item.isPurchased }
+          : item
+      )
     );
 
     console.log("editing id:", itemId, "text value:", newValue.text);
 
     items.forEach((item) => {
       if (item.id === itemId) {
+        console.log(
+          "is item.isPurchased null or something?:",
+          item.isPurchased
+        );
         axios
           .put(`http://localhost:8080/grocery_items/${itemId}`, {
             name: newValue.text,
