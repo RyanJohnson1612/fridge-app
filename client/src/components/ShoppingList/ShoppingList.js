@@ -55,10 +55,6 @@ function ShoppingList() {
 
     items.forEach((item) => {
       if (item.id === itemId) {
-        console.log(
-          "is item.isPurchased null or something?:",
-          item.isPurchased
-        );
         axios
           .put(`http://localhost:8080/grocery_items/${itemId}`, {
             name: newValue.text,
@@ -147,15 +143,16 @@ function ShoppingList() {
     <div>
       <h1> My Grocery List</h1>
 
-      {!editMode && <ShoppingListForm onSubmit={addItem} />}
+      {!editMode && <ShoppingListForm editMode={editMode} onSubmit={addItem} />}
 
       <ShoppingListItem
+        editMode={editMode}
         items={items}
         completeItem={completeItem}
         removeItem={removeItem}
         updateItem={updateItem}
         addToFridge={addToFridge}
-        editMode={setEditMode}
+        setEditMode={setEditMode}
       />
     </div>
   );

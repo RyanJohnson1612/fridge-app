@@ -25,6 +25,8 @@ function ShoppingListForm(props) {
     setInput("");
   };
 
+  console.log("Is edit mode in the form?", props.editMode);
+
   return (
     <form className="item-form" onSubmit={handleSubmit}>
       <input

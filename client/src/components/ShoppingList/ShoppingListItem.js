@@ -4,8 +4,14 @@ import { RiCloseCircleLine, RiFridgeLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
 
 function ShoppingListItem(props) {
-  const { items, completeItem, removeItem, updateItem, addToFridge, editMode } =
-    props;
+  const {
+    items,
+    completeItem,
+    removeItem,
+    updateItem,
+    addToFridge,
+    setEditMode,
+  } = props;
 
   const [edit, setEdit] = useState({
     id: null,
@@ -18,14 +24,14 @@ function ShoppingListItem(props) {
       id: null,
       value: "",
     });
-    editMode(false);
+    setEditMode(false);
   };
 
   /*  If state variable edit.id is true (which occurs after edit icon is clicked),
   return ShoppingListForm while passing submitUpdate function onSubmit */
   if (edit.id) {
-    editMode(true);
-    return <ShoppingListForm onSubmit={submitUpdate} />;
+    setEditMode(true);
+    return <ShoppingListForm editMode={true} onSubmit={submitUpdate} />;
   }
   const itemsMapped = items.map((item, index) => (
     // class of item is assigned based on whether item was purchased or not
