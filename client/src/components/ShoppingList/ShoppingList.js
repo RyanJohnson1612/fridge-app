@@ -7,6 +7,7 @@ import swal from "sweetalert";
 function ShoppingList() {
   //the state items in format: [ {id: #, text: string, isPurchased: boolean }, ...]
   const [items, setItems] = useState([]);
+  //State to keep track if user is editing(updating) an existing grocery list item or not
   const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
@@ -75,7 +76,7 @@ function ShoppingList() {
 
   //Function to remove item from shopping list,will be passed to ShoppingListItem component
   const removeItem = (id) => {
-    //Check items array for the target item, and filter it out to remove
+    //Check items array for target item in order to remove it (filter it out)
     const removeArr = [...items].filter((item) => item.id !== id);
 
     setItems(removeArr);

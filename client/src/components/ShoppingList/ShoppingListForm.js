@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 function ShoppingListForm(props) {
+  //props.input passed in from shopping list item when in form EDIT mode
   const [input, setInput] = useState(props.input ? props.input : "");
 
   //Input form ref attribute will call inputRefFocus to focus cursor on form
