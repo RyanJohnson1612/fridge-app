@@ -1,13 +1,24 @@
 @import '../../styles/mediaqueries.scss';
 
 .fridge-filters {
+  padding: 10px;
 
   @include for-md-up {
-    height: calc(100vh - 40px);
+    height: calc(100vh - 55px);
     position: fixed;
-    top: 40px;
+    top: 55px;
     left: 0;
     width: 300px;
-    background: #e6e6e6;
+    background: #eeeeee;
+  }
+
+  h2, h3 {
+    margin: 10px 0;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
   }
 }
