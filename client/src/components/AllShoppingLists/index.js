@@ -14,7 +14,13 @@ export default function AllShoppingListsIndex() {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(allGroceryLists);
+  console.log("all g lists:", allGroceryLists);
 
-  return <div>index</div>;
+  const groceryListsMapped = allGroceryLists.map((groceryList, index) => {
+    <div key={index}>
+      <h1> Grocery List: ${index} </h1>{" "}
+    </div>;
+  });
+
+  return <div> {groceryListsMapped} </div>;
 }
