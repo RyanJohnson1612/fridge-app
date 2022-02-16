@@ -3,7 +3,7 @@ const router = require("express").Router();
 module.exports = (db) => {
   // GET grocery items listing
   router.get("/", function (req, res, next) {
-    const command = "SELECT * FROM grocery_items";
+    const command = "SELECT * FROM grocery_items ORDER BY ID";
     db.query(command)
       .then((data) => {
         console.log(data.rows);
