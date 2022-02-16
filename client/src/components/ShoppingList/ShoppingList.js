@@ -21,7 +21,14 @@ function ShoppingList() {
         obtained: false,
       })
       .then((res) => {
-        const newItems = [{ id: res.data.id, text: res.data.name }, ...items];
+        const newItems = [
+          {
+            id: res.data.id,
+            text: res.data.name,
+            isPurchased: res.data.obtained,
+          },
+          ...items,
+        ];
         setItems(newItems);
       })
       .catch((err) => {
@@ -41,13 +48,13 @@ function ShoppingList() {
       prev.map((item) => (item.id === itemId ? newValue : item))
     );
 
-    console.log("this is the item id you are editing:", itemId);
+    console.log("editing id:", itemId, "text value:", newValue.text);
 
     items.forEach((item) => {
       if (item.id === itemId) {
         axios
           .put(`http://localhost:8080/grocery_items/${itemId}`, {
-            name: newValue,
+            name: newValue.text,
             obtained: item.isPurchased,
           })
           .then(() => {})
@@ -90,7 +97,6 @@ function ShoppingList() {
       if (item.id === id) {
         /* toggles isPurchased between true and false */
         item.isPurchased = !item.isPurchased;
-
         axios
           .put(`http://localhost:8080/grocery_items/${id}`, {
             name: item.text,
