@@ -25,6 +25,7 @@ function CheckList(props) {
         id={option}
         className="check-list__checkbox"
         type="checkbox"
+        checked={active.includes(option)}
         onChange={() => handleChecked(option)}
       />
       <label className="check-list__label" htmlFor={option}>{option}</label>
