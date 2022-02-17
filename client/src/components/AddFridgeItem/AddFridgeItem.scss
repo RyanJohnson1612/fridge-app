@@ -1,6 +1,6 @@
 .add-item-card {
   background-color: rgb(218, 230, 240);
-  width: 35%;
+  width: 75%;
   margin-left: auto;
   margin-right: auto;
   box-shadow: 5px 5px rgb(206, 206, 206);
@@ -23,3 +23,8 @@
   border: teal;
 }
 
+@media screen and (min-width: 800px) {
+  .add-item-card {
+    width: 35%;
+  }
+}
