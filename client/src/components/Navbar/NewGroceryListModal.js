@@ -4,6 +4,7 @@ import axios from "axios";
 
 function NewGroceryListModal() {
   const [show, setShow] = useState(false);
+  const [input, setInput] = useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -12,7 +13,7 @@ function NewGroceryListModal() {
     axios
     .post("http://localhost:8080/grocery_lists", {
       user_id: 2,
-      name: 'mcDONALDs',
+      name: input,
     })
     .then((res) => {
       console.log("New grocery list submitted!", res.data)
@@ -20,6 +21,11 @@ function NewGroceryListModal() {
     .catch((err) => {
       console.log(err);
     });
+  }
+
+  const handleChange = (e) => {
+    console.log(e.target.value);
+    setInput(e.target.value)
   }
 
   return (
@@ -34,15 +40,10 @@ function NewGroceryListModal() {
         </Modal.Header>
         <Modal.Body>
 
-        <form>
-          <label> Grocery List Name </label><br/>
-          <input type="text" className="grocery-list-name"/> <br />
-        </form>
-
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Grocery List Name</Form.Label>
-              <Form.Control type="text" placeholder="Name your new Grocery List" />
+              <Form.Control type="text" placeholder="Name your new Grocery List" onChange={handleChange} />
             </Form.Group>
             <Button variant="primary" type="submit">
               Submit
