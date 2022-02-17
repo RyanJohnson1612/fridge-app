@@ -1,10 +1,8 @@
 import React, { useState, useRef } from "react";
-import Collapse from "react-bootstrap/Collapse";
 import { Button, Tooltip, Overlay } from "react-bootstrap";
 
 function Recipe(props) {
   const { title, image, recipeURL, ingredients } = props;
-  const [open, setOpen] = useState(false);
   const [show, setShow] = useState(false);
   const target = useRef(null);
 

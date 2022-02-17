@@ -66,19 +66,28 @@ function MealIdeas() {
   };
 
   //Function to get Fridge items
-  const searchFridge = () => {
-    axios.get(`${process.env.REACT_APP_API_URL}/fridge_items`)
-      .then(res => {
-        console.log(res.data)
+  const getFridgeItems = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/fridge_items`)
+      .then((res) => {
+        console.log(res.data);
+        getExpiring(res.data);
       })
-      .catch(err => console.log(err));
-  }
+      .catch((err) => console.log(err));
+  };
 
-  searchFridge();
+  const getExpiring = (fridgeItemsArray) => {
+    const expiringFood = fridgeItemsArray.filter(
+      (foodObject) => foodObject.expire_in <= 3
+    );
+    console.log("Expiring food items:", expiringFood);
+    return expiringFood;
+  };
+
+  getFridgeItems();
 
   //Temporarily hardcode, in future pull from DB
   const expiringFoodItems = "soy sauce, onion";
-
 
   //Function that gets recipe data from Edamam API using axios call
   /////**NOTE: For searchbar functionality, replace expiringFoodItem with query
