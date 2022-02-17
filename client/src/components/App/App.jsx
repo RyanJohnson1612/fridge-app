@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Navbar from '../Navbar/'
 import FridgeItem from '../FridgeItem/FridgeItem';
 import ShoppingList from "../ShoppingList";
@@ -61,8 +62,12 @@ function App() {
               allGroceryLists={allGroceryLists}
             />
             )} />
-            <Route path="/fridge" element={<FridgeIndex />} />
-            <Route path="/grocery-list" element={<ShoppingList />} />
+            <Route path="/fridge" element={<h1>Fridge Index</h1>} />
+            <Route path="/grocery-list" element={
+              <ProtectedRoute redirectTo="/login" message="Please login or register to view your grocery lists">
+                <ShoppingList />
+              </ProtectedRoute>
+              } />
             <Route path="/recipes" element={<h1>Recipes Index</h1>} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
