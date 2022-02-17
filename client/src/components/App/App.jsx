@@ -4,27 +4,36 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from '../Navbar/'
 import FridgeItem from '../FridgeItem/FridgeItem';
-import ShoppingList from '../ShoppingList/';
+import ShoppingList from "../ShoppingList";
 import Login from '../Login/';
 import Register from '../Register/';
 import FridgeIndex from '../FridgeIndex';
 import axios from 'axios'
 
 function App() {
-
   const [fridgeItem, setFridgeItem] = useState({});
+  const [groceryList, setGroceryList] = useState(1);
+  const [allGroceryLists, setAllGroceryLists] = useState([]);
 
   useEffect(() => {
+
     axios.get(`${process.env.REACT_APP_API_URL}/fridge_items/7`)
       .then((results) => {
         const item = results.data[0]
-
         if (JSON.stringify(fridgeItem) !== JSON.stringify(item)) {
           setFridgeItem(item);
         }
       })
       .catch(error => console.log(`Error: ${error.message}`));
-  }, [fridgeItem]);
+
+    axios.get(`${process.env.REACT_APP_API_URL}/grocery_lists`)
+      .then((results) => {
+        console.log(results);
+        setAllGroceryLists(results.data);
+      })
+      .catch(err => console.log(err));
+
+  }, []);
 
   return (
     <main className="App">
@@ -34,18 +43,22 @@ function App() {
           <Routes>
            <Route path="/" element={ (!fridgeItem.date_removed && fridgeItem) && (
             <FridgeItem
-            key={fridgeItem.id}
-            id={fridgeItem.id}
-            name={fridgeItem.name}
-            dateStored={fridgeItem.date_stored}
-            expiry={fridgeItem.expiry}
-            category={fridgeItem.category}
-            image={fridgeItem.image_url}
-            notes={fridgeItem.notes}
-            expireIn={fridgeItem.expire_in}
-            storedSince={fridgeItem.stored_since}
-            dateRemoved={fridgeItem.date_removed}
-            setFridgeItem={setFridgeItem}
+              key={fridgeItem.id}
+              // id={fridgeItem.id}
+              // name={fridgeItem.name}
+              // dateStored={fridgeItem.date_stored}
+              // expiry={fridgeItem.expiry}
+              // category={fridgeItem.category}
+              // image={fridgeItem.image_url}
+              // notes={fridgeItem.notes}
+              // expireIn={fridgeItem.expire_in}
+              // storedSince={fridgeItem.stored_since}
+              // dateRemoved={fridgeItem.date_removed}
+              fridgeItem={fridgeItem}
+              setFridgeItem={setFridgeItem}
+              setGroceryList={setGroceryList}
+              groceryList={groceryList}
+              allGroceryLists={allGroceryLists}
             />
             )} />
             <Route path="/fridge" element={<FridgeIndex />} />
@@ -55,6 +68,7 @@ function App() {
             <Route path="/register" element={<Register />} />
           </Routes>
         </section>
+
 
 
       </Router>

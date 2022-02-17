@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 
 function ShoppingListForm(props) {
-  const [input, setInput] = useState("");
+  //props.input passed in from shopping list item when in form EDIT mode
+  const [input, setInput] = useState(props.input ? props.input : "");
 
   //Input form ref attribute will call inputRefFocus to focus cursor on form
   const inputRefFocus = useRef(null);
@@ -18,15 +19,12 @@ function ShoppingListForm(props) {
     e.preventDefault();
 
     props.onSubmit({
-      //Temporary way to generate unique item id between 1-10,000 --> to be replaced
-      id: Math.floor(Math.random() * 10000),
       text: input,
     });
 
     //Clear input form after clicking submit
     setInput("");
   };
-
   return (
     <form className="item-form" onSubmit={handleSubmit}>
       <input
@@ -38,7 +36,10 @@ function ShoppingListForm(props) {
         onChange={handleChange}
         ref={inputRefFocus}
       />
-      <button className="item-button"> Add Item </button>
+      <button className="item-button">
+        {" "}
+        {props.editMode ? "Edit Item" : "Add Item"}{" "}
+      </button>
     </form>
   );
 }
