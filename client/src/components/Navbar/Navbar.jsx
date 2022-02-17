@@ -1,8 +1,9 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Nav, Navbar, NavDropdown  } from "react-bootstrap";
 import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
 import { Link } from "react-router-dom";
 import { authContext } from "../../providers/AuthProvider";
+import GroceryListDropdown from './GroceryListDropdown';
 
 function Navigation() {
   const { user, logout } = useContext(authContext);
@@ -18,6 +19,8 @@ function Navigation() {
           <Nav.Link as={Link} to="/recipes">Recipe Ideas</Nav.Link>
 
           <NavDropdown title="Grocery Lists" id="basic-nav-dropdown">
+            <GroceryListDropdown />
+            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>

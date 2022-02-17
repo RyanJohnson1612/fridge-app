@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { NavDropdown } from 'react-bootstrap';
 
 export default function GroceryListDropdown() {
 
@@ -15,6 +17,12 @@ export default function GroceryListDropdown() {
   }, []);
 
   console.log("all g lists:", allGroceryLists);
+
+
+  //Have to acheive format: <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+  const groceryListsMapped = allGroceryLists.map((groceryList, index) => (
+    <NavDropdown.Item key={index} href="#action/3.1"> {groceryList.name} </NavDropdown.Item>
+  ));
 
 
   return (
