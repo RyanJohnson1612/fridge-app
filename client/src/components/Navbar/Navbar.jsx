@@ -8,6 +8,7 @@ import NewGroceryListModal from './NewGroceryListModal';
 
 function Navigation() {
   const { user, logout } = useContext(authContext);
+
   return (
     <Navbar bg="myTeal" variant="dark" fixed="top" expand="sm">
       <Navbar.Brand as={Link} to="/">FridgeApp</Navbar.Brand>
@@ -18,7 +19,7 @@ function Navigation() {
           <Nav.Link as={Link} to="/grocery-list">Grocery List</Nav.Link>
           <Nav.Link as={Link} to="/recipes">Recipe Ideas</Nav.Link>
 
-          <NavDropdown title="Grocery Lists" id="basic-nav-dropdown">
+          <NavDropdown title="Grocery Lists" id="basic-nav-dropdown" menuVariant="dark">
             <GroceryListDropdown />
             <NavDropdown.Divider />
             <NewGroceryListModal/>

@@ -11,7 +11,7 @@ function NewGroceryListModal() {
 
   const handleSubmit = () => {
     axios
-    .post("http://localhost:8080/grocery_lists", {
+    .post(`${process.env.REACT_APP_API_URL}/grocery_lists`, {
       user_id: 2,
       name: input,
     })
@@ -30,7 +30,7 @@ function NewGroceryListModal() {
 
   return (
     <>
-      <Button size="sm" variant="light" bg="myTeal" onClick={handleShow}>
+      <Button size="sm" variant="dark" bg="myTeal" onClick={handleShow}>
         + New Grocery List
       </Button>
 

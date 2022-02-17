@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { NavDropdown } from 'react-bootstrap';
 
-export default function GroceryListDropdown() {
+export default function GroceryListDropdown(props) {
 
   const [allGroceryLists, setAllGroceryLists] = useState([]);
 
