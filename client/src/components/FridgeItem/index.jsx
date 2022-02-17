@@ -11,9 +11,13 @@ function FridgeItemIndex(props) {
 
   useEffect(() => {
 
-    axios.get(`${process.env.REACT_APP_API_URL}/fridge_items/7`)
+    axios.get(`${process.env.REACT_APP_API_URL}/fridge_items/`)
       .then((results) => {
-        const item = results.data[0]
+        // use this one if you wanna see the ketchup camel with all fields filled
+        const item = results.data[6];
+        // use this one if you want to see most recent add to fridge item
+        // const item = results.data[results.data.length - 1];
+
         if (JSON.stringify(fridgeItem) !== JSON.stringify(item)) {
           setFridgeItem(item);
         }
