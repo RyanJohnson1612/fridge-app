@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { Nav, Navbar, NavDropdown  } from "react-bootstrap";
 import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
 import { Link } from "react-router-dom";
@@ -20,10 +20,6 @@ function Navigation() {
 
           <NavDropdown title="Grocery Lists" id="basic-nav-dropdown">
             <GroceryListDropdown />
-            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="#action/3.4">Make a new Grocery List</NavDropdown.Item>
           </NavDropdown>
