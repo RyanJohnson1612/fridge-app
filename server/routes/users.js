@@ -38,6 +38,7 @@ module.exports = (db) => {
     req.body.password = await bcrypt.hash(req.body.password, 10);
     const params = Object.values(req.body);
     const command = "INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4);"
+
     db.query(command, params)
       .then(data => {
         return res.status(201).json('User created').end();
@@ -63,6 +64,7 @@ module.exports = (db) => {
 
         if (user && bcrypt.compareSync(req.body.password, user.password)) {
           const token = createToken(user);
+          console.log(token);
           // create cookie for access token that lasts 30 days
           res.cookie('access-token', token, { maxAge: 2592000000, httpOnly: true });
           // create cookie with basic user info

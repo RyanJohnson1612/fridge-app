@@ -7,8 +7,7 @@ import './AddFridgeItem.scss';
 import { useNavigate } from 'react-router-dom'
 import classNames from 'classnames';
 // import { authContext } from '../../providers/AuthProvider';
-
-axios.defaults.withCredentials = false;
+axios.withCredentials = false;
 
 const AddFridgeItem = (props) => {
 

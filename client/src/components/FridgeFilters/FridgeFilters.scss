@@ -1,0 +1,15 @@
+@import '../../styles/mediaqueries.scss';
+
+.fridge-filters {
+  padding: 10px;
+
+  h2, h3 {
+    margin: 10px 0;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+}

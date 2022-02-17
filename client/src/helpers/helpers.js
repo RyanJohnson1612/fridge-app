@@ -35,3 +35,41 @@ const getUser = () => {
 }
 
 module.exports.getUser = getUser;
+
+const createQueryString = (obj) => {
+  return Object.keys(obj).reduce((prev, current) => {
+    if(Array.isArray(obj[current]) && obj[current].length > 0) {
+      if (prev !== '?') {
+        prev += `&${current}=${obj[current].join(',')}`;
+      } else {
+        prev += `${current}=${obj[current].join(',')}`;
+      }
+    } else if (obj[current] && !Array.isArray(obj[current])) {
+      if (prev !== '?') {
+        prev += `&${current}=${obj[current]}`;
+      } else {
+        prev += `${current}=${obj[current]}`;
+      }
+    }
+
+    return prev;
+  }, '?');
+}
+
+module.exports.createQueryString = createQueryString;
+
+const decodeQueryString = (queryString) => {
+  const queryArr = queryString.replace('?', '').split('&');
+  let queryObj = {};
+  queryArr.forEach(item => {
+    const parts = item.split('=');
+    if(parts[1].includes(',')) {
+      queryObj[parts[0]] = parts[1].split(',');
+    } else {
+      queryObj[parts[0]] = parts[1];
+    }
+  });
+  return queryObj;
+}
+
+module.exports.decodeQueryString = decodeQueryString;
