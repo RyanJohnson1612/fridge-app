@@ -9,7 +9,7 @@ import ShoppingListIndex from "../ShoppingList";
 import Login from '../Login/';
 import Register from '../Register/';
 import axios from 'axios'
-import MealIdeas from "../Meal-Ideas";
+import MealIdeas from '../Meal-Ideas';
 
 function App() {
   const [fridgeItem, setFridgeItem] = useState({});
@@ -62,10 +62,9 @@ function App() {
               allGroceryLists={allGroceryLists}
             />
             )} />
-            <MealIdeas />
             <Route path="/fridge" element={<h1>Fridge Index</h1>} />
             <Route path="/grocery-list" element={<ShoppingListIndex />} />
-            <Route path="/recipes" element={<h1>Recipes Index</h1>} />
+            <Route path="/recipes" element={<h1><MealIdeas /></h1>} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>
