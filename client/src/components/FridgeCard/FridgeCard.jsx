@@ -4,7 +4,7 @@ import { BsFillClockFill } from 'react-icons/bs';
 import moment from 'moment';
 
 function FridgeCard(props) {
-  const daysUntilExpired = moment(props.item.expiry).diff(moment(), 'days');
+  const daysUntilExpired = moment(props.item.expiry).endOf('day').diff(moment().endOf('day'), 'days');
 
   const status = (daysLeft) => {
     if (daysUntilExpired > 3) {
@@ -33,6 +33,10 @@ function FridgeCard(props) {
         </div>
         <div className="fridge-card__footer">
           <h4 className="fridge-card__name">{props.item.name}</h4>
+          <h5 className="fridge-card__date">
+            days until expired {daysUntilExpired}
+            Category: {props.item.category}
+          </h5>
           <h5 className="fridge-card__date">
             <BsFillClockFill />
             <span>Added {moment(props.item.date_stored).fromNow()}</span>
