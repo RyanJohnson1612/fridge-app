@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import { debounce } from '../../helpers/helpers';
 import { BiSearch } from 'react-icons/bi';
 import './SearchBar.scss';
 
 function SearchBar(props) {
   const [search, setSearch] = useState('');
 
+
   const handleChange = (e) => {
     setSearch(e.currentTarget.value);
-    debounce(props.onSearch(search), 40000);
+    props.onSearch(search)
   }
 
   return (
