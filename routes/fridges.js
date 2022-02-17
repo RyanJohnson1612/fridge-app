@@ -20,7 +20,10 @@ module.exports = (db) => {
       .replace(/status = /g, '')
       .replace("'fresh'", `expiry >= '${moment().add(3, 'days').format('YYYY-MM-DD')}' OR expiry IS NULL`)
       .replace("'expiring soon'", `expiry BETWEEN '${moment().format('YYYY-MM-DD')}' AND '${moment().add(3, 'days').format('YYYY-MM-DD')}'`)
-      .replace("'expired'", `expiry <= '${moment().format('YYYY-MM-DD')}'`);
+      .replace("'expired'", `expiry <= '${moment().format('YYYY-MM-DD')}'`)
+      .replace('search', 'name');
+
+    console.log(command);
 
     db.query(command, [req.user.id])
       .then(data => {
