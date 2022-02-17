@@ -3,6 +3,7 @@ import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Navbar from '../Navbar/'
 import FridgeItem from '../FridgeItem/FridgeItem';
 import ShoppingListIndex from "../ShoppingList";
@@ -63,14 +64,19 @@ function App() {
             />
             )} />
             <Route path="/fridge" element={<h1>Fridge Index</h1>} />
-            <Route path="/grocery-list" element={<ShoppingListIndex />} />
-            <Route path="/recipes" element={<h1><MealIdeas /></h1>} />
+                                           
+            <Route path="/grocery-list" element={
+              <ProtectedRoute redirectTo="/login" message="Please login or register to view your grocery lists">
+                <ShoppingListIndex />
+              </ProtectedRoute>
+              } />
+            <Route path="/recipes" element={<h1>Recipes Index</h1>} />
+
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/recipes" element={<h1><MealIdeas /></h1>} />
           </Routes>
         </section>
-
-
 
       </Router>
     </main>
