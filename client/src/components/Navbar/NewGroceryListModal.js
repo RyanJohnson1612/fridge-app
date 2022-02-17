@@ -7,6 +7,10 @@ function NewGroceryListModal() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const handleSubmit = () => {
+    console.log("YEAHHHH")
+  }
+
   return (
     <>
       <Button size="sm" variant="light" bg="myTeal" onClick={handleShow}>
@@ -18,7 +22,13 @@ function NewGroceryListModal() {
           <Modal.Title>New Grocery List</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+
+        <form>
+          <label> Grocery List Name </label><br/>
+          <input type="text" className="grocery-list-name"/> <br />
+        </form>
+
+          <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Grocery List Name</Form.Label>
               <Form.Control type="text" placeholder="Name your new Grocery List" />
