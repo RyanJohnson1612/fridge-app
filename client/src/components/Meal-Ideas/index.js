@@ -101,7 +101,7 @@ function MealIdeas() {
   return (
     <div className="Recipes-index">
       <div className="top-page">
-        <h3>Here are some recipe ideas for you based on your fridge items! </h3>
+        <h4>Here are some recipe ideas for you based on your fridge items! </h4>
         {loading && (
           <div>
             <Spinner animation="border" variant="secondary" />

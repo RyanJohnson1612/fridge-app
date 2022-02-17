@@ -13,11 +13,11 @@
   align-items: center;
 }
 
-.Recipes-index h3 {
+.Recipes-index h4 {
   display: flex;
   justify-content: center;
   opacity: 0.75;
-  margin: 20px;
+  margin: 5px;
 }
 
 .spinner {
@@ -27,8 +27,8 @@
 
 .filters {
   background: #EDF6F9;
-  padding: 15px;
-  margin: 15px;
+  padding: 10px;
+  margin: 10px;
   border-width:1px;
   border-style: solid;
   border-radius: 10px;
@@ -38,6 +38,7 @@
   width: 80%;
   flex-wrap: wrap;
   box-shadow: 1px 2px gray;
+  font-size: 1rem;
 }
 
 .search-form{
@@ -102,17 +103,19 @@
   background-color: #1aacb1;
   color: white;
   text-decoration: none;
-  margin: 5px;
+  width: 8rem;
+  margin: 2px;
   padding: 1em;
   border-radius: 4px;
-  height: 55px;
+  height: 3rem;
+  font-size: 0.75rem;
 }
 
 .Recipe a:active {
   transform: scale(0.98);
 }
 
-.Recipe h4 {
+.Recipe h5 {
   display: flex;
   justify-content: center;
   text-align: center;
@@ -123,6 +126,8 @@
   counter-reset: item;
 }
 .round-numbers li {
+  font-weight: normal;
+  font-size: medium;
   counter-increment: item;
   margin-bottom: 5px;
 }
