@@ -138,13 +138,6 @@
   display: inline-block;
 }
 
-.extra-ingredients {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 @media (max-width: 480px) {
   body {
     background-color: rgb(233, 203, 214);

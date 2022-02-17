@@ -36,10 +36,6 @@ function Recipe(props) {
               </Tooltip>
             )}
           </Overlay>
-          <Collapse in={open}>
-            {/* Display ingredients #6... to last ingredient */}
-            <div>{ingredientsArray.slice(5, ingredientsArray.length)}</div>
-          </Collapse>
         </div>
       );
     } else {
