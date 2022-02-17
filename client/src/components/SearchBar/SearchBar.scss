@@ -1,0 +1,21 @@
+.search-bar {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  &__input {
+    width: 100%;
+    padding: 10px 15px;
+    padding-right: 35px;
+    border: none;
+    border-radius: 25px;
+  }
+
+  &__icon {
+    position: absolute;
+    right: 10px;
+    font-size: 25px;
+    color: #747474;
+    cursor: pointer;
+  }
+}

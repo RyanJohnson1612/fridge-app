@@ -6,8 +6,7 @@ import swal from 'sweetalert';
 import './AddFridgeItem.scss';
 import { useNavigate } from 'react-router-dom'
 // import { authContext } from '../../providers/AuthProvider';
-
-axios.defaults.withCredentials = false;
+axios.withCredentials = false;
 
 const AddFridgeItem = (props) => {
 
