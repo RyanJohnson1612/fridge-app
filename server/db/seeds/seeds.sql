@@ -19,7 +19,7 @@ INSERT INTO grocery_lists (user_id, name) VALUES (1, 'Birthday');
 -- sample fridge items
 INSERT INTO fridge_items (name, fridge_id, expiry, category, image_URL, notes) VALUES ('bananas', 1, NULL, 'fruit', 'https://images.unsplash.com/photo-1511264827770-095d5f6db91e', NULL);
 INSERT INTO fridge_items (name, fridge_id, expiry, category, image_URL, notes) VALUES ('apples', 1, NULL, 'fruit', 'https://images.unsplash.com/photo-1511264827770-095d5f6db91e', 'i am allergic but i like it');
-INSERT INTO fridge_items (name, fridge_id, expiry, category, image_URL, notes) VALUES ('milk', 1, '2022-03-13', 'dairy', 'https://images.unsplash.com/photo-1556997685-309989c1aa82', 'milk makes me moo');
+INSERT INTO fridge_items (name, fridge_id, expiry, category, image_URL, notes) VALUES ('milk', 1, '2022-02-18', 'dairy', 'https://images.unsplash.com/photo-1556997685-309989c1aa82', 'milk makes me moo');
 INSERT INTO fridge_items (name, fridge_id, expiry, category, image_URL, notes) VALUES ('chicken breast', 1, '2022-02-01', 'meat', 'https://images.unsplash.com/photo-1556997685-309989c1aa82', 'bawk bawk');
 INSERT INTO fridge_items (name, fridge_id, expiry, category, image_URL, notes) VALUES ('broccoli', 1, NULL, 'vegetable', 'https://images.unsplash.com/photo-1556997685-309989c1aa82', 'eating this raw kills ppl');
 INSERT INTO fridge_items (name, fridge_id, expiry, category, image_URL, notes) VALUES ('cake', 1, '2022-03-31', 'dessert', 'https://images.unsplash.com/photo-1511264827770-095d5f6db91e', NULL);
