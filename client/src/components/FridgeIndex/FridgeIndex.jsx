@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { createQueryString, decodeQueryString } from '../../helpers/helpers';
 import FridgeList from "../FridgeList/";
 import FridgeFilters from "../FridgeFilters/";
 import axios from 'axios';
@@ -13,7 +14,7 @@ function FridgeIndex() {
     days: null
   })
 
-  const handleSearch = (search) => {
+  const handleSearch = async (search) => {
     setFilters(prev => ({...prev, search}));
   }
 
@@ -21,21 +22,27 @@ function FridgeIndex() {
     setFilters(prev => ({...prev, [filter]: values}));
   }
 
-  useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/api/fridges`)
+  const searchFridge = () => {
+    const queryString = createQueryString(filters);
+    window.history.replaceState(window.location.href, '', queryString);
+    axios.get(`${process.env.REACT_APP_API_URL}/api/fridges${queryString}`)
       .then(res => {
         setItems(res.data);
       })
       .catch(err => console.log(err));
+  }
+
+  useEffect(() => {
+    searchFridge();
   }, [filters]);
 
 
   return (
     <section className="fridge-index">
-      <aside class="fridge-index__sidebar">
+      <aside className="fridge-index__sidebar">
         <FridgeFilters onSearch={handleSearch} onSelect={handleSelect}/>
       </aside>
-      <div class="fridge-index__content">
+      <div className="fridge-index__content">
         <h1>My Fridge</h1>
         <FridgeList items={items} />
       </div>

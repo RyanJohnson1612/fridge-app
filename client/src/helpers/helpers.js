@@ -51,6 +51,7 @@ const createQueryString = (obj) => {
         prev += `${current}=${obj[current]}`;
       }
     }
+
     return prev;
   }, '?');
 }
