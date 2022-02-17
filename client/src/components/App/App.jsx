@@ -25,13 +25,12 @@ function App() {
 
             <Route path="/" element={<FridgeItemIndex />} />
             <Route path="/fridge" element={<h1>Fridge Index</h1>} />
-                                           
+
             <Route path="/grocery-list" element={
               <ProtectedRoute redirectTo="/login" message="Please login or register to view your grocery lists">
                 <ShoppingListIndex />
               </ProtectedRoute>
               } />
-            <Route path="/recipes" element={<h1>Recipes Index</h1>} />
 
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

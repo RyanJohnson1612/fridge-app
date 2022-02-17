@@ -12,7 +12,6 @@ function MealIdeas() {
     "Gluten-Free",
     "Pork-Free",
   ];
-
   const APP_ID = process.env.REACT_APP_EDAMAM_ID;
   const APP_KEY = process.env.REACT_APP_EDAMAM_KEY;
 
@@ -23,7 +22,7 @@ function MealIdeas() {
   const [filters, setFilters] = useState([]);
 
   /////NOTE: UNCOMMENT if want to use searchbar functionality
-  //state will be set to data that comes back from edamam API
+  //recipes state will be set to data that comes back from edamam API
   const [recipes, setRecipes] = useState([]);
   //const [search, setSearch] = useState("");
 
@@ -66,8 +65,20 @@ function MealIdeas() {
     return result.toLowerCase();
   };
 
+  //Function to get Fridge items
+  const searchFridge = () => {
+    axios.get(`${process.env.REACT_APP_API_URL}/fridge_items`)
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch(err => console.log(err));
+  }
+
+  searchFridge();
+
   //Temporarily hardcode, in future pull from DB
   const expiringFoodItems = "soy sauce, onion";
+
 
   //Function that gets recipe data from Edamam API using axios call
   /////**NOTE: For searchbar functionality, replace expiringFoodItem with query
@@ -84,6 +95,7 @@ function MealIdeas() {
         console.log(err);
       });
   };
+
   //Function that will run everytime there is an onChange event in form
   /*  const updateSearch = (e) => {
     setSearch(e.target.value);
