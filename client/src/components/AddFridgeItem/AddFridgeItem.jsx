@@ -4,6 +4,7 @@ import { Button, Card, Form } from 'react-bootstrap';
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import swal from 'sweetalert';
 import './AddFridgeItem.scss';
+import { useNavigate } from 'react-router-dom'
 // import { authContext } from '../../providers/AuthProvider';
 
 axios.defaults.withCredentials = false;
@@ -12,8 +13,10 @@ const AddFridgeItem = (props) => {
 
   const [name, setName] = useState("");
   const [expiry, setExpiry] = useState("");
-  const [category, setCategory] = useState("Grain");
+  const [category, setCategory] = useState("");
   const [notes, setNotes] = useState("");
+
+  const navigate = useNavigate();
 
   // const { user } = useContext(authContext);
 
@@ -30,18 +33,14 @@ const AddFridgeItem = (props) => {
       queryExpiry = null;
     }
 
-    axios.get(`https://api.spoonacular.com/food/ingredients/search?apiKey=${foodApiKey}&query=${name}`)
+    axios.get(`https://api.spoonacular.com/food/ingredients/search?apiKey=${process.env.REACT_APP_FOOD_API_KEY}&query=${name}`)
       .then((response) => {
         // console.log(response.data.results);
         const itemList = response.data.results;
         let image = response.data.results[0].image;
 
-        if (image.includes("png")) {
-          image = response.data.results[1].image;
-        }
-
         for (const item of itemList) {
-          if (item.image !== "no.jpg" && item.image !== "no.png" && item.image.includes(name)) {
+          if (item.image !== "no.jpg" && item.image !== "no.png" && !item.image.includes("png") && item.image.includes(name)) {
             image = item.image;
             break;
           }
@@ -52,8 +51,37 @@ const AddFridgeItem = (props) => {
 
         axios.post(`${process.env.REACT_APP_API_URL}/fridge_items`, { name: capName, expiry: queryExpiry, category, image_URL, notes })
           .then(() => {
-            swal("Success!", `${capName} has been added to your fridge.`, "success");
+            // swal("Success!", `${capName} has been added to your fridge.`, "success");
 
+            swal({
+              title: "Success!",
+              text: `${capName} has been added to your fridge.`,
+              icon: "success",
+              buttons: {
+                cancel: {
+                  text: "Add another item",
+                  value: null,
+                  visible: true,
+                  closeModal: true,
+                },
+                confirm: {
+                  text: "See your fridge",
+                  value: true,
+                  visible: true,
+                  closeModal: true
+                }
+              }
+            })
+              .then((value) => {
+                if (value) {
+                  navigate('/fridge');
+                } else {
+                  setName("");
+                  setExpiry("");
+                  setNotes("");
+                }
+              })
+              .catch((err) => console.log("Err:", err.message));
           })
           .catch(err => {
             console.log(err)
