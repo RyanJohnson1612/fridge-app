@@ -16,14 +16,10 @@ export default function GroceryListDropdown() {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log("all g lists:", allGroceryLists);
-
-
   //Have to acheive format: <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
   const groceryListsMapped = allGroceryLists.map((groceryList, index) => (
     <NavDropdown.Item key={index} href={`/grocery-list/${groceryList.id}`}> {groceryList.name} </NavDropdown.Item>
   ));
-
 
   return (
     <div>{groceryListsMapped}</div>

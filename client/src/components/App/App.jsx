@@ -8,7 +8,6 @@ import ShoppingListIndex from "../ShoppingList";
 import Login from "../Login/";
 import Register from "../Register/";
 import axios from "axios";
-import AllShoppingListsIndex from "../AllShoppingLists";
 
 function App() {
   const [fridgeItem, setFridgeItem] = useState({});
@@ -73,7 +72,6 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>
-          <AllShoppingListsIndex />
         </section>
       </Router>
     </main>
