@@ -6,7 +6,7 @@ function FridgeList(props) {
   return (
     <>
       <div className="fridge-list">
-        {parsedItems}
+        {parsedItems.length > 0 ? parsedItems : <h3>No results found</h3>}
       </div>
     </>
   )
