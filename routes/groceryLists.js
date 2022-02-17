@@ -39,8 +39,6 @@ module.exports = (db) => {
     }).catch(error => console.log(`Error: ${error.message}`));
   });
 
-  //POST a new grocery list
-
   //INSERT INTO grocery_lists (user_id, name) VALUES (1, 'Party');
   router.post('/', function(req, res, next) {
     const queryString =
