@@ -1,0 +1,30 @@
+.add-item-card {
+  background-color: rgb(218, 230, 240);
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 5px 5px rgb(206, 206, 206);
+}
+
+.add-item-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3em;
+  font-size: 1.25em;
+  background-color: rgb(233, 232, 232);
+}
+
+.add-item-button {
+  margin: 10px 0px 10px 5px;
+  padding: 10px;
+  font-weight: bold;
+  background-color: #008080;
+  border: teal;
+}
+
+@media screen and (min-width: 800px) {
+  .add-item-card {
+    width: 35%;
+  }
+}

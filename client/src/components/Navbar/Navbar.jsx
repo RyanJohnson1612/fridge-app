@@ -16,6 +16,7 @@ function Navigation() {
           <Nav.Link as={Link} to="/fridge">MyFridge</Nav.Link>
           <Nav.Link as={Link} to="/grocery-list">Grocery List</Nav.Link>
           <Nav.Link as={Link} to="/recipes">Recipe Ideas</Nav.Link>
+          <Nav.Link as={Link} to="/fridge-item/new">Add Fridge Item</Nav.Link>
         </Nav>
         { user ?
             <Nav className="nav-right">

@@ -4,8 +4,14 @@ module.exports = (db) => {
 
   // GET food listing
   router.get('/', function(req, res, next) {
-    const command = "SELECT * FROM fridge_items";
-    db.query(command).then(data => {
+    const queryString =
+      `SELECT id, name, category, image_URL, notes, date_removed,
+      to_char(date_stored, 'Mon DD, YYYY') as date_stored,
+      to_char(expiry, 'Mon DD, YYYY') as expiry,
+      (expiry - date_stored) as expire_in,
+      (CURRENT_DATE - date_stored) as stored_since
+      FROM fridge_items`;
+    db.query(queryString).then(data => {
       console.log(data.rows)
       res.json(data.rows);
     }).catch(error => console.log(`Error: ${error.message}`));
@@ -54,6 +60,18 @@ module.exports = (db) => {
   //     res.json(data);
   //   });
   // });
+
+  router.post('/', function(req, res, next) {
+    const queryString =
+      `INSERT INTO fridge_items (name, fridge_id, expiry, category, image_URL, notes)
+       VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`;
+    const queryParams = [req.body.name, 1, req.body.expiry, req.body.category, req.body.image_URL, req.body.notes]
+
+    db.query(queryString, queryParams).then(data => {
+      console.log(data.rows[0]);
+      res.json(data.rows[0]);
+    }).catch(error => console.log(`Error: ${error.message}`));
+  });
 
   return router;
 }
