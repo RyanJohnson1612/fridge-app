@@ -12,7 +12,7 @@ function NewGroceryListModal() {
     axios
     .post("http://localhost:8080/grocery_lists", {
       user_id: 2,
-      name: "Mickey Mouse",
+      name: 'mcDONALDs',
     })
     .then((res) => {
       console.log("New grocery list submitted!", res.data)
