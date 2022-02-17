@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -13,6 +12,9 @@ import Login from '../Login/';
 import Register from '../Register/';
 import AddFridgeItemIndex from '../AddFridgeItem';
 import MealIdeas from '../Meal-Ideas';
+import axios from 'axios';
+
+axios.defaults.withCredentials = false;
 
 function App() {
 
@@ -25,13 +27,12 @@ function App() {
 
             <Route path="/" element={<FridgeItemIndex />} />
             <Route path="/fridge" element={<h1>Fridge Index</h1>} />
-                                           
+
             <Route path="/grocery-list" element={
-              <ProtectedRoute redirectTo="/login" message="Please login or register to view your grocery lists">
+              // <ProtectedRoute redirectTo="/login" message="Please login or register to view your grocery lists">
                 <ShoppingListIndex />
-              </ProtectedRoute>
+              // </ProtectedRoute>
               } />
-            <Route path="/recipes" element={<h1>Recipes Index</h1>} />
 
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
