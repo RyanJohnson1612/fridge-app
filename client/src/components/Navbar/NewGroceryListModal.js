@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
+import axios from "axios";
 
 function NewGroceryListModal() {
   const [show, setShow] = useState(false);
@@ -8,7 +9,17 @@ function NewGroceryListModal() {
   const handleShow = () => setShow(true);
 
   const handleSubmit = () => {
-    console.log("YEAHHHH")
+    axios
+    .post("http://localhost:8080/grocery_lists", {
+      user_id: 2,
+      name: "Mickey Mouse",
+    })
+    .then((res) => {
+      console.log("New grocery list submitted!", res.data)
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 
   return (
