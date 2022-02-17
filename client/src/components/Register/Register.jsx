@@ -58,7 +58,6 @@ function Register(props) {
     if (validateForm()) {
       register(firstName, lastName, email, password)
         .then(res => {
-          console.log(res);
           if (res && res.status !== 201) {
             setErrors(prev => ({...prev, server: res.response.data.error}));
             return false;
