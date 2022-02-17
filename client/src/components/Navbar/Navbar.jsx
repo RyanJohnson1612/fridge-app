@@ -21,7 +21,6 @@ function Navigation() {
           <NavDropdown title="Grocery Lists" id="basic-nav-dropdown">
             <GroceryListDropdown />
             <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">Make a new Grocery List</NavDropdown.Item>
             <NewGroceryListModal/>
           </NavDropdown>
         </Nav>
