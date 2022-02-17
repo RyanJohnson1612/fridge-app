@@ -1,17 +1,26 @@
 const router = require('express').Router();
 const protectedRoute = require('../middleware/protectedRoute');
+const formatQueryString = require('../helpers/formatQueryString');
+const moment = require('moment');
 
 module.exports = (db) => {
 
   /* GET fridge by user id */
   router.get('/', protectedRoute, (req, res) => {
     if (!req.authenticated) {
-      return res.status(401).json({message: 'Unauthorized'}).end();
+      return res.status(401).json({error: 'Unauthorized'}).end();
     }
-    const command = `
-      SELECT * FROM fridges
-      JOIN fridge_items ON fridges.id = fridge_id
-      WHERE fridges.id = $1`;
+
+    let command = `
+      SELECT * FROM fridge_items WHERE (fridge_id = $1)`
+
+    command += `${formatQueryString(req.query)}`;
+
+    command = command
+      .replace(/status = /g, '')
+      .replace("'fresh'", `expiry >= '${moment().add(3, 'days').format('YYYY-MM-DD')}' OR expiry IS NULL`)
+      .replace("'expiring soon'", `expiry BETWEEN '${moment().format('YYYY-MM-DD')}' AND '${moment().add(3, 'days').format('YYYY-MM-DD')}'`)
+      .replace("'expired'", `expiry <= '${moment().format('YYYY-MM-DD')}'`);
 
     db.query(command, [req.user.id])
       .then(data => {
