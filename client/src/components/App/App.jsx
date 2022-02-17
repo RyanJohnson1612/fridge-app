@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Navbar from '../Navbar/'
 import FridgeItem from '../FridgeItem/FridgeItem';
