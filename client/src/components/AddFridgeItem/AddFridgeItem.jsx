@@ -20,8 +20,6 @@ const AddFridgeItem = (props) => {
 
   // const { user } = useContext(authContext);
 
-  const foodApiKey = '7d6a61fad9b24db6985482b1ae5a6954';
-
   const submitItem = (event) => {
     event.preventDefault();
     // console.log(name, expiry, category, notes);
@@ -51,8 +49,6 @@ const AddFridgeItem = (props) => {
 
         axios.post(`${process.env.REACT_APP_API_URL}/fridge_items`, { name: capName, expiry: queryExpiry, category, image_URL, notes })
           .then(() => {
-            // swal("Success!", `${capName} has been added to your fridge.`, "success");
-
             swal({
               title: "Success!",
               text: `${capName} has been added to your fridge.`,
