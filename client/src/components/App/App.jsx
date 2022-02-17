@@ -1,8 +1,10 @@
-import React from 'react';
+
+import React, { useState, useEffect } from "react";
 import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Navbar from '../Navbar/'
 import FridgeItemIndex from '../FridgeItem';
@@ -12,7 +14,6 @@ import Register from '../Register/';
 import AddFridgeItemIndex from '../AddFridgeItem';
 import MealIdeas from '../Meal-Ideas';
 
-
 function App() {
 
   return (
@@ -21,6 +22,7 @@ function App() {
         <Navbar />
         <section className="content">
           <Routes>
+
             <Route path="/" element={<FridgeItemIndex />} />
             <Route path="/fridge" element={<h1>Fridge Index</h1>} />
                                            
