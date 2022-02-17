@@ -4,6 +4,7 @@ import { BsCart4, BsTrash } from 'react-icons/bs';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom'
+import classNames from "classnames";
 
 const FridgeItem = (props) => {
 
@@ -18,6 +19,22 @@ const FridgeItem = (props) => {
       return `${days} days ago`;
     }
   };
+
+  const expiredAgo = (days) => {
+    if (days > 1) {
+      return `${days} days`;
+    } else if (days === 1) {
+      return `1 day`;
+    } else if (days === 0) {
+      return "Expired today";
+    } else if (days === -1) {
+      return "Expired " + (days * -1) + " day ago";
+    } else {
+      return "Expired " + (days * -1) + " days ago";
+    }
+  }
+
+  const expiredClass = classNames({ 'expired': props.fridgeItem.expire_in <= 0 });
 
   const onAdd = () => {
     const selectedGroceryList = props.allGroceryLists.filter((groceryList) => groceryList.id === props.groceryList);
@@ -96,7 +113,7 @@ const FridgeItem = (props) => {
             { props.fridgeItem.expiry &&
               <tr>
                 <td>Days Until Expiry:</td>
-                <td><strong>{props.fridgeItem.expire_in} days</strong></td>
+                <td className={expiredClass}><strong>{expiredAgo(props.fridgeItem.expire_in)}</strong></td>
               </tr>
             }
             <tr>
