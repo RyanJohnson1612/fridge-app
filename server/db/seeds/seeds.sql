@@ -36,17 +36,17 @@ INSERT INTO fridge_items (name, fridge_id, expiry, category, image_URL, notes) V
 INSERT INTO fridge_items (name, fridge_id, expiry, category, image_URL, notes) VALUES ('milk', 4, '2022-04-24', 'dairy', 'https://images.unsplash.com/photo-1511264827770-095d5f6db91e', 'me love milk');
 
 -- sample grocery items
-INSERT INTO grocery_items (name, grocery_list_id) VALUES ('tomatoes', 1);
-INSERT INTO grocery_items (name, grocery_list_id) VALUES ('potatoes', 1);
-INSERT INTO grocery_items (name, grocery_list_id) VALUES ('doritos', 1);
-INSERT INTO grocery_items (name, grocery_list_id) VALUES ('burritos', 1);
-INSERT INTO grocery_items (name, grocery_list_id) VALUES ('cheetos', 1);
-INSERT INTO grocery_items (name, grocery_list_id) VALUES ('sausages', 2);
-INSERT INTO grocery_items (name, grocery_list_id) VALUES ('ham', 2);
-INSERT INTO grocery_items (name, grocery_list_id) VALUES ('bacon', 2);
-INSERT INTO grocery_items (name, grocery_list_id) VALUES ('olives', 2);
-INSERT INTO grocery_items (name, grocery_list_id) VALUES ('shrimp', 3);
-INSERT INTO grocery_items (name, grocery_list_id) VALUES ('avocado', 3);
-INSERT INTO grocery_items (name, grocery_list_id) VALUES ('zucchini', 3);
-INSERT INTO grocery_items (name, grocery_list_id) VALUES ('milk', 1);
-INSERT INTO grocery_items (name, grocery_list_id) VALUES ('milk', 1);
+INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Tomatoes', 1);
+INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Potatoes', 1);
+INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Doritos', 1);
+INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Burritos', 1);
+INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Cheetos', 1);
+INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Sausages', 2);
+INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Ham', 2);
+INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Bacon', 2);
+INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Olives', 2);
+INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Shrimp', 3);
+INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Avocado', 3);
+INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Zucchini', 3);
+INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Milk', 1);
+INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Milk', 1);

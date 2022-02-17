@@ -1,6 +1,8 @@
 import { useState, useEffect, createContext } from "react";
-import axios from 'axios';
 import { getUser, deleteCookie } from "../helpers/helpers";
+import axios from 'axios';
+axios.withCredentials = true;
+axios.credentials = 'include';
 
 export const authContext = createContext();
 
@@ -19,7 +21,7 @@ const AuthProvider = function(props) {
    */
   const login = (email, password) => {
     return axios
-      .post(`${process.env.REACT_APP_API_URL}/api/users/login`, {email, password})
+      .post(`${process.env.REACT_APP_API_URL}/api/users/login`, {email, password}, {withCredentials: true})
       .then(res => {
         setUser(getUser());
       });
@@ -34,7 +36,7 @@ const AuthProvider = function(props) {
    */
   const register = (firstName, lastName, email, password) => {
     return axios
-      .post(`${process.env.REACT_APP_API_URL}/api/users`, {firstName, lastName, email, password})
+      .post(`${process.env.REACT_APP_API_URL}/api/users`, {firstName, lastName, email, password}, {withCredentials: true})
       .then(() => login(email, password))
       .then(() => createFridge(user.id, user.firstName))
       .catch(err => err);
@@ -42,7 +44,7 @@ const AuthProvider = function(props) {
 
   const createFridge = (id, name) => {
     return axios
-      .post(`${process.env.REACT_APP_API_URL}/api/fridges`, {id, name})
+      .post(`${process.env.REACT_APP_API_URL}/api/fridges`, {id, name}, {withCredentials: true})
       .then((res) => res)
       .catch(err => err);
   }
@@ -52,7 +54,7 @@ const AuthProvider = function(props) {
    */
   const logout = () => {
     return axios
-      .post(`${process.env.REACT_APP_API_URL}/api/users/logout`)
+      .post(`${process.env.REACT_APP_API_URL}/api/users/logout`, {withCredentials: true})
       .then(res => {
         deleteCookie('user');
         setUser(null);

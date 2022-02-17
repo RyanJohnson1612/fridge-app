@@ -3,7 +3,6 @@ import { createQueryString, decodeQueryString } from '../../helpers/helpers';
 import FridgeList from "../FridgeList/";
 import FridgeFilters from "../FridgeFilters/";
 import axios from 'axios';
-axios.defaults.withCredentials = true;
 
 function FridgeIndex() {
   const [items, setItems] = useState([]);
@@ -25,7 +24,7 @@ function FridgeIndex() {
   const searchFridge = () => {
     const queryString = createQueryString(filters);
     window.history.replaceState(window.location.href, '', queryString);
-    axios.get(`${process.env.REACT_APP_API_URL}/api/fridges${queryString}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/api/fridges${queryString}`, {withCredentials: true})
       .then(res => {
         setItems(res.data);
       })

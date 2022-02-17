@@ -1,9 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
-import axios from 'axios';
 import { Alert, Button, Form } from 'react-bootstrap';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { authContext } from '../../providers/AuthProvider';
-axios.defaults.withCredentials = true;
 
 function Login(props) {
   const [email, setEmail] = useState('');

@@ -2,8 +2,6 @@ import { useState, useContext } from 'react';
 import { Alert, Button, Form } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 import { authContext } from '../../providers/AuthProvider';
-import axios from 'axios';
-axios.defaults.withCredentials = true;
 
 function Register(props) {
   const [firstName, setFirstName] = useState('');
@@ -14,7 +12,7 @@ function Register(props) {
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
-  const { login, register } = useContext(authContext);
+  const { register } = useContext(authContext);
 
   /* Validate form fields
    * @return {boolean}
@@ -58,7 +56,7 @@ function Register(props) {
     if (validateForm()) {
       register(firstName, lastName, email, password)
         .then(res => {
-          if (res && res.status !== 201) {
+          if ((res && res.status !== 201 && res.status !== 200)) {
             setErrors(prev => ({...prev, server: res.response.data.error}));
             return false;
           } else {
