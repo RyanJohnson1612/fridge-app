@@ -1,13 +1,13 @@
 import { useContext } from 'react';
-import { Nav, Navbar, NavDropdown  } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown, Button } from "react-bootstrap";
 import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
 import { Link } from "react-router-dom";
 import { authContext } from "../../providers/AuthProvider";
 import GroceryListDropdown from './GroceryListDropdown';
+import NewGroceryListModal from './NewGroceryListModal';
 
 function Navigation() {
   const { user, logout } = useContext(authContext);
-
   return (
     <Navbar bg="myTeal" variant="dark" fixed="top" expand="sm">
       <Navbar.Brand as={Link} to="/">FridgeApp</Navbar.Brand>
@@ -22,6 +22,7 @@ function Navigation() {
             <GroceryListDropdown />
             <NavDropdown.Divider />
             <NavDropdown.Item href="#action/3.4">Make a new Grocery List</NavDropdown.Item>
+            <NewGroceryListModal/>
           </NavDropdown>
         </Nav>
         { user ?
