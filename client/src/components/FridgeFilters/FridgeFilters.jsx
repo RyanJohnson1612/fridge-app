@@ -12,7 +12,7 @@ function FridgeFilters(props) {
       <h3>Categories</h3>
       <CheckList
         options={['fruit', 'vegetable', 'dairy', 'meat', 'seafood', 'drinks', 'condiments', 'other']}
-        filter="categories"
+        filter="category"
         onSelect={props.onSelect}
       />
       <h3>Status</h3>

@@ -9,7 +9,7 @@ function FridgeIndex() {
   const [items, setItems] = useState([]);
   const [filters, setFilters] = useState({
     search: null,
-    categories: [],
+    category: [],
     status: [],
     days: null
   })
