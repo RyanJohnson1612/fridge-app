@@ -23,8 +23,8 @@ function App() {
             <Route path="/recipes" element={<h1>Recipes Index</h1>} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/fridge-item/new" element={<AddFridgeItemIndex />} />
           </Routes>
-          <AddFridgeItemIndex />
         </section>
       </Router>
     </main>
