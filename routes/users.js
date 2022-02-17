@@ -61,7 +61,7 @@ module.exports = (db) => {
           return res.status(404).json({error: 'User not found'}).end();
         }
 
-        if (user && req.body.password === user.password) {
+        if (user && bcrypt.compareSync(req.body.password, user.password)) {
         // if (user && bcrypt.compareSync(req.body.password, user.password)) {
           const token = createToken(user);
           // create cookie for access token that lasts 30 days
