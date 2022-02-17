@@ -7,7 +7,7 @@ html {
 }
 
 .image {
-  width: 80%;
+  width: 75%;
   height: 50%;
   display: block;
   margin-left: auto;
@@ -24,7 +24,7 @@ html {
   border: 0.1em solid;
   border-color: rgb(138, 138, 138);
   font-family: 'Raleway', sans-serif;
-  box-shadow: 400px 10px solid;
+  box-shadow: 5px 5px gray;
 }
 
 // td {
@@ -49,6 +49,10 @@ select {
   border-style: groove;
 }
 
+.expired {
+  color: red;
+}
+
 @media screen and (min-width: 576px) {
   .body {
     display: flex;
@@ -58,7 +62,7 @@ select {
 
   .image {
     margin-right: 10px;
-    width: 40%;
+    width: 33%;
   }
 
   .properties {

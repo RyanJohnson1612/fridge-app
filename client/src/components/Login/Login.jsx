@@ -1,7 +1,7 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { Alert, Button, Form } from 'react-bootstrap';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { authContext } from '../../providers/AuthProvider';
 axios.defaults.withCredentials = true;
 
@@ -10,6 +10,7 @@ function Login(props) {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useContext(authContext);
 
   /* Validate form fields
@@ -53,6 +54,16 @@ function Login(props) {
     }
   }
 
+  // Display redirect message if one exists
+  useEffect(() => {
+    if (location.state) {
+      setErrors({
+        redirect: location.state.message
+      });
+    }
+  }, [])
+
+
   return (
     <>
       <h1>Login to Fridge App</h1>
@@ -90,6 +101,7 @@ function Login(props) {
         </Button>
 
         { errors.server && <Alert variant={'danger'}>{errors.server}</Alert>}
+        { errors.redirect && <Alert variant={'primary'}>{errors.redirect}</Alert>}
       </Form>
       <p>Don't have an account? Register <Link to="/register">here</Link></p>
     </>
