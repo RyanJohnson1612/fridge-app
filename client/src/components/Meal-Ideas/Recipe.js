@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Collapse from "react-bootstrap/Collapse";
-import Button from "react-bootstrap/Button";
+import { Button, Tooltip, Overlay } from "react-bootstrap";
 
 function Recipe(props) {
   const { title, image, recipeURL, ingredients } = props;
   const [open, setOpen] = useState(false);
+  const [show, setShow] = useState(false);
+  const target = useRef(null);
 
   /*   When recipe has 5+ ingredients, list first 5, then insert a collapsable
   component that must be opened to see additional ingredients */
@@ -17,9 +19,23 @@ function Recipe(props) {
       result = ingredientsArray.slice(0, 5);
       result.push(
         <div>
-          <Button variant="link" onClick={() => setOpen(!open)} size="sm">
+          <Button
+            variant="link"
+            ref={target}
+            onClick={() => setShow(!show)}
+            size="sm"
+          >
             ...{ingredientsArray.length - 5} more ingredients
           </Button>
+
+          <Overlay target={target.current} show={show} placement="right">
+            {(props) => (
+              <Tooltip id="overlay-example" {...props}>
+                {/* Display ingredients #6... to last ingredient */}
+                <div>{ingredientsArray.slice(5, ingredientsArray.length)}</div>
+              </Tooltip>
+            )}
+          </Overlay>
           <Collapse in={open}>
             {/* Display ingredients #6... to last ingredient */}
             <div>{ingredientsArray.slice(5, ingredientsArray.length)}</div>

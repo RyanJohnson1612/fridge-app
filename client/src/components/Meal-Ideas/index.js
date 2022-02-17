@@ -67,7 +67,7 @@ function MealIdeas() {
   };
 
   //Temporarily hardcode, in future pull from DB
-  const expiringFoodItems = "Peas";
+  const expiringFoodItems = "soy sauce, onion";
 
   //Function that gets recipe data from Edamam API using axios call
   /////**NOTE: For searchbar functionality, replace expiringFoodItem with query
