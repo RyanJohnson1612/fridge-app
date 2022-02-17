@@ -39,12 +39,13 @@ module.exports = (db) => {
     }).catch(error => console.log(`Error: ${error.message}`));
   });
 
+  //POST a new grocery list
   //INSERT INTO grocery_lists (user_id, name) VALUES (1, 'Party');
   router.post('/', function(req, res, next) {
     const queryString =
       `INSERT INTO grocery_lists (user_id, name)
        VALUES ($1, $2) RETURNING *;`;
-    const queryParams = [req.user_id, req.body.name]
+    const queryParams = [req.body.user_id, req.body.name]
 
     db.query(queryString, queryParams).then(data => {
       console.log(data.rows[0]);
