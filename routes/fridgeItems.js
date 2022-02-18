@@ -20,7 +20,7 @@ module.exports = (db) => {
   // GET specific food
   router.get('/:id', function(req, res, next) {
     const queryString =
-      `SELECT id, name, category, image_URL, notes, date_removed,
+      `SELECT id, name, category, fridge_id, image_URL, notes, date_removed,
        to_char(date_stored, 'Mon DD, YYYY') as date_stored,
        to_char(expiry, 'Mon DD, YYYY') as expiry,
        (expiry - date_stored) as expire_in,
