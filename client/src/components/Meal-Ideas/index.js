@@ -76,15 +76,22 @@ function MealIdeas() {
       .catch((err) => console.log(err));
   };
 
-  //Take in array of fridge items (from axios), return string of expiring foods. Used in getFridgeItems()
+  //Take in array of fridge items (from axios), return 3 items closest to expiry as string.
   const getExpiring = (fridgeItemsArray) => {
-    //fridgeItemsArray is an array of objects. Filter for food objects that are expiring <= 7 days.
-    const expiringArray = fridgeItemsArray.filter(
-      (foodObject) =>
-        foodObject.expire_in <= 7 &&
-        foodObject.expire_in >= 0 &&
-        foodObject.expire_in !== null
+    //Remove foods will unknown (null) expiry date, or already expired food
+    const validExpiryItems = fridgeItemsArray.filter(
+      (foodObject) => foodObject.expire_in !== null && foodObject.expire_in >= 0
     );
+
+    const sortedFridge = validExpiryItems.sort(
+      (a, b) => parseFloat(a.expire_in) - parseFloat(b.expire_in)
+    );
+
+    console.log("SORT FRIDGE :)", sortedFridge);
+
+    //Return the 3 foods closest to expiry
+    const expiringArray = fridgeItemsArray.slice(0, 3);
+
     //Convert object of foods --> string of food names
     const expiringParsed = expiringArray
       .map((expiringObject) => expiringObject.name)
@@ -135,15 +142,12 @@ function MealIdeas() {
   return (
     <div className="Recipes-index">
       <div className="top-page">
-        <h4> Recipe Ideas </h4>
-        {expiring && (
-          <p>
-            {" "}
-            Heads up! The following ingredients will expire within the next
-            week: {expiring}. <br />
-            Here are some recipes you could make to use up those ingredients.
-          </p>
-        )}
+        <p>
+          The three fridge items closest to expiring are:
+          <span> {expiring}. </span> <br />
+          Here are some recipes you could make to use up those ingredients!
+        </p>
+
         {loading && (
           <div>
             <Spinner animation="border" variant="secondary" />
