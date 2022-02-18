@@ -3,7 +3,7 @@ import { Button, Tooltip, Overlay } from "react-bootstrap";
 import { GiCookingGlove } from "react-icons/gi";
 
 function Recipe(props) {
-  const { title, image, recipeURL, ingredients } = props;
+  const { title, image, recipeURL, ingredients, expiring } = props;
   const [show, setShow] = useState(false);
   const target = useRef(null);
 
@@ -30,19 +30,15 @@ function Recipe(props) {
       <figure>
         <img src={image} alt="recipe-image" />
       </figure>
-
       <div className="card-meta">
         <p className="get-recipe">
-          {" "}
           <a href={recipeURL}> Full Recipe</a>{" "}
         </p>
         <ul className="dish-stats">
           <li>
-            {" "}
             <GiCookingGlove size={30} opacity={0.5} />{" "}
           </li>
           <li>
-            {" "}
             <Button
               variant="link"
               ref={target}
@@ -50,7 +46,7 @@ function Recipe(props) {
               size="sm"
             >
               {ingredients.length} ingredients
-            </Button>{" "}
+            </Button>
             <Overlay target={target.current} show={show} placement="right">
               {(props) => (
                 <Tooltip id="overlay-example" {...props}>

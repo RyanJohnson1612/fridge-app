@@ -34,6 +34,7 @@ function MealIdeas() {
   //const [search, setSearch] = useState("");
 
   //State that is set to expiring food items in fridge
+  const [expiring, setExpiring] = useState("");
   const [fridgeQuery, setfridgeQuery] = useState("");
 
   /* If useEffect were to run everytime search state is updated,
@@ -69,6 +70,7 @@ function MealIdeas() {
       .then((res) => {
         console.log(res.data);
         setfridgeQuery(getExpiring(res.data));
+        setExpiring(fridgeQuery);
         console.log("Fridge Query", fridgeQuery);
       })
       .catch((err) => console.log(err));
@@ -83,7 +85,7 @@ function MealIdeas() {
     //Convert object of foods --> string of food names
     const expiringParsed = expiringArray
       .map((expiringObject) => expiringObject.name)
-      .toString();
+      .join(", ");
     return expiringParsed;
   };
 
@@ -131,6 +133,14 @@ function MealIdeas() {
     <div className="Recipes-index">
       <div className="top-page">
         <h4> Recipe Ideas </h4>
+        {expiring && (
+          <p>
+            {" "}
+            Heads up! The following ingredients will expire within the next
+            week: {expiring}. <br />
+            Here are some recipes you could make to use up those ingredients.
+          </p>
+        )}
         {loading && (
           <div>
             <Spinner animation="border" variant="secondary" />
