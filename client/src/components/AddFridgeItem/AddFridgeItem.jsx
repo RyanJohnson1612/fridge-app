@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import { Button, Card, Form } from 'react-bootstrap';
+import { Button, Card, Form, Spinner } from 'react-bootstrap';
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import swal from 'sweetalert';
 import './AddFridgeItem.scss';
@@ -15,17 +15,20 @@ const AddFridgeItem = (props) => {
   const [expiry, setExpiry] = useState("");
   const [category, setCategory] = useState("");
   const [notes, setNotes] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const { user } = useContext(authContext);
 
   const submitItem = (event) => {
+    setLoading(true);
     event.preventDefault();
     // console.log(name, expiry, category, notes);
 
     let queryExpiry = expiry;
     const capName = name[0].toUpperCase() + name.slice(1);
+    const dbName = name.toLowerCase();
 
     if (expiry === "") {
       queryExpiry = null;
@@ -38,7 +41,7 @@ const AddFridgeItem = (props) => {
         let image = "no.jpg";
 
         for (const item of itemList) {
-          if (item.image !== "no.jpg" && item.image !== "no.png" && item.image.includes(name)) {
+          if (item.image !== "no.jpg" && item.image !== "no.png" && item.image.includes(dbName)) {
             image = item.image;
             break;
           }
@@ -46,8 +49,9 @@ const AddFridgeItem = (props) => {
 
         const image_URL = `https://spoonacular.com/cdn/ingredients_500x500/${image}`;
 
-        axios.post(`${process.env.REACT_APP_API_URL}/fridge_items`, { name, fridge_id: user.id, expiry: queryExpiry, category, image_URL, notes })
+        axios.post(`${process.env.REACT_APP_API_URL}/fridge_items`, { name: dbName, fridge_id: user.id, expiry: queryExpiry, category, image_URL, notes })
           .then(() => {
+            setLoading(false);
 
             if (props.groceryName) {
               swal({
@@ -173,13 +177,18 @@ const AddFridgeItem = (props) => {
               onChange={event => setNotes(event.target.value)}
             />
           </Form.Group>
-          <Button
-            className="add-item-button"
-            type="submit"
-            variant={'primary'}
-          >
-            Add to Fridge
-          </Button>
+          { !loading ?
+            <Button
+              className="add-item-button"
+              type="submit"
+              variant={'primary'}>
+              Add to Fridge
+            </Button>
+            : (
+            <div>
+              <Spinner animation="border" variant="secondary" className="spin" />
+            </div>
+          )}
         </Form>
       </Card.Body>
     </Card>
