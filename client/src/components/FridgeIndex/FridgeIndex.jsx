@@ -10,7 +10,7 @@ function FridgeIndex() {
     search: null,
     category: [],
     status: [],
-    expiresIn: [],
+    // expiresIn: [],
   })
 
   const handleSearch = (search) => {
@@ -21,9 +21,9 @@ function FridgeIndex() {
     setFilters(prev => ({...prev, [filter]: values}));
   }
 
-  const handleRange = (values) => {
-    setFilters(prev => ({...prev, expiresIn: values}));
-  }
+  // const handleRange = (values) => {
+  //   setFilters(prev => ({...prev, expiresIn: values}));
+  // }
 
   const searchFridge = () => {
     const queryString = createQueryString(filters);
@@ -44,7 +44,7 @@ function FridgeIndex() {
     <section className="fridge-index">
       <aside className="fridge-index__sidebar">
         <FridgeFilters
-          onSearch={{handleRange, handleSelect, handleSearch}}
+          onSearch={{handleSelect, handleSearch}}
         />
       </aside>
       <div className="fridge-index__content">

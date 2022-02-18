@@ -41,8 +41,8 @@ function FridgeFilters(props) {
           filter="status"
           onSelect={props.onSearch.handleSelect}
         />
-        <h3>Days until expired</h3>
-        <RangeSlider onRange={props.onSearch.handleRange}/>
+        {/* <h3>Days until expired</h3>
+        <RangeSlider onRange={props.onSearch.handleRange}/> */}
 
         <Button className="fridge-filters__apply-button" onClick={() => setDropdown(false)}>Apply Filters</Button>
       </div>
