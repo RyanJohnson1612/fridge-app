@@ -3,6 +3,7 @@
 .fridge-index {
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 
   @include for-md-up {
     display: block;
@@ -26,5 +27,9 @@
   h1 {
     font-weight: bold;
     margin: 10px 15px;
+
+    @include for-sm-down {
+      display: none;
+    }
   }
 }
