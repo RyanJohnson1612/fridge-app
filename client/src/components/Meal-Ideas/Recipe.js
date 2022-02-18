@@ -45,19 +45,21 @@ function Recipe(props) {
   const ingredientsMapped = ingredientsFormatter();
 
   return (
-    <div className="Recipe-card">
+    <div className="recipe-card">
       <figure>
         <img src={image} alt="recipe-image" />
       </figure>
 
       <div className="card-meta">
-        <p className="dish-type"> Get Recipe </p>
+        <p className="dish-type">
+          {" "}
+          <a href={recipeURL}>Get Full Recipe</a>
+        </p>
         <ul className="dish-stats">
           <li> # ingredients</li>
         </ul>
         <h1> {title} </h1>
       </div>
-      <a href={recipeURL}>Get Full Recipe</a>
     </div>
   );
 }

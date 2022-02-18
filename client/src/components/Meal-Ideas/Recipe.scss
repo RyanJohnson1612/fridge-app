@@ -54,3 +54,29 @@
   justify-content: space-around;
   flex-wrap: wrap;
 }
+
+/* Recipe card */
+.recipe-card {
+  background-color: var(--card-bg-color);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--global-radius);
+  color: var(--card-text-color);
+  line-height: 1.5;
+  width: 22rem;
+}
+
+.recipe-card figure {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  height: 16rem;
+  overflow: hidden;
+  border-radius: var(--global-radius) var(--global-radius) 0 0;
+  margin-bottom: 2rem;
+}
+
+.recipe-card figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
