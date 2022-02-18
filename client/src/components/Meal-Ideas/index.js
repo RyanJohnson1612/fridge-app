@@ -84,7 +84,7 @@ function MealIdeas() {
   const getExpiring = (fridgeItemsArray) => {
     //fridgeItemsArray is an array of objects. Filter for food objects that are expiring <= 7 days.
     const expiringArray = fridgeItemsArray.filter(
-      (foodObject) => foodObject.expire_in <= 7
+      (foodObject) => foodObject.expire_in <= 7 && foodObject.expire_in !== null
     );
     //Convert object of foods --> string of food names
     const expiringParsed = expiringArray
@@ -93,15 +93,12 @@ function MealIdeas() {
     return expiringParsed;
   };
 
-  //Temporarily hardcode, in future pull from DB
-  const expiringFoodItems = "soy sauce, onion";
-
   //Function that gets recipe data from Edamam API using axios call
   /////**NOTE: For searchbar functionality, replace expiringFoodItem with query
   const getRecipes = () => {
     axios
       .get(
-        `https://api.edamam.com/search?q=${expiringFoodItems}&app_id=${APP_ID}&app_key=${APP_KEY}${healthLabels()}`
+        `https://api.edamam.com/search?q=${fridgeQuery}&app_id=${APP_ID}&app_key=${APP_KEY}${healthLabels()}`
       )
       .then((res) => {
         setRecipes(res.data.hits);
