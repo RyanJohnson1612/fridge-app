@@ -48,8 +48,10 @@ function Recipe(props) {
     <div className="Recipe">
       <h5> {title} </h5>
       <ol className="round-numbers">
-        <h6> Ingredients: </h6>
-        {ingredientsMapped}
+        <div className="ingredients">
+          <h6> Ingredients: </h6>
+          {ingredientsMapped}
+        </div>
       </ol>
       <div className="recipe-card-footer">
         <img src={image} alt="recipe-image" />
