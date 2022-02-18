@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -14,6 +13,9 @@ import Login from '../Login/';
 import Register from '../Register/';
 import AddFridgeItemIndex from '../AddFridgeItem';
 import MealIdeas from '../Meal-Ideas';
+import axios from 'axios';
+
+axios.defaults.withCredentials = false;
 
 function App() {
 
@@ -31,7 +33,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-
             <Route
               path="/fridge-item/:id"
               element={

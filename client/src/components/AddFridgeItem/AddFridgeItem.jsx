@@ -5,12 +5,13 @@ import CardHeader from "react-bootstrap/esm/CardHeader";
 import swal from 'sweetalert';
 import './AddFridgeItem.scss';
 import { useNavigate } from 'react-router-dom'
+import classNames from 'classnames';
 // import { authContext } from '../../providers/AuthProvider';
 axios.withCredentials = false;
 
 const AddFridgeItem = (props) => {
 
-  const [name, setName] = useState("");
+  const [name, setName] = useState( props.groceryName || "" );
   const [expiry, setExpiry] = useState("");
   const [category, setCategory] = useState("");
   const [notes, setNotes] = useState("");
@@ -48,44 +49,80 @@ const AddFridgeItem = (props) => {
 
         axios.post(`${process.env.REACT_APP_API_URL}/fridge_items`, { name: capName, expiry: queryExpiry, category, image_URL, notes })
           .then(() => {
-            swal({
-              title: "Success!",
-              text: `${capName} has been added to your fridge.`,
-              icon: "success",
-              buttons: {
-                cancel: {
-                  text: "Add another item",
-                  value: null,
-                  visible: true,
-                  closeModal: true,
-                },
-                confirm: {
-                  text: "See your fridge",
-                  value: true,
-                  visible: true,
-                  closeModal: true
-                }
-              }
-            })
-              .then((value) => {
-                if (value) {
-                  navigate('/fridge');
-                } else {
-                  setName("");
-                  setExpiry("");
-                  setNotes("");
+
+            if (props.groceryName) {
+              swal({
+                title: "Success!",
+                text: `${capName} has been added to your fridge.`,
+                icon: "success",
+                buttons: {
+                  cancel: {
+                    text: "Close",
+                    value: null,
+                    visible: true,
+                    closeModal: true,
+                  },
+                  confirm: {
+                    text: "See your fridge",
+                    value: true,
+                    visible: true,
+                    closeModal: true
+                  }
                 }
               })
-              .catch((err) => console.log("Err:", err.message));
+                .then((value) => {
+                  if (value) {
+                    navigate('/fridge');
+                  } else {
+                    props.closeModal();
+                  }
+                })
+                .catch((err) => console.log("Err:", err.message));
+            } else {
+              swal({
+                title: "Success!",
+                text: `${capName} has been added to your fridge.`,
+                icon: "success",
+                buttons: {
+                  cancel: {
+                    text: "Add another item",
+                    value: null,
+                    visible: true,
+                    closeModal: true,
+                  },
+                  confirm: {
+                    text: "See your fridge",
+                    value: true,
+                    visible: true,
+                    closeModal: true
+                  }
+                }
+              })
+                .then((value) => {
+                  if (value) {
+                    navigate('/fridge');
+                  } else {
+                    setName("");
+                    setExpiry("");
+                    setNotes("");
+                  }
+                })
+                .catch((err) => console.log("Err:", err.message));
+              }
           })
           .catch(err => {
             console.log(err)
             swal("Oops!", "There was an error with your request. Please try again in a few minutes.", "error");
           });
-      }).catch((error) => console.log("Error:", error.message))
+      }).catch((err) => {
+        console.log("Error:", err.message)
+        swal("Oops!", "There was an error with your request. Please try again in a few minutes.", "error");
+      });
   };
 
   const list = ["Grain", "Vegetable", "Fruit", "Dairy", "Meat", "Seafood", "Alternative Protein", "Dessert", "Condiment", "Other"];
+
+  const fridgeItemHeader = classNames("add-item-card", { "fridge-modal": props.groceryName });
 
   const categoryList = list.map(category => {
     return (
@@ -94,7 +131,7 @@ const AddFridgeItem = (props) => {
   });
 
   return (
-    <Card className="add-item-card">
+    <Card className={fridgeItemHeader}>
       <CardHeader className="add-item-header"><strong>Add a Fridge Item</strong></CardHeader>
       <Card.Body>
         <Form onSubmit={submitItem}>
