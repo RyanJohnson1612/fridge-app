@@ -9,7 +9,7 @@ const formatQueryString = (params) => {
         prev += ` AND (${current} = '${params[current]}')`;
       }
     } else {
-      prev += ` AND (${current} LIKE '%${params[current].trim()}%')`;
+      prev += ` AND (UPPER(${current}) LIKE UPPER('%${params[current].trim()}%'))`;
     }
       return prev;
 
