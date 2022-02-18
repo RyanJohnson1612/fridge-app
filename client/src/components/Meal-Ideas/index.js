@@ -26,6 +26,9 @@ function MealIdeas() {
   const [recipes, setRecipes] = useState([]);
   //const [search, setSearch] = useState("");
 
+  //frideQuery will be set to expiring food items in the fridge
+  const [fridgeQuery, setfridgeQuery] = useState("");
+
   //State to determine if loading spinner should be displayed
   const [loading, setLoading] = useState(true);
 
@@ -37,6 +40,7 @@ function MealIdeas() {
 
   useEffect(() => {
     getRecipes();
+    getFridgeItems();
   }, [filters]);
 
   //Updates filters state based on dietaryRestrictions checked off
@@ -65,7 +69,7 @@ function MealIdeas() {
     return result.toLowerCase();
   };
 
-  //Function to get Fridge items
+  //Function to get all fridge items using axios, then return expiring fridge items
   const getFridgeItems = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/fridge_items`)
@@ -76,15 +80,21 @@ function MealIdeas() {
       .catch((err) => console.log(err));
   };
 
+  //Take in array of all fridge items (from axios request to GET /fridge_items), return array of names of expiring foods
   const getExpiring = (fridgeItemsArray) => {
-    const expiringFood = fridgeItemsArray.filter(
-      (foodObject) => foodObject.expire_in <= 3
+    //fridgeItemsArray is an array of objects. Filter for food objects that are expiring <= 7 days.
+    const expiringArray = fridgeItemsArray.filter(
+      (foodObject) => foodObject.expire_in <= 7
     );
-    console.log("Expiring food items:", expiringFood);
-    return expiringFood;
-  };
 
-  getFridgeItems();
+    const expiringParsed = expiringArray
+      .map((expiringObject) => expiringObject.name)
+      .toString();
+
+    console.log("Expiring food items:", expiringParsed);
+
+    return expiringParsed;
+  };
 
   //Temporarily hardcode, in future pull from DB
   const expiringFoodItems = "soy sauce, onion";
