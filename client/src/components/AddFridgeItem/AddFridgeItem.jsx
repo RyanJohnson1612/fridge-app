@@ -38,7 +38,7 @@ const AddFridgeItem = (props) => {
         let image = "no.jpg";
 
         for (const item of itemList) {
-          if (item.image !== "no.jpg" && item.image !== "no.png") {
+          if (item.image !== "no.jpg" && item.image !== "no.png" && item.image.includes(name)) {
             image = item.image;
             break;
           }
