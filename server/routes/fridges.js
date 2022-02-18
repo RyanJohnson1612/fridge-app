@@ -12,7 +12,7 @@ module.exports = (db) => {
     }
 
     let command = `
-      SELECT * FROM fridge_items WHERE (fridge_id = $1)`
+      SELECT * FROM fridge_items WHERE (fridge_id = $1) AND (date_removed IS NULL)`
 
     command += `${formatQueryString(req.query)}`;
 
