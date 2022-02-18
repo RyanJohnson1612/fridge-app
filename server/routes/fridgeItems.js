@@ -29,7 +29,7 @@ module.exports = (db) => {
        WHERE id = $1`;
     const queryParams = [req.params.id]
     db.query(queryString, queryParams).then(data => {
-      res.json(data.rows);
+      res.json(data.rows[0]);
     });
   });
 

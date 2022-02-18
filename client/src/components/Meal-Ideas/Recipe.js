@@ -1,10 +1,9 @@
 import React, { useState, useRef } from "react";
-import Collapse from "react-bootstrap/Collapse";
 import { Button, Tooltip, Overlay } from "react-bootstrap";
+import { GiCookingGlove } from "react-icons/gi";
 
 function Recipe(props) {
-  const { title, image, recipeURL, ingredients } = props;
-  const [open, setOpen] = useState(false);
+  const { title, image, recipeURL, ingredients, expiring } = props;
   const [show, setShow] = useState(false);
   const target = useRef(null);
 
@@ -17,27 +16,7 @@ function Recipe(props) {
     ));
     if (ingredientsArray.length > 5) {
       result = ingredientsArray.slice(0, 5);
-      result.push(
-        <div>
-          <Button
-            variant="link"
-            ref={target}
-            onClick={() => setShow(!show)}
-            size="sm"
-          >
-            ...{ingredientsArray.length - 5} more ingredients
-          </Button>
-
-          <Overlay target={target.current} show={show} placement="right">
-            {(props) => (
-              <Tooltip id="overlay-example" {...props}>
-                {/* Display ingredients #6... to last ingredient */}
-                <div>{ingredientsArray.slice(5, ingredientsArray.length)}</div>
-              </Tooltip>
-            )}
-          </Overlay>
-        </div>
-      );
+      result.push(<div>...{ingredientsArray.length - 5} more ingredients</div>);
     } else {
       result = ingredientsArray;
     }
@@ -47,16 +26,39 @@ function Recipe(props) {
   const ingredientsMapped = ingredientsFormatter();
 
   return (
-    <div className="Recipe">
-      <h5> {title} </h5>
-      <ol className="round-numbers">
-        <h6> Ingredients: </h6>
-        {ingredientsMapped}
-      </ol>
-      <div className="recipe-card-footer">
+    <div className="recipe-card">
+      <figure>
         <img src={image} alt="recipe-image" />
-        <a href={recipeURL}>Get Full Recipe</a>
+      </figure>
+      <div className="card-meta">
+        <p className="get-recipe">
+          <a href={recipeURL}> Full Recipe</a>{" "}
+        </p>
+        <ul className="dish-stats">
+          <li>
+            <GiCookingGlove size={30} opacity={0.5} />{" "}
+          </li>
+          <li>
+            <Button
+              variant="link"
+              ref={target}
+              onClick={() => setShow(!show)}
+              size="sm"
+            >
+              {ingredients.length} ingredients
+            </Button>
+            <Overlay target={target.current} show={show} placement="left">
+              {(props) => (
+                <Tooltip id="overlay-example" {...props}>
+                  {/* Display ingredients #6... to last ingredient */}
+                  {ingredientsMapped}
+                </Tooltip>
+              )}
+            </Overlay>
+          </li>
+        </ul>
       </div>
+      <h1> {title} </h1>
     </div>
   );
 }
