@@ -45,18 +45,19 @@ function Recipe(props) {
   const ingredientsMapped = ingredientsFormatter();
 
   return (
-    <div className="Recipe">
-      <h5> {title} </h5>
-      <ol className="round-numbers">
-        <div className="ingredients">
-          <h6> Ingredients: </h6>
-          {ingredientsMapped}
-        </div>
-      </ol>
-      <div className="recipe-card-footer">
+    <div className="Recipe-card">
+      <figure>
         <img src={image} alt="recipe-image" />
-        <a href={recipeURL}>Get Full Recipe</a>
+      </figure>
+
+      <div className="card-meta">
+        <p className="dish-type"> Get Recipe </p>
+        <ul className="dish-stats">
+          <li> # ingredients</li>
+        </ul>
+        <h1> {title} </h1>
       </div>
+      <a href={recipeURL}>Get Full Recipe</a>
     </div>
   );
 }
