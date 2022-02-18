@@ -5,6 +5,13 @@ import "./Recipe.scss";
 import Spinner from "react-bootstrap/Spinner";
 
 function MealIdeas() {
+  const APP_ID = process.env.REACT_APP_EDAMAM_ID;
+  const APP_KEY = process.env.REACT_APP_EDAMAM_KEY;
+
+  //State to determine if loading spinner should be displayed
+  const [loading, setLoading] = useState(true);
+
+  //These will serve as recipe filters
   const dietRestrictions = [
     "Vegetarian",
     "Vegan",
@@ -12,13 +19,13 @@ function MealIdeas() {
     "Gluten-Free",
     "Pork-Free",
   ];
-  const APP_ID = process.env.REACT_APP_EDAMAM_ID;
-  const APP_KEY = process.env.REACT_APP_EDAMAM_KEY;
 
   //State to manage multiple checkboxes used for dietRestrictions recipe filters
   const [checkedState, setCheckedState] = useState(
     new Array(dietRestrictions.length).fill(false)
   );
+
+  //State to keep track of filters checked off
   const [filters, setFilters] = useState([]);
 
   /////NOTE: UNCOMMENT if want to use searchbar functionality
@@ -26,11 +33,8 @@ function MealIdeas() {
   const [recipes, setRecipes] = useState([]);
   //const [search, setSearch] = useState("");
 
-  //frideQuery will be set to expiring food items in the fridge
+  //State that is set to expiring food items in fridge
   const [fridgeQuery, setfridgeQuery] = useState("");
-
-  //State to determine if loading spinner should be displayed
-  const [loading, setLoading] = useState(true);
 
   /* If useEffect were to run everytime search state is updated,
   there would be be an API call for every keystroke.
@@ -42,6 +46,46 @@ function MealIdeas() {
     getRecipes();
     getFridgeItems();
   }, [filters, fridgeQuery]);
+
+  //Function that gets recipe data from Edamam API using axios call
+  const getRecipes = () => {
+    axios
+      .get(
+        `https://api.edamam.com/search?q=${fridgeQuery}&app_id=${APP_ID}&app_key=${APP_KEY}${healthLabels()}`
+      )
+      .then((res) => {
+        setRecipes(res.data.hits);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  //Function to get all fridge items (axios), then update setfridgeQuery to expiring fridge items
+  const getFridgeItems = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/fridge_items`)
+      .then((res) => {
+        console.log(res.data);
+        setfridgeQuery(getExpiring(res.data));
+        console.log("Fridge Query", fridgeQuery);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  //Take in array of fridge items (from axios), return string of expiring foods. Used in getFridgeItems()
+  const getExpiring = (fridgeItemsArray) => {
+    //fridgeItemsArray is an array of objects. Filter for food objects that are expiring <= 7 days.
+    const expiringArray = fridgeItemsArray.filter(
+      (foodObject) => foodObject.expire_in <= 7 && foodObject.expire_in !== null
+    );
+    //Convert object of foods --> string of food names
+    const expiringParsed = expiringArray
+      .map((expiringObject) => expiringObject.name)
+      .toString();
+    return expiringParsed;
+  };
 
   //Updates filters state based on dietaryRestrictions checked off, then update setCheckedState
   const handleOnChange = (position) => {
@@ -58,6 +102,7 @@ function MealIdeas() {
     setFilters([...allFilters]);
   };
 
+  //Generate queryString based off of dietary restrictions that were checked off
   const healthLabels = () => {
     let result = "";
     if (filters.length > 0) {
@@ -66,47 +111,6 @@ function MealIdeas() {
       });
     }
     return result.toLowerCase();
-  };
-
-  //Function to get all fridge items (axios), then update setfridgeQuery to expiring fridge items
-  const getFridgeItems = () => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/fridge_items`)
-      .then((res) => {
-        console.log(res.data);
-        setfridgeQuery(getExpiring(res.data));
-        console.log("Fridge Query", fridgeQuery);
-      })
-      .catch((err) => console.log(err));
-  };
-
-  //Take in array of fridge items (from axios), return string of expiring foods
-  const getExpiring = (fridgeItemsArray) => {
-    //fridgeItemsArray is an array of objects. Filter for food objects that are expiring <= 7 days.
-    const expiringArray = fridgeItemsArray.filter(
-      (foodObject) => foodObject.expire_in <= 7 && foodObject.expire_in !== null
-    );
-    //Convert object of foods --> string of food names
-    const expiringParsed = expiringArray
-      .map((expiringObject) => expiringObject.name)
-      .toString();
-    return expiringParsed;
-  };
-
-  //Function that gets recipe data from Edamam API using axios call
-  /////**NOTE: For searchbar functionality, replace expiringFoodItem with query
-  const getRecipes = () => {
-    axios
-      .get(
-        `https://api.edamam.com/search?q=${fridgeQuery}&app_id=${APP_ID}&app_key=${APP_KEY}${healthLabels()}`
-      )
-      .then((res) => {
-        setRecipes(res.data.hits);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
   //Function that will run everytime there is an onChange event in form
