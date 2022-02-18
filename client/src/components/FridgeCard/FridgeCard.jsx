@@ -26,7 +26,7 @@ function FridgeCard(props) {
 
   return (
     <article className="fridge-card">
-      <Link to={`/fridge-items/${props.item.id}`}>
+      <Link to={`/fridge-item/${props.item.id}`}>
         <div className="fridge-card__header" style={{backgroundImage: `url(${props.item.image_url})`}}>
           <div className={statusClassName}>{status()}</div>
         </div>
