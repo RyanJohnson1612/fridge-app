@@ -1,4 +1,4 @@
-import React, { useState, /*useContext*/ } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { Button, Card, Form } from 'react-bootstrap';
 import CardHeader from "react-bootstrap/esm/CardHeader";
@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 import './AddFridgeItem.scss';
 import { useNavigate } from 'react-router-dom'
 import classNames from 'classnames';
-// import { authContext } from '../../providers/AuthProvider';
+import { authContext } from '../../providers/AuthProvider';
 axios.withCredentials = false;
 
 const AddFridgeItem = (props) => {
@@ -18,7 +18,7 @@ const AddFridgeItem = (props) => {
 
   const navigate = useNavigate();
 
-  // const { user } = useContext(authContext);
+  const { user } = useContext(authContext);
 
   const submitItem = (event) => {
     event.preventDefault();
@@ -35,19 +35,18 @@ const AddFridgeItem = (props) => {
       .then((response) => {
         // console.log(response.data.results);
         const itemList = response.data.results;
-        let image = response.data.results[0].image;
+        let image = "no.jpg";
 
         for (const item of itemList) {
-          if (item.image !== "no.jpg" && item.image !== "no.png" && !item.image.includes("png") && item.image.includes(name)) {
+          if (item.image !== "no.jpg" && item.image !== "no.png") {
             image = item.image;
             break;
           }
         }
 
-        const formatImage = image.slice(0, -3);
-        const image_URL = `https://spoonacular.com/cdn/ingredients_500x500/${formatImage}jpg`;
+        const image_URL = `https://spoonacular.com/cdn/ingredients_500x500/${image}`;
 
-        axios.post(`${process.env.REACT_APP_API_URL}/fridge_items`, { name: capName, expiry: queryExpiry, category, image_URL, notes })
+        axios.post(`${process.env.REACT_APP_API_URL}/fridge_items`, { name, fridge_id: user.id, expiry: queryExpiry, category, image_URL, notes })
           .then(() => {
 
             if (props.groceryName) {
@@ -120,13 +119,18 @@ const AddFridgeItem = (props) => {
       });
   };
 
-  const list = ["Grain", "Vegetable", "Fruit", "Dairy", "Meat", "Seafood", "Alternative Protein", "Dessert", "Condiment", "Other"];
+  const list = ["grain", "vegetable", "fruit", "dairy", "meat", "seafood", "alternative protein", "dessert", "drinks", "condiment", "other"];
 
   const fridgeItemHeader = classNames("add-item-card", { "fridge-modal": props.groceryName });
 
+  const capitalize = (name) => {
+    const capName = name[0].toUpperCase() + name.slice(1);
+    return capName;
+  }
+
   const categoryList = list.map(category => {
     return (
-      <option key={category} value={category}>{category}</option>
+      <option key={category} value={category}>{capitalize(category)}</option>
     )
   });
 
