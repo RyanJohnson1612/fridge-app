@@ -90,7 +90,7 @@ function MealIdeas() {
     console.log("SORT FRIDGE :)", sortedFridge);
 
     //Return the 3 foods closest to expiry
-    const expiringArray = fridgeItemsArray.slice(0, 3);
+    const expiringArray = sortedFridge.slice(0, 3);
 
     //Convert object of foods --> string of food names
     const expiringParsed = expiringArray
