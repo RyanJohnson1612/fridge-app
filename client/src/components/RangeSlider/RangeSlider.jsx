@@ -9,11 +9,11 @@ const MAX = 100;
 const RangeSlider = (props) => {
   const [values, setValues] = useState([0, 100]);
 
-  // const debounceRange = useCallback(debounce((value) => props.onRange(value), 500), [])
+  const debounceRange = useCallback(debounce((value) => props.onRange(value), 500), [])
 
-  // useEffect(() => {
-  //   debounceRange(values);
-  // }, [values])
+  useEffect(() => {
+    debounceRange(values);
+  }, [values])
 
   return (
     <div
