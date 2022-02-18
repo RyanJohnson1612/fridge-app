@@ -16,27 +16,7 @@ function Recipe(props) {
     ));
     if (ingredientsArray.length > 5) {
       result = ingredientsArray.slice(0, 5);
-      result.push(
-        <div>
-          <Button
-            variant="link"
-            ref={target}
-            onClick={() => setShow(!show)}
-            size="sm"
-          >
-            ...{ingredientsArray.length - 5} more ingredients
-          </Button>
-
-          <Overlay target={target.current} show={show} placement="right">
-            {(props) => (
-              <Tooltip id="overlay-example" {...props}>
-                {/* Display ingredients #6... to last ingredient */}
-                <div>{ingredientsArray.slice(5, ingredientsArray.length)}</div>
-              </Tooltip>
-            )}
-          </Overlay>
-        </div>
-      );
+      result.push(<div>...{ingredientsArray.length - 5} more ingredients</div>);
     } else {
       result = ingredientsArray;
     }
@@ -61,7 +41,25 @@ function Recipe(props) {
             {" "}
             <GiCookingGlove size={30} opacity={0.5} />{" "}
           </li>
-          <li> $ ingredients </li>
+          <li>
+            {" "}
+            <Button
+              variant="link"
+              ref={target}
+              onClick={() => setShow(!show)}
+              size="sm"
+            >
+              {ingredients.length} ingredients
+            </Button>{" "}
+            <Overlay target={target.current} show={show} placement="right">
+              {(props) => (
+                <Tooltip id="overlay-example" {...props}>
+                  {/* Display ingredients #6... to last ingredient */}
+                  {ingredientsMapped}
+                </Tooltip>
+              )}
+            </Overlay>
+          </li>
         </ul>
       </div>
       <h1> {title} </h1>
