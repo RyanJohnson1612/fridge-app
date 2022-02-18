@@ -18,10 +18,10 @@
   margin: 128px auto;
   border: 2px solid #000000;
   padding-bottom: 32px;
-  box-shadow: 5px 10px gray
+  box-shadow: 5px 10px gray;
 }
 
-h1 {
+.grocery-title {
   margin: 32px 0;
   color: rgb(15, 15, 15);
   font-size: 24px;
@@ -30,8 +30,8 @@ h1 {
 .complete {
   text-decoration: line-through;
   text-decoration-thickness: 2px;
-  color:rgb(168, 167, 167);
-  box-shadow: none
+  color: rgb(168, 167, 167);
+  box-shadow: none;
 }
 
 .item-form {
@@ -43,7 +43,7 @@ h1 {
   border: 2px solid #1aacb1;
   outline: none;
   width: 300px;
-  box-shadow: 1px 2px gray
+  box-shadow: 1px 2px gray;
 }
 
 .item-button {
@@ -54,7 +54,7 @@ h1 {
   outline: none;
   background: #1aacb1;
   color: #fff;
-  box-shadow: 1px 2px gray
+  box-shadow: 1px 2px gray;
 }
 
 .item-button:active {
