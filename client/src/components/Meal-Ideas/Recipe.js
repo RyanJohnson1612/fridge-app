@@ -32,7 +32,7 @@ function Recipe(props) {
       </figure>
 
       <div className="card-meta">
-        <p className="dish-type">
+        <p className="get-recipe">
           {" "}
           <a href={recipeURL}> Full Recipe</a>{" "}
         </p>

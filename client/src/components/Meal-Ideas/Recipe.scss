@@ -1,13 +1,11 @@
 /* CSS Variables */
 :root {
-  --card-bg-color: #fff;
   --card-text-color: #070705;
-  --dish-type-color: #bb5274;
+  --get-recipe-color: #bb5274;
   --card-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02),
     0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035),
     0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
     0 100px 80px rgba(0, 0, 0, 0.07);
-  --global-radius: 16px;
 }
 
 * {
@@ -28,6 +26,10 @@
   align-items: center;
 }
 
+.top-page h4 {
+  color: rgb(81, 97, 89);
+  margin-bottom: 1rem;
+}
 .spinner {
   display: flex;
   justify-content: center;
@@ -35,17 +37,17 @@
 
 .filters {
   background: #edf6f9;
-  padding: 5px;
-  margin: 5px;
-  border-width: 1px;
+  padding: 0.25rem;
+  margin: 0.25rem;
+  border-width: 0.1rem;
   border-style: solid;
-  border-radius: 10px;
+  border-radius: 16px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 70%;
   flex-wrap: wrap;
-  box-shadow: 2px 3px 5px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--card-shadow);
   font-size: 0.8rem;
 }
 
@@ -57,9 +59,9 @@
 
 /* Recipe card */
 .recipe-card {
-  background-color: var(--card-bg-color);
+  background-color: white;
   box-shadow: var(--card-shadow);
-  border-radius: var(--global-radius);
+  border-radius: 16px;
   color: var(--card-text-color);
   line-height: 1.5;
   width: 22rem;
@@ -71,10 +73,10 @@
   width: 100%;
   margin: 0;
   padding: 0;
-  height: 16rem;
+  height: 14rem;
   overflow: hidden;
-  border-radius: var(--global-radius) var(--global-radius) 0 0;
-  margin-bottom: 2rem;
+  border-radius: 16px 16px 0 0;
+  margin-bottom: 1.25rem;
 }
 
 .recipe-card figure img {
@@ -86,7 +88,7 @@
 }
 
 .recipe-card h1 {
-  margin: 0 1.5rem 2rem 1.5rem;
+  margin: 0 1.5rem 1rem 1.5rem;
   font-size: 20px;
   font-weight: 700;
   letter-spacing: -1px;
@@ -99,17 +101,21 @@
   font-size: 13px;
 }
 
-.dish-type {
+.get-recipe {
   font-weight: 600;
   letter-spacing: -0.25px;
   color: white;
   margin: 0;
-  background-color: var(--dish-type-color);
-  padding: 0.25rem 1rem;
+  background-color: var(--get-recipe-color);
+  padding: 0.5rem 1rem;
   border-radius: 100px;
 }
 
-.dish-type a {
+.get-recipe:active {
+  transform: scale(0.98);
+}
+
+.get-recipe a {
   text-decoration: none;
   color: white;
 }
