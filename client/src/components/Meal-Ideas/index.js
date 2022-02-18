@@ -80,7 +80,10 @@ function MealIdeas() {
   const getExpiring = (fridgeItemsArray) => {
     //fridgeItemsArray is an array of objects. Filter for food objects that are expiring <= 7 days.
     const expiringArray = fridgeItemsArray.filter(
-      (foodObject) => foodObject.expire_in <= 7 && foodObject.expire_in !== null
+      (foodObject) =>
+        foodObject.expire_in <= 7 &&
+        foodObject.expire_in >= 0 &&
+        foodObject.expire_in !== null
     );
     //Convert object of foods --> string of food names
     const expiringParsed = expiringArray
