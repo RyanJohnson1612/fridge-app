@@ -26,7 +26,7 @@ const FridgeItem = (props) => {
     } else if (days === 1) {
       return `1 day`;
     } else if (days === 0) {
-      return "Expired today";
+      return "Expires today";
     } else if (days === -1) {
       return "Expired " + (days * -1) + " day ago";
     } else {
