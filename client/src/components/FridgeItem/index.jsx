@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import FridgeItem from "./FridgeItem";
 import "./FridgeItem.scss";
 import axios from 'axios'
 
 function FridgeItemIndex(props) {
-
+  const { id } = useParams();
   const [fridgeItem, setFridgeItem] = useState({});
   const [groceryList, setGroceryList] = useState(1);
   const [allGroceryLists, setAllGroceryLists] = useState([]);
 
   useEffect(() => {
 
-    axios.get(`${process.env.REACT_APP_API_URL}/fridge_items/`)
+    axios.get(`${process.env.REACT_APP_API_URL}/fridge_items/${id}`)
       .then((results) => {
         // use this one if you wanna see the ketchup camel with all fields filled
-        const item = results.data[6];
+        setFridgeItem(results.data);
         // use this one if you want to see most recent add to fridge item
         // const item = results.data[results.data.length - 1];
 
-        if (JSON.stringify(fridgeItem) !== JSON.stringify(item)) {
-          setFridgeItem(item);
-        }
+        // if (JSON.stringify(fridgeItem) !== JSON.stringify(item)) {
+        //   setFridgeItem(item);
+        // }
       })
       .catch(error => console.log(`Error: ${error.message}`));
 

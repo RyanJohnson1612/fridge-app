@@ -1,0 +1,30 @@
+@import '../../styles/mediaqueries.scss';
+
+.fridge-index {
+  display: flex;
+  flex-direction: column;
+
+  @include for-md-up {
+    display: block;
+
+    &__sidebar {
+      height: calc(100vh - 55px);
+      position: fixed;
+      top: 55px;
+      left: 0;
+      width: 300px;
+      background: #eeeeee;
+    }
+
+    &__content {
+      position: relative;
+      left: 275px;
+      max-width: calc(100vw - 311px);
+    }
+  }
+
+  h1 {
+    font-weight: bold;
+    margin: 10px 15px;
+  }
+}

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import ShoppingListForm from "./ShoppingListForm";
 import { RiCloseCircleLine, RiFridgeLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
+import AddFridgeItem from "../AddFridgeItem/AddFridgeItem";
+import { Modal } from "react-bootstrap";
 
 function ShoppingListItem(props) {
   const {
@@ -9,7 +11,6 @@ function ShoppingListItem(props) {
     completeItem,
     removeItem,
     updateItem,
-    addToFridge,
     setEditMode,
   } = props;
 
@@ -17,6 +18,15 @@ function ShoppingListItem(props) {
     id: null,
     value: "",
   });
+
+  const [show, setShow] = useState(false);
+  const [food, setFood] = useState("");
+
+  const handleClose = () => setShow(false);
+  const handleShow = (name) => {
+    setFood(name);
+    setShow(true);
+  }
 
   const submitUpdate = (value) => {
     updateItem(edit.id, value);
@@ -60,13 +70,27 @@ function ShoppingListItem(props) {
           className="edit-icon"
         />
         <RiFridgeLine
-          onClick={() => addToFridge(item.id)}
+          onClick={() => handleShow(item.text)}
           className="fridge-icon"
         />
       </div>
     </div>
   ));
 
-  return itemsMapped;
+  return (
+    <>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+        </Modal.Header>
+        <Modal.Body>
+          <AddFridgeItem
+            groceryName={food}
+            closeModal={handleClose}
+          />
+        </Modal.Body>
+      </Modal>
+      {itemsMapped}
+    </>
+  )
 }
 export default ShoppingListItem;
