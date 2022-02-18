@@ -41,16 +41,15 @@ function MealIdeas() {
   useEffect(() => {
     getRecipes();
     getFridgeItems();
-  }, [filters]);
+  }, [filters, fridgeQuery]);
 
-  //Updates filters state based on dietaryRestrictions checked off
+  //Updates filters state based on dietaryRestrictions checked off, then update setCheckedState
   const handleOnChange = (position) => {
     const allFilters = [];
     const updatedCheckedState = checkedState.map((item, index) =>
       index === position ? !item : item
     );
     setCheckedState(updatedCheckedState);
-
     updatedCheckedState.forEach((currentState, index) => {
       if (currentState === true) {
         allFilters.push(dietRestrictions[index]);
@@ -69,30 +68,28 @@ function MealIdeas() {
     return result.toLowerCase();
   };
 
-  //Function to get all fridge items using axios, then return expiring fridge items
+  //Function to get all fridge items (axios), then update setfridgeQuery to expiring fridge items
   const getFridgeItems = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/fridge_items`)
       .then((res) => {
         console.log(res.data);
-        getExpiring(res.data);
+        setfridgeQuery(getExpiring(res.data));
+        console.log("Fridge Query", fridgeQuery);
       })
       .catch((err) => console.log(err));
   };
 
-  //Take in array of all fridge items (from axios request to GET /fridge_items), return array of names of expiring foods
+  //Take in array of fridge items (from axios), return string of expiring foods
   const getExpiring = (fridgeItemsArray) => {
     //fridgeItemsArray is an array of objects. Filter for food objects that are expiring <= 7 days.
     const expiringArray = fridgeItemsArray.filter(
       (foodObject) => foodObject.expire_in <= 7
     );
-
+    //Convert object of foods --> string of food names
     const expiringParsed = expiringArray
       .map((expiringObject) => expiringObject.name)
       .toString();
-
-    console.log("Expiring food items:", expiringParsed);
-
     return expiringParsed;
   };
 
