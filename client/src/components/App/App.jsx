@@ -23,9 +23,7 @@ function App() {
         <Navbar />
         <section className="content">
           <Routes>
-
-            <Route path="/" element={<FridgeItemIndex />} />
-            <Route
+          <Route
               path="/fridge"
               element={
                 <ProtectedRoute redirectTo="/login" message="Please login or register to view your fridge">
@@ -34,6 +32,14 @@ function App() {
               }
             />
 
+            <Route
+              path="/fridge-item/:id"
+              element={
+                <ProtectedRoute redirectTo="/login" message="Please login or register to view your fridge item">
+                  <FridgeItemIndex />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/grocery-list"
               element={
