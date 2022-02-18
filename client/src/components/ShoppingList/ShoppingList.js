@@ -108,11 +108,6 @@ function ShoppingList() {
       });
   };
 
-  //Placeholder --> replace with function that adds item to user's fridge
-  const addToFridge = (id) => {
-    console.log("The item was added to your fridge!");
-  };
-
   //Function to toggle item as completed or not, will be passed to ShoppingListItem component
   const completeItem = (id) => {
     let updatedItems = items.map((item) => {
@@ -169,7 +164,6 @@ function ShoppingList() {
         completeItem={completeItem}
         removeItem={removeItem}
         updateItem={updateItem}
-        addToFridge={addToFridge}
         setEditMode={setEditMode}
         editMode={editMode}
       />

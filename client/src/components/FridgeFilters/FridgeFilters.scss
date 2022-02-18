@@ -1,0 +1,58 @@
+@import '../../styles/mediaqueries.scss';
+
+.fridge-filters {
+  position: relative;
+  padding: 10px;
+
+  h2, h3 {
+    margin: 10px 0;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  @include for-sm-down {
+    &__dropdown {
+      position: absolute;
+      width: 100%;
+      margin-top: 10px;
+      padding-right: 20px;
+      background-color: white;
+      overflow: hidden;
+      transition: max-height 0.5s;
+      z-index: 1;
+
+      &--open {
+        max-height: 600px;
+      }
+
+      &--closed {
+        max-height: 0;
+      }
+    }
+  }
+
+  &__button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px 0 5px;
+    line-height: 0.75;
+    cursor: pointer;
+
+    &-icon {
+      font-size: 24px;
+    }
+
+    span {
+      user-select: none;
+    }
+
+    @include for-md-up {
+      display: none;
+    }
+  }
+}
