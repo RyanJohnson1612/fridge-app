@@ -25,6 +25,7 @@ function App() {
         <Navbar />
         <section className="content">
           <Routes>
+
           <Route
               path="/fridge"
               element={
@@ -49,6 +50,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
+
             <Route path="/fridge-item/new" element={<AddFridgeItemIndex />} />
             <Route path="/recipes" element={<h1><MealIdeas /></h1>} />
             <Route path="/login" element={<Login />} />
