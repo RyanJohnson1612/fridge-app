@@ -47,7 +47,7 @@ function Recipe(props) {
             >
               {ingredients.length} ingredients
             </Button>
-            <Overlay target={target.current} show={show} placement="right">
+            <Overlay target={target.current} show={show} placement="left">
               {(props) => (
                 <Tooltip id="overlay-example" {...props}>
                   {/* Display ingredients #6... to last ingredient */}
