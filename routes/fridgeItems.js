@@ -65,7 +65,7 @@ module.exports = (db) => {
     const queryString =
       `INSERT INTO fridge_items (name, fridge_id, expiry, category, image_URL, notes)
        VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`;
-    const queryParams = [req.body.name, 1, req.body.expiry, req.body.category, req.body.image_URL, req.body.notes]
+    const queryParams = [req.body.name, req.body.fridge_id, req.body.expiry, req.body.category, req.body.image_URL, req.body.notes]
 
     db.query(queryString, queryParams).then(data => {
       console.log(data.rows[0]);
