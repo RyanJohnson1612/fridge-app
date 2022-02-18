@@ -63,6 +63,8 @@
   color: var(--card-text-color);
   line-height: 1.5;
   width: 22rem;
+  padding: 0;
+  margin: 10px;
 }
 
 .recipe-card figure {
@@ -76,7 +78,53 @@
 }
 
 .recipe-card figure img {
+  padding: 0;
+  margin: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.recipe-card h1 {
+  margin: 0 1.5rem 2rem 1.5rem;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.card-meta {
+  margin: 0 1.5rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.dish-type {
+  font-weight: 600;
+  letter-spacing: -0.25px;
+  color: white;
+  margin: 0;
+  background-color: var(--dish-type-color);
+  padding: 0.25rem 1rem;
+  border-radius: 100px;
+}
+
+.dish-type a {
+  text-decoration: none;
+  color: white;
+}
+
+.dish-stats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.dish-stats li {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  opacity: 75%;
 }

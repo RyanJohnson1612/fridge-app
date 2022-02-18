@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Button, Tooltip, Overlay } from "react-bootstrap";
+import { GiCookingGlove } from "react-icons/gi";
 
 function Recipe(props) {
   const { title, image, recipeURL, ingredients } = props;
@@ -53,13 +54,17 @@ function Recipe(props) {
       <div className="card-meta">
         <p className="dish-type">
           {" "}
-          <a href={recipeURL}>Get Full Recipe</a>
+          <a href={recipeURL}> Full Recipe</a>{" "}
         </p>
         <ul className="dish-stats">
-          <li> # ingredients</li>
+          <li>
+            {" "}
+            <GiCookingGlove size={30} opacity={0.5} />{" "}
+          </li>
+          <li> $ ingredients </li>
         </ul>
-        <h1> {title} </h1>
       </div>
+      <h1> {title} </h1>
     </div>
   );
 }
