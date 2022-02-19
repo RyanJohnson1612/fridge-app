@@ -68,10 +68,8 @@ function MealIdeas() {
     axios
       .get(`${process.env.REACT_APP_API_URL}/fridge_items`)
       .then((res) => {
-        console.log(res.data);
         setfridgeQuery(getExpiring(res.data));
         setExpiring(fridgeQuery);
-        console.log("Fridge Query", fridgeQuery);
       })
       .catch((err) => console.log(err));
   };
@@ -86,8 +84,6 @@ function MealIdeas() {
     const sortedFridge = validExpiryItems.sort(
       (a, b) => parseFloat(a.expire_in) - parseFloat(b.expire_in)
     );
-
-    console.log("SORT FRIDGE :)", sortedFridge);
 
     //Return the 3 foods closest to expiry
     const expiringArray = sortedFridge.slice(0, 3);
