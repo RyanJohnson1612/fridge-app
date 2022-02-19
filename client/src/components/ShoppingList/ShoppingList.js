@@ -3,8 +3,11 @@ import ShoppingListForm from "./ShoppingListForm";
 import ShoppingListItem from "./ShoppingListItem";
 import axios from "axios";
 import swal from "sweetalert";
+import { useParams } from "react-router-dom";
 
 function ShoppingList() {
+  const { id } = useParams();
+
   //the state items in format: [ {id: #, text: string, isPurchased: boolean }, ...]
   const [items, setItems] = useState([]);
   //State to keep track if user is editing(updating) an existing grocery list item or not
@@ -136,7 +139,7 @@ function ShoppingList() {
 
   const getPreviousItems = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/grocery_lists/3`)
+      .get(`${process.env.REACT_APP_API_URL}/grocery_lists/${id}`)
       .then((res) => {
         const results = [];
         res.data.forEach((data, index) => {
