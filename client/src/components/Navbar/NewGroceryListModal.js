@@ -24,6 +24,8 @@ function NewGroceryListModal() {
     .catch((err) => {
       console.log("Grocery list submssion error", err);
     });
+
+    setInput("");
   }
 
   const handleChange = (e) => {
@@ -43,12 +45,12 @@ function NewGroceryListModal() {
         </Modal.Header>
         <Modal.Body>
 
-          <Form name="grocery-submit">
+          <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Grocery List Name</Form.Label>
               <Form.Control type="text" placeholder="Name your new Grocery List" onChange={handleChange} />
             </Form.Group>
-            <Button variant="primary" type="button" onClick={handleSubmit}>
+            <Button variant="primary" type="submit" onClick={handleSubmit}>
               Submit
             </Button>
           </Form>
