@@ -11,22 +11,24 @@ function FridgeCard(props) {
       return 'Fresh';
     } else if (daysUntilExpired <= 3 && daysUntilExpired > 0) {
       return 'Expiring Soon';
-    } else if (daysUntilExpired <= 0){
+    } else if (daysUntilExpired === 0) {
+      return 'Expires Today';
+    } else if (daysUntilExpired < 0){
       return 'Expired';
     } else {
-    return 'Fresh';
+      return 'Fresh';
     }
   }
 
   const statusClassName = classNames('fridge-card__status', {
     'fridge-card__status--fresh': status() === 'Fresh',
     'fridge-card__status--expiring': status() === 'Expiring Soon',
-    'fridge-card__status--expired': status() === 'Expired',
+    'fridge-card__status--expired': status() === 'Expired' || status() === 'Expires Today',
   })
 
   return (
     <article className="fridge-card">
-      <Link to={`/fridge-item/${props.item.id}`}>
+      <Link to={`/fridge-items/${props.item.id}`}>
         <div className="fridge-card__header" style={{backgroundImage: `url(${props.item.image_url})`}}>
           <div className={statusClassName}>{status()}</div>
         </div>

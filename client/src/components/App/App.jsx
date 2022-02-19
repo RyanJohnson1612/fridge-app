@@ -35,7 +35,7 @@ function App() {
               }
             />
             <Route
-              path="/fridge-item/:id"
+              path="/fridge-items/:id"
               element={
                 <ProtectedRoute redirectTo="/login" message="Please login or register to view your fridge item">
                   <FridgeItemIndex />
@@ -50,8 +50,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
-
-            <Route path="/fridge-item/new" element={<AddFridgeItemIndex />} />
+            <Route path="/fridge-items/new" element={<AddFridgeItemIndex />} />
             <Route path="/recipes" element={<h1><MealIdeas /></h1>} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
