@@ -4,14 +4,10 @@ import ShoppingListForm from "./ShoppingListForm";
 import ShoppingListItem from "./ShoppingListItem";
 import axios from "axios";
 import swal from "sweetalert";
-import { useParams } from "react-router-dom";
 
 function ShoppingList() {
-<<<<<<< HEAD
-=======
 
   //Variable that the grocery list id based on dynamic URL
->>>>>>> main
   const { id } = useParams();
 
   //the state items in format: [ {id: #, text: string, isPurchased: boolean }, ...]
