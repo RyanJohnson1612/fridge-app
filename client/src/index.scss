@@ -1,4 +1,8 @@
+// Dont touch the styles in this file unless absolutely necessary
+
 @import './styles/variables';
+@import './styles/mediaqueries';
+@import './styles/typography';
 
 body {
   margin: 0;
@@ -18,3 +22,8 @@ code {
   box-sizing: border-box;
 }
 
+// @include for-sm-down {
+//   body {
+//     overflow-x: hidden;
+//   }
+// }

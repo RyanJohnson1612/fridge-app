@@ -40,11 +40,12 @@
 
     &__dropdown {
       position: absolute;
-      top: 40px;
+      top: 50px;
       left: 0;
+      height: calc(100vh - 50px);
       width: 100vw;
       padding: 20px;
-      background-color: white;
+      background-color: #eaeaea;
       overflow: hidden;
       transition: all 0.25s;
       z-index: 1;
@@ -82,11 +83,12 @@
 
     @include for-md-up {
       display: none;
-    }
+    };
   }
 
   &__apply-button {
     width: 100%;
+    margin-top: 10px;
     padding: 10px;
     border: 1px solid teal;
     background-color: teal;
