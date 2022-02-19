@@ -19,19 +19,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 20px;
-  padding: 5px;
+  margin-top: 20px;
+  padding: 2rem;
 }
 
 .top-page p {
   margin-top: 0;
-  font-size: 1rem;
+  font-size: 1.1rem;
   line-height: 1.5;
   letter-spacing: -1px;
 }
 
 .top-page span {
   color: #bb5274;
+  font-weight: bold;
 }
 
 .spinner {
