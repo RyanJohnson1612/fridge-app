@@ -20,8 +20,9 @@ function FridgeFilters(props) {
       <h2>Filters</h2>
       <div>
         <SearchBar
+          filters={props.filters}
           placeholder="Search Fridge"
-          onSearch={props.onSearch.handleSearch}
+          onSearch={props.onSearch}
         />
         <Button className="fridge-filters__button" onClick={() => setDropdown(true)}>
           <BsSliders />
@@ -31,15 +32,17 @@ function FridgeFilters(props) {
         <h2 className="fridge-filters__header--mobile">Filters</h2>
         <h3>Categories</h3>
         <CheckList
+          filters={props.filters}
           options={['Fruit', 'Vegetable', 'Dairy', 'Grain', 'Meat', 'Seafood', 'Alternative Protein', 'Dessert', 'Condiments', 'Other']}
           filter="category"
-          onSelect={props.onSearch.handleSelect}
+          onSelect={props.onSelect}
         />
         <h3>Status</h3>
         <CheckList
+          filters={props.filters}
           options={['fresh', 'expiring soon', 'expired']}
           filter="status"
-          onSelect={props.onSearch.handleSelect}
+          onSelect={props.onSelect}
         />
         {/* <h3>Days until expired</h3>
         <RangeSlider onRange={props.onSearch.handleRange}/> */}

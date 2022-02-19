@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import debounce from 'lodash.debounce'
 import './SearchBar.scss';
@@ -6,7 +6,13 @@ import './SearchBar.scss';
 function SearchBar(props) {
   const [search, setSearch] = useState('');
 
-  const debounceSearch = useCallback(debounce((value) => props.onSearch(value), 500), [])
+  const debounceSearch = useCallback(debounce((value) => props.onSearch(value), 300), [])
+
+  useEffect(() => {
+    if(props.filters.search) {
+      setSearch(props.filters.search)
+    }
+  }, [props.filters]);
 
   const handleInput = (e) => {
     const value = e.target.value;
