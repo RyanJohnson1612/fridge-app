@@ -43,14 +43,21 @@ function App() {
               }
             />
             <Route
-              path="/grocery-list"
+              path="/grocery-lists/:id"
               element={
                 <ProtectedRoute redirectTo="/login" message="Please login or register to view your grocery lists">
                   <ShoppingListIndex />
                 </ProtectedRoute>
               }
             />
-            <Route path="/fridge-items/new" element={<AddFridgeItemIndex />} />
+            <Route
+              path="/fridge-items/new"
+              element={
+                <ProtectedRoute redirectTo="/login" message="Please login or register to a fridge item">
+                  <AddFridgeItemIndex />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/recipes" element={<h1><MealIdeas /></h1>} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
