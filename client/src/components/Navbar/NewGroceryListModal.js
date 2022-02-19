@@ -30,7 +30,7 @@ function NewGroceryListModal() {
 
   return (
     <>
-      <Button size="sm" variant="dark" bg="myTeal" onClick={handleShow}>
+      <Button size="sm" variant="custom-button" onClick={handleShow}>
         + New Grocery List
       </Button>
 

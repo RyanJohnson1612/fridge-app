@@ -19,6 +19,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 20px;
+  padding: 5px;
 }
 
 .top-page p {
@@ -51,6 +53,10 @@
   flex-wrap: wrap;
   box-shadow: var(--card-shadow);
   font-size: 0.8rem;
+}
+
+.filters label {
+  margin: 5px;
 }
 
 .recipes-list {

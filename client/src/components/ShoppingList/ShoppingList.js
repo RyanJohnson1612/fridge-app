@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom'
 import ShoppingListForm from "./ShoppingListForm";
 import ShoppingListItem from "./ShoppingListItem";
 import axios from "axios";
 import swal from "sweetalert";
 
 function ShoppingList() {
+
+  //Variable that the grocery list id based on dynamic URL
+  const { id } = useParams();
+
   //the state items in format: [ {id: #, text: string, isPurchased: boolean }, ...]
   const [items, setItems] = useState([]);
+
   //State to keep track if user is editing(updating) an existing grocery list item or not
   const [editMode, setEditMode] = useState(false);
 
@@ -25,9 +31,9 @@ function ShoppingList() {
     }
 
     axios
-      .post(`${process.env.REACT_APP_API_URL}/grocery_lists/1`, {
+      .post(`${process.env.REACT_APP_API_URL}/grocery_lists/${id}`, {
         name: item.text,
-        grocery_list_id: 3,
+        grocery_list_id: id,
         obtained: false,
       })
       .then((res) => {
@@ -136,7 +142,7 @@ function ShoppingList() {
 
   const getPreviousItems = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/grocery_lists/3`)
+      .get(`${process.env.REACT_APP_API_URL}/grocery_lists/${id}`)
       .then((res) => {
         const results = [];
         res.data.forEach((data, index) => {
