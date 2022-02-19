@@ -22,8 +22,8 @@ code {
   box-sizing: border-box;
 }
 
-// @include for-sm-down {
-//   body {
-//     overflow-x: hidden;
-//   }
-// }
+@include for-sm-down {
+  body {
+    overflow-x: hidden;
+  }
+}
