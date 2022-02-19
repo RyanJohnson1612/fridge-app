@@ -27,8 +27,9 @@ const AddFridgeItem = (props) => {
     // console.log(name, expiry, category, notes);
 
     let queryExpiry = expiry;
-    const capName = name[0].toUpperCase() + name.slice(1);
-    const dbName = name.toLowerCase();
+    const trimName = name.trim();
+    const capName = trimName[0].toUpperCase() + trimName.slice(1);
+    const dbName = trimName.toLowerCase();
 
     if (expiry === "") {
       queryExpiry = null;
