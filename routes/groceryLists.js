@@ -1,13 +1,17 @@
 const router = require('express').Router();
+const protectedRoute = require('../middleware/protectedRoute');
 
 module.exports = (db) => {
 
   // GET grocery lists
-  router.get('/', function(req, res, next) {
+  router.get('/', protectedRoute, function(req, res, next) {
     const queryString =
       `SELECT *
-       FROM grocery_lists;`
-    db.query(queryString).then(data => {
+       FROM grocery_lists
+       WHERE user_id = $1;`;
+    const queryParams = [req.user.id];
+
+    db.query(queryString, queryParams).then(data => {
       console.log(data.rows)
       res.json(data.rows);
     }).catch(error => console.log(`Error: ${error.message}`));
