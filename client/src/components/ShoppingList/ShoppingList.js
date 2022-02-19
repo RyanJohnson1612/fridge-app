@@ -23,6 +23,36 @@ function ShoppingList() {
     getGroceryListsData();
   }, []);
 
+  const getPreviousItems = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/grocery_lists/${id}`)
+      .then((res) => {
+        const results = [];
+        res.data.forEach((data, index) => {
+          results.unshift({
+            id: data.id,
+            text: data.name,
+            isPurchased: data.obtained,
+          });
+        });
+        setItems([...items, ...results]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getGroceryListsData = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/grocery_lists`)
+      .then((results) => {
+        const listTitle = results.data.filter( list => list.id == id );
+        setGroceryTitle(listTitle[0].name);
+        console.log("grocery title", groceryTitle)
+      })
+      .catch((err) => console.log(err));
+  }
+
   //Function to add items to shopping list, will be passed to ShoppingListForm
   const addItem = (item) => {
     if (!item.text || /^\s*$/.test(item.text)) {
@@ -143,39 +173,10 @@ function ShoppingList() {
     setItems(updatedItems);
   };
 
-  const getPreviousItems = () => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/grocery_lists/${id}`)
-      .then((res) => {
-        const results = [];
-        res.data.forEach((data, index) => {
-          results.unshift({
-            id: data.id,
-            text: data.name,
-            isPurchased: data.obtained,
-          });
-        });
-        setItems([...items, ...results]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const getGroceryListsData = () => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/grocery_lists`)
-      .then((results) => {
-        const listTitle = results.data.filter( list => list.id == id );
-        setGroceryTitle(listTitle[0].name);
-        console.log("grocery title", groceryTitle)
-      })
-      .catch((err) => console.log(err));
-  }
 
   return (
     <div>
-      <h1 className="grocery-title"> My Grocery List</h1>
+      <h1 className="grocery-title"> {groceryTitle} List</h1>
 
       {!editMode && <ShoppingListForm editMode={editMode} onSubmit={addItem} />}
 
