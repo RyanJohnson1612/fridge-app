@@ -8,7 +8,7 @@ export default function GroceryListDropdown(props) {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/grocery_lists`)
+      .get(`${process.env.REACT_APP_API_URL}/grocery_lists`, { withCredentials: true })
       .then((results) => {
         console.log(results);
         setAllGroceryLists(results.data);
@@ -18,7 +18,7 @@ export default function GroceryListDropdown(props) {
 
   //Have to acheive format: <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
   const groceryListsMapped = allGroceryLists.map((groceryList, index) => (
-    <NavDropdown.Item key={index} href={`/grocery-list/${groceryList.id}`}> {groceryList.name} </NavDropdown.Item>
+    <NavDropdown.Item key={index} href={`/grocery-lists/${groceryList.id}`}> {groceryList.name} </NavDropdown.Item>
   ));
 
   return (
