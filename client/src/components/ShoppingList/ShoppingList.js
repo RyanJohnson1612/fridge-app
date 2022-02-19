@@ -16,6 +16,8 @@ function ShoppingList() {
   //State to keep track if user is editing(updating) an existing grocery list item or not
   const [editMode, setEditMode] = useState(false);
 
+  const [allGroceryLists, setAllGroceryLists] = useState([]);
+
   useEffect(() => {
     getPreviousItems();
   }, []);
@@ -158,6 +160,16 @@ function ShoppingList() {
         console.log(err);
       });
   };
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/grocery_lists`)
+      .then((results) => {
+        console.log("all grocery list data", results.data);
+        setAllGroceryLists(results.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div>
