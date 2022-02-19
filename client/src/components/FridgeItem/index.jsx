@@ -25,7 +25,7 @@ function FridgeItemIndex(props) {
       })
       .catch(error => console.log(`Error: ${error.message}`));
 
-    axios.get(`${process.env.REACT_APP_API_URL}/grocery_lists`)
+    axios.get(`${process.env.REACT_APP_API_URL}/grocery_lists`, { withCredentials: true })
       .then((results) => {
         console.log(results);
         setAllGroceryLists(results.data);
