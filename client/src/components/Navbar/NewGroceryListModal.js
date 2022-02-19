@@ -7,8 +7,8 @@ function NewGroceryListModal() {
   //States responsible for modal display
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [show, setShow] = useState(false);
 
+  const [show, setShow] = useState(false);
   const [input, setInput] = useState('');
 
   const handleSubmit = (e) => {
@@ -26,6 +26,7 @@ function NewGroceryListModal() {
     });
 
     setInput("");
+    handleClose();
   }
 
   const handleChange = (e) => {
@@ -50,7 +51,7 @@ function NewGroceryListModal() {
               <Form.Label>Grocery List Name</Form.Label>
               <Form.Control type="text" placeholder="Name your new Grocery List" onChange={handleChange} />
             </Form.Group>
-            <Button variant="primary" type="submit" onClick={handleSubmit}>
+            <Button variant="primary" type="button" onClick={handleSubmit}>
               Submit
             </Button>
           </Form>
