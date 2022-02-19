@@ -4,6 +4,14 @@
   padding: 0;
 }
 
+/* CSS Variables */
+:root {
+  --card-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
+    0 100px 80px rgba(0, 0, 0, 0.07);
+}
+
 // body {
 //   background:rgb(241, 241, 241)
 // }
@@ -15,14 +23,14 @@
   min-height: 600px;
   background: #ffffff;
   text-align: center;
-  margin: 128px auto;
+  margin: 4rem auto;
   border: 2px solid #000000;
   padding-bottom: 32px;
-  box-shadow: 5px 10px gray;
+  box-shadow: var(--card-shadow);
 }
 
 .grocery-title {
-  margin: 32px 0;
+  margin: 20px 0;
   color: rgb(15, 15, 15);
   font-size: 24px;
 }
@@ -97,8 +105,6 @@
 .fridge-icon {
   color: rgb(8, 34, 149);
   outline: none;
-  border-color: #9ecaed;
-  box-shadow: 0 0 10px #9ecaed;
   font-size: 28px;
   margin-left: 10px;
 }
