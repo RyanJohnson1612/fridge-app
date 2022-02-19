@@ -3,13 +3,16 @@ import { Modal, Button, Form } from "react-bootstrap";
 import axios from "axios";
 
 function NewGroceryListModal() {
-  const [show, setShow] = useState(false);
-  const [input, setInput] = useState('');
 
+  //States responsible for modal display
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false);
 
-  const handleSubmit = () => {
+  const [input, setInput] = useState('');
+
+  const handleSubmit = (e) => {
+
     axios
     .post(`${process.env.REACT_APP_API_URL}/grocery_lists`, {
       user_id: 2,
@@ -19,7 +22,7 @@ function NewGroceryListModal() {
       console.log("New grocery list submitted!", res.data)
     })
     .catch((err) => {
-      console.log(err);
+      console.log("Grocery list submssion error", err);
     });
   }
 
@@ -40,12 +43,12 @@ function NewGroceryListModal() {
         </Modal.Header>
         <Modal.Body>
 
-          <Form onSubmit={handleSubmit}>
+          <Form name="grocery-submit">
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Grocery List Name</Form.Label>
               <Form.Control type="text" placeholder="Name your new Grocery List" onChange={handleChange} />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="button" onClick={handleSubmit}>
               Submit
             </Button>
           </Form>
