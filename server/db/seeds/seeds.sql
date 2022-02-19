@@ -1,8 +1,8 @@
 -- sample users
-INSERT INTO users (first_name, last_name, email, password) VALUES ('Hippo', 'Oppih', 'hippo@cat.com', 'password');
-INSERT INTO users (first_name, last_name, email, password) VALUES ('Flamingo', 'Ognimalf', 'flamingo@cat.com', 'password');
-INSERT INTO users (first_name, last_name, email, password) VALUES ('Ostrich', 'Hcirtso', 'ostrich@cat.com', 'password');
-INSERT INTO users (first_name, last_name, email, password) VALUES ('Bread', 'Daerb', 'bread@cat.com', 'password');
+INSERT INTO users (first_name, last_name, email, password) VALUES ('Hippo', 'Oppih', 'hippo@cat.com', '$2b$10$jyw1m/0ldv.g/QUYBd8ow.BkBzUVNLTEn0nO.MJDF8/Srm8Q6H1YK'); /*password is = password*/
+INSERT INTO users (first_name, last_name, email, password) VALUES ('Flamingo', 'Ognimalf', 'flamingo@cat.com', '$2b$10$jyw1m/0ldv.g/QUYBd8ow.BkBzUVNLTEn0nO.MJDF8/Srm8Q6H1YK');
+INSERT INTO users (first_name, last_name, email, password) VALUES ('Ostrich', 'Hcirtso', 'ostrich@cat.com', '$2b$10$jyw1m/0ldv.g/QUYBd8ow.BkBzUVNLTEn0nO.MJDF8/Srm8Q6H1YK');
+INSERT INTO users (first_name, last_name, email, password) VALUES ('Bread', 'Daerb', 'bread@cat.com', '$2b$10$jyw1m/0ldv.g/QUYBd8ow.BkBzUVNLTEn0nO.MJDF8/Srm8Q6H1YK');
 
 -- sample fridges
 INSERT INTO fridges (name, user_id) VALUES ('Joe', 1);

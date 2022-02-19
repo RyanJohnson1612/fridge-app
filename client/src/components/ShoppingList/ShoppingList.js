@@ -155,7 +155,7 @@ function ShoppingList() {
 
   return (
     <div>
-      <h1> My Grocery List</h1>
+      <h1 class="grocery-title"> My Grocery List</h1>
 
       {!editMode && <ShoppingListForm editMode={editMode} onSubmit={addItem} />}
 

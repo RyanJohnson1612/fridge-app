@@ -3,8 +3,9 @@ body {
 }
 
 .image {
-  width: 75%;
-  height: 50%;
+  max-height: 300px;
+  width: auto;
+  height: 80%;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -22,10 +23,6 @@ body {
   font-family: 'Raleway', sans-serif;
   box-shadow: 5px 5px gray;
 }
-
-// td {
-//   border-bottom: 0.5px dotted;
-// }
 
 .click-from-item {
   display: flex;
@@ -49,19 +46,38 @@ select {
   color: red;
 }
 
-@media screen and (min-width: 576px) {
+.expire-soon {
+  color: rgb(216, 149, 25);
+}
+
+.image-container {
+  width: 100%;
+  height: 333px;
+  max-height: 333px;
+  max-width: 425px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: -18px;
+}
+
+@media screen and (min-width: 743px) {
   .body {
     display: flex;
     align-items: center;
     margin: 10px;
-  }
-
-  .image {
-    margin-right: 10px;
-    width: 33%;
+    margin-top: 25px;
+    margin-left: 45px;
   }
 
   .properties {
     width: 50%;
   }
+
+  .image-container {
+    max-width: 315px;
+  }
+
 }
