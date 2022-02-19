@@ -5,14 +5,14 @@ import ShoppingListItem from "./ShoppingListItem";
 import axios from "axios";
 import swal from "sweetalert";
 
-function ShoppingList(props) {
+function ShoppingList() {
+
+  //Variable that the grocery list id based on dynamic URL
   const { id } = useParams();
 
-  console.log("did i get the url id?", id);
-
-  console.log("this is the user props from inside ShoppingList.js", props.user);
   //the state items in format: [ {id: #, text: string, isPurchased: boolean }, ...]
   const [items, setItems] = useState([]);
+
   //State to keep track if user is editing(updating) an existing grocery list item or not
   const [editMode, setEditMode] = useState(false);
 
