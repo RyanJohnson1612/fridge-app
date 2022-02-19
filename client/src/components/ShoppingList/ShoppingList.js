@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import ShoppingListForm from "./ShoppingListForm";
 import ShoppingListItem from "./ShoppingListItem";
 import axios from "axios";
@@ -31,9 +31,9 @@ function ShoppingList(props) {
     }
 
     axios
-      .post(`${process.env.REACT_APP_API_URL}/grocery_lists/3`, {
+      .post(`${process.env.REACT_APP_API_URL}/grocery_lists/${id}`, {
         name: item.text,
-        grocery_list_id: 3,
+        grocery_list_id: id,
         obtained: false,
       })
       .then((res) => {

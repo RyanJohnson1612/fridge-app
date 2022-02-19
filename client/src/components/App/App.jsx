@@ -43,7 +43,7 @@ function App() {
               }
             />
             <Route
-              path="/grocery-list"
+              path="/grocery-list/:id"
               element={
                 <ProtectedRoute redirectTo="/login" message="Please login or register to view your grocery lists">
                   <ShoppingListIndex />
