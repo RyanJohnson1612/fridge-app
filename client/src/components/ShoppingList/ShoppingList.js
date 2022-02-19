@@ -19,7 +19,8 @@ function ShoppingList() {
   const [allGroceryLists, setAllGroceryLists] = useState([]);
 
   useEffect(() => {
-    getPreviousItems();
+    getPreviousItems()
+    getGroceryListsData();
   }, []);
 
   //Function to add items to shopping list, will be passed to ShoppingListForm
@@ -161,19 +162,25 @@ function ShoppingList() {
       });
   };
 
-  useEffect(() => {
+  const getGroceryListsData = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/grocery_lists`)
       .then((results) => {
-        console.log("all grocery list data", results.data);
         setAllGroceryLists(results.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }
+
+  const getGroceryTitle = () => {
+    console.log("Al g lists:", allGroceryLists);
+  }
+
+  getGroceryTitle();
+
 
   return (
     <div>
-      <h1 class="grocery-title"> My Grocery List</h1>
+      <h1 className="grocery-title"> My Grocery List</h1>
 
       {!editMode && <ShoppingListForm editMode={editMode} onSubmit={addItem} />}
 
