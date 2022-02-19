@@ -1,4 +1,4 @@
-@import '../../styles/mediaqueries.scss';
+@import '../../styles/mediaqueries';
 
 .fridge-index {
   display: flex;
@@ -13,7 +13,7 @@
       top: 55px;
       left: 0;
       width: 300px;
-      background: #eeeeee;
+      background: #eaeaea;
     }
 
     &__content {
@@ -21,10 +21,14 @@
       left: 275px;
       max-width: calc(100vw - 311px);
     }
-  }
+  };
 
   h1 {
     font-weight: bold;
     margin: 10px 15px;
-  }
+
+    @include for-sm-down {
+      display: none;
+    };
+  };
 }

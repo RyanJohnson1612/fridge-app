@@ -5,6 +5,12 @@ function CheckList(props) {
   const [active, setActive] = useState([]);
 
   useEffect(() => {
+    if(props.filters[props.filter] && !Array.isArray(props.filters[props.filter])) {
+      setActive(props.filters[props.filter].replace('+', ' ').split('%2C'))
+    }
+  }, [props.filters]);
+
+  useEffect(() => {
     props.onSelect(active, props.filter);
   }, [active]);
 
