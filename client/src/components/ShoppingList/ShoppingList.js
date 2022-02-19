@@ -21,7 +21,7 @@ function ShoppingList() {
   useEffect(() => {
     getPreviousItems()
     getGroceryListsData();
-  }, []);
+  }, [groceryTitle]);
 
   const getPreviousItems = () => {
     axios
@@ -48,7 +48,6 @@ function ShoppingList() {
       .then((results) => {
         const listTitle = results.data.filter( list => list.id == id );
         setGroceryTitle(listTitle[0].name);
-        console.log("grocery title", groceryTitle)
       })
       .catch((err) => console.log(err));
   }
