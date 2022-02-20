@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Nav, Navbar, NavDropdown, Button } from "react-bootstrap";
 import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
 import { Link } from "react-router-dom";
@@ -9,6 +9,7 @@ import fridgeLogo from "../../images/fridge-logo3.png"
 
 function Navigation() {
   const { user, logout } = useContext(authContext);
+  const [allGroceryLists, setAllGroceryLists] = useState([]);
 
   return (
     <Navbar bg="myTeal" variant="dark" fixed="top" expand="sm">
@@ -25,9 +26,9 @@ function Navigation() {
 
 
           <NavDropdown title="Grocery Lists" id="basic-nav-dropdown" menuVariant="dark">
-            <GroceryListDropdown />
+            <GroceryListDropdown allGroceryLists={allGroceryLists} setAllGroceryLists={setAllGroceryLists}/>
             <NavDropdown.Divider />
-            <NewGroceryListModal/>
+            <NewGroceryListModal allGroceryLists={allGroceryLists} setAllGroceryLists={setAllGroceryLists}/>
           </NavDropdown>
 
           <Nav.Link as={Link} to="/fridge-items/new">Add Fridge Item</Nav.Link>

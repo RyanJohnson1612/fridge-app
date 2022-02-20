@@ -44,7 +44,6 @@ module.exports = (db) => {
   });
 
   //POST a new grocery list
-  //INSERT INTO grocery_lists (user_id, name) VALUES (1, 'Party');
   router.post('/', function(req, res, next) {
     const queryString =
       `INSERT INTO grocery_lists (user_id, name)
@@ -56,6 +55,18 @@ module.exports = (db) => {
       res.json(data.rows[0]);
     }).catch(error => console.log(`Error: ${error.message}`));
   });
+
+  //DELETE specific grocery list
+  router.delete("/", function (req, res, next) {
+    const queryString = `DELETE FROM grocery_lists
+      WHERE id = $1 RETURNING *;`;
+    const queryParams = [req.body.id];
+
+    db.query(queryString, queryParams).then((data) => {
+      res.json(data);
+    });
+  });
+
 
   return router;
 }

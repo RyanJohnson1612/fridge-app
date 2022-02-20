@@ -36,7 +36,7 @@ function ShoppingListForm(props) {
         onChange={handleChange}
         ref={inputRefFocus}
       />
-      <button className="item-button">
+      <button className={props.editMode ? "item-button edit" : "item-button"}>
         {" "}
         {props.editMode ? "Edit Item" : "Add Item"}{" "}
       </button>
