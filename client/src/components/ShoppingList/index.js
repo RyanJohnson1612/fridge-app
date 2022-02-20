@@ -1,10 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import ShoppingList from "./ShoppingList";
 import "./ShoppingList.scss";
 
 function ShoppingListIndex() {
-
-
   return (
     <div className="shopping-list">
       <ShoppingList />

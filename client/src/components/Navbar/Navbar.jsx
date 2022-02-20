@@ -31,7 +31,7 @@ function Navigation() {
             <NewGroceryListModal allGroceryLists={allGroceryLists} setAllGroceryLists={setAllGroceryLists}/>
           </NavDropdown>
 
-          <Nav.Link as={Link} to="/fridge-item/new">Add Fridge Item</Nav.Link>
+          <Nav.Link as={Link} to="/fridge-items/new">Add Fridge Item</Nav.Link>
 
         </Nav>
         { user ?

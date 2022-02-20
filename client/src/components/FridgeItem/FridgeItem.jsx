@@ -3,11 +3,10 @@ import './FridgeItem.scss';
 import { BsCart4, BsTrash } from 'react-icons/bs';
 import axios from 'axios';
 import swal from 'sweetalert';
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import classNames from "classnames";
 
 const FridgeItem = (props) => {
-  const { id } = useParams();
   const navigate = useNavigate();
 
   const daysAgo = (days) => {
@@ -26,7 +25,7 @@ const FridgeItem = (props) => {
     } else if (days === 1) {
       return `1 day`;
     } else if (days === 0) {
-      return "Expired today";
+      return "Expires today";
     } else if (days === -1) {
       return "Expired " + (days * -1) + " day ago";
     } else {
@@ -34,14 +33,14 @@ const FridgeItem = (props) => {
     }
   }
 
-  const expiredClass = classNames({ 'expired': props.fridgeItem.expire_in <= 0 });
+  const expiredClass = classNames({ 'expired': props.fridgeItem.expire_in <= 0, 'expire-soon': props.fridgeItem.expire_in > 0 && props.fridgeItem.expire_in <= 3 });
 
   const onAdd = () => {
     const selectedGroceryList = props.allGroceryLists.filter((groceryList) => groceryList.id === props.groceryList);
 
     axios.post(`${process.env.REACT_APP_API_URL}/grocery_lists/${props.groceryList}`, { name: props.fridgeItem.name, grocery_list_id: props.groceryList, obtained: false })
       .then(() => {
-        swal("Success!", `${props.fridgeItem.name} has been added to your ${selectedGroceryList[0].name} grocery list.`, "success");
+        swal("Success!", `${capitalize(props.fridgeItem.name)} has been added to your ${selectedGroceryList[0].name} grocery list.`, "success");
 
       })
       .catch(err => {
@@ -61,7 +60,7 @@ const FridgeItem = (props) => {
       if (confirm) {
         axios.put(`${process.env.REACT_APP_API_URL}/fridge_items/${props.fridgeItem.id}`)
           .then(() => {
-            swal("Success!", `${props.fridgeItem.name} has been removed from your fridge.`, "success");
+            swal("Success!", `${capitalize(props.fridgeItem.name)} has been removed from your fridge.`, "success");
             props.setFridgeItem({});
             navigate('/fridge');
           })
@@ -73,6 +72,11 @@ const FridgeItem = (props) => {
     });
   }
 
+  const capitalize = (name) => {
+    const capName = name[0].toUpperCase() + name.slice(1);
+    return capName;
+  }
+
   const groceryListOptions = props.allGroceryLists.map((groceryList) => {
     return (
       <option value={groceryList.id} key={groceryList.id} name={groceryList.name}>
@@ -82,19 +86,21 @@ const FridgeItem = (props) => {
   })
 
   return (
-    <>
+    <div className='fridge-item-box'>
       <div className='body'>
-        <img src={props.fridgeItem.image_url} className='image' alt="" />
+        <div className='image-container'>
+          <img src={props.fridgeItem.image_url} className='image' alt="" />
+        </div>
         <br />
         <table className='properties'>
           <tbody>
             <tr>
               <td width="40%">Food Item:</td>
-              <td><strong>{props.fridgeItem.name}</strong></td>
+              <td><strong>{ props.fridgeItem.name ? capitalize(props.fridgeItem.name) : "" }</strong></td>
             </tr>
             <tr>
               <td>Category:</td>
-              <td><strong>{props.fridgeItem.category}</strong></td>
+              <td><strong>{ props.fridgeItem.category ? capitalize(props.fridgeItem.category) : "" }</strong></td>
             </tr>
             <tr>
               <td>Date Purchased:</td>
@@ -124,6 +130,7 @@ const FridgeItem = (props) => {
         </table>
       </div>
       <br />
+      <br />
       <div className='click-from-item'>
         <div>
           <p>
@@ -143,7 +150,8 @@ const FridgeItem = (props) => {
           </button>
         </div>
       </div>
-    </>
+      <br />
+    </div>
   );
 }
 

@@ -3,8 +3,10 @@ body {
 }
 
 .image {
-  width: 75%;
-  height: 50%;
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  height: 80%;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -16,16 +18,13 @@ body {
   margin-right: auto;
   border-collapse: separate;
   border-spacing: 15px 10px;
-  background-color: rgb(218, 230, 240);
+  // background-color: rgb(218, 230, 240);
+  background-color: rgb(228, 233, 235);
   border: 0.1em solid;
   border-color: rgb(138, 138, 138);
   font-family: 'Raleway', sans-serif;
   box-shadow: 5px 5px gray;
 }
-
-// td {
-//   border-bottom: 0.5px dotted;
-// }
 
 .click-from-item {
   display: flex;
@@ -49,19 +48,62 @@ select {
   color: red;
 }
 
-@media screen and (min-width: 576px) {
+.expire-soon {
+  color: rgb(216, 149, 25);
+}
+
+.image-container {
+  width: 100%;
+  height: 333px;
+  max-height: 333px;
+  max-width: 425px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: -12px;
+}
+
+.unauthorized {
+  color: rgb(243, 30, 30);
+  text-align: center;
+  margin-top: 30px;
+}
+
+.spinning {
+  margin-top: 35px;
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (min-width: 743px) {
   .body {
     display: flex;
     align-items: center;
     margin: 10px;
-  }
-
-  .image {
-    margin-right: 10px;
-    width: 33%;
+    margin-top: 15px;
+    margin-left: 30px;
   }
 
   .properties {
     width: 50%;
   }
+
+  .image-container {
+    max-width: 370px;
+    max-height: 315px;
+  }
+
+  .fridge-item-box {
+    border: 1.5px solid;
+    border-color: rgb(138, 138, 138);
+    border-radius: 20px;
+    margin-top: 25px;
+    background-color: rgba(225, 236, 248, 0.897);
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
 }

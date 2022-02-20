@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { authContext } from '../../providers/AuthProvider';
 
 function NewGroceryListModal({ setAllGroceryLists, allGroceryLists }) {
   //States responsible for modal display
@@ -10,8 +11,8 @@ function NewGroceryListModal({ setAllGroceryLists, allGroceryLists }) {
   const [show, setShow] = useState(false);
 
   const [input, setInput] = useState("");
-
   const navigate = useNavigate();
+  const { user } = useContext(authContext);
 
   const handleChange = (e) => {
     console.log(e.target.value);
@@ -22,7 +23,7 @@ function NewGroceryListModal({ setAllGroceryLists, allGroceryLists }) {
     e.preventDefault();
     axios
       .post(`${process.env.REACT_APP_API_URL}/grocery_lists`, {
-        user_id: 2,
+        user_id: user.id,
         name: input,
       })
       .then((res) => {
