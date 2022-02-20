@@ -39,12 +39,11 @@
   display: flex;
 }
 
-.list-header h1 {
-  margin-left: 9rem;
+.delete-grocery-list{
+  position: absolute
 }
 
 .delete-grocery-list {
-  margin: 10px;
   padding: 5px;
   cursor: pointer;
 }

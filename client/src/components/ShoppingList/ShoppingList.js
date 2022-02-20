@@ -206,15 +206,14 @@ function ShoppingList() {
       <div className="list-header">
         <TiDelete
           className="delete-grocery-list"
-          size={40}
+          size={35}
           onClick={deleteGroceryList}
           opacity={0.7}
         />
-        <h1 className="grocery-title">{groceryTitle} List</h1>
       </div>
 
+      <h1 className="grocery-title">{groceryTitle} List</h1>
       {!editMode && <ShoppingListForm editMode={editMode} onSubmit={addItem} />}
-
       <ShoppingListItem
         items={items}
         completeItem={completeItem}
