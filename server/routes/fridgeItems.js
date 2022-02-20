@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const protectedRoute = require('../middleware/protectedRoute');
 
 module.exports = (db) => {
 
@@ -18,7 +19,7 @@ module.exports = (db) => {
   });
 
   // GET specific food
-  router.get('/:id', function(req, res, next) {
+  router.get('/:id', protectedRoute, function(req, res, next) {
     const queryString =
       `SELECT id, name, category, fridge_id, image_URL, notes, date_removed,
        to_char(date_stored, 'Mon DD, YYYY') as date_stored,
@@ -29,7 +30,12 @@ module.exports = (db) => {
        WHERE id = $1`;
     const queryParams = [req.params.id]
     db.query(queryString, queryParams).then(data => {
-      res.json(data.rows[0]);
+      const fridgeData = data.rows[0];
+      if (fridgeData && req.user && fridgeData.fridge_id === req.user.id) {
+        res.json(fridgeData);
+      } else {
+        res.json({});
+      }
     });
   });
 

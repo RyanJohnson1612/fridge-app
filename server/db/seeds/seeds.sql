@@ -48,5 +48,5 @@ INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Olives', 2);
 INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Shrimp', 3);
 INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Avocado', 3);
 INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Zucchini', 3);
-INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Milk', 1);
-INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Milk', 1);
+INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Milk', 4);
+INSERT INTO grocery_items (name, grocery_list_id) VALUES ('Milk', 4);

@@ -7,6 +7,7 @@ import './AddFridgeItem.scss';
 import { useNavigate } from 'react-router-dom'
 import classNames from 'classnames';
 import { authContext } from '../../providers/AuthProvider';
+
 axios.withCredentials = false;
 
 const AddFridgeItem = (props) => {
@@ -116,10 +117,12 @@ const AddFridgeItem = (props) => {
           })
           .catch(err => {
             console.log(err)
+            setLoading(false);
             swal("Oops!", "There was an error with your request. Please try again in a few minutes.", "error");
           });
       }).catch((err) => {
         console.log("Error:", err.message)
+        setLoading(false);
         swal("Oops!", "There was an error with your request. Please try again in a few minutes.", "error");
       });
   };

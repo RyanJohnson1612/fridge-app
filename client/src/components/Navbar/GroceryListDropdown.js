@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { NavDropdown } from 'react-bootstrap';
 
-export default function GroceryListDropdown(props) {
-
-  const [allGroceryLists, setAllGroceryLists] = useState([]);
+export default function GroceryListDropdown({setAllGroceryLists, allGroceryLists}) {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/grocery_lists`)
+      .get(`${process.env.REACT_APP_API_URL}/grocery_lists`, { withCredentials: true })
       .then((results) => {
         setAllGroceryLists(results.data);
       })
@@ -17,7 +15,7 @@ export default function GroceryListDropdown(props) {
 
   //Have to acheive format: <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
   const groceryListsMapped = allGroceryLists.map((groceryList, index) => (
-    <NavDropdown.Item key={index} href={`/grocery-list/${groceryList.id}`}> {groceryList.name} </NavDropdown.Item>
+    <NavDropdown.Item key={index} href={`/grocery-lists/${groceryList.id}`}> {groceryList.name} </NavDropdown.Item>
   ));
 
   return (
