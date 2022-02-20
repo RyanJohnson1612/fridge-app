@@ -21,7 +21,7 @@ function ShoppingList() {
   useEffect(() => {
     getPreviousItems()
     getGroceryListsData();
-  }, [groceryTitle]);
+  }, [id]);
 
   const getPreviousItems = () => {
     axios
