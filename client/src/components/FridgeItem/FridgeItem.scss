@@ -63,6 +63,18 @@ select {
   margin-bottom: -18px;
 }
 
+.unauthorized {
+  color: rgb(243, 30, 30);
+  text-align: center;
+  margin-top: 30px;
+}
+
+.spinning {
+  margin-top: 35px;
+  display: flex;
+  justify-content: center;
+}
+
 @media screen and (min-width: 743px) {
   .body {
     display: flex;
