@@ -175,8 +175,10 @@ function ShoppingList() {
   };
 
   const deleteGroceryList = () => {
+
     axios
-    .delete(`${process.env.REACT_APP_API_URL}/grocery_lists/`, {id})
+    .delete(`${process.env.REACT_APP_API_URL}/grocery_lists/`, { data: { id: id } })
+    .then((res) => console.log("deleted!!!!!", res))
     .catch((err) => {
       console.log(err);
       swal(
