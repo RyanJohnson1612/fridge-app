@@ -54,10 +54,6 @@ function ShoppingList() {
       .catch((err) => console.log(err));
   };
 
-  function refreshPage() {
-    window.location.reload(false);
-  }
-
   //Function to add items to shopping list, will be passed to ShoppingListForm
   const addItem = (item) => {
     if (!item.text || /^\s*$/.test(item.text)) {
@@ -180,19 +176,28 @@ function ShoppingList() {
   };
 
   const deleteGroceryList = () => {
-    axios
-      .delete(`${process.env.REACT_APP_API_URL}/grocery_lists/`, {
-        data: { id },
-      })
-      .then((res) => navigate(`/fridge`))
-      .catch((err) => {
-        console.log(err);
-        swal(
-          "Oops!",
-          "There was an error with your request. Please try again in a few minutes.",
-          "error"
-        );
-      });
+    swal({
+      title: "Are you sure?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((confirm) => {
+      if (confirm) {
+        axios
+          .delete(`${process.env.REACT_APP_API_URL}/grocery_lists/`, {
+            data: { id },
+          })
+          .then(() => navigate(`/fridge`))
+          .catch((err) => {
+            console.log(err);
+            swal(
+              "Oops!",
+              "There was an error with your request. Please try again in a few minutes.",
+              "error"
+            );
+          });
+      }
+    });
   };
 
   return (
