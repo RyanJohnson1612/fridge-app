@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import useList from '../../hooks/useList/useList';
+import useCheckList from '../../hooks/useCheckList/useCheckList';
 import CheckBox from '../Checkbox/Checkbox';
 import './CheckList.scss';
 
 function CheckList(props) {
-  const { selected, setSelected, handleCheck } = useList(props);
+  const { selected, setSelected, handleCheck } = useCheckList(props);
 
   useEffect(() => {
     if(props.filters[props.filter] && !Array.isArray(props.filters[props.filter])) {
