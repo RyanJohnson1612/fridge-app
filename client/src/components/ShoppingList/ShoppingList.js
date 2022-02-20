@@ -91,13 +91,15 @@ function ShoppingList() {
 
   //Function to update item in shopping list, will be passed to ShoppingListItem component
   const updateItem = (itemId, newValue) => {
+
+    //Block user from submitting an empty value
     if (!newValue.text || /^\s*$/.test(newValue.text)) {
       return swal(
         "Oops!",
         "You can't edit an item to be an emply value.",
         "error"
-      );
-    }
+        );
+      }
 
     items.forEach((item) => {
       if (item.id === itemId) {
@@ -172,10 +174,24 @@ function ShoppingList() {
     setItems(updatedItems);
   };
 
+  const deleteGroceryList = () => {
+    axios
+    .delete(`${process.env.REACT_APP_API_URL}/grocery_lists/`, {id})
+    .catch((err) => {
+      console.log(err);
+      swal(
+        "Oops!",
+        "There was an error with your request. Please try again in a few minutes.",
+        "error"
+      );
+    });
+  }
+
 
   return (
     <div>
       <h1 className="grocery-title"> {groceryTitle} List</h1>
+      <button onClick={deleteGroceryList}> BUTTON </button>
 
       {!editMode && <ShoppingListForm editMode={editMode} onSubmit={addItem} />}
 
