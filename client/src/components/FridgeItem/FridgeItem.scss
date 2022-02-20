@@ -3,7 +3,8 @@ body {
 }
 
 .image {
-  max-height: 300px;
+  max-height: 100%;
+  max-width: 100%;
   width: auto;
   height: 80%;
   display: block;
@@ -17,7 +18,8 @@ body {
   margin-right: auto;
   border-collapse: separate;
   border-spacing: 15px 10px;
-  background-color: rgb(218, 230, 240);
+  // background-color: rgb(218, 230, 240);
+  background-color: rgb(228, 233, 235);
   border: 0.1em solid;
   border-color: rgb(138, 138, 138);
   font-family: 'Raleway', sans-serif;
@@ -60,7 +62,7 @@ select {
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: -18px;
+  margin-bottom: -12px;
 }
 
 .unauthorized {
@@ -80,8 +82,8 @@ select {
     display: flex;
     align-items: center;
     margin: 10px;
-    margin-top: 25px;
-    margin-left: 45px;
+    margin-top: 15px;
+    margin-left: 30px;
   }
 
   .properties {
@@ -89,7 +91,19 @@ select {
   }
 
   .image-container {
-    max-width: 315px;
+    max-width: 370px;
+    max-height: 315px;
+  }
+
+  .fridge-item-box {
+    border: 1.5px solid;
+    border-color: rgb(138, 138, 138);
+    border-radius: 20px;
+    margin-top: 25px;
+    background-color: rgba(225, 236, 248, 0.897);
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
 }
