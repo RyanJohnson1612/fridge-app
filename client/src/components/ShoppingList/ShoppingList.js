@@ -47,7 +47,9 @@ function ShoppingList() {
 
   const getGroceryListsData = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/grocery_lists`)
+      .get(`${process.env.REACT_APP_API_URL}/grocery_lists`, {
+        withCredentials: true,
+      })
       .then((results) => {
         const listTitle = results.data.filter((list) => list.id == id);
         setGroceryTitle(listTitle[0].name);

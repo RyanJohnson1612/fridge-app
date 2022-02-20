@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { authContext } from '../../providers/AuthProvider';
+import { authContext } from "../../providers/AuthProvider";
 
 function NewGroceryListModal({ setAllGroceryLists, allGroceryLists }) {
   //States responsible for modal display
@@ -29,7 +29,7 @@ function NewGroceryListModal({ setAllGroceryLists, allGroceryLists }) {
       .then((res) => {
         console.log("New grocery list submitted!", res.data);
         setAllGroceryLists([...allGroceryLists, res.data]);
-        navigate(`/grocery-list/${res.data.id}`);
+        navigate(`/grocery-lists/${res.data.id}`);
       })
       .catch((err) => {
         console.log("Grocery list submssion error", err);
