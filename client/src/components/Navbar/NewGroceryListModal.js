@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom'
 
 
-function NewGroceryListModal() {
+function NewGroceryListModal({setAllGroceryLists, allGroceryLists}) {
 
   //States responsible for modal display
   const handleClose = () => setShow(false);
@@ -29,6 +29,7 @@ function NewGroceryListModal() {
     })
     .then((res) => {
       console.log("New grocery list submitted!", res.data)
+      setAllGroceryLists([...allGroceryLists, res.data])
       navigate(`/grocery-list/${res.data.id}`)
     })
     .catch((err) => {
@@ -56,7 +57,7 @@ function NewGroceryListModal() {
               <Form.Label>Grocery List Name</Form.Label>
               <Form.Control type="text" placeholder="Name your new Grocery List" onChange={handleChange} />
             </Form.Group>
-            <Button variant="primary" type="button" onClick={handleSubmit}>
+            <Button variant="primary" type="button" onClick={(e) => handleSubmit(e)}>
               Submit
             </Button>
           </Form>
