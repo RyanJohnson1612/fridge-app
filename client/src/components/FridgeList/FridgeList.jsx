@@ -18,9 +18,15 @@ function FridgeList(props) {
 
   return (
     <>
-      <div class="fridge-list">
-        {checkboxVisible && <Button onClick={() => redirectToRecipes()}>Find Recipe Ideas</Button>}
-        <Button onClick={() => selectIngredients()} variant={checkboxVisible ? 'danger' : 'primary'}>{checkboxVisible ? 'Cancel' : 'Select recipe ingredients'}</Button>
+      <div class="fridge-list__buttons">
+        {checkboxVisible ?
+          <>
+            <Button onClick={() => redirectToRecipes()} className="fridge-list__buttons--primary">Find Recipe Ideas</Button>
+            <Button onClick={() => selectIngredients()} className="fridge-list__buttons--cancel">Cancel</Button>
+          </>
+          :
+          <Button onClick={() => selectIngredients()} className="fridge-list__buttons--primary">Select recipe ingredients</Button>
+        }
       </div>
       <div className="fridge-list">
         {parsedItems.length > 0 ? parsedItems : <h3>No results found</h3>}
