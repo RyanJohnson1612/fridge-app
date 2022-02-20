@@ -10,7 +10,7 @@ function useFridgeSearch() {
     category: [],
     status: [],
   });
-
+  const [checkboxVisible, setCheckboxVisible] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
   const firstUpdate = useRef(true);
@@ -22,6 +22,10 @@ function useFridgeSearch() {
 
   const handleSelect = (values, filter) => {
     setFilters(prev => ({...prev, [filter]: values}));
+  }
+
+  const selectIngredients = () => {
+    setCheckboxVisible(prev => !prev);
   }
 
   const setFiltersFromParams = () => {
@@ -54,7 +58,7 @@ function useFridgeSearch() {
     searchFridge();
   }, [filters]);
 
-  return { items, filters, handleSearch, handleSelect}
+  return { items, filters, handleSearch, handleSelect, checkboxVisible, selectIngredients}
 }
 
 export default useFridgeSearch;

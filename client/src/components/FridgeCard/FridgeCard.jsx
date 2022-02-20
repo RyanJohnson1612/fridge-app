@@ -5,7 +5,7 @@ import { BsFillClockFill } from 'react-icons/bs';
 import moment from 'moment';
 
 function FridgeCard(props) {
-  const { item } = props;
+  const { item, checkboxVisible, onChecked } = props;
   const daysUntilExpired = moment(item.expiry).endOf('day').diff(moment().endOf('day'), 'days');
 
   const status = () => {
@@ -22,8 +22,6 @@ function FridgeCard(props) {
     }
   }
 
-
-
   const statusClassName = classNames('fridge-card__status', {
     'fridge-card__status--fresh': status() === 'Fresh',
     'fridge-card__status--expiring': status() === 'Expiring Soon',
@@ -32,8 +30,7 @@ function FridgeCard(props) {
 
   return (
     <article className="fridge-card">
-
-      <CheckBox onChecked={props.onChecked} key={item.id} option={item.name} hideLabel={true} />
+      { checkboxVisible && <CheckBox onChecked={onChecked} key={item.id} option={item.name} hideLabel={true} />}
       <Link to={`/fridge-items/${item.id}`} >
         <div className="fridge-card__header" style={{backgroundImage: `url(${item.image_url})`}}>
           <div className={statusClassName}>{status()}</div>

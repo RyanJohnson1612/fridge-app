@@ -10,7 +10,6 @@ function CheckBox(props) {
   }, [initial])
 
   const handleChecked = (e) => {
-    console.log('clicked check');
     setActive(e.currentTarget.checked);
     onChecked(option);
   };
