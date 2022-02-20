@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ShoppingListForm from "./ShoppingListForm";
 import ShoppingListItem from "./ShoppingListItem";
+import { TiDelete } from "react-icons/ti";
 import axios from "axios";
 import swal from "sweetalert";
 
@@ -177,7 +178,7 @@ function ShoppingList() {
 
   const deleteGroceryList = () => {
     swal({
-      title: "Are you sure?",
+      title: "Are you sure you want to delete this grocery list?",
       icon: "warning",
       buttons: true,
       dangerMode: true,
@@ -202,8 +203,15 @@ function ShoppingList() {
 
   return (
     <div>
-      <h1 className="grocery-title"> {groceryTitle} List</h1>
-      <button onClick={deleteGroceryList}> BUTTON </button>
+      <div className="list-header">
+        <TiDelete
+          className="delete-grocery-list"
+          size={40}
+          onClick={deleteGroceryList}
+          opacity={0.7}
+        />
+        <h1 className="grocery-title">{groceryTitle} List</h1>
+      </div>
 
       {!editMode && <ShoppingListForm editMode={editMode} onSubmit={addItem} />}
 
