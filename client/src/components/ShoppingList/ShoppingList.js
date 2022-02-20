@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from "react-router-dom";
 import ShoppingListForm from "./ShoppingListForm";
 import ShoppingListItem from "./ShoppingListItem";
 import axios from "axios";
 import swal from "sweetalert";
 
 function ShoppingList() {
-
   //Variable that the grocery list id based on dynamic URL
   const { id } = useParams();
 
@@ -18,8 +17,11 @@ function ShoppingList() {
 
   const [groceryTitle, setGroceryTitle] = useState([]);
 
+  //To be used to navigate user to main (Fridge) page after deleting a shopping list
+  const navigate = useNavigate();
+
   useEffect(() => {
-    getPreviousItems()
+    getPreviousItems();
     getGroceryListsData();
   }, [id]);
 
@@ -46,10 +48,14 @@ function ShoppingList() {
     axios
       .get(`${process.env.REACT_APP_API_URL}/grocery_lists`)
       .then((results) => {
-        const listTitle = results.data.filter( list => list.id == id );
+        const listTitle = results.data.filter((list) => list.id == id);
         setGroceryTitle(listTitle[0].name);
       })
       .catch((err) => console.log(err));
+  };
+
+  function refreshPage() {
+    window.location.reload(false);
   }
 
   //Function to add items to shopping list, will be passed to ShoppingListForm
@@ -91,15 +97,14 @@ function ShoppingList() {
 
   //Function to update item in shopping list, will be passed to ShoppingListItem component
   const updateItem = (itemId, newValue) => {
-
     //Block user from submitting an empty value
     if (!newValue.text || /^\s*$/.test(newValue.text)) {
       return swal(
         "Oops!",
         "You can't edit an item to be an emply value.",
         "error"
-        );
-      }
+      );
+    }
 
     items.forEach((item) => {
       if (item.id === itemId) {
@@ -175,20 +180,20 @@ function ShoppingList() {
   };
 
   const deleteGroceryList = () => {
-
     axios
-    .delete(`${process.env.REACT_APP_API_URL}/grocery_lists/`, { data: { id: id } })
-    .then((res) => console.log("deleted!!!!!", res))
-    .catch((err) => {
-      console.log(err);
-      swal(
-        "Oops!",
-        "There was an error with your request. Please try again in a few minutes.",
-        "error"
-      );
-    });
-  }
-
+      .delete(`${process.env.REACT_APP_API_URL}/grocery_lists/`, {
+        data: { id },
+      })
+      .then((res) => navigate(`/fridge`))
+      .catch((err) => {
+        console.log(err);
+        swal(
+          "Oops!",
+          "There was an error with your request. Please try again in a few minutes.",
+          "error"
+        );
+      });
+  };
 
   return (
     <div>
