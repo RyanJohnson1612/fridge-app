@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const protectedRoute = require('../middleware/protectedRoute');
 
 module.exports = (db) => {
 
@@ -18,9 +19,9 @@ module.exports = (db) => {
   });
 
   // GET specific food
-  router.get('/:id', function(req, res, next) {
+  router.get('/:id', protectedRoute, function(req, res, next) {
     const queryString =
-      `SELECT id, name, category, image_URL, notes, date_removed,
+      `SELECT id, name, category, fridge_id, image_URL, notes, date_removed,
        to_char(date_stored, 'Mon DD, YYYY') as date_stored,
        to_char(expiry, 'Mon DD, YYYY') as expiry,
        (expiry - date_stored) as expire_in,
@@ -29,7 +30,12 @@ module.exports = (db) => {
        WHERE id = $1`;
     const queryParams = [req.params.id]
     db.query(queryString, queryParams).then(data => {
-      res.json(data.rows[0]);
+      const fridgeData = data.rows[0];
+      if (fridgeData && req.user && fridgeData.fridge_id === req.user.id) {
+        res.json(fridgeData);
+      } else {
+        res.json({});
+      }
     });
   });
 
@@ -65,7 +71,7 @@ module.exports = (db) => {
     const queryString =
       `INSERT INTO fridge_items (name, fridge_id, expiry, category, image_URL, notes)
        VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`;
-    const queryParams = [req.body.name, 1, req.body.expiry, req.body.category, req.body.image_URL, req.body.notes]
+    const queryParams = [req.body.name, req.body.fridge_id, req.body.expiry, req.body.category, req.body.image_URL, req.body.notes]
 
     db.query(queryString, queryParams).then(data => {
       console.log(data.rows[0]);
