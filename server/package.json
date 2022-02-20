@@ -16,6 +16,7 @@
     ]
   },
   "dependencies": {
+    "aws-sdk": "^2.1077.0",
     "bcrypt": "^5.0.1",
     "clarifai-nodejs-grpc": "^8.0.0",
     "cookie-parser": "^1.4.6",
