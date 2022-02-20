@@ -21,7 +21,7 @@ function FridgeList(props) {
       <div class="fridge-list__buttons">
         {checkboxVisible ?
           <>
-            <Button onClick={() => redirectToRecipes()} className="fridge-list__buttons--primary">Find Recipe Ideas</Button>
+            <Button onClick={() => redirectToRecipes()} className="fridge-list__buttons--primary">Find recipe ideas</Button>
             <Button onClick={() => selectIngredients()} className="fridge-list__buttons--cancel">Cancel</Button>
           </>
           :
