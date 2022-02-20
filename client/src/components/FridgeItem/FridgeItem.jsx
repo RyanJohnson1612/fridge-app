@@ -86,7 +86,7 @@ const FridgeItem = (props) => {
   })
 
   return (
-    <>
+    <div className='fridge-item-box'>
       <div className='body'>
         <div className='image-container'>
           <img src={props.fridgeItem.image_url} className='image' alt="" />
@@ -150,7 +150,8 @@ const FridgeItem = (props) => {
           </button>
         </div>
       </div>
-    </>
+      <br />
+    </div>
   );
 }
 
