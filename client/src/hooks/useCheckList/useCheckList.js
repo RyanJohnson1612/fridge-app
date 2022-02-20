@@ -4,7 +4,6 @@ function useCheckList() {
   const [selected, setSelected] = useState([]);
 
   const handleCheck = (option) => {
-    console.log('handle deez nuts')
     if (selected.includes(option)) {
       const activeArr = [...selected];
       const index = activeArr.indexOf(option);
