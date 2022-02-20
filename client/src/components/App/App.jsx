@@ -53,7 +53,7 @@ function App() {
             <Route
               path="/fridge-items/new"
               element={
-                <ProtectedRoute redirectTo="/login" message="Please login or register to a fridge item">
+                <ProtectedRoute redirectTo="/login" message="Please login or register to add a fridge item">
                   <AddFridgeItemIndex />
                 </ProtectedRoute>
               }
