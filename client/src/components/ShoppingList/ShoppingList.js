@@ -35,7 +35,7 @@ function ShoppingList() {
             isPurchased: data.obtained,
           });
         });
-        setItems([...items, ...results]);
+        setItems([...results]);
       })
       .catch((err) => {
         console.log(err);
