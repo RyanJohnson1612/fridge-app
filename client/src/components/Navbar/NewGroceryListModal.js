@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import axios from "axios";
+import { authContext } from '../../providers/AuthProvider';
 
 function NewGroceryListModal() {
   const [show, setShow] = useState(false);
@@ -9,10 +10,12 @@ function NewGroceryListModal() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const { user } = useContext(authContext);
+
   const handleSubmit = () => {
     axios
     .post(`${process.env.REACT_APP_API_URL}/grocery_lists`, {
-      user_id: 2,
+      user_id: user.id,
       name: input,
     })
     .then((res) => {

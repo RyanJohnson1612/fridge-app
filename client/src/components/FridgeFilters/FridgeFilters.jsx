@@ -33,14 +33,14 @@ function FridgeFilters(props) {
         <h3>Categories</h3>
         <CheckList
           filters={props.filters}
-          options={['Fruit', 'Vegetable', 'Dairy', 'Grain', 'Meat', 'Seafood', 'Alternative Protein', 'Dessert', 'Condiments', 'Other']}
+          options={['fruit', 'vegetable', 'dairy', 'grain', 'meat', 'seafood', 'alternative protein', 'dessert', 'condiments', 'other']}
           filter="category"
           onSelect={props.onSelect}
         />
         <h3>Status</h3>
         <CheckList
           filters={props.filters}
-          options={['fresh', 'expiring soon', 'expired']}
+          options={['fresh', 'expiring soon', 'expires today', 'expired']}
           filter="status"
           onSelect={props.onSelect}
         />

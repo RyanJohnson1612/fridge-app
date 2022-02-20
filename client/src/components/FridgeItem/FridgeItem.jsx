@@ -3,11 +3,10 @@ import './FridgeItem.scss';
 import { BsCart4, BsTrash } from 'react-icons/bs';
 import axios from 'axios';
 import swal from 'sweetalert';
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import classNames from "classnames";
 
 const FridgeItem = (props) => {
-  const { id } = useParams();
   const navigate = useNavigate();
 
   const daysAgo = (days) => {
@@ -87,7 +86,7 @@ const FridgeItem = (props) => {
   })
 
   return (
-    <>
+    <div className='fridge-item-box'>
       <div className='body'>
         <div className='image-container'>
           <img src={props.fridgeItem.image_url} className='image' alt="" />
@@ -151,7 +150,8 @@ const FridgeItem = (props) => {
           </button>
         </div>
       </div>
-    </>
+      <br />
+    </div>
   );
 }
 
