@@ -8,6 +8,7 @@ module.exports = (db) => {
   router.get('/', protectedRoute, function(req, res, next) {
     const queryString =
       `SELECT fridge_items.id, fridge_items.name,
+      (expiry - date_stored) as expire_in
       FROM fridge_items
       JOIN fridges ON fridges.id = fridge_id
       WHERE (expiry - date_stored) > 0
@@ -22,6 +23,7 @@ module.exports = (db) => {
       res.json(data.rows);
     }).catch(error => console.log(`Error: ${error.message}`));
   });
+
 
   return router;
 }
