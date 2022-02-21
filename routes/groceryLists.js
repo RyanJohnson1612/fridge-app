@@ -18,12 +18,13 @@ module.exports = (db) => {
   })
 
   // GET grocery list
-  router.get('/:id', function(req, res, next) {
+  router.get('/:id', protectedRoute, function(req, res, next) {
     const queryString =
-      `SELECT * FROM grocery_items
-       WHERE grocery_list_id = $1
+      `SELECT grocery_items.* FROM grocery_items
+       JOIN grocery_lists ON grocery_lists.id = grocery_list_id
+       WHERE grocery_list_id = $1 AND user_id = $2
        ORDER BY ID;`;
-    const queryParams = [req.params.id]
+    const queryParams = [req.params.id, req.user.id]
 
     db.query(queryString, queryParams).then(data => {
       console.log(data.rows)
