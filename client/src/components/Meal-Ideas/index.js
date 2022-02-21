@@ -31,20 +31,13 @@ function MealIdeas() {
   //State to keep track of filters checked off
   const [filters, setFilters] = useState([]);
 
-  /////NOTE: UNCOMMENT if want to use searchbar functionality
   //recipes state will be set to data that comes back from edamam API
   const [recipes, setRecipes] = useState([]);
-  //const [search, setSearch] = useState("");
+
 
   //State that is set to expiring food items in fridge
   const [expiring, setExpiring] = useState("");
   const [fridgeQuery, setfridgeQuery] = useState("");
-
-  /* If useEffect were to run everytime search state is updated,
-  there would be be an API call for every keystroke.
-  Therefore, create query state which only updates after search button is clicked */
-  /////NOTE: UNCOMMENT if want to use searchbar functionality, and place "query" in array
-  //const [query, setQuery] = useState("");
 
   useEffect(() => {
     getRecipes();
@@ -128,20 +121,6 @@ function MealIdeas() {
     return result.toLowerCase();
   };
 
-  //Function that will run everytime there is an onChange event in form
-  /*  const updateSearch = (e) => {
-    setSearch(e.target.value);
-  };
-
-  //Will be called in search form on submission only
-  const getSearch = (e) => {
-    e.preventDefault();
-    setQuery(search);
-
-    //Clear input bar after each search
-    setSearch("");
-  }; */
-
   return (
     <div className="Recipes-index">
       <div className="top-page">
@@ -180,15 +159,6 @@ function MealIdeas() {
           })}
         </div>
       </div>
-      {/*       <form className="search-form" onSubmit={getSearch}>
-        <input
-          className="search-bar"
-          type="text"
-          value={search}
-          onChange={updateSearch}
-        />
-        <button className="search-button" type="submit"></button>
-      </form> */}
       <div className="recipes-list">
         {recipes.map((recipe) => (
           <Recipe
