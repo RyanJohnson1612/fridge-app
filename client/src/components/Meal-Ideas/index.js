@@ -67,23 +67,16 @@ function MealIdeas() {
   //Function to get all fridge items (axios), then update setfridgeQuery to expiring fridge items
   const getFridgeItems = () => {
 
+    // GET /recipeItems will contain the 3 items closest to expiry in users fridge
     axios.get(`${process.env.REACT_APP_API_URL}/recipeItems`, { withCredentials: true })
     .then((results) => {
-      console.log("This is from the api!!!", results.data);
-
       const closestToExpiry = results.data.map( itemObj => itemObj.name).join(", ")
       console.log("mapped", closestToExpiry);
+      setfridgeQuery(closestToExpiry)
+      setExpiring(fridgeQuery)
     })
     .catch(error => console.log(`Error: ${error.message}`));
 
-
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/fridge_items`)
-      .then((res) => {
-        setfridgeQuery(getExpiring(res.data));
-        setExpiring(fridgeQuery);
-      })
-      .catch((err) => console.log(err));
   };
 
   //Take in array of fridge items (from axios), return 3 items closest to expiry as string.
