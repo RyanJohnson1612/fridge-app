@@ -16,15 +16,7 @@ function FridgeItemIndex(props) {
 
     axios.get(`${process.env.REACT_APP_API_URL}/fridge_items/${id}`, { withCredentials: true })
       .then((results) => {
-        console.log(results.data);
-        // use this one if you wanna see the ketchup camel with all fields filled
         setFridgeItem(results.data);
-        // use this one if you want to see most recent add to fridge item
-        // const item = results.data[results.data.length - 1];
-
-        // if (JSON.stringify(fridgeItem) !== JSON.stringify(item)) {
-        //   setFridgeItem(item);
-        // }
       })
       .catch(error => console.log(`Error: ${error.message}`));
 

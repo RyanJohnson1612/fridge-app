@@ -28,7 +28,7 @@ function ShoppingList() {
 
   const getPreviousItems = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/grocery_lists/${id}`)
+      .get(`${process.env.REACT_APP_API_URL}/grocery_lists/${id}`, { withCredentials: true })
       .then((res) => {
         const results = [];
         res.data.forEach((data, index) => {
