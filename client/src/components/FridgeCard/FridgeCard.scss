@@ -138,7 +138,11 @@
     width: calc(50% - 30px);
   }
 
-  @include for-xl-up {
+  @include for-lg-up {
     width: calc(33% - 30px);
+  }
+
+  @include for-custom-up(1500px) {
+    width: calc(25% - 30px);
   }
 }
