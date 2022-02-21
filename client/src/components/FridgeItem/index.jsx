@@ -32,7 +32,7 @@ function FridgeItemIndex(props) {
   const unauthorized = () => {
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1500);
   }
 
   return (
@@ -50,7 +50,7 @@ function FridgeItemIndex(props) {
       <div>
         { loading && <div className="spinning"><Spinner animation="border" variant="secondary" /></div>}
         {unauthorized()}
-        { !loading && <h2 className="unauthorized">This page doesn't exist, or you are unauthorized to view this page.</h2> }
+        { !loading && <h4 className="unauthorized">This page doesn't exist, or you are unauthorized to view this page.</h4> }
       </div>}
     </div>
   );
