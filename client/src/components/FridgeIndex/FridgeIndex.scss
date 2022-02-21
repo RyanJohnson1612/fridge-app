@@ -3,14 +3,15 @@
 .fridge-index {
   display: flex;
   flex-direction: column;
+  margin-top: 25px;
 
   @include for-md-up {
     display: block;
 
     &__sidebar {
-      height: calc(100vh - 55px);
+      height: calc(100vh - 74px);
       position: fixed;
-      top: 55px;
+      top: 74px;
       left: 0;
       width: 300px;
       background: #eaeaea;
