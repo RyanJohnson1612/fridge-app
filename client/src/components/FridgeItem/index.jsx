@@ -22,8 +22,9 @@ function FridgeItemIndex(props) {
 
     axios.get(`${process.env.REACT_APP_API_URL}/grocery_lists`, { withCredentials: true })
       .then((results) => {
-        console.log(results);
-        setAllGroceryLists(results.data);
+        const groceries = results.data;
+        setAllGroceryLists(groceries);
+        setGroceryList(groceries[0].id);
       })
       .catch(err => console.log(err));
 
