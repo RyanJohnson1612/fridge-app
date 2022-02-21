@@ -50,6 +50,7 @@ function MealIdeas() {
 
   //Function that gets recipe data from Edamam API using axios call
   const getRecipes = () => {
+
     axios
       .get(
         `https://api.edamam.com/search?q=${fridgeQuery}&app_id=${APP_ID}&app_key=${APP_KEY}${healthLabels()}`
@@ -65,6 +66,17 @@ function MealIdeas() {
 
   //Function to get all fridge items (axios), then update setfridgeQuery to expiring fridge items
   const getFridgeItems = () => {
+
+    axios.get(`${process.env.REACT_APP_API_URL}/recipeItems`, { withCredentials: true })
+    .then((results) => {
+      console.log("This is from the api!!!", results.data);
+
+      const closestToExpiry = results.data.map( itemObj => itemObj.name).join(", ")
+      console.log("mapped", closestToExpiry);
+    })
+    .catch(error => console.log(`Error: ${error.message}`));
+
+
     axios
       .get(`${process.env.REACT_APP_API_URL}/fridge_items`)
       .then((res) => {
