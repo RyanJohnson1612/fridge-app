@@ -79,10 +79,26 @@ module.exports = (db) => {
         .then(output => {
           res.json({image: data.Location, predictions: output}).status(201).end();
         })
-
     });
 
+    router.post('/upload', upload.single('file'), (req, res) => {
+      const image = req.file;
+      const fileContent = createReadStream(image.path);
 
+      const params = {
+        Bucket: process.env.S3_BUCKET_NAME,
+        Key: `${image.filename}`,
+        Body: fileContent
+      }
+
+      s3.upload(params, (err, data) => {
+        if (err) {
+          console.log(err);
+          res.status(400).end();
+        }
+
+        res.json({image: data.Location}).status(201).end();
+      });
   });
 
   return router;
