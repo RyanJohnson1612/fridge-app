@@ -59,6 +59,10 @@
 
 .filters label {
   margin: 5px;
+
+  &::before, &::after {
+    top: -2px;
+  }
 }
 
 .recipes-list {

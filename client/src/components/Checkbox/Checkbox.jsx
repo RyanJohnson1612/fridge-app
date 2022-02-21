@@ -15,7 +15,7 @@ function CheckBox(props) {
   };
 
   return (
-    <>
+    <div className="checkbox">
       <input
         id={option}
         className="checkbox__input"
@@ -24,7 +24,7 @@ function CheckBox(props) {
         onChange={(e) => handleChecked(e)}
       />
       <label className="checkbox__label" htmlFor={option}>{hideLabel ? '' : option}</label>
-    </>
+    </div>
   );
 }
 
