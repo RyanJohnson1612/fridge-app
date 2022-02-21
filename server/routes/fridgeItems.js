@@ -20,6 +20,23 @@ module.exports = (db) => {
 
   // GET specific food
   router.get('/:id', protectedRoute, function(req, res, next) {
+    const queryString =
+      `SELECT fridge_items.id as id, fridge_items.name as name,
+      category, fridge_id, image_URL, notes, date_removed,
+      to_char(date_stored, 'Mon DD, YYYY') as date_stored,
+      to_char(expiry, 'Mon DD, YYYY') as expiry,
+      (expiry - date_stored) as expire_in,
+      (CURRENT_DATE - date_stored) as stored_since
+      FROM fridge_items
+      JOIN fridges ON fridges.id = fridge_id
+      WHERE fridge_items.id = $1 AND user_id = $2`;
+    const queryParams = [req.params.id, req.user.id]
+    db.query(queryString, queryParams).then(data => {
+      console.log(data.rows);
+      const fridgeData = data.rows[0];
+      res.json(fridgeData);
+    });
+
     // const queryString =
     //   `SELECT id, name, category, fridge_id, image_URL, notes, date_removed,
     //    to_char(date_stored, 'Mon DD, YYYY') as date_stored,
@@ -39,22 +56,6 @@ module.exports = (db) => {
     //   }
     // });
 
-    const queryString =
-      `SELECT fridge_items.id as id, fridge_items.name as name,
-      category, fridge_id, image_URL, notes, date_removed,
-      to_char(date_stored, 'Mon DD, YYYY') as date_stored,
-      to_char(expiry, 'Mon DD, YYYY') as expiry,
-      (expiry - date_stored) as expire_in,
-      (CURRENT_DATE - date_stored) as stored_since
-      FROM fridge_items
-      JOIN fridges ON fridges.id = fridge_id
-      WHERE fridge_items.id = $1 AND user_id = $2`;
-    const queryParams = [req.params.id, req.user.id]
-    db.query(queryString, queryParams).then(data => {
-      console.log(data.rows);
-      const fridgeData = data.rows[0];
-      res.json(fridgeData);
-    });
   });
 
   // DELETE specific food
