@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import SearchBar from "../SearchBar/SearchBar";
 import CheckList from "../CheckList/CheckList";
-import RangeSlider from "../RangeSlider/RangeSlider";
 import { BsSliders } from "react-icons/bs";
 import { Button } from "react-bootstrap";
 import classNames from 'classnames';
@@ -44,8 +43,6 @@ function FridgeFilters(props) {
           filter="status"
           onSelect={props.onSelect}
         />
-        {/* <h3>Days until expired</h3>
-        <RangeSlider onRange={props.onSearch.handleRange}/> */}
 
         <Button className="fridge-filters__apply-button" onClick={() => setDropdown(false)}>Apply Filters</Button>
       </div>

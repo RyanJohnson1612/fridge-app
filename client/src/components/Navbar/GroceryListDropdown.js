@@ -8,7 +8,6 @@ export default function GroceryListDropdown({setAllGroceryLists, allGroceryLists
     axios
       .get(`${process.env.REACT_APP_API_URL}/grocery_lists`, { withCredentials: true })
       .then((results) => {
-        console.log(results);
         setAllGroceryLists(results.data);
       })
       .catch((err) => console.log(err));

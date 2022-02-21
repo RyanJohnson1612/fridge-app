@@ -2,15 +2,15 @@ import { useState, useEffect } from 'react';
 import './Checkbox.scss';
 
 function CheckBox(props) {
-  const { option, initial, onChecked } = props;
+  const { option, initial, hideLabel, onChecked } = props;
   const [active, setActive] = useState(initial || false);
 
   useEffect(() => {
     setActive(initial);
   }, [initial])
 
-  const handleChecked = () => {
-    setActive(prev => (!prev));
+  const handleChecked = (e) => {
+    setActive(e.currentTarget.checked);
     onChecked(option);
   };
 
@@ -21,9 +21,9 @@ function CheckBox(props) {
         className="checkbox__input"
         type="checkbox"
         checked={active}
-        onChange={() => handleChecked()}
+        onChange={(e) => handleChecked(e)}
       />
-      <label className="checkbox__label" htmlFor={option}>{option}</label>
+      <label className="checkbox__label" htmlFor={option}>{hideLabel ? '' : option}</label>
     </>
   );
 }

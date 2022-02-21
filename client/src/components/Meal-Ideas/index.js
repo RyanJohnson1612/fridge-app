@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Recipe from "./Recipe";
 import "./Recipe.scss";
@@ -7,6 +8,8 @@ import Spinner from "react-bootstrap/Spinner";
 function MealIdeas() {
   const APP_ID = process.env.REACT_APP_EDAMAM_ID;
   const APP_KEY = process.env.REACT_APP_EDAMAM_KEY;
+
+  const location = useLocation();
 
   //State to determine if loading spinner should be displayed
   const [loading, setLoading] = useState(true);
@@ -45,7 +48,11 @@ function MealIdeas() {
 
   useEffect(() => {
     getRecipes();
-    getFridgeItems();
+    if (location.search) {
+      setfridgeQuery(location.search.replace('?q=', ''));
+    } else {
+      getFridgeItems();
+    }
   }, [filters, fridgeQuery]);
 
   //Function that gets recipe data from Edamam API using axios call
@@ -138,11 +145,16 @@ function MealIdeas() {
   return (
     <div className="Recipes-index">
       <div className="top-page">
-        <p>
-          The three fridge items closest to expiring are:
-          <span> {expiring}. </span> <br />
-          Here are some recipes you could make to use up those ingredients!
-        </p>
+        {expiring ?
+          <p>
+            The three fridge items closest to expiring are:
+            <span> {expiring}. </span> <br />
+            Here are some recipes you could make to use up those ingredients!
+          </p>
+        :
+          <p>Recipes with ingredients: <span>{decodeURI(fridgeQuery).replace(/,/g, ', ')}</span></p>
+        }
+
 
         {loading && (
           <div>
