@@ -40,7 +40,7 @@ app.use('/api/fridges', fridgesRouter(db));
 app.use('/fridge_items', fridgeItemsRouter(db));
 app.use('/grocery_lists', groceryListsRouter(db));
 app.use("/grocery_items", groceryListItemsRouter(db));
-app.use('/recipeItems', groceryListItemsRouter(db));
+app.use('/recipeItems', recipeRouter(db));
 
 
 module.exports = app;
