@@ -16,22 +16,15 @@ function FridgeItemIndex(props) {
 
     axios.get(`${process.env.REACT_APP_API_URL}/fridge_items/${id}`, { withCredentials: true })
       .then((results) => {
-        console.log(results.data);
-        // use this one if you wanna see the ketchup camel with all fields filled
         setFridgeItem(results.data);
-        // use this one if you want to see most recent add to fridge item
-        // const item = results.data[results.data.length - 1];
-
-        // if (JSON.stringify(fridgeItem) !== JSON.stringify(item)) {
-        //   setFridgeItem(item);
-        // }
       })
       .catch(error => console.log(`Error: ${error.message}`));
 
     axios.get(`${process.env.REACT_APP_API_URL}/grocery_lists`, { withCredentials: true })
       .then((results) => {
-        console.log(results);
-        setAllGroceryLists(results.data);
+        const groceries = results.data;
+        setAllGroceryLists(groceries);
+        setGroceryList(groceries[0].id);
       })
       .catch(err => console.log(err));
 
@@ -40,7 +33,7 @@ function FridgeItemIndex(props) {
   const unauthorized = () => {
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1500);
   }
 
   return (
@@ -58,7 +51,7 @@ function FridgeItemIndex(props) {
       <div>
         { loading && <div className="spinning"><Spinner animation="border" variant="secondary" /></div>}
         {unauthorized()}
-        { !loading && <h2 className="unauthorized">This page doesn't exist, or you are unauthorized to view this page.</h2> }
+        { !loading && <h4 className="unauthorized">This page doesn't exist, or you are unauthorized to view this page.</h4> }
       </div>}
     </div>
   );

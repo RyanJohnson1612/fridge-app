@@ -37,9 +37,9 @@ module.exports = (db) => {
   });
 
   /* POST create new fridge for user */
-  router.post('/', (req, res) => {
+  router.post('/', protectedRoute, (req, res) => {
     const command = `INSERT INTO fridges (name, user_id) VALUES ($1, $2);`;
-    db.query(command, [`${req.body.name}'s Fridge`, req.body.id])
+    db.query(command, [`${req.body.name}'s Fridge`, req.user.id])
       .then(data => {
         return res.status(201).json('Fridge Created').end();
       })

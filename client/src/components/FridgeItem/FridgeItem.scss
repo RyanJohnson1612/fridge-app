@@ -66,9 +66,17 @@ select {
 }
 
 .unauthorized {
-  color: rgb(243, 30, 30);
+  color: #084298;
+  background-color: #cfe2ff;
+  border-color: #b6d4fe;
+  border-radius: .25rem;
+  position: relative;
+  padding: 1rem 1rem;
   text-align: center;
+  width: 80%;
   margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .spinning {
