@@ -21,7 +21,6 @@ function Navigation() {
       <NavbarCollapse>
         <Nav>
           <Nav.Link as={Link} to="/fridge">MyFridge</Nav.Link>
-          <Nav.Link as={Link} to="/grocery-lists">Grocery List</Nav.Link>
           <Nav.Link as={Link} to="/recipes">Recipe Ideas</Nav.Link>
 
 
