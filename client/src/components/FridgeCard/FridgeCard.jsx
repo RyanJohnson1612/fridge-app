@@ -32,7 +32,10 @@ function FridgeCard(props) {
     <article className="fridge-card">
       { checkboxVisible && <CheckBox onChecked={onChecked} key={item.id} option={item.name} hideLabel={true} />}
       <Link to={`/fridge-items/${item.id}`} >
-        <div className="fridge-card__header" style={{backgroundImage: `url(${item.image_url})`}}>
+        <div className="fridge-card__header">
+          <figure className="fridge-card__figure">
+            <img className="fridge-card__image" src={item.image_url} alt="" />
+          </figure>
           <div className={statusClassName}>{status()}</div>
         </div>
         <div className="fridge-card__footer">
