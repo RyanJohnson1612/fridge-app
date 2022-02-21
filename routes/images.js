@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const path = require('path');
 const AWS = require('aws-sdk');
-const { DetectLabelsCommand, RekognitionClient } = require('@aws-sdk/client-rekognition');
 const multer = require('multer');
 const { createReadStream, unlink } = require('fs');
 const {ClarifaiStub, grpc} = require('clarifai-nodejs-grpc');
@@ -18,7 +17,6 @@ const config = {
   }
 };
 
-// const rekogClient = new RekognitionClient(config)
 const s3 = new AWS.S3(config);
 
 const storage = multer.diskStorage({
@@ -33,46 +31,31 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage})
 
-
-// const detect_label = async (bucket, photo) => {
-//   const params = {
-//     Image: {
-//       S3Object: {
-//         Bucket: bucket,
-//         Name: photo
-//       },
-//     },
-//   }
-
-//   try {
-//     const response = await rekogClient.send(new DetectLabelsCommand(params));
-//     console.log(response.Labels);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
-
 const detectFood = (image) => {
-  stub.PostModelOutputs(
-    {
-        model_id: 'bd367be194cf45149e75f01d59f77ba7',
-        inputs: [
-            {data: {image: {url: image}}}
-        ]
-    },
-    metadata,
-    (err, response) => {
-        if (err) {
-            throw new Error(err);
-        }
+  return new Promise((resolve, reject) => {
+    stub.PostModelOutputs(
+      {
+          model_id: 'bd367be194cf45149e75f01d59f77ba7',
+          inputs: [
+              {data: {image: {url: image}}}
+          ]
+      },
+      metadata,
+      (err, response) => {
+        try {
+          if (response.status.code !== 10000) {
+            console.log(response.status);
+          }
 
-        if (response.status.code !== 10000) {
-            throw new Error("Post model outputs failed, status: " + response.status.description);
+          const output = response.outputs[0];
+          resolve(output.data.concepts);
         }
-
-        return response.outputs[0];
-    }
-  );
+        catch(err) {
+          reject(err);
+        }
+      }
+    );
+  });
 }
 
 module.exports = (db) => {
@@ -92,9 +75,11 @@ module.exports = (db) => {
         res.status(400).end();
       }
 
-      const output = detectFood(data.Location);
+      detectFood(data.Location)
+        .then(output => {
+          res.json({image: data.Location, predictions: output}).status(201).end();
+        })
 
-      res.json({image: data.Location, predicted: output}).status(201).end();
     });
 
 
