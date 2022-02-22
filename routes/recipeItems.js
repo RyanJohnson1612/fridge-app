@@ -13,7 +13,7 @@ module.exports = (db) => {
       JOIN fridges ON fridges.id = fridge_id
       WHERE (expiry - date_stored) >= 0
       AND (date_removed IS NULL)
-      AND user_id = 1
+      AND user_id = $1
       ORDER BY (expiry - date_stored)
       LIMIT 3`;
 
