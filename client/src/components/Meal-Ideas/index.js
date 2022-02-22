@@ -71,33 +71,10 @@ function MealIdeas() {
     axios.get(`${process.env.REACT_APP_API_URL}/recipeItems`, { withCredentials: true })
     .then((results) => {
       const closestToExpiry = results.data.map( itemObj => itemObj.name).join(", ")
-      console.log("mapped", closestToExpiry);
       setfridgeQuery(closestToExpiry)
       setExpiring(fridgeQuery)
     })
     .catch(error => console.log(`Error: ${error.message}`));
-
-  };
-
-  //Take in array of fridge items (from axios), return 3 items closest to expiry as string.
-  const getExpiring = (fridgeItemsArray) => {
-    //Remove foods will unknown (null) expiry date, or already expired food
-    const validExpiryItems = fridgeItemsArray.filter(
-      (foodObject) => foodObject.expire_in !== null && foodObject.expire_in >= 0
-    );
-
-    const sortedFridge = validExpiryItems.sort(
-      (a, b) => parseFloat(a.expire_in) - parseFloat(b.expire_in)
-    );
-
-    //Return the 3 foods closest to expiry
-    const expiringArray = sortedFridge.slice(0, 3);
-
-    //Convert object of foods --> string of food names
-    const expiringParsed = expiringArray
-      .map((expiringObject) => expiringObject.name)
-      .join(", ");
-    return expiringParsed;
   };
 
   //Updates filters state based on dietaryRestrictions checked off, then update setCheckedState
