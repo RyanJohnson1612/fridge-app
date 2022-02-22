@@ -122,6 +122,11 @@
     }
   }
 
+  .fridge-item-modal {
+    display: block;
+    width: 100%;
+  }
+
   @include for-sm-up {
     width: calc(50% - 30px);
   }
@@ -129,4 +134,8 @@
   @include for-xl-up {
     width: calc(33% - 30px);
   }
+}
+
+.modal-content {
+  background-color: rgb(231, 223, 235);
 }
