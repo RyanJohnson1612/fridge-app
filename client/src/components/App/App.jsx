@@ -13,7 +13,6 @@ import Login from '../Login/';
 import Register from '../Register/';
 import AddFridgeItemIndex from '../AddFridgeItem';
 import MealIdeas from '../Meal-Ideas';
-import Camera from '../Camera/Camera';
 import axios from 'axios';
 
 axios.defaults.withCredentials = false;
@@ -26,10 +25,7 @@ function App() {
         <Navbar />
         <section className="content">
           <Routes>
-          <Route path="/" element={<Camera />}></Route>
-
-
-          <Route
+            <Route
               path="/fridge"
               element={
                 <ProtectedRoute redirectTo="/login" message="Please login or register to view your fridge">
