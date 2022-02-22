@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { authContext } from "../../providers/AuthProvider";
 import GroceryListDropdown from './GroceryListDropdown';
 import NewGroceryListModal from './NewGroceryListModal';
-import fridgeLogo from "../../images/fridge-logo3.png"
+import fridgeLogo from "../../assets/images/fridgie-logo-text.png"
 
 function Navigation() {
   const { user, logout } = useContext(authContext);
@@ -16,7 +16,6 @@ function Navigation() {
     <Navbar bg="myTeal" variant="dark" fixed="top" expand="lg" expanded={expanded}>
       <Navbar.Brand as={Link} to="/">
           <img src={fridgeLogo} height="40" alt="Fridgie App Logo"/>
-          Fridgie
       </Navbar.Brand>
       <Navbar.Toggle onClick={() => setExpanded(expanded ? false : "expanded")} />
       <NavbarCollapse >

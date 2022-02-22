@@ -4,7 +4,7 @@ import axios from "axios";
 import Recipe from "./Recipe";
 import "./Recipe.scss";
 import Spinner from "react-bootstrap/Spinner";
-import drool from "../../images/drool.png";
+import drool from "../../assets/images/drool.png";
 import { useNavigate } from "react-router-dom";
 import useCheckList from '../../hooks/useCheckList/useCheckList';
 import CheckBox from "../Checkbox/Checkbox";
