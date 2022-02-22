@@ -79,3 +79,11 @@
 @mixin for-lg-only {
   @media (min-width: 1200px) { @content }
 }
+
+@mixin for-custom-up($width) {
+  @media (min-width: $width) { @content }
+}
+
+@mixin for-custom-down($width) {
+  @media (max-width: $width) { @content }
+}
