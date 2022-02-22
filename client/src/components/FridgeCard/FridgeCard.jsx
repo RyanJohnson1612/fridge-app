@@ -1,12 +1,19 @@
+import React, { useState } from 'react';
 import CheckBox from '../Checkbox/Checkbox';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
 import { BsFillClockFill } from 'react-icons/bs';
 import moment from 'moment';
+import FridgeItemIndex from '../FridgeItem';
+import { Modal } from 'react-bootstrap';
 
 function FridgeCard(props) {
   const { item, checkboxVisible, onChecked } = props;
   const daysUntilExpired = moment(item.expiry).endOf('day').diff(moment().endOf('day'), 'days');
+
+  const [show, setShow] = useState(false);
+
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   const status = () => {
     if (daysUntilExpired > 3) {
@@ -31,7 +38,7 @@ function FridgeCard(props) {
   return (
     <article className="fridge-card">
       { checkboxVisible && <CheckBox onChecked={onChecked} key={item.id} option={item.name} hideLabel={true} />}
-      <Link to={`/fridge-items/${item.id}`} >
+      <button className='fridge-item-modal' onClick={handleShow}>
         <div className="fridge-card__header" style={{backgroundImage: `url(${item.image_url})`}}>
           <div className={statusClassName}>{status()}</div>
         </div>
@@ -42,7 +49,17 @@ function FridgeCard(props) {
             <span>Added {moment(item.date_stored).fromNow()}</span>
           </h5>
         </div>
-      </Link>
+      </button>
+      <Modal size='lg' show={show} onHide={handleClose}>
+        <Modal.Header className='item-modal-header' closeButton>
+        </Modal.Header>
+        <Modal.Body>
+          <FridgeItemIndex
+            id={item.id}
+            closeModal={handleClose}
+          />
+        </Modal.Body>
+      </Modal>
     </article>
   )
 }
