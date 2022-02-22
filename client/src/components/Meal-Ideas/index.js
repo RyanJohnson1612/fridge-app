@@ -4,6 +4,7 @@ import axios from "axios";
 import Recipe from "./Recipe";
 import "./Recipe.scss";
 import Spinner from "react-bootstrap/Spinner";
+import drool from "../../images/drool.png";
 
 function MealIdeas() {
   const APP_ID = process.env.REACT_APP_EDAMAM_ID;
@@ -34,15 +35,17 @@ function MealIdeas() {
   //recipes state will be set to data that comes back from edamam API
   const [recipes, setRecipes] = useState([]);
 
-
   //State that is set to expiring food items in fridge
   const [expiring, setExpiring] = useState("");
   const [fridgeQuery, setfridgeQuery] = useState("");
 
+  //Set to true when no recipes available based on expiring ingredients, display message to user
+  const [noRecipes, setNoRecipes] = useState(false);
+
   useEffect(() => {
     getRecipes();
     if (location.search) {
-      setfridgeQuery(location.search.replace('?q=', ''));
+      setfridgeQuery(location.search.replace("?q=", ""));
     } else {
       getFridgeItems();
     }
@@ -50,7 +53,6 @@ function MealIdeas() {
 
   //Function that gets recipe data from Edamam API using axios call
   const getRecipes = () => {
-
     axios
       .get(
         `https://api.edamam.com/search?q=${fridgeQuery}&app_id=${APP_ID}&app_key=${APP_KEY}${healthLabels()}`
@@ -58,6 +60,7 @@ function MealIdeas() {
       .then((res) => {
         setRecipes(res.data.hits);
         setLoading(false);
+        setNoRecipes(recipes.length === 0);
       })
       .catch((err) => {
         console.log(err);
@@ -66,16 +69,19 @@ function MealIdeas() {
 
   //Function to get all fridge items (axios), then update setfridgeQuery to expiring fridge items
   const getFridgeItems = () => {
-
     // GET /recipeItems will contain the 3 items closest to expiry in users fridge
-    axios.get(`${process.env.REACT_APP_API_URL}/recipeItems`, { withCredentials: true })
-    .then((results) => {
-      const closestToExpiry = results.data.map( itemObj => itemObj.name).join(", ")
-      setfridgeQuery(closestToExpiry)
-      setExpiring(fridgeQuery)
-    })
-    .catch(error => console.log(`Error: ${error.message}`));
-
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/recipeItems`, {
+        withCredentials: true,
+      })
+      .then((results) => {
+        const closestToExpiry = results.data
+          .map((itemObj) => itemObj.name)
+          .join(", ");
+        setfridgeQuery(closestToExpiry);
+        setExpiring(fridgeQuery);
+      })
+      .catch((error) => console.log(`Error: ${error.message}`));
   };
 
   //Updates filters state based on dietaryRestrictions checked off, then update setCheckedState
@@ -104,19 +110,23 @@ function MealIdeas() {
     return result.toLowerCase();
   };
 
+  console.log("recipes?", recipes.length);
+
   return (
     <div className="Recipes-index">
       <div className="top-page">
-        {expiring ?
+        {expiring ? (
           <p>
             The three fridge items closest to expiring are:
             <span> {expiring}. </span> <br />
             Here are some recipes you could make to use up those ingredients!
           </p>
-        :
-          <p>Recipes with ingredients: <span>{decodeURI(fridgeQuery).replace(/,/g, ', ')}</span></p>
-        }
-
+        ) : (
+          <p>
+            Recipes with ingredients:{" "}
+            <span>{decodeURI(fridgeQuery).replace(/,/g, ", ")}</span>
+          </p>
+        )}
 
         {loading && (
           <div>
@@ -142,17 +152,28 @@ function MealIdeas() {
           })}
         </div>
       </div>
-      <div className="recipes-list">
-        {recipes.map((recipe) => (
-          <Recipe
-            key={recipe.recipe.label}
-            title={recipe.recipe.label}
-            image={recipe.recipe.image}
-            ingredients={recipe.recipe.ingredients}
-            recipeURL={recipe.recipe.url}
-          />
-        ))}
-      </div>
+
+      {noRecipes ? (
+        <div className="oh-no">
+          <h4>
+            Oh no. We couldn't find any recipes based on these items...but you
+            can select different items to search recipes with!
+          </h4>
+          <img src={drool} height="300" />
+        </div>
+      ) : (
+        <div className="recipes-list">
+          {recipes.map((recipe) => (
+            <Recipe
+              key={recipe.recipe.label}
+              title={recipe.recipe.label}
+              image={recipe.recipe.image}
+              ingredients={recipe.recipe.ingredients}
+              recipeURL={recipe.recipe.url}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
