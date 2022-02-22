@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import FormData from 'form-data';
 
-function usePrediction(canvasRef, videoRef) {
+function usePredictions() {
   const [predictions, setPredictions] = useState([]);
   const [image, setImage] = useState();
 
@@ -14,10 +14,8 @@ function usePrediction(canvasRef, videoRef) {
           'Content-Type': img.type
         }})
         .then(res => {
-          console.log(res);
-
           setPredictions(res.data.predictions);
-          setImage(res.data.image)
+          setImage(res.data.image);
         })
         .catch(err => {
           console.log(err);
@@ -27,4 +25,4 @@ function usePrediction(canvasRef, videoRef) {
   return {image, setImage, predictions, getPredictions};
 }
 
-export default usePrediction;
+export default usePredictions;
