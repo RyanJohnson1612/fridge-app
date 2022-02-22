@@ -13,10 +13,10 @@ function Navigation() {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <Navbar bg="myTeal" variant="dark" fixed="top" expand="lg" expanded={expanded}>
+    <Navbar bg="myteal" variant="dark" fixed="top" expand="lg" expanded={expanded}>
       <Navbar.Brand as={Link} to="/">
-          <img src={fridgeLogo} height="40" alt="Fridge App Logo"/>
-          FridgeApp
+          <img src={fridgeLogo} height="40" alt="Fridgie App Logo"/>
+          Fridgie
       </Navbar.Brand>
       <Navbar.Toggle onClick={() => setExpanded(expanded ? false : "expanded")} />
       <NavbarCollapse >

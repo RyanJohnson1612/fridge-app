@@ -41,7 +41,7 @@ function FridgeCard(props) {
       <button className='fridge-item-modal' onClick={handleShow}>
         <div className="fridge-card__header">
           <figure className="fridge-card__figure">
-            <img className="fridge-card__image" src={item.image_url} alt="" />
+            <img className="fridge-card__image" src={item.image_url} alt="" style={item.image_url.includes('spoonacular') ? {'objectFit': 'contain'} : {'objectFit': 'cover'} }/>
           </figure>
           <div className={statusClassName}>{status()}</div>
         </div>
