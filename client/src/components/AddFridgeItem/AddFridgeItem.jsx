@@ -180,7 +180,9 @@ const AddFridgeItem = (props) => {
           }
           { image && !camera &&
             <div className="form-image__results">
-              <img src={image} alt={capitalize(name)} />
+              <figure>
+                <img src={image} alt={capitalize(name)} />
+              </figure>
               <Button variant={'danger'} onClick={() => setImage(null)}>Delete</Button>
               <Button onClick={() => setCamera(true)}>Retake Picture</Button>
             </div>
