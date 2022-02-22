@@ -75,6 +75,7 @@ function MealIdeas() {
       setExpiring(fridgeQuery)
     })
     .catch(error => console.log(`Error: ${error.message}`));
+
   };
 
   //Updates filters state based on dietaryRestrictions checked off, then update setCheckedState
