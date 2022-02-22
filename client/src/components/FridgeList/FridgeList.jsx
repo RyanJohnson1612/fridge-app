@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap'
 import useCheckList from '../../hooks/useCheckList/useCheckList';
 import useFridgeSearch from '../../hooks/useFridgeSearch/useFridgeSearch';
+import drool from "../../images/drool.png";
 
 function FridgeList(props) {
   const { checkboxVisible, selectIngredients } = useFridgeSearch();
@@ -29,7 +30,17 @@ function FridgeList(props) {
         }
       </div>
       <div className="fridge-list">
-        {parsedItems.length > 0 ? parsedItems : <h3>No results found</h3>}
+        {
+          parsedItems.length > 0 ? parsedItems :
+          <div className="oh-no">
+          <h5>
+            Oh no. We couldn't find any items in your fridge based on these filters...
+            <br />
+            try changing your search criteria!
+          </h5>
+          <img className="drool" src={drool} alt="Drool" />
+        </div>
+        }
       </div>
     </>
   )

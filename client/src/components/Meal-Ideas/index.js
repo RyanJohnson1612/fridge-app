@@ -177,11 +177,11 @@ function MealIdeas() {
       ) : (
         <div className="oh-no" onClick={handleNoRecipe}>
           <h5>
-            Oh no. We couldn't find any recipes based on these ingredients...{" "}
+            Oh no. We couldn't find any recipes based on these ingredients...
             <br />
             try selecting different items from your fridge!
           </h5>
-          <img className="drool" src={drool} />
+          <img className="drool" src={drool} alt="Drool" />
         </div>
       )}
     </div>
