@@ -41,11 +41,8 @@ app.use('/api/fridges', fridgesRouter(db));
 app.use('/fridge_items', fridgeItemsRouter(db));
 app.use('/grocery_lists', groceryListsRouter(db));
 app.use("/grocery_items", groceryListItemsRouter(db));
-<<<<<<< HEAD
-app.use('/api/images', imagesRouter(db));
-=======
 app.use('/recipeItems', recipeRouter(db));
+app.use('/api/images', imagesRouter(db));
 
->>>>>>> main
 
 module.exports = app;
