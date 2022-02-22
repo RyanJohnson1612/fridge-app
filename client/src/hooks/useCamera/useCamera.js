@@ -22,6 +22,7 @@ export default function useCamera(videoRef, canvasRef, constraints = defaultCons
             onLoad();
           };
         })
+        .catch(err => err);
     }
   };
 
@@ -43,5 +44,5 @@ export default function useCamera(videoRef, canvasRef, constraints = defaultCons
     })
   };
 
-  return { picture, takePicture, requestUserMedia }
+  return { picture, loading, takePicture, requestUserMedia }
 }
