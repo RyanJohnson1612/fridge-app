@@ -5,8 +5,10 @@ import Recipe from "./Recipe";
 import "./Recipe.scss";
 import Spinner from "react-bootstrap/Spinner";
 import drool from "../../images/drool.png";
+import { useNavigate } from "react-router-dom";
 
 function MealIdeas() {
+  const navigate = useNavigate();
   const APP_ID = process.env.REACT_APP_EDAMAM_ID;
   const APP_KEY = process.env.REACT_APP_EDAMAM_KEY;
 
@@ -110,7 +112,9 @@ function MealIdeas() {
     return result.toLowerCase();
   };
 
-  console.log("recipes?", recipes.length);
+  const handleNoRecipe = () => {
+    navigate(`/fridge`);
+  };
 
   return (
     <div className="Recipes-index">
@@ -154,12 +158,12 @@ function MealIdeas() {
       </div>
 
       {noRecipes ? (
-        <div className="oh-no">
-          <h4>
-            Oh no. We couldn't find any recipes based on these items...but you
-            can select different items to search recipes with!
-          </h4>
-          <img src={drool} height="300" />
+        <div className="oh-no" onClick={handleNoRecipe}>
+          <h5>
+            Oh no. We couldn't find any recipes based on these ingredients...but
+            you can select different items from your fridge!
+          </h5>
+          <img className="drool" src={drool} />
         </div>
       ) : (
         <div className="recipes-list">
