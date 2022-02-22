@@ -4,10 +4,13 @@ import axios from "axios";
 import Recipe from "./Recipe";
 import "./Recipe.scss";
 import Spinner from "react-bootstrap/Spinner";
+import drool from "../../images/drool.png";
+import { useNavigate } from "react-router-dom";
 import useCheckList from '../../hooks/useCheckList/useCheckList';
 import CheckBox from "../Checkbox/Checkbox";
 
 function MealIdeas() {
+  const navigate = useNavigate();
   const APP_ID = process.env.REACT_APP_EDAMAM_ID;
   const APP_KEY = process.env.REACT_APP_EDAMAM_KEY;
 
@@ -33,25 +36,20 @@ function MealIdeas() {
   //State to keep track of filters checked off
   const [filters, setFilters] = useState([]);
 
-  /////NOTE: UNCOMMENT if want to use searchbar functionality
   //recipes state will be set to data that comes back from edamam API
   const [recipes, setRecipes] = useState([]);
-  //const [search, setSearch] = useState("");
 
   //State that is set to expiring food items in fridge
   const [expiring, setExpiring] = useState("");
   const [fridgeQuery, setfridgeQuery] = useState("");
 
-  /* If useEffect were to run everytime search state is updated,
-  there would be be an API call for every keystroke.
-  Therefore, create query state which only updates after search button is clicked */
-  /////NOTE: UNCOMMENT if want to use searchbar functionality, and place "query" in array
-  //const [query, setQuery] = useState("");
+  //Set to false when EDAMAM API returns no recipes
+  const [recipesPresent, setRecipesPresent] = useState(true);
 
   useEffect(() => {
     getRecipes();
     if (location.search) {
-      setfridgeQuery(location.search.replace('?q=', ''));
+      setfridgeQuery(location.search.replace("?q=", ""));
     } else {
       getFridgeItems();
     }
@@ -59,6 +57,10 @@ function MealIdeas() {
 
   //Function that gets recipe data from Edamam API using axios call
   const getRecipes = () => {
+    //Avoid axios call if fridgeQuery is blank
+    if (fridgeQuery === "") {
+      return;
+    }
     axios
       .get(
         `https://api.edamam.com/search?q=${fridgeQuery}&app_id=${APP_ID}&app_key=${APP_KEY}${healthLabels()}`
@@ -66,6 +68,10 @@ function MealIdeas() {
       .then((res) => {
         setRecipes(res.data.hits);
         setLoading(false);
+        return res.data.hits;
+      })
+      .then((res) => {
+        setRecipesPresent(res.length > 0);
       })
       .catch((err) => {
         console.log(err);
@@ -74,34 +80,20 @@ function MealIdeas() {
 
   //Function to get all fridge items (axios), then update setfridgeQuery to expiring fridge items
   const getFridgeItems = () => {
+    // GET /recipeItems will contain the 3 items closest to expiry in users fridge
     axios
-      .get(`${process.env.REACT_APP_API_URL}/fridge_items`)
-      .then((res) => {
-        setfridgeQuery(getExpiring(res.data));
+      .get(`${process.env.REACT_APP_API_URL}/recipeItems`, {
+        withCredentials: true,
+      })
+      .then((results) => {
+        const closestToExpiry = results.data
+          .map((itemObj) => itemObj.name)
+          .join(", ");
+        setfridgeQuery(closestToExpiry);
         setExpiring(fridgeQuery);
       })
-      .catch((err) => console.log(err));
-  };
-
-  //Take in array of fridge items (from axios), return 3 items closest to expiry as string.
-  const getExpiring = (fridgeItemsArray) => {
-    //Remove foods will unknown (null) expiry date, or already expired food
-    const validExpiryItems = fridgeItemsArray.filter(
-      (foodObject) => foodObject.expire_in !== null && foodObject.expire_in >= 0
-    );
-
-    const sortedFridge = validExpiryItems.sort(
-      (a, b) => parseFloat(a.expire_in) - parseFloat(b.expire_in)
-    );
-
-    //Return the 3 foods closest to expiry
-    const expiringArray = sortedFridge.slice(0, 3);
-
-    //Convert object of foods --> string of food names
-    const expiringParsed = expiringArray
-      .map((expiringObject) => expiringObject.name)
-      .join(", ");
-    return expiringParsed;
+      .then(() => getRecipes())
+      .catch((error) => console.log(`Error: ${error.message}`));
   };
 
   //Generate queryString based off of dietary restrictions that were checked off
@@ -115,33 +107,25 @@ function MealIdeas() {
     return result.toLowerCase();
   };
 
-  //Function that will run everytime there is an onChange event in form
-  /*  const updateSearch = (e) => {
-    setSearch(e.target.value);
+  const handleNoRecipe = () => {
+    navigate(`/fridge`);
   };
-
-  //Will be called in search form on submission only
-  const getSearch = (e) => {
-    e.preventDefault();
-    setQuery(search);
-
-    //Clear input bar after each search
-    setSearch("");
-  }; */
 
   return (
     <div className="Recipes-index">
       <div className="top-page">
-        {expiring ?
+        {expiring ? (
           <p>
             The three fridge items closest to expiring are:
             <span> {expiring}. </span> <br />
             Here are some recipes you could make to use up those ingredients!
           </p>
-        :
-          <p>Recipes with ingredients: <span>{decodeURI(fridgeQuery).replace(/,/g, ', ')}</span></p>
-        }
-
+        ) : (
+          <p>
+            Recipes with ingredients:{" "}
+            <span>{decodeURI(fridgeQuery).replace(/,/g, ", ")}</span>
+          </p>
+        )}
 
         {loading && (
           <div>
@@ -177,26 +161,29 @@ function MealIdeas() {
           }
         </div>
       </div>
-      {/*       <form className="search-form" onSubmit={getSearch}>
-        <input
-          className="search-bar"
-          type="text"
-          value={search}
-          onChange={updateSearch}
-        />
-        <button className="search-button" type="submit"></button>
-      </form> */}
-      <div className="recipes-list">
-        {recipes.map((recipe) => (
-          <Recipe
-            key={recipe.recipe.label}
-            title={recipe.recipe.label}
-            image={recipe.recipe.image}
-            ingredients={recipe.recipe.ingredients}
-            recipeURL={recipe.recipe.url}
-          />
-        ))}
-      </div>
+
+      {recipesPresent ? (
+        <div className="recipes-list">
+          {recipes.map((recipe) => (
+            <Recipe
+              key={recipe.recipe.label}
+              title={recipe.recipe.label}
+              image={recipe.recipe.image}
+              ingredients={recipe.recipe.ingredients}
+              recipeURL={recipe.recipe.url}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="oh-no" onClick={handleNoRecipe}>
+          <h5>
+            Oh no. We couldn't find any recipes based on these ingredients...{" "}
+            <br />
+            try selecting different items from your fridge!
+          </h5>
+          <img className="drool" src={drool} />
+        </div>
+      )}
     </div>
   );
 }
