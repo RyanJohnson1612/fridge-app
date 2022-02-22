@@ -101,7 +101,7 @@ function Login(props) {
         { errors.server && <Alert variant={'danger'}>{errors.server}</Alert>}
         { errors.redirect && <Alert variant={'primary'}>{errors.redirect}</Alert>}
       </Form>
-      <p>Don't have an account? Register <Link to="/register">here</Link></p>
+      <p>Don't have an account?  <br/> <Link to="/register">Register</Link></p>
     </>
   );
 }

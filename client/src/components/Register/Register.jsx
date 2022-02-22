@@ -146,7 +146,7 @@ function Register(props) {
 
         { errors.server && <Alert variant={'danger'}>{errors.server}</Alert>}
       </Form>
-      <p>Already have and account? Login <Link to="/login">here</Link></p>
+      <p>Already have and account?  <br/> <Link to="/login">Login</Link></p>
     </>
   );
 }
