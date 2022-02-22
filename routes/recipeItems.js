@@ -3,8 +3,7 @@ const protectedRoute = require('../middleware/protectedRoute');
 
 module.exports = (db) => {
 
-  /* GET list 3 items in fridge closest to expiring for SPECIFIC user*, to use in default recipe recommendation*/
-  //user_id temporarily hardcoded
+  /* GET list 3 items in fridge closest to expiring for SPECIFIC user, to use in default recipe recommendation*/
   router.get('/', protectedRoute, function(req, res, next) {
     const queryString =
       `SELECT fridge_items.id, fridge_items.name,
