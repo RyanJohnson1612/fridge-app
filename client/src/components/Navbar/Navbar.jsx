@@ -12,13 +12,13 @@ function Navigation() {
   const [allGroceryLists, setAllGroceryLists] = useState([]);
 
   return (
-    <Navbar bg="myTeal" variant="dark" fixed="top" expand="sm">
+    <Navbar bg="myTeal" variant="dark" fixed="top" expand="lg">
       <Navbar.Brand as={Link} to="/">
-        <img src={fridgeLogo} height="40"/>
-        FridgeApp
-        </Navbar.Brand>
+          <img src={fridgeLogo} height="40" alt="Fridge App Logo"/>
+          FridgeApp
+      </Navbar.Brand>
       <Navbar.Toggle />
-      <NavbarCollapse>
+      <NavbarCollapse >
         <Nav>
           <Nav.Link as={Link} to="/fridge">MyFridge</Nav.Link>
           <Nav.Link as={Link} to="/recipes">Recipe Ideas</Nav.Link>
