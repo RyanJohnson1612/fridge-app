@@ -21,7 +21,7 @@ const s3 = new AWS.S3(config);
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, './tmp/images')
+    cb(null, './tmp')
   },
   filename: (req, file, cb) => {
     console.log(file)
@@ -75,9 +75,19 @@ module.exports = (db) => {
         res.status(400).end();
       }
 
+
       detectFood(data.Location)
         .then(output => {
-          res.json({image: data.Location, predictions: output}).status(201).end();
+          unlink(image.path, (err) => {
+            if (err) {
+              console.log(err)
+            }
+            res.json({image: data.Location, predictions: output}).status(201).end();
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          return err;
         })
     });
   });
