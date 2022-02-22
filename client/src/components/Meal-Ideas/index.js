@@ -41,8 +41,8 @@ function MealIdeas() {
   const [expiring, setExpiring] = useState("");
   const [fridgeQuery, setfridgeQuery] = useState("");
 
-  //Set to true when no recipes available based on expiring ingredients, display message to user
-  const [noRecipes, setNoRecipes] = useState(false);
+  //Set to false when EDAMAM API returns no recipes
+  const [recipesPresent, setRecipesPresent] = useState(true);
 
   useEffect(() => {
     getRecipes();
@@ -55,6 +55,10 @@ function MealIdeas() {
 
   //Function that gets recipe data from Edamam API using axios call
   const getRecipes = () => {
+    //Avoid axios call if fridgeQuery is blank
+    if (fridgeQuery === "") {
+      return;
+    }
     axios
       .get(
         `https://api.edamam.com/search?q=${fridgeQuery}&app_id=${APP_ID}&app_key=${APP_KEY}${healthLabels()}`
@@ -62,7 +66,10 @@ function MealIdeas() {
       .then((res) => {
         setRecipes(res.data.hits);
         setLoading(false);
-        setNoRecipes(recipes.length === 0);
+        return res.data.hits;
+      })
+      .then((res) => {
+        setRecipesPresent(res.length > 0);
       })
       .catch((err) => {
         console.log(err);
@@ -83,6 +90,7 @@ function MealIdeas() {
         setfridgeQuery(closestToExpiry);
         setExpiring(fridgeQuery);
       })
+      .then(() => getRecipes())
       .catch((error) => console.log(`Error: ${error.message}`));
   };
 
@@ -157,15 +165,7 @@ function MealIdeas() {
         </div>
       </div>
 
-      {noRecipes ? (
-        <div className="oh-no" onClick={handleNoRecipe}>
-          <h5>
-            Oh no. We couldn't find any recipes based on these ingredients...but
-            you can select different items from your fridge!
-          </h5>
-          <img className="drool" src={drool} />
-        </div>
-      ) : (
+      {recipesPresent ? (
         <div className="recipes-list">
           {recipes.map((recipe) => (
             <Recipe
@@ -176,6 +176,15 @@ function MealIdeas() {
               recipeURL={recipe.recipe.url}
             />
           ))}
+        </div>
+      ) : (
+        <div className="oh-no" onClick={handleNoRecipe}>
+          <h5>
+            Oh no. We couldn't find any recipes based on these ingredients...{" "}
+            <br />
+            try selecting different items from your fridge!
+          </h5>
+          <img className="drool" src={drool} />
         </div>
       )}
     </div>
