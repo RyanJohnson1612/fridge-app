@@ -34,7 +34,7 @@ function FridgeCard(props) {
       <Link to={`/fridge-items/${item.id}`} >
         <div className="fridge-card__header">
           <figure className="fridge-card__figure">
-            <img className="fridge-card__image" src={item.image_url} alt="" style={item.image_url.includes('spoonacular') ? {'object-fit': 'contain'} : '' }/>
+            <img className="fridge-card__image" src={item.image_url} alt="" style={item.image_url.includes('spoonacular') ? {'objectFit': 'contain'} : {'objectFit': 'cover'} }/>
           </figure>
           <div className={statusClassName}>{status()}</div>
         </div>
