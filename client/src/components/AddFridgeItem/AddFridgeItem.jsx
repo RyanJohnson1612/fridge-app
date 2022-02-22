@@ -142,16 +142,7 @@ const AddFridgeItem = (props) => {
             setLoading(false);
             swal("Oops!", "There was an error with your request. Please try again in a few minutes.", "error");
           });
-<<<<<<< HEAD
   }
-=======
-      }).catch((err) => {
-        console.log("Error:", err.message)
-        setLoading(false);
-        swal("Oops!", "There was an error with your request. Please try again in a few minutes.", "error");
-      });
-  };
->>>>>>> main
 
   const list = ["grain", "vegetable", "fruit", "dairy", "meat", "seafood", "alternative protein", "dessert", "drinks", "condiment", "other"];
 
