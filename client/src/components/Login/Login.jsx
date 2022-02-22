@@ -64,7 +64,7 @@ function Login(props) {
 
   return (
     <>
-      <h1>Login to Fridge App</h1>
+      <h1>Login to Fridgie</h1>
       <Form className="login__form" onSubmit={e => e.preventDefault()}>
         <Form.Group className="login__form-group">
           <Form.Label className={errors.email ? 'login__label login__label--error' : 'login__label'} htmlFor="email">Email</Form.Label>
@@ -101,7 +101,7 @@ function Login(props) {
         { errors.server && <Alert variant={'danger'}>{errors.server}</Alert>}
         { errors.redirect && <Alert variant={'primary'}>{errors.redirect}</Alert>}
       </Form>
-      <p>Don't have an account? Register <Link to="/register">here</Link></p>
+      <p>Don't have an account?  <br/> <Link to="/register">Register</Link></p>
     </>
   );
 }

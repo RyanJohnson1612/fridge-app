@@ -1,9 +1,7 @@
 import React from "react";
 import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Navbar from '../Navbar/'
 import FridgeIndex from '../FridgeIndex';
@@ -25,7 +23,9 @@ function App() {
         <Navbar />
         <section className="content">
           <Routes>
-            <Route
+          <Route element={<Navigate to="/fridge" />} path="/"/>
+
+          <Route
               path="/fridge"
               element={
                 <ProtectedRoute redirectTo="/login" message="Please login or register to view your fridge">
@@ -42,14 +42,21 @@ function App() {
               }
             />
             <Route
-              path="/grocery-list/:id"
+              path="/grocery-lists/:id"
               element={
                 <ProtectedRoute redirectTo="/login" message="Please login or register to view your grocery lists">
                   <ShoppingListIndex />
                 </ProtectedRoute>
               }
             />
-            <Route path="/fridge-items/new" element={<AddFridgeItemIndex />} />
+            <Route
+              path="/fridge-items/new"
+              element={
+                <ProtectedRoute redirectTo="/login" message="Please login or register to add a fridge item">
+                  <AddFridgeItemIndex />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/recipes" element={<h1><MealIdeas /></h1>} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

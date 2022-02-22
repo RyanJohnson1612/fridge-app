@@ -38,13 +38,13 @@ const AuthProvider = function(props) {
     return axios
       .post(`${process.env.REACT_APP_API_URL}/api/users`, {firstName, lastName, email, password}, {withCredentials: true})
       .then(() => login(email, password))
-      .then(() => createFridge(user.id, user.firstName))
+      .then(() => createFridge(firstName))
       .catch(err => err);
   }
 
-  const createFridge = (id, name) => {
+  const createFridge = (name) => {
     return axios
-      .post(`${process.env.REACT_APP_API_URL}/api/fridges`, {id, name}, {withCredentials: true})
+      .post(`${process.env.REACT_APP_API_URL}/api/fridges`, {name}, {withCredentials: true})
       .then((res) => res)
       .catch(err => err);
   }

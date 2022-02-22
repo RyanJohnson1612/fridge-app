@@ -80,7 +80,7 @@ function ShoppingListItem(props) {
   return (
     <>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header className='item-modal-header' closeButton>
         </Modal.Header>
         <Modal.Body>
           <AddFridgeItem

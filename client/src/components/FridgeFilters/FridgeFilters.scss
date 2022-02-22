@@ -3,6 +3,7 @@
 .fridge-filters {
   padding: 10px;
   overflow-y: scroll;
+  height: 100%;
   &__header--mobile {
     display: none;
   }
@@ -17,14 +18,15 @@
     font-size: 1.25rem;
   }
 
-  & > div:first-of-type {
-    display: flex;
+  @include for-sm-down {
+    & > div:first-of-type {
+      display: flex;
 
-    .search-bar {
-      flex-basis: 100%;
-      margin-right: 10px;
+      .search-bar {
+        flex-basis: 100%;
+        margin-right: 10px;
+      }
     }
-
   }
 
   @include for-sm-down {

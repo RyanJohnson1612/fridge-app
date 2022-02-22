@@ -31,9 +31,7 @@ function Recipe(props) {
         <img src={image} alt="recipe-image" />
       </figure>
       <div className="card-meta">
-        <p className="get-recipe">
-          <a href={recipeURL}> Full Recipe</a>{" "}
-        </p>
+        <a className="get-recipe" href={recipeURL} target="_blank" rel="noreferrer"> Full Recipe</a>{" "}
         <ul className="dish-stats">
           <li>
             <GiCookingGlove size={30} opacity={0.5} />{" "}

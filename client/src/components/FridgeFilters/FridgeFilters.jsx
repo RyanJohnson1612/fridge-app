@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import SearchBar from "../SearchBar/SearchBar";
 import CheckList from "../CheckList/CheckList";
-import RangeSlider from "../RangeSlider/RangeSlider";
 import { BsSliders } from "react-icons/bs";
 import { Button } from "react-bootstrap";
 import classNames from 'classnames';
@@ -33,19 +32,17 @@ function FridgeFilters(props) {
         <h3>Categories</h3>
         <CheckList
           filters={props.filters}
-          options={['Fruit', 'Vegetable', 'Dairy', 'Grain', 'Meat', 'Seafood', 'Alternative Protein', 'Dessert', 'Condiments', 'Other']}
+          options={['fruit', 'vegetable', 'dairy', 'grain', 'meat', 'seafood', 'alternative protein', 'dessert', 'condiments', 'other']}
           filter="category"
           onSelect={props.onSelect}
         />
         <h3>Status</h3>
         <CheckList
           filters={props.filters}
-          options={['fresh', 'expiring soon', 'expired']}
+          options={['fresh', 'expiring soon', 'expires today', 'expired']}
           filter="status"
           onSelect={props.onSelect}
         />
-        {/* <h3>Days until expired</h3>
-        <RangeSlider onRange={props.onSearch.handleRange}/> */}
 
         <Button className="fridge-filters__apply-button" onClick={() => setDropdown(false)}>Apply Filters</Button>
       </div>

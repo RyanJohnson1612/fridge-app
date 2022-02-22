@@ -73,7 +73,7 @@ function Register(props) {
 
   return (
     <>
-      <h1>Register for Fridge App</h1>
+      <h1>Register for Fridgie</h1>
       <Form className="register__form" onSubmit={e => e.preventDefault()}>
         <Form.Group className="register__form-group">
           <Form.Label className={errors.firstName ? 'register__label register__label--error' : 'register__label'} htmlFor="firstName">First Name</Form.Label>
@@ -146,7 +146,7 @@ function Register(props) {
 
         { errors.server && <Alert variant={'danger'}>{errors.server}</Alert>}
       </Form>
-      <p>Already have and account? Login <Link to="/login">here</Link></p>
+      <p>Already have and account?  <br/> <Link to="/login">Login</Link></p>
     </>
   );
 }

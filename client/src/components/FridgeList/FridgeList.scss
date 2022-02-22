@@ -4,4 +4,45 @@
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px 10px 0;
+
+    &--primary {
+      margin: 0 5px;
+      background-color: teal;
+      border-color: teal;
+
+      &:hover, &:focus {
+        background-color: darken(teal, 10%);
+        border-color: darken(teal, 10%);
+      }
+    }
+
+    @include for-md-up {
+      display: block;
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      padding: 0;
+    }
+
+    &--cancel {
+      margin: 0 5px;
+      background-color: #dc3545;
+      border-color: #dc3545;
+
+      &:hover, &:focus {
+        background-color: darken(#dc3545, 10%);
+        border-color: darken(#dc3545, 10%);
+      }
+    }
+  }
+
+  .oh-no {
+    margin-top: 40px;
+    cursor: default;
+  }
 }
