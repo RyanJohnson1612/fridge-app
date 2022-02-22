@@ -14,7 +14,7 @@ INSERT INTO fridges (name, user_id) VALUES ('Bita', 4);
 INSERT INTO grocery_lists (user_id, name) VALUES (1, 'Party');
 INSERT INTO grocery_lists (user_id, name) VALUES (2, 'Pizza');
 INSERT INTO grocery_lists (user_id, name) VALUES (3, 'Nice');
-INSERT INTO grocery_lists (user_id, name) VALUES (1, 'Birthday');
+INSERT INTO grocery_lists (user_id, name) VALUES (1, 'BBQ');
 
 -- sample fridge items
 INSERT INTO fridge_items (name, fridge_id, expiry, category, image_URL, notes) VALUES ('bananas', 1, NULL, 'fruit', 'https://spoonacular.com/cdn/ingredients_500x500/bananas.jpg', NULL);
