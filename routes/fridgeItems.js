@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const protectedRoute = require('../middleware/protectedRoute');
 
 module.exports = (db) => {
 
@@ -18,19 +19,43 @@ module.exports = (db) => {
   });
 
   // GET specific food
-  router.get('/:id', function(req, res, next) {
+  router.get('/:id', protectedRoute, function(req, res, next) {
     const queryString =
-      `SELECT id, name, category, fridge_id, image_URL, notes, date_removed,
-       to_char(date_stored, 'Mon DD, YYYY') as date_stored,
-       to_char(expiry, 'Mon DD, YYYY') as expiry,
-       (expiry - date_stored) as expire_in,
-       (CURRENT_DATE - date_stored) as stored_since
-       FROM fridge_items
-       WHERE id = $1`;
-    const queryParams = [req.params.id]
+      `SELECT fridge_items.id as id, fridge_items.name as name,
+      category, fridge_id, image_URL, notes, date_removed,
+      to_char(date_stored, 'Mon DD, YYYY') as date_stored,
+      to_char(expiry, 'Mon DD, YYYY') as expiry,
+      (expiry - date_stored) as expire_in,
+      (CURRENT_DATE - date_stored) as stored_since
+      FROM fridge_items
+      JOIN fridges ON fridges.id = fridge_id
+      WHERE fridge_items.id = $1 AND user_id = $2`;
+    const queryParams = [req.params.id, req.user.id]
     db.query(queryString, queryParams).then(data => {
-      res.json(data.rows[0]);
+      console.log(data.rows);
+      const fridgeData = data.rows[0];
+      res.json(fridgeData);
     });
+
+    // const queryString =
+    //   `SELECT id, name, category, fridge_id, image_URL, notes, date_removed,
+    //    to_char(date_stored, 'Mon DD, YYYY') as date_stored,
+    //    to_char(expiry, 'Mon DD, YYYY') as expiry,
+    //    (expiry - date_stored) as expire_in,
+    //    (CURRENT_DATE - date_stored) as stored_since
+    //    FROM fridge_items
+    //    WHERE id = $1`;
+    // const queryParams = [req.params.id]
+    // db.query(queryString, queryParams).then(data => {
+    //   const fridgeData = data.rows[0];
+    //   console.log(fridgeData);
+    //   if (fridgeData && req.user && fridgeData.fridge_id === req.user.id) {
+    //     res.json(fridgeData);
+    //   } else {
+    //     res.json({});
+    //   }
+    // });
+
   });
 
   // DELETE specific food

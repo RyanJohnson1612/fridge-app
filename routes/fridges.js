@@ -19,8 +19,9 @@ module.exports = (db) => {
     command = command
       .replace(/status = /g, '')
       .replace("'fresh'", `expiry >= '${moment().add(4, 'days').format('YYYY-MM-DD')}' OR expiry IS NULL`)
-      .replace("'expiring soon'", `expiry BETWEEN '${moment().format('YYYY-MM-DD')}' AND '${moment().add(3, 'days').format('YYYY-MM-DD')}'`)
-      .replace("'expired'", `expiry <= '${moment().format('YYYY-MM-DD')}'`)
+      .replace("'expiring soon'", `expiry BETWEEN '${moment().add(1, 'days').format('YYYY-MM-DD')}' AND '${moment().add(3, 'days').format('YYYY-MM-DD')}'`)
+      .replace("'expires today'", `expiry = '${moment().format('YYYY-MM-DD')}'`)
+      .replace("'expired'", `expiry < '${moment().format('YYYY-MM-DD')}'`)
       .replace('search', 'name');
 
     console.log(command);
@@ -36,9 +37,9 @@ module.exports = (db) => {
   });
 
   /* POST create new fridge for user */
-  router.post('/', (req, res) => {
+  router.post('/', protectedRoute, (req, res) => {
     const command = `INSERT INTO fridges (name, user_id) VALUES ($1, $2);`;
-    db.query(command, [`${req.body.name}'s Fridge`, req.body.id])
+    db.query(command, [`${req.body.name}'s Fridge`, req.user.id])
       .then(data => {
         return res.status(201).json('Fridge Created').end();
       })
