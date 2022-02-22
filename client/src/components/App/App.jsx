@@ -1,9 +1,7 @@
 import React from "react";
 import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Navbar from '../Navbar/'
 import FridgeIndex from '../FridgeIndex';
@@ -25,6 +23,7 @@ function App() {
         <Navbar />
         <section className="content">
           <Routes>
+          <Route element={<Navigate to="/fridge" />} path="/"/>
 
           <Route
               path="/fridge"

@@ -59,6 +59,10 @@
 
 .filters label {
   margin: 5px;
+
+  &::before, &::after {
+    top: -2px;
+  }
 }
 
 .oh-no {
@@ -174,6 +178,13 @@
   background-color: #bb5274;
   padding: 0.5rem 1rem;
   border-radius: 100px;
+  text-decoration: none;
+
+  &:hover {
+    background-color: darken(#bb5274, 10%);
+    cursor: pointer;
+    color: white;
+  }
 }
 
 .get-recipe:active {
