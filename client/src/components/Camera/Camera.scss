@@ -1,8 +1,8 @@
 .camera {
   display: flex;
   justify-content: center;
-  width: 500px;
-  height: 375px;
+  width: 100%;
+  height: 100%;
   justify-content: center;
   position: relative;
 
@@ -10,7 +10,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 500px;
+    width: 100%;
     height: auto;
   }
 
@@ -37,8 +37,3 @@
   }
 }
 
-.prediction-list {
-  position: absolute;
-  top: 70px;
-  left: 675px;
-}

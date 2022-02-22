@@ -9,6 +9,7 @@ const defaultConstraints = {
 
 export default function useCamera(videoRef, canvasRef, constraints = defaultConstraints) {
   const [picture, setPicture] = useState();
+  const [loading, setLoading] = useState(false);
 
   const requestUserMedia = (onLoad) => {
     // Check if client supports navigator mediaDevices and getUserMedia API
@@ -25,6 +26,7 @@ export default function useCamera(videoRef, canvasRef, constraints = defaultCons
   };
 
   const takePicture = (cb) => {
+    setLoading(true);
     const canvas = canvasRef.current;
     canvas.width = 640;
     canvas.height = 480;
@@ -37,6 +39,7 @@ export default function useCamera(videoRef, canvasRef, constraints = defaultCons
       if(cb) {
         cb(img);
       }
+      setLoading(false);
     })
   };
 

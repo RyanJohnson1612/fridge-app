@@ -16,11 +16,17 @@
 }
 
 .add-item-button {
+  float: right;
   margin: 10px 0px 10px 5px;
   padding: 10px;
   font-weight: bold;
   background-color: #008080;
   border: teal;
+
+  &:hover {
+    background-color: darken(teal, 10%);
+    border-color: darken(teal, 10%);
+  }
 }
 
 .spin {
@@ -35,5 +41,81 @@
 
   .fridge-modal {
     width: 90%;
+  }
+}
+
+.form-image {
+  width: 100%;
+
+  &--open {
+    height: 375px;
+  }
+
+  &--closed {
+    height: 100%;
+  }
+
+  .camera {
+    height: 325px;
+  }
+
+  button {
+    float: right;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+
+  &__toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+    border: 3px solid teal;
+    background-color: #6ab9b965;
+    border-radius: 14px;
+    font-weight: bold;
+    cursor: pointer;
+
+    svg {
+      font-size: 2rem;
+      color: teal;
+    }
+
+    &:hover {
+      background-color: darken(#6ab9b965, 10%);
+    }
+  }
+
+  &__results {
+    img {
+      width: 100%;
+    }
+
+    button.btn-primary {
+      background-color: teal;
+      border-color: teal;
+
+      &:hover {
+        background-color: darken(teal, 10%);
+        border-color: darken(teal, 10%);
+      }
+    }
+  }
+}
+
+.form-name_item {
+  display: inline-block;
+  background-color: teal;
+  color: white;
+  font-weight: bold;
+  margin: 5px;
+  padding: 5px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken(teal, 10%);
   }
 }

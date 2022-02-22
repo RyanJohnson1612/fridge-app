@@ -24,7 +24,7 @@ function usePrediction(canvasRef, videoRef) {
         })
   }
 
-  return {image, predictions, getPredictions};
+  return {image, setImage, predictions, getPredictions};
 }
 
 export default usePrediction;

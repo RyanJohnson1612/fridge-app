@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { Button, Card, Form, Spinner } from 'react-bootstrap';
 import CardHeader from "react-bootstrap/esm/CardHeader";
@@ -7,6 +7,10 @@ import './AddFridgeItem.scss';
 import { useNavigate } from 'react-router-dom'
 import classNames from 'classnames';
 import { authContext } from '../../providers/AuthProvider';
+import { AiFillPlusCircle } from 'react-icons/ai';
+import Camera from '../Camera/Camera';
+import usePredictions from '../../hooks/usePredictions/usePredictions';
+
 axios.withCredentials = false;
 
 const AddFridgeItem = (props) => {
@@ -16,10 +20,17 @@ const AddFridgeItem = (props) => {
   const [category, setCategory] = useState("");
   const [notes, setNotes] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const [camera, setCamera] = useState(false);
   const navigate = useNavigate();
-
+  const { image, setImage, predictions, getPredictions } = usePredictions();
   const { user } = useContext(authContext);
+
+  useEffect(() => {
+    if(predictions.length > 0) {
+      setName(capitalize(predictions[0].name));
+    }
+    setCamera(false);
+  }, [image, predictions])
 
   const submitItem = (event) => {
     setLoading(true);
@@ -35,29 +46,41 @@ const AddFridgeItem = (props) => {
       queryExpiry = null;
     }
 
-    axios.get(`https://api.spoonacular.com/food/ingredients/search?apiKey=${process.env.REACT_APP_FOOD_API_KEY}&query=${name}`)
-      .then((response) => {
-        // console.log(response.data.results);
-        const itemList = response.data.results;
-        let image = "no.jpg";
+    if (!image) {
+      axios.get(`https://api.spoonacular.com/food/ingredients/search?apiKey=${process.env.REACT_APP_FOOD_API_KEY}&query=${name}`)
+        .then((response) => {
+          // console.log(response.data.results);
+          const itemList = response.data.results;
+          let image = "no.jpg";
 
-        for (const item of itemList) {
-          if (item.image !== "no.jpg" && item.image !== "no.png" && item.image.includes(dbName)) {
-            image = item.image;
-            break;
+          for (const item of itemList) {
+            if (item.image !== "no.jpg" && item.image !== "no.png" && item.image.includes(dbName)) {
+              image = item.image;
+              break;
+            }
           }
-        }
 
-        const image_URL = `https://spoonacular.com/cdn/ingredients_500x500/${image}`;
+          const image_URL = `https://spoonacular.com/cdn/ingredients_500x500/${image}`;
 
-        axios.post(`${process.env.REACT_APP_API_URL}/fridge_items`, { name: dbName, fridge_id: user.id, expiry: queryExpiry, category, image_URL, notes })
+          uploadFoodItem({ name: dbName, fridge_id: user.id, expiry: queryExpiry, category, image_URL, notes });
+        }).catch((err) => {
+          console.log("Error:", err.message)
+          swal("Oops!", "There was an error with your request. Please try again in a few minutes.", "error");
+        });
+    } else {
+      uploadFoodItem({ name: dbName, fridge_id: user.id, expiry: queryExpiry, category, image_URL: image, notes });
+    }
+  };
+
+  const uploadFoodItem = (data) => {
+    axios.post(`${process.env.REACT_APP_API_URL}/fridge_items`, data)
           .then(() => {
             setLoading(false);
 
             if (props.groceryName) {
               swal({
                 title: "Success!",
-                text: `${capName} has been added to your fridge.`,
+                text: `${capitalize(data.name)} has been added to your fridge.`,
                 icon: "success",
                 buttons: {
                   cancel: {
@@ -85,7 +108,7 @@ const AddFridgeItem = (props) => {
             } else {
               swal({
                 title: "Success!",
-                text: `${capName} has been added to your fridge.`,
+                text: `${capitalize(data.name)} has been added to your fridge.`,
                 icon: "success",
                 buttons: {
                   cancel: {
@@ -118,11 +141,7 @@ const AddFridgeItem = (props) => {
             console.log(err)
             swal("Oops!", "There was an error with your request. Please try again in a few minutes.", "error");
           });
-      }).catch((err) => {
-        console.log("Error:", err.message)
-        swal("Oops!", "There was an error with your request. Please try again in a few minutes.", "error");
-      });
-  };
+  }
 
   const list = ["grain", "vegetable", "fruit", "dairy", "meat", "seafood", "alternative protein", "dessert", "drinks", "condiment", "other"];
 
@@ -143,6 +162,29 @@ const AddFridgeItem = (props) => {
     <Card className={fridgeItemHeader}>
       <CardHeader className="add-item-header"><strong>Add a Fridge Item</strong></CardHeader>
       <Card.Body>
+        <div className={camera || image ? 'form-image form-image--open' : 'form-image form-image--closed'}>
+          { camera &&
+            <>
+              <Camera cb={getPredictions} />
+              <Button variant={'danger'} onClick={() => setCamera(false)}>Cancel</Button>
+            </>
+          }
+          { !camera && !image &&
+            <>
+              <Form.Label>Take Picture</Form.Label>
+              <div className="form-image__toggle" onClick={() => setCamera(true)} >
+                <AiFillPlusCircle/>
+              </div>
+            </>
+          }
+          { image && !camera &&
+            <div className="form-image__results">
+              <img src={image} alt={capitalize(name)} />
+              <Button variant={'danger'} onClick={() => setImage(null)}>Delete</Button>
+              <Button onClick={() => setCamera(true)}>Retake Picture</Button>
+            </div>
+          }
+        </div>
         <Form onSubmit={submitItem}>
           <Form.Group className="mb-3" controlId="formGroupName">
             <Form.Label>Food Item</Form.Label>
@@ -153,6 +195,24 @@ const AddFridgeItem = (props) => {
               value={name}
               onChange={event => setName(event.target.value)}
             />
+            {predictions.length > 0 &&
+            <Form.Text>
+              Incorrect food item?
+              <br/>
+              {
+                predictions.slice(1, 6).map(prediction => {
+                  return (
+                    <li
+                      className="form-name_item"
+                      onClick={() => setName(capitalize(prediction.name))}
+                      key={prediction.id}>
+                        {capitalize(prediction.name)}
+                    </li>
+                  )
+                })
+              }
+            </Form.Text>
+            }
           </Form.Group>
           <Form.Group className="mb-3" controlId="formGroupExpiry">
             <Form.Label>Expiry (Leave blank if unknown)</Form.Label>
