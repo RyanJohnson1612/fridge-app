@@ -1,18 +1,20 @@
-# Fridgie ✨
+<h1><p align="center"> ✨ Fridgie ✨ </h1></p>
+<p align="center"> Meet <strong> Fridgie: </strong> a digital replica of your fridge that keeps track of expiry dates 👀, creates shopping lists 📝, and generate recipes ideas 💡. </p>
 
-Meet **Fridgie**: a digital replica of your fridge that enables you to keep track of expiry dates 👀, create shopping lists 📝, and generate recipe ideas 💡.
 
-## Life just got easier.🤩
+## Life just got easier ❤️ 
 
 No more heartbreaks from discovering mould on the veggies you were about to use for dinner. With a quick glance at Fridgie, you can see the freshness status of all your ingredients, empowering you to use them up before they spoil.
 
-## Your taste buds will thank you.🥙
+## Your taste buds will thank you 🥙
 
-Not sure what to cook with ingredients you have at home? Fridgie’s got you. With the click of a button, Fridgie will generate a variety of recipes customized to you based on the items in your fridge.
+Not sure what to cook with ingredients you have at home? Fridgie’s got you. With the click of a button, Fridgie will generate a variety of recipes customized to _you_ based on the items in _your_ fridge.
 
-## Shopping made a breeze. 🛒
+## Shopping made a breeze 🛒
 
 Once an item in your fridge is used up, add it to your shopping list with a click of a button. Create multiple customized shopping lists for your different needs, mark items as purchased as you go, and with a quick “click”, place items from your shopping list back into your fridge
+
+## <h2><p align="center">  Save time. Save money. Live Happy.  <h2></p>
 
 
 
