@@ -48,7 +48,7 @@
   &__image {
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: fill;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
   }
@@ -134,6 +134,12 @@
     }
   }
 
+  .fridge-item-modal {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+
   @include for-sm-up {
     width: calc(50% - 30px);
   }
@@ -145,4 +151,8 @@
   @include for-custom-up(1500px) {
     width: calc(25% - 30px);
   }
+}
+
+.modal-content {
+  background-color: rgb(231, 223, 235);
 }

@@ -11,10 +11,11 @@ function FridgeItemIndex(props) {
   const [groceryList, setGroceryList] = useState(1);
   const [allGroceryLists, setAllGroceryLists] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [queryId, setQueryId] = useState(props.id || id)
 
   useEffect(() => {
 
-    axios.get(`${process.env.REACT_APP_API_URL}/fridge_items/${id}`, { withCredentials: true })
+    axios.get(`${process.env.REACT_APP_API_URL}/fridge_items/${queryId}`, { withCredentials: true })
       .then((results) => {
         setFridgeItem(results.data);
       })
@@ -46,6 +47,8 @@ function FridgeItemIndex(props) {
           setGroceryList={setGroceryList}
           groceryList={groceryList}
           allGroceryLists={allGroceryLists}
+          closeModal={props.closeModal}
+          modalId={props.id}
         />
       ) :
       <div>
