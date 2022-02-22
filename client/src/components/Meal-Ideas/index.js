@@ -4,12 +4,16 @@ import axios from "axios";
 import Recipe from "./Recipe";
 import "./Recipe.scss";
 import Spinner from "react-bootstrap/Spinner";
+import useCheckList from '../../hooks/useCheckList/useCheckList';
+import CheckBox from "../Checkbox/Checkbox";
 
 function MealIdeas() {
   const APP_ID = process.env.REACT_APP_EDAMAM_ID;
   const APP_KEY = process.env.REACT_APP_EDAMAM_KEY;
 
   const location = useLocation();
+
+
 
   //State to determine if loading spinner should be displayed
   const [loading, setLoading] = useState(true);
@@ -23,10 +27,8 @@ function MealIdeas() {
     "Pork-Free",
   ];
 
-  //State to manage multiple checkboxes used for dietRestrictions recipe filters
-  const [checkedState, setCheckedState] = useState(
-    new Array(dietRestrictions.length).fill(false)
-  );
+  //State and event handler to manage checkboxes used for dietRestrictions recipe filters
+  const { selected, handleCheck } = useCheckList();
 
   //State to keep track of filters checked off
   const [filters, setFilters] = useState([]);
@@ -53,7 +55,7 @@ function MealIdeas() {
     } else {
       getFridgeItems();
     }
-  }, [filters, fridgeQuery]);
+  }, [selected, fridgeQuery]);
 
   //Function that gets recipe data from Edamam API using axios call
   const getRecipes = () => {
@@ -102,26 +104,11 @@ function MealIdeas() {
     return expiringParsed;
   };
 
-  //Updates filters state based on dietaryRestrictions checked off, then update setCheckedState
-  const handleOnChange = (position) => {
-    const allFilters = [];
-    const updatedCheckedState = checkedState.map((item, index) =>
-      index === position ? !item : item
-    );
-    setCheckedState(updatedCheckedState);
-    updatedCheckedState.forEach((currentState, index) => {
-      if (currentState === true) {
-        allFilters.push(dietRestrictions[index]);
-      }
-    });
-    setFilters([...allFilters]);
-  };
-
   //Generate queryString based off of dietary restrictions that were checked off
   const healthLabels = () => {
     let result = "";
-    if (filters.length > 0) {
-      filters.forEach((filter) => {
+    if (selected.length > 0) {
+      selected.forEach((filter) => {
         result += `&health=${filter}`;
       });
     }
@@ -163,7 +150,7 @@ function MealIdeas() {
         )}
         <div className="filters">
           <b>Dietary Filters</b>
-          {dietRestrictions.map((name, index) => {
+          {/* {dietRestrictions.map((name, index) => {
             return (
               <div key={index}>
                 <input
@@ -177,7 +164,17 @@ function MealIdeas() {
                 <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
               </div>
             );
-          })}
+          })} */}
+          { dietRestrictions.map((name) => {
+            return (
+              <CheckBox
+                key={name}
+                onChecked={handleCheck}
+                option={name}
+              />
+            )
+          })
+          }
         </div>
       </div>
       {/*       <form className="search-form" onSubmit={getSearch}>
