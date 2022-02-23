@@ -19,7 +19,7 @@ Once an item in your fridge is used up, add it to your shopping list with a clic
 ## App Screenshots
 
 ### Fridge Page / Homepage
-!["Screenshot of fridge page"](https://github.com/RyanJohnson1612/fridge-app/blob/main/docs/add-fridge-item-page.png)
+!["Screenshot of fridge page"](https://github.com/RyanJohnson1612/fridge-app/blob/main/docs/fridge-page.png)
 
 ### Fridge Item
 !["Screenshot of fridge item"](https://github.com/RyanJohnson1612/fridge-app/blob/main/docs/fridge-item-card.png)
