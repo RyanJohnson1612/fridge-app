@@ -19,9 +19,22 @@ Once an item in your fridge is used up, add it to your shopping list with a clic
 ## App Screenshots
 
 ### Fridge Page / Homepage
-<!-- Template! !["Screenshot of fridge page"](https://github.com/Juicetin22/scheduler/blob/master/docs/overall-webpage.png) -->
+!["Screenshot of fridge page"](https://github.com/RyanJohnson1612/fridge-app/blob/general/readme/docs/fridge.png)
 
-### Other Screenshots
+### Fridge Item
+!["Screenshot of fridge item"](https://github.com/RyanJohnson1612/fridge-app/blob/general/readme/docs/fridge-item.png)
+
+### Add Fridge Item Page
+!["Screenshot of add fridge item page"](https://github.com/RyanJohnson1612/fridge-app/blob/general/readme/docs/add-fridge-item.png)
+
+### Grocery List
+!["Screenshot of grocery list"](https://github.com/RyanJohnson1612/fridge-app/blob/general/readme/docs/grocery-list.png)
+
+### Recipe Ideas
+!["Screenshot of recipe ideas page"](https://github.com/RyanJohnson1612/fridge-app/blob/general/readme/docs/recipe-ideas.png)
+
+### Registration
+!["Screenshot of registration page"](https://github.com/RyanJohnson1612/fridge-app/blob/general/readme/docs/registration.png)
 
 ## To Setup This Project
 
