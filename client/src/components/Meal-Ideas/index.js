@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import useCheckList from '../../hooks/useCheckList/useCheckList';
 import CheckBox from "../Checkbox/Checkbox";
 
+axios.withCredentials = false;
+
 function MealIdeas() {
   const navigate = useNavigate();
   const APP_ID = process.env.REACT_APP_EDAMAM_ID;
