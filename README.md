@@ -8,7 +8,7 @@ No more heartbreaks from discovering mould on the veggies you were about to use 
 
 ## Your taste buds will thank you 🥙
 
-Not sure what to cook with ingredients you have at home? Fridgie’s got you. With the click of a button, Fridgie will generate a variety of recipes customized to _you_ based on the items in _your_ fridge.
+No ideas for what to cook with the ingredients you have at home? No worries. With the click of a button, Fridgie will generate a variety of recipes customized to _you_ based on the items in _your_ fridge.
 
 ## Shopping made a breeze 🛒
 
