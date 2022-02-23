@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap'
 import useCheckList from '../../hooks/useCheckList/useCheckList';
 import useFridgeSearch from '../../hooks/useFridgeSearch/useFridgeSearch';
-import drool from "../../images/drool.png";
+import drool from "../../assets/images/drool.png";
 
 function FridgeList(props) {
   const { checkboxVisible, selectIngredients } = useFridgeSearch();
