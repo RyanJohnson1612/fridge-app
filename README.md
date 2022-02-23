@@ -19,22 +19,22 @@ Once an item in your fridge is used up, add it to your shopping list with a clic
 ## App Screenshots
 
 ### Fridge Page / Homepage
-!["Screenshot of fridge page"](https://github.com/RyanJohnson1612/fridge-app/blob/general/readme/docs/fridge.png)
+!["Screenshot of fridge page"](https://github.com/RyanJohnson1612/fridge-app/blob/main/docs/add-fridge-item-page.png)
 
 ### Fridge Item
-!["Screenshot of fridge item"](https://github.com/RyanJohnson1612/fridge-app/blob/general/readme/docs/fridge-item.png)
+!["Screenshot of fridge item"](https://github.com/RyanJohnson1612/fridge-app/blob/main/docs/fridge-item-card.png)
 
 ### Add Fridge Item Page
-!["Screenshot of add fridge item page"](https://github.com/RyanJohnson1612/fridge-app/blob/general/readme/docs/add-fridge-item.png)
+!["Screenshot of add fridge item page"](https://github.com/RyanJohnson1612/fridge-app/blob/main/docs/add-fridge-item-page.png)
 
 ### Grocery List
-!["Screenshot of grocery list"](https://github.com/RyanJohnson1612/fridge-app/blob/general/readme/docs/grocery-list.png)
+!["Screenshot of grocery list"](https://github.com/RyanJohnson1612/fridge-app/blob/main/docs/grocery-list-page.png)
 
 ### Recipe Ideas
-!["Screenshot of recipe ideas page"](https://github.com/RyanJohnson1612/fridge-app/blob/general/readme/docs/recipe-ideas.png)
+!["Screenshot of recipe ideas page"](https://github.com/RyanJohnson1612/fridge-app/blob/main/docs/recipe-ideas-page.png)
 
 ### Registration
-!["Screenshot of registration page"](https://github.com/RyanJohnson1612/fridge-app/blob/general/readme/docs/registration.png)
+!["Screenshot of registration page"](https://github.com/RyanJohnson1612/fridge-app/blob/main/docs/registration-page.png)
 
 ## To Setup This Project
 
