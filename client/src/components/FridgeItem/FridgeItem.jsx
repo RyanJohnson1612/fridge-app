@@ -40,8 +40,12 @@ const FridgeItem = (props) => {
 
     axios.post(`${process.env.REACT_APP_API_URL}/grocery_lists/${props.groceryList}`, { name: props.fridgeItem.name, grocery_list_id: props.groceryList, obtained: false })
       .then(() => {
-        swal("Success!", `${capitalize(props.fridgeItem.name)} has been added to your ${selectedGroceryList[0].name} grocery list.`, "success");
-
+        if (props.modalId) {
+          swal("Success!", `${capitalize(props.fridgeItem.name)} has been added to your ${selectedGroceryList[0].name} grocery list.`, "success");
+          props.closeModal();
+        } else {
+          swal("Success!", `${capitalize(props.fridgeItem.name)} has been added to your ${selectedGroceryList[0].name} grocery list.`, "success");
+        }
       })
       .catch(err => {
         console.log(err)
@@ -60,9 +64,14 @@ const FridgeItem = (props) => {
       if (confirm) {
         axios.put(`${process.env.REACT_APP_API_URL}/fridge_items/${props.fridgeItem.id}`)
           .then(() => {
-            swal("Success!", `${capitalize(props.fridgeItem.name)} has been removed from your fridge.`, "success");
-            props.setFridgeItem({});
-            navigate('/fridge');
+            if (props.modalId) {
+              swal("Success!", `${capitalize(props.fridgeItem.name)} has been removed from your fridge.`, "success");
+              props.closeModal();
+              navigate('/');
+            } else {
+              swal("Success!", `${capitalize(props.fridgeItem.name)} has been removed from your fridge.`, "success");
+              navigate('/fridge');
+            }
           })
           .catch(err => {
             console.log(err)
@@ -134,7 +143,7 @@ const FridgeItem = (props) => {
       <div className='click-from-item'>
         <div>
           <p>
-            Add to Grocery List? &nbsp;
+            Add to a Grocery List? &nbsp;
             <select name='groceryList' onChange={(event) => props.setGroceryList(parseInt(event.target.value))}>
               {groceryListOptions}
             </select>

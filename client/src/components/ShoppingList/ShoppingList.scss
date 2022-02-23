@@ -24,7 +24,7 @@
   background: #ffffff;
   text-align: center;
   margin: 4rem auto;
-  border: 2px solid #000000;
+  border-radius: 16px;
   padding-bottom: 32px;
   box-shadow: var(--card-shadow);
 }
@@ -32,20 +32,27 @@
 .grocery-title {
   margin: 20px 0;
   color: rgb(15, 15, 15);
-  font-size: 24px;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .list-header {
   display: flex;
+  position: relative;
 }
 
 .delete-grocery-list{
-  position: absolute
+  position: absolute;
+  right: 0;;
 }
 
 .delete-grocery-list {
   padding: 5px;
   cursor: pointer;
+
+  &:hover {
+    color: darken(#626568, 40%);
+  }
 }
 
 .complete {
@@ -61,21 +68,22 @@
 
 .item-input {
   padding: 14px 32px 14px 16px;
-  border: 2px solid #1aacb1;
+  border: 2px solid teal;
   outline: none;
   width: 300px;
-  box-shadow: 1px 2px gray;
+  border-radius: 5px 0 0 5px;
+  // box-shadow: 1px 2px gray;
 }
 
 .item-button {
   padding: 16px;
   border: none;
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 5px 5px 0;
   cursor: pointer;
   outline: none;
-  background: #1aacb1;
+  background: teal;
   color: #fff;
-  box-shadow: 1px 2px gray;
+  // box-shadow: 1px 2px gray;
 }
 
 .edit {
@@ -89,11 +97,13 @@
 .item-row {
   display: flex;
   justify-content: space-between;
-  margin: 4px auto;
+  margin: 10px auto;
   padding: 10px;
-  border: 1px solid #000000;
+  border: 1px solid #dfdfdf;
+  border-radius: 5px;
   width: 90%;
-  box-shadow: 1px 2px gray;
+  // box-shadow: 1px 2px gray;
+  box-shadow: 2px 3px 5px 2px rgba(0,0,0,0.10);
 }
 
 .item-row div {

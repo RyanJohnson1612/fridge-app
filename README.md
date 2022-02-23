@@ -1,6 +1,22 @@
-# Fridge App (name WIP)
+<h1><p align="center"> ✨ Fridgie ✨ </h1></p>
+<p align="center"> Meet <strong> Fridgie: </strong> a digital replica of your fridge that keeps track of expiry dates 👀, creates shopping lists 📝, and generate recipes ideas 💡. </p>
 
-A fridge and grocery manager app that allows users to keep track of their food products along with their expiry dates, with the ultimate goal of minimizing food waste.
+
+## Life just got easier ❤️ 
+
+No more heartbreaks from discovering mould on the veggies you were about to use for dinner. With a quick glance at Fridgie, you can see the freshness status of all your ingredients, empowering you to use them up before they spoil.
+
+## Your taste buds will thank you 🥙
+
+No ideas for what to cook with the ingredients you have at home? No worries. With the click of a button, Fridgie will generate a variety of recipes customized to _you_ based on the items in _your_ fridge.
+
+## Shopping made a breeze 🛒
+
+Once an item in your fridge is used up, add it to your shopping list with a click of a button. Create multiple customized shopping lists for your different needs, mark items as purchased as you go, and with a quick “click”, place items from your shopping list back into your fridge
+
+## <h2><p align="center">  Save time. Save money. Live Happy.  <h2></p>
+
+
 
 ## To Setup This Project
 

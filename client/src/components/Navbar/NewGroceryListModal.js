@@ -4,10 +4,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../../providers/AuthProvider";
 
-function NewGroceryListModal({ setAllGroceryLists, allGroceryLists }) {
+function NewGroceryListModal({ setAllGroceryLists, allGroceryLists, onClick }) {
   //States responsible for modal display
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => { onClick(false); setShow(true) };
   const [show, setShow] = useState(false);
 
   const [input, setInput] = useState("");

@@ -22,7 +22,7 @@ it('renders without crashing', () => {
         </Routes>
       </BrowserRouter>
     </AuthProvider>, container);
-  expect(screen.getByText('Register for Fridge App')).toBeInTheDocument();
+  expect(screen.getByText('Register for Fridgie')).toBeInTheDocument();
 });
 
 it('displays errors when a field is not filled in', () => {

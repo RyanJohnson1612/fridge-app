@@ -14,7 +14,9 @@ const usersRouter = require('./routes/users');
 const fridgesRouter = require('./routes/fridges');
 const fridgeItemsRouter = require('./routes/fridgeItems');
 const groceryListsRouter = require('./routes/groceryLists');
-const groceryListItemsRouter = require("./routes/groceryListItems");
+const groceryListItemsRouter = require('./routes/groceryListItems');
+const recipeRouter = require('./routes/recipeItems');
+const imagesRouter = require("./routes/images");
 
 const app = express();
 
@@ -39,6 +41,8 @@ app.use('/api/fridges', fridgesRouter(db));
 app.use('/fridge_items', fridgeItemsRouter(db));
 app.use('/grocery_lists', groceryListsRouter(db));
 app.use("/grocery_items", groceryListItemsRouter(db));
+app.use('/recipeItems', recipeRouter(db));
+app.use('/api/images', imagesRouter(db));
 
 
 module.exports = app;

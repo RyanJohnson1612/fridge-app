@@ -59,6 +59,62 @@
 
 .filters label {
   margin: 5px;
+
+  &::before, &::after {
+    top: -2px;
+  }
+}
+
+.oh-no {
+  text-align: center;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  border-radius: 16px;
+
+  display: block;
+  position: relative;
+  border: solid 1px #6e7491;
+  padding: 40px 40px;
+  max-width: 800px;
+  width: 70%;
+  margin: 20px auto 0;
+  font-size: 17px;
+  line-height: 28px;
+  transform: rotate(-1deg);
+  box-shadow: 3px 15px 8px -10px rgba(0, 0, 0, 0.3);
+  transition: all 0.13s ease-in;
+  cursor: pointer;
+
+  margin-top: 0;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  letter-spacing: -1px;
+}
+
+.oh-no img {
+  width:35%;
+}
+
+.oh-no h5 {
+  opacity: 80%;
+}
+
+.oh-no:hover {
+  transform: translateY(-10px) rotate(1deg);
+  box-shadow: 3px 15px 8px -10px rgba(0, 0, 0, 0.3);
+}
+
+.oh-no:hover .border {
+  transform: translateY(4px) rotate(-5deg);
+}
+
+.border {
+  position: absolute;
+  transition: all 0.13s ease-in;
 }
 
 .recipes-list {
@@ -119,6 +175,13 @@
   background-color: #bb5274;
   padding: 0.5rem 1rem;
   border-radius: 100px;
+  text-decoration: none;
+
+  &:hover {
+    background-color: darken(#bb5274, 10%);
+    cursor: pointer;
+    color: white;
+  }
 }
 
 .get-recipe:active {
