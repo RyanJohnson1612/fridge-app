@@ -98,42 +98,44 @@ const FridgeItem = (props) => {
     <div className='fridge-item-box'>
       <div className='body'>
         <div className='image-container'>
-          <img src={props.fridgeItem.image_url} className='image' alt="" />
+          <figure>
+            <img src={props.fridgeItem.image_url} className='image' alt="" />
+          </figure>
         </div>
         <br />
         <table className='properties'>
           <tbody>
             <tr>
-              <td width="40%">Food Item:</td>
-              <td><strong>{ props.fridgeItem.name ? capitalize(props.fridgeItem.name) : "" }</strong></td>
+              <td width="40%"><strong>Food Item:</strong></td>
+              <td>{ props.fridgeItem.name ? capitalize(props.fridgeItem.name) : "" }</td>
             </tr>
             <tr>
-              <td>Category:</td>
-              <td><strong>{ props.fridgeItem.category ? capitalize(props.fridgeItem.category) : "" }</strong></td>
+              <td><strong>Category:</strong></td>
+              <td>{ props.fridgeItem.category ? capitalize(props.fridgeItem.category) : "" }</td>
             </tr>
             <tr>
-              <td>Date Purchased:</td>
-              <td><strong>{props.fridgeItem.date_stored}</strong></td>
+              <td><strong>Date Purchased:</strong></td>
+              <td>{props.fridgeItem.date_stored}</td>
             </tr>
             <tr>
-              <td>Been in the Fridge since:</td>
-              <td><strong>{daysAgo(props.fridgeItem.stored_since)}</strong></td>
+              <td><strong>Been in the Fridge since:</strong></td>
+              <td>{daysAgo(props.fridgeItem.stored_since)}</td>
             </tr>
             { props.fridgeItem.expiry &&
               <tr>
-                <td>Expiry Date:</td>
-                <td><strong>{props.fridgeItem.expiry}</strong></td>
+                <td><strong>Expiry Date:</strong></td>
+                <td>{props.fridgeItem.expiry}</td>
               </tr>
             }
             { props.fridgeItem.expiry &&
               <tr>
-                <td>Days Until Expiry:</td>
-                <td className={expiredClass}><strong>{expiredAgo(props.fridgeItem.expire_in)}</strong></td>
+                <td><strong>Days Until Expiry:</strong></td>
+                <td className={expiredClass}>{expiredAgo(props.fridgeItem.expire_in)}</td>
               </tr>
             }
             <tr>
-              <td>Notes:</td>
-              <td><strong>{props.fridgeItem.notes}</strong></td>
+              <td><strong>Notes:</strong></td>
+              <td>{props.fridgeItem.notes}</td>
             </tr>
           </tbody>
         </table>

@@ -1,15 +1,12 @@
-body {
-  background-color: #e2cae963;
-}
-
 .image {
-  max-height: 100%;
+  max-height: 350px;
   max-width: 100%;
   width: auto;
   height: 80%;
   display: block;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 5px;
 }
 
 .properties {
@@ -18,12 +15,6 @@ body {
   margin-right: auto;
   border-collapse: separate;
   border-spacing: 15px 10px;
-  // background-color: rgb(218, 230, 240);
-  background-color: rgb(228, 233, 235);
-  border: 0.1em solid;
-  border-color: rgb(138, 138, 138);
-  font-family: 'Raleway', sans-serif;
-  box-shadow: 5px 5px gray;
 }
 
 .click-from-item {
@@ -39,9 +30,10 @@ button {
 }
 
 select {
+  padding: 4px 10px;
+  border: 1px solid #c7c7c7;;
   border-radius: 5px;
-  background-color: rgb(218, 230, 240);
-  border-style: groove;
+  cursor: pointer;
 }
 
 .expired {
@@ -102,6 +94,20 @@ select {
     max-height: 315px;
   }
 
+}
+
+.modal-content {
+  border: 0;
+  border-radius: 16px;
+}
+
+.item-modal-header {
+  border-bottom: 0;
+  padding: 1.25rem;
+
+  & ~ div {
+    padding: 0;
+  }
 }
 
 // original fridge item page
