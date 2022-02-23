@@ -9,7 +9,7 @@ function Camera(props) {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
-  const { takePicture, requestUserMedia, loading } = useCamera(videoRef, canvasRef);
+  const { takePicture, requestUserMedia } = useCamera(videoRef, canvasRef);
 
   useEffect(() => {
     requestUserMedia(() => {
@@ -19,12 +19,12 @@ function Camera(props) {
 
   return (
     <div className="camera">
-      <video className="camera__video" ref={videoRef}></video>
+      <video id="camera" className="camera__video" ref={videoRef}></video>
       <canvas className="camera__canvas" ref={canvasRef}></canvas>
       <button className="camera__button" onClick={() => takePicture(props.cb)}>
         <BsFillCameraFill />
       </button>
-      { loading && <div className="camera__loading"><Spinner animation="border" variant="white" /></div> }
+      { props.loading && <div className="camera__loading"><Spinner animation="border" variant="white" /></div> }
     </div>
   );
 }
