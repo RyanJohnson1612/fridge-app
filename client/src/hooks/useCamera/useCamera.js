@@ -33,7 +33,7 @@ export default function useCamera(videoRef, canvasRef, constraints = defaultCons
     canvas.height = 480;
     const context = canvas.getContext('2d');
     const video = document.getElementsByClassName("camera__video")[0];
-    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    context.drawImage(video, 0, 0);
     canvas.toBlob(img => {
       setPicture(img);
       context.clearRect(0, 0, canvas.width, canvas.height);
