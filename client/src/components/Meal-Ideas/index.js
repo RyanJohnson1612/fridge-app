@@ -6,7 +6,7 @@ import "./Recipe.scss";
 import Spinner from "react-bootstrap/Spinner";
 import drool from "../../assets/images/drool.png";
 import { useNavigate } from "react-router-dom";
-import useCheckList from '../../hooks/useCheckList/useCheckList';
+import useCheckList from "../../hooks/useCheckList/useCheckList";
 import CheckBox from "../Checkbox/Checkbox";
 
 function MealIdeas() {
@@ -15,8 +15,6 @@ function MealIdeas() {
   const APP_KEY = process.env.REACT_APP_EDAMAM_KEY;
 
   const location = useLocation();
-
-
 
   //State to determine if loading spinner should be displayed
   const [loading, setLoading] = useState(true);
@@ -45,6 +43,9 @@ function MealIdeas() {
 
   //Set to false when EDAMAM API returns no recipes
   const [recipesPresent, setRecipesPresent] = useState(true);
+
+  //Set to true if fridge has no items to search
+  const [noFridgeItems, setNoFridgeItems] = useState(false);
 
   useEffect(() => {
     getRecipes();
@@ -91,8 +92,8 @@ function MealIdeas() {
           .join(", ");
         setfridgeQuery(closestToExpiry);
         setExpiring(fridgeQuery);
+        setNoFridgeItems(results.data.length === 0);
       })
-      .then(() => getRecipes())
       .catch((error) => console.log(`Error: ${error.message}`));
   };
 
@@ -114,7 +115,16 @@ function MealIdeas() {
   return (
     <div className="Recipes-index">
       <div className="top-page">
-        {expiring ? (
+        {noFridgeItems ? (
+          <div className="oh-no" onClick={handleNoRecipe}>
+            <h5>
+              Oh no! There are no recipe recommendations for you.
+              <br />
+              Try adding some items in your fridge first.
+            </h5>
+            <img className="drool" src={drool} alt="Drool" />
+          </div>
+        ) : expiring ? (
           <p>
             The three fridge items closest to expiring are:
             <span> {expiring}. </span> <br />
@@ -127,39 +137,22 @@ function MealIdeas() {
           </p>
         )}
 
-        {loading && (
+        {loading && !noFridgeItems && (
           <div>
             <Spinner animation="border" variant="secondary" />
           </div>
         )}
-        <div className="filters">
-          <b>Dietary Filters</b>
-          {/* {dietRestrictions.map((name, index) => {
-            return (
-              <div key={index}>
-                <input
-                  type="checkbox"
-                  id={`custom-checkbox-${index}`}
-                  name={name}
-                  value={name}
-                  checked={checkedState[index]}
-                  onChange={() => handleOnChange(index)}
-                />
-                <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
-              </div>
-            );
-          })} */}
-          { dietRestrictions.map((name) => {
-            return (
-              <CheckBox
-                key={name}
-                onChecked={handleCheck}
-                option={name}
-              />
-            )
-          })
-          }
-        </div>
+
+        {!noFridgeItems && recipesPresent && (
+          <div className="filters">
+            <b>Dietary Filters</b>
+            {dietRestrictions.map((name) => {
+              return (
+                <CheckBox key={name} onChecked={handleCheck} option={name} />
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {recipesPresent ? (
