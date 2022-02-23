@@ -94,7 +94,6 @@ function MealIdeas() {
         setExpiring(fridgeQuery);
         setNoFridgeItems(results.data.length === 0);
       })
-      .then(() => getRecipes())
       .catch((error) => console.log(`Error: ${error.message}`));
   };
 
@@ -119,7 +118,7 @@ function MealIdeas() {
         {noFridgeItems ? (
           <div className="oh-no" onClick={handleNoRecipe}>
             <h5>
-              Oh no! There are no recipe recommedations for you.
+              Oh no! There are no recipe recommendations for you.
               <br />
               Try adding some items in your fridge first.
             </h5>
