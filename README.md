@@ -26,26 +26,6 @@ Once an item in your fridge is used up, add it to your shopping list with a clic
 
 ## <h2><p align="center">  Save time. Save money. Live Happy.  <h2></p>
 
-## App Screenshots
-
-### Fridge Page / Homepage
-!["Screenshot of fridge page"](https://github.com/RyanJohnson1612/fridge-app/blob/main/docs/fridge-page.png)
-
-### Fridge Item
-!["Screenshot of fridge item"](https://github.com/RyanJohnson1612/fridge-app/blob/main/docs/fridge-item-card.png)
-
-### Add Fridge Item Page
-!["Screenshot of add fridge item page"](https://github.com/RyanJohnson1612/fridge-app/blob/main/docs/add-fridge-item-page.png)
-
-### Grocery List
-!["Screenshot of grocery list"](https://github.com/RyanJohnson1612/fridge-app/blob/main/docs/grocery-list-page.png)
-
-### Recipe Ideas
-!["Screenshot of recipe ideas page"](https://github.com/RyanJohnson1612/fridge-app/blob/main/docs/recipe-ideas-page.png)
-
-### Registration
-!["Screenshot of registration page"](https://github.com/RyanJohnson1612/fridge-app/blob/main/docs/registration-page.png)
-
 ## To Setup This Project
 
 Note: Both server and client code should be running in seperate terminals
