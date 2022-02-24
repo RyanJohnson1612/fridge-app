@@ -10,7 +10,7 @@ const pool = new Pool({
   password: DB_PASSWORD,
   port: DB_PORT,
   database: process.env.NODE_ENV !== 'test' ? DB_DATABASE : TEST_DATABASE,
-  ssl: true
+  ssl: { rejectUnauthorized: false }
 });
 
 pool.connect().then(() => {
