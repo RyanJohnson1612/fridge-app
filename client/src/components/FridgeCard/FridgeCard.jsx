@@ -49,7 +49,7 @@ function FridgeCard(props) {
           <h4 className="fridge-card__name">{item.name}</h4>
           <h5 className="fridge-card__date">
             <BsFillClockFill />
-            <span>Added {moment(item.date_stored).fromNow()}</span>
+            <span>Added {moment(item.time_stored).fromNow()}</span>
           </h5>
         </div>
       </button>
