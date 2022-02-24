@@ -66,7 +66,7 @@ module.exports = (db) => {
           const token = createToken(user);
           console.log(token);
           // create cookie for access token that lasts 30 days
-          res.cookie('access-token', token, { maxAge: 2592000000, httpOnly: true, sameSite: 'none', secure: true });
+          res.cookie('access-token', token, { maxAge: 2592000000, httpOnly: true, sameSite: 'lax' });
           // create cookie with basic user info
           res.cookie(
             'user',
@@ -76,7 +76,7 @@ module.exports = (db) => {
               firstName: user.first_name,
               lastName: user.last_name
             }),
-            { maxAge: 2592000000, sameSite: 'none', secure: true }
+            { maxAge: 2592000000, sameSite: 'lax' }
           );
 
           return res.status(200).json({
@@ -103,8 +103,7 @@ module.exports = (db) => {
       'expired',
       {
         expires: new Date(Date.now() + 3000),
-        sameSite: 'none', 
-        secure: true
+        sameSite: 'lax'
       }
     );
     res.status(200).json('Logged out');
