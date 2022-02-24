@@ -5,7 +5,9 @@
 ## Life just got easier ❤️ 
 
 No more heartbreaks from discovering mould on the veggies you were about to use for dinner. With a quick glance at Fridgie, you can see the freshness status of all your ingredients, reminding you to use them up before they spoil. Just snap a quick photo of your food to add it to your app...Fridgie's smart enough to identify the food item for you. 
-<p align="center"> <img src="https://user-images.githubusercontent.com/79466802/155426993-c6a56049-8ea4-4e05-a70b-f91cc7ece326.gif"> </p>
+<p align="center"> <img src="https://user-images.githubusercontent.com/79466802/155456802-f7033f51-842c-4a64-b5de-4b49e2202774.gif"> </p>
+
+
 
 
 
