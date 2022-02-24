@@ -11,6 +11,7 @@ body {
   font-family: apple-system, BlinkMacSystemFont, $inter, 'Segoe UI', 'Roboto', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
   sans-serif !important;
+  overflow-x: hidden;
 }
 
 code {
@@ -20,10 +21,4 @@ code {
 
 * {
   box-sizing: border-box;
-}
-
-@include for-sm-down {
-  body {
-    overflow-x: hidden;
-  }
 }
