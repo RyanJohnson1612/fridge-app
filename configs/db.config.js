@@ -6,7 +6,7 @@ const {DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE, DB_PORT, TEST_DATABASE} = pro
 
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL + '?sslmode=require',
   ssl: { rejectUnauthorized: false }
 });
 
