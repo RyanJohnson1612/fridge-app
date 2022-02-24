@@ -4,6 +4,8 @@ import { Button } from 'react-bootstrap'
 import useCheckList from '../../hooks/useCheckList/useCheckList';
 import useFridgeSearch from '../../hooks/useFridgeSearch/useFridgeSearch';
 import drool from "../../assets/images/drool.png";
+import Spinner from "react-bootstrap/Spinner";
+
 
 function FridgeList(props) {
   const { checkboxVisible, selectIngredients } = useFridgeSearch();
@@ -30,17 +32,22 @@ function FridgeList(props) {
         }
       </div>
       <div className="fridge-list">
-        {
-          parsedItems.length > 0 ? parsedItems :
+        { parsedItems.length === 0 && !props.loading &&
           <div className="oh-no">
-          <h5>
-            Oh no. We couldn't find any items in your fridge based on these filters...
-            <br />
-            try changing your search criteria!
-          </h5>
-          <img className="drool" src={drool} alt="Drool" />
-        </div>
+            <h5>
+              Oh no. We couldn't find any items in your fridge based on these filters...
+              <br />
+              try changing your search criteria!
+            </h5>
+            <img className="drool" src={drool} alt="Drool" />
+          </div>
         }
+        { parsedItems.length > 0 && !props.loading && parsedItems}
+        {props.loading && (
+          <div>
+            <Spinner animation="border" variant="secondary" />
+          </div>
+        )}
       </div>
     </>
   )

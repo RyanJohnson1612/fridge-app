@@ -3,7 +3,8 @@ import FridgeFilters from "../FridgeFilters/";
 import useFridgeSearch from "../../hooks/useFridgeSearch/useFridgeSearch";
 
 function FridgeIndex() {
-  const { items, filters, handleSearch, handleSelect, } = useFridgeSearch();
+
+  const { items, filters, handleSearch, handleSelect, loading} = useFridgeSearch();
 
   return (
     <section className="fridge-index">
@@ -16,7 +17,7 @@ function FridgeIndex() {
       </aside>
       <div className="fridge-index__content">
         <h1>My Fridge</h1>
-        <FridgeList items={items} />
+        <FridgeList items={items} loading={loading} />
       </div>
     </section>
   )
