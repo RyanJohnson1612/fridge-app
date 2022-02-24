@@ -1,5 +1,6 @@
 // Database connections
 const { Pool } = require('pg');
+pg.defaults.ssl = true;
 
 const {DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE, DB_PORT, TEST_DATABASE} = process.env;
 
