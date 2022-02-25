@@ -21,7 +21,7 @@ const imagesRouter = require("./routes/images");
 const app = express();
 
 app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'https://stupefied-hopper-ff0780.netlify.app');
+  res.header('Access-Control-Allow-Origin', process.env.CLIENT_URL);
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.setHeader('Access-Control-Allow-Credentials', true);
@@ -35,7 +35,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
-
 app.use('/api/users', usersRouter(db));
 app.use('/api/fridges', fridgesRouter(db));
 app.use('/fridge_items', fridgeItemsRouter(db));
@@ -43,6 +42,5 @@ app.use('/grocery_lists', groceryListsRouter(db));
 app.use("/grocery_items", groceryListItemsRouter(db));
 app.use('/recipeItems', recipeRouter(db));
 app.use('/api/images', imagesRouter(db));
-
 
 module.exports = app;
