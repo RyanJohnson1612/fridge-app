@@ -4,6 +4,7 @@ import { useSearchParams, useLocation } from "react-router-dom";
 import axios from 'axios';
 
 function useFridgeSearch() {
+  const [loading, setLoading] = useState(true);
   const [items, setItems] = useState([]);
   const [filters, setFilters] = useState({
     search: null,
@@ -42,6 +43,7 @@ function useFridgeSearch() {
     axios.get(`${process.env.REACT_APP_API_URL}/api/fridges${queryString}`, {withCredentials: true})
       .then(res => {
         setItems(res.data);
+        setLoading(false);
       })
       .catch(err => console.log(err));
   }
@@ -58,7 +60,7 @@ function useFridgeSearch() {
     searchFridge();
   }, [filters]);
 
-  return { items, filters, handleSearch, handleSelect, checkboxVisible, selectIngredients}
+  return { items, filters, handleSearch, handleSelect, checkboxVisible, selectIngredients, loading}
 }
 
 export default useFridgeSearch;

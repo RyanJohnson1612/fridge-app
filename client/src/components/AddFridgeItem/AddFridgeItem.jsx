@@ -22,7 +22,7 @@ const AddFridgeItem = (props) => {
   const [loading, setLoading] = useState(false);
   const [camera, setCamera] = useState(false);
   const navigate = useNavigate();
-  const { image, setImage, predictions, getPredictions } = usePredictions();
+  const { image, setImage, predictions, getPredictions, predictionsLoading } = usePredictions();
   const { user } = useContext(authContext);
 
   useEffect(() => {
@@ -163,16 +163,16 @@ const AddFridgeItem = (props) => {
     <Card className={fridgeItemHeader}>
       <CardHeader className="add-item-header"><strong>Add a Fridge Item</strong></CardHeader>
       <Card.Body>
+        <Form.Label>Take a Picture</Form.Label>
         <div className={camera || image ? 'form-image form-image--open' : 'form-image form-image--closed'}>
           { camera &&
             <>
-              <Camera cb={getPredictions} />
+              <Camera cb={getPredictions} loading={predictionsLoading} />
               <Button variant={'danger'} onClick={() => setCamera(false)}>Cancel</Button>
             </>
           }
           { !camera && !image &&
             <>
-              <Form.Label>Take Picture</Form.Label>
               <div className="form-image__toggle" onClick={() => setCamera(true)} >
                 <AiFillPlusCircle/>
               </div>

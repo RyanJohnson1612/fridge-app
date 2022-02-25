@@ -4,37 +4,27 @@
 
 ## Life just got easier ❤️ 
 
-No more heartbreaks from discovering mould on the veggies you were about to use for dinner. With a quick glance at Fridgie, you can see the freshness status of all your ingredients, empowering you to use them up before they spoil.
+No more heartbreaks from discovering mould on the veggies you were about to use for dinner. With a quick glance at Fridgie, you can see the freshness status of all your ingredients, reminding you to use them up before they spoil. Just snap a quick photo of your food to add it to your app...Fridgie's smart enough to identify the food item for you. 
+<p align="center"> <img src="https://user-images.githubusercontent.com/79466802/155456802-f7033f51-842c-4a64-b5de-4b49e2202774.gif"> </p>
+
+
+
+
 
 ## Your taste buds will thank you 🥙
 
 No ideas for what to cook with the ingredients you have at home? No worries. With the click of a button, Fridgie will generate a variety of recipes customized to _you_ based on the items in _your_ fridge.
 
+<p align="center"> <img src="https://user-images.githubusercontent.com/79466802/155428838-73be8928-7191-46fb-9527-1ec7d49d3b25.gif"> </p>
+
+
 ## Shopping made a breeze 🛒
 
-Once an item in your fridge is used up, add it to your shopping list with a click of a button. Create multiple customized shopping lists for your different needs, mark items as purchased as you go, and with a quick “click”, place items from your shopping list back into your fridge.
+Once an item in your fridge is used up, add it to your shopping list with a click of a button. Create multiple customized shopping lists for your different needs, mark items as purchased as you go, and with a quick “click”, place items from your shopping list back into your fridge. 
+
+<p align="center"> <img src="https://user-images.githubusercontent.com/79466802/155426262-541e3684-d6ed-4c4e-b0b7-72678c693aa0.gif"> </p>
 
 ## <h2><p align="center">  Save time. Save money. Live Happy.  <h2></p>
-
-## App Screenshots
-
-### Fridge Page / Homepage
-!["Screenshot of fridge page"](https://github.com/RyanJohnson1612/fridge-app/blob/main/docs/fridge-page.png)
-
-### Fridge Item
-!["Screenshot of fridge item"](https://github.com/RyanJohnson1612/fridge-app/blob/main/docs/fridge-item-card.png)
-
-### Add Fridge Item Page
-!["Screenshot of add fridge item page"](https://github.com/RyanJohnson1612/fridge-app/blob/main/docs/add-fridge-item-page.png)
-
-### Grocery List
-!["Screenshot of grocery list"](https://github.com/RyanJohnson1612/fridge-app/blob/main/docs/grocery-list-page.png)
-
-### Recipe Ideas
-!["Screenshot of recipe ideas page"](https://github.com/RyanJohnson1612/fridge-app/blob/main/docs/recipe-ideas-page.png)
-
-### Registration
-!["Screenshot of registration page"](https://github.com/RyanJohnson1612/fridge-app/blob/main/docs/registration-page.png)
 
 ## To Setup This Project
 

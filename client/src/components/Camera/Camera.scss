@@ -7,6 +7,11 @@
   position: relative;
 
   &__video, &__canvas {
+    width: 100%;
+    height: auto;
+  }
+
+  &__canvas {
     position: absolute;
     top: 0;
     left: 0;
