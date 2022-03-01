@@ -91,6 +91,7 @@ module.exports = (db) => {
         }
       })
       .catch(err => {
+        console.log(err);
         return res.status(500).json({error: 'Error logging in, please try again', err}).end();
       });
   });
