@@ -1,8 +1,6 @@
 import { useState, useEffect, createContext } from "react";
 import { getUser, deleteCookie } from "../helpers/helpers";
 import axios from 'axios';
-axios.withCredentials = true;
-axios.credentials = 'include';
 
 export const authContext = createContext();
 

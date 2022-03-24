@@ -12,9 +12,15 @@ function usePredictions() {
     let data = new FormData();
       data.append('file', img, 'img.png');
       axios
-        .post(`${process.env.REACT_APP_API_URL}/api/images`, data, { headers: {
-          'Content-Type': img.type
-        }})
+        .post(
+          `${process.env.REACT_APP_API_URL}/api/images`, data,
+          {
+            headers: {
+            'Content-Type': img.type
+            },
+            withCredentials: true
+          }
+        )
         .then(res => {
           setPredictions(res.data.predictions);
           setImage(res.data.image);

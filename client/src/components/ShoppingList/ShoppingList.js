@@ -72,7 +72,8 @@ function ShoppingList() {
         name: item.text,
         grocery_list_id: id,
         obtained: false,
-      })
+      },
+      { withCredentials: true })
       .then((res) => {
         const newItems = [
           {
@@ -111,7 +112,8 @@ function ShoppingList() {
           .put(`${process.env.REACT_APP_API_URL}/grocery_items/${itemId}`, {
             name: newValue.text,
             obtained: item.isPurchased,
-          })
+          },
+          { withCredentials: true })
           .then(() => {})
           .catch((err) => {
             console.log(err);
@@ -141,7 +143,7 @@ function ShoppingList() {
 
     setItems(removeArr);
     axios
-      .delete(`${process.env.REACT_APP_API_URL}/grocery_items/${id}`)
+      .delete(`${process.env.REACT_APP_API_URL}/grocery_items/${id}`, { withCredentials: true })
       .catch((err) => {
         console.log(err);
         swal(
@@ -162,7 +164,8 @@ function ShoppingList() {
           .put(`${process.env.REACT_APP_API_URL}/grocery_items/${id}`, {
             name: item.text,
             obtained: item.isPurchased,
-          })
+          },
+          { withCredentials: true })
           .then(() => {})
           .catch((err) => {
             console.log(err);
@@ -189,7 +192,8 @@ function ShoppingList() {
         axios
           .delete(`${process.env.REACT_APP_API_URL}/grocery_lists/`, {
             data: { id },
-          })
+          },
+          { withCredentials: true })
           .then(() => navigate(`/fridge`))
           .catch((err) => {
             console.log(err);

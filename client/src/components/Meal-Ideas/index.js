@@ -64,7 +64,8 @@ function MealIdeas() {
     }
     axios
       .get(
-        `https://api.edamam.com/search?q=${fridgeQuery}&app_id=${APP_ID}&app_key=${APP_KEY}${healthLabels()}`
+        `https://api.edamam.com/search?q=${fridgeQuery}&app_id=${APP_ID}&app_key=${APP_KEY}${healthLabels()}`,
+        { withCredentials: false }
       )
       .then((res) => {
         setRecipes(res.data.hits);
@@ -83,9 +84,10 @@ function MealIdeas() {
   const getFridgeItems = () => {
     // GET /recipeItems will contain the 3 items closest to expiry in users fridge
     axios
-      .get(`${process.env.REACT_APP_API_URL}/recipeItems`, {
-        withCredentials: true,
-      })
+      .get(
+        `${process.env.REACT_APP_API_URL}/recipeItems`,
+        { withCredentials: true }
+        )
       .then((results) => {
         const closestToExpiry = results.data
           .map((itemObj) => itemObj.name)

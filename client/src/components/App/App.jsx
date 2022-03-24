@@ -11,9 +11,6 @@ import Login from '../Login/';
 import Register from '../Register/';
 import AddFridgeItemIndex from '../AddFridgeItem';
 import MealIdeas from '../Meal-Ideas';
-import axios from 'axios';
-
-axios.defaults.withCredentials = false;
 
 function App() {
 

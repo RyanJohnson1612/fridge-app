@@ -25,7 +25,8 @@ function NewGroceryListModal({ setAllGroceryLists, allGroceryLists, onClick }) {
       .post(`${process.env.REACT_APP_API_URL}/grocery_lists`, {
         user_id: user.id,
         name: input,
-      })
+      },
+      { withCredentials: true })
       .then((res) => {
         console.log("New grocery list submitted!", res.data);
         setAllGroceryLists([...allGroceryLists, res.data]);
