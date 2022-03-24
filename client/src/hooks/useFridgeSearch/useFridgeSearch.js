@@ -40,7 +40,7 @@ function useFridgeSearch() {
     const queryString = createQueryString(filters);
     setSearchParams(queryString);
 
-    axios.get(`${process.env.REACT_APP_API_URL}/api/fridges${queryString}`, {withCredentials: true})
+    axios.get(`/api/fridges${queryString}`, {withCredentials: true})
       .then(res => {
         setItems(res.data);
         setLoading(false);

@@ -15,13 +15,13 @@ function FridgeItemIndex(props) {
 
   useEffect(() => {
 
-    axios.get(`${process.env.REACT_APP_API_URL}/fridge_items/${queryId}`, { withCredentials: true })
+    axios.get(`/api/fridge_items/${queryId}`, { withCredentials: true })
       .then((results) => {
         setFridgeItem(results.data);
       })
       .catch(error => console.log(`Error: ${error.message}`));
 
-    axios.get(`${process.env.REACT_APP_API_URL}/grocery_lists`, { withCredentials: true })
+    axios.get(`/api/grocery_lists`, { withCredentials: true })
       .then((results) => {
         const groceries = results.data;
         setAllGroceryLists(groceries);

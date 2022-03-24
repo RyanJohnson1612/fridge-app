@@ -13,7 +13,7 @@ function usePredictions() {
       data.append('file', img, 'img.png');
       axios
         .post(
-          `${process.env.REACT_APP_API_URL}/api/images`, data,
+          `/api/images`, data,
           {
             headers: {
             'Content-Type': img.type

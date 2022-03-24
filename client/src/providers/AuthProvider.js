@@ -19,7 +19,7 @@ const AuthProvider = function(props) {
    */
   const login = (email, password) => {
     return axios
-      .post(`${process.env.REACT_APP_API_URL}/api/users/login`, {email, password}, {withCredentials: true})
+      .post(`/api/users/login`, {email, password}, {withCredentials: true})
       .then(res => {
         setUser(getUser());
       });
@@ -34,7 +34,7 @@ const AuthProvider = function(props) {
    */
   const register = (firstName, lastName, email, password) => {
     return axios
-      .post(`${process.env.REACT_APP_API_URL}/api/users`, {firstName, lastName, email, password}, {withCredentials: true})
+      .post(`/api/users`, {firstName, lastName, email, password}, {withCredentials: true})
       .then(() => login(email, password))
       .then(() => createFridge(firstName))
       .catch(err => err);
@@ -42,7 +42,7 @@ const AuthProvider = function(props) {
 
   const createFridge = (name) => {
     return axios
-      .post(`${process.env.REACT_APP_API_URL}/api/fridges`, {name}, {withCredentials: true})
+      .post(`/api/fridges`, {name}, {withCredentials: true})
       .then((res) => res)
       .catch(err => err);
   }
@@ -52,7 +52,7 @@ const AuthProvider = function(props) {
    */
   const logout = () => {
     return axios
-      .post(`${process.env.REACT_APP_API_URL}/api/users/logout`, {withCredentials: true})
+      .post(`/api/users/logout`, {withCredentials: true})
       .then(res => {
         deleteCookie('user');
         setUser(null);

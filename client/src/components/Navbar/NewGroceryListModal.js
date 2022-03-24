@@ -22,7 +22,7 @@ function NewGroceryListModal({ setAllGroceryLists, allGroceryLists, onClick }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`${process.env.REACT_APP_API_URL}/grocery_lists`, {
+      .post(`/api/grocery_lists`, {
         user_id: user.id,
         name: input,
       },

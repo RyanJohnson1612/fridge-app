@@ -70,7 +70,7 @@ const AddFridgeItem = (props) => {
   };
 
   const uploadFoodItem = (data) => {
-    axios.post(`${process.env.REACT_APP_API_URL}/fridge_items`, data, { withCredentials: true })
+    axios.post(`/api/fridge_items`, data, { withCredentials: true })
           .then(() => {
             setLoading(false);
 

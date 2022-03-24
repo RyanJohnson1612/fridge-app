@@ -85,7 +85,7 @@ function MealIdeas() {
     // GET /recipeItems will contain the 3 items closest to expiry in users fridge
     axios
       .get(
-        `${process.env.REACT_APP_API_URL}/recipeItems`,
+        `/api/recipeItems`,
         { withCredentials: true }
         )
       .then((results) => {

@@ -28,7 +28,7 @@ function ShoppingList() {
 
   const getPreviousItems = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/grocery_lists/${id}`, { withCredentials: true })
+      .get(`/api/grocery_lists/${id}`, { withCredentials: true })
       .then((res) => {
         const results = [];
         res.data.forEach((data, index) => {
@@ -47,7 +47,7 @@ function ShoppingList() {
 
   const getGroceryListsData = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/grocery_lists`, {
+      .get(`/api/grocery_lists`, {
         withCredentials: true,
       })
       .then((results) => {
@@ -68,7 +68,7 @@ function ShoppingList() {
     }
 
     axios
-      .post(`${process.env.REACT_APP_API_URL}/grocery_lists/${id}`, {
+      .post(`/api/grocery_lists/${id}`, {
         name: item.text,
         grocery_list_id: id,
         obtained: false,
@@ -109,7 +109,7 @@ function ShoppingList() {
     items.forEach((item) => {
       if (item.id === itemId) {
         axios
-          .put(`${process.env.REACT_APP_API_URL}/grocery_items/${itemId}`, {
+          .put(`/api/grocery_items/${itemId}`, {
             name: newValue.text,
             obtained: item.isPurchased,
           },
@@ -143,7 +143,7 @@ function ShoppingList() {
 
     setItems(removeArr);
     axios
-      .delete(`${process.env.REACT_APP_API_URL}/grocery_items/${id}`, { withCredentials: true })
+      .delete(`/api/grocery_items/${id}`, { withCredentials: true })
       .catch((err) => {
         console.log(err);
         swal(
@@ -161,7 +161,7 @@ function ShoppingList() {
         /* toggles isPurchased between true and false */
         item.isPurchased = !item.isPurchased;
         axios
-          .put(`${process.env.REACT_APP_API_URL}/grocery_items/${id}`, {
+          .put(`/api/grocery_items/${id}`, {
             name: item.text,
             obtained: item.isPurchased,
           },
@@ -190,7 +190,7 @@ function ShoppingList() {
     }).then((confirm) => {
       if (confirm) {
         axios
-          .delete(`${process.env.REACT_APP_API_URL}/grocery_lists/`, {
+          .delete(`/api/grocery_lists/`, {
             data: { id },
           },
           { withCredentials: true })
