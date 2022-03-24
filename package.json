@@ -30,8 +30,7 @@
     "moment": "^2.29.1",
     "morgan": "~1.9.1",
     "multer": "^1.4.4",
-    "pg": "^8.7.3",
-    "should-send-same-site-none": "^2.0.5"
+    "pg": "^8.7.3"
   },
   "devDependencies": {
     "axios": "^0.25.0",

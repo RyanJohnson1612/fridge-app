@@ -5,7 +5,6 @@ const path = require('path');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const { shouldSendSameSiteNone } = require('should-send-same-site-none');
 const cors = require('cors');
 
 // db connection
@@ -26,7 +25,7 @@ const corsOptions = {
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
   exposedHeaders: 'Set-Cookie',
-  credentials: true
+  credentials: true,
 }
 
 app.use(cors(corsOptions));
@@ -37,7 +36,6 @@ app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
-app.use(shouldSendSameSiteNone);
 
 app.use('/api/users', usersRouter(db));
 app.use('/api/fridges', fridgesRouter(db));
