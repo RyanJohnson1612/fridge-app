@@ -6,6 +6,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { shouldSendSameSiteNone } = require('should-send-same-site-none');
+const cors = require('cors');
 
 // db connection
 const db = require("./configs/db.config");
@@ -20,14 +21,15 @@ const imagesRouter = require("./routes/images");
 
 const app = express();
 
-app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', process.env.CLIENT_URL);
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.setHeader('Access-Control-Expose-Headers', 'Set-Cookie');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  next();
-});
+const corsOptions = {
+  origin: process.env.CLIENT_URL,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
+  exposedHeaders: 'Set-Cookie',
+  credentials: true
+}
+
+app.use(cors(corsOptions));
 
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
