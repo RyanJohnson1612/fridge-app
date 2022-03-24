@@ -7,7 +7,8 @@
     "test": "NODE_ENV=test node db/scripts/resetdb.js & jest --testTimeout=3000 --forceExit",
     "local": "node ./node_modules/nodemon/bin/nodemon.js",
     "db:reset": "node db/scripts/resetdb.js",
-    "test-db:reset": "NODE_ENV=test node db/scripts/resetdb.js"
+    "test-db:reset": "NODE_ENV=test node db/scripts/resetdb.js",
+    "heroku-postbuild": "cd ../client && npm install && npm run build"
   },
   "jest": {
     "testEnvironment": "node",
