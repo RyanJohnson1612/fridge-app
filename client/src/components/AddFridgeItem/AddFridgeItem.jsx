@@ -11,8 +11,6 @@ import { AiFillPlusCircle } from 'react-icons/ai';
 import Camera from '../Camera/Camera';
 import usePredictions from '../../hooks/usePredictions/usePredictions';
 
-axios.withCredentials = false;
-
 const AddFridgeItem = (props) => {
 
   const [name, setName] = useState( props.groceryName || "" );
@@ -39,7 +37,6 @@ const AddFridgeItem = (props) => {
 
     let queryExpiry = expiry;
     const trimName = name.trim();
-    const capName = trimName[0].toUpperCase() + trimName.slice(1);
     const dbName = trimName.toLowerCase();
 
     if (expiry === "") {
@@ -47,7 +44,7 @@ const AddFridgeItem = (props) => {
     }
 
     if (!image) {
-      axios.get(`https://api.spoonacular.com/food/ingredients/search?apiKey=${process.env.REACT_APP_FOOD_API_KEY}&query=${name}`)
+      axios.get(`https://api.spoonacular.com/food/ingredients/search?apiKey=${process.env.REACT_APP_FOOD_API_KEY}&query=${name}`, { withCredentials: false })
         .then((response) => {
           // console.log(response.data.results);
           const itemList = response.data.results;
@@ -73,7 +70,7 @@ const AddFridgeItem = (props) => {
   };
 
   const uploadFoodItem = (data) => {
-    axios.post(`${process.env.REACT_APP_API_URL}/fridge_items`, data)
+    axios.post(`${process.env.REACT_APP_API_URL}/fridge_items`, data, { withCredentials: true })
           .then(() => {
             setLoading(false);
 
