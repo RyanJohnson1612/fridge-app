@@ -58,7 +58,7 @@ module.exports = (db) => {
       httpOnly: true, 
       sameSite: 'none', 
       secure: true, 
-      domain: process.env.CLIENT_URL.replace('https://', ''),
+      domain: '.' + process.env.CLIENT_URL.replace('https://', ''),
       path: '/' 
     }
     const command = "SELECT * FROM users WHERE email = $1;"
