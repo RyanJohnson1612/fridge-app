@@ -9,7 +9,9 @@ const decryptToken = async (token) => {
   return await verifyToken(token, process.env.JWT_SECRET);
 }
 
-/* Route protection middleware, requires a jsonwebtoken (access-token) to be set to access route */
+/* Route protection middleware, requires a jsonwebtoken (access-token) to be set to access route 
+ * AKA user must be logged in to access route
+ */
 const protectedRoute = async (req, res, next) => {
   const accessToken = req.cookies['access-token'];
 
