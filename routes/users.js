@@ -55,11 +55,8 @@ module.exports = (db) => {
   router.post('/login', (req, res) => {
     const cookieOptions = { 
       maxAge: 2592000000, 
-      httpOnly: true, 
       sameSite: 'none', 
       secure: true, 
-      domain: '.' + process.env.CLIENT_URL.replace('https://', ''),
-      path: '/' 
     }
     const command = "SELECT * FROM users WHERE email = $1;"
     db.query(command, [req.body.email])
