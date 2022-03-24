@@ -53,6 +53,13 @@ module.exports = (db) => {
 
   /* POST validate user login */
   router.post('/login', (req, res) => {
+    const cookieOptions = { 
+      maxAge: 2592000000, 
+      httpOnly: true, 
+      sameSite: 'none', 
+      secure: true, 
+      domain: process.env.CLIENT_URL 
+    }
     const command = "SELECT * FROM users WHERE email = $1;"
     db.query(command, [req.body.email])
       .then(data => {
@@ -66,7 +73,7 @@ module.exports = (db) => {
           const token = createToken(user);
           console.log(token);
           // create cookie for access token that lasts 30 days
-          res.cookie('access-token', token, { maxAge: 2592000000, httpOnly: true, sameSite: 'none', secure: true, domain: process.env.CLIENT_URL.replace('https://', '') });
+          res.cookie('access-token', token, cookieOptions);
           // create cookie with basic user info
           res.cookie(
             'user',
@@ -76,7 +83,7 @@ module.exports = (db) => {
               firstName: user.first_name,
               lastName: user.last_name
             }),
-            { maxAge: 2592000000, sameSite: 'none', secure: true, domain: process.env.CLIENT_URL.replace('https://', '') }
+            cookieOptions
           );
 
           return res.status(200).json({
@@ -102,10 +109,7 @@ module.exports = (db) => {
     res.cookie(
       'access-token',
       'expired',
-      {
-        expires: new Date(Date.now() + 3000),
-        sameSite: 'none', secure: true
-      }
+      cookieOptions
     );
     res.status(200).json('Logged out');
   });
