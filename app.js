@@ -21,9 +21,10 @@ const imagesRouter = require("./routes/images");
 const app = express();
 
 app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', process.env.CLIENT_URL);
+  res.setHeader('Access-Control-Allow-Origin', process.env.CLIENT_URL);
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.setHeader('Access-Control-Expose-Headers', 'Set-Cookie');
   res.setHeader('Access-Control-Allow-Credentials', true);
   next();
 });
