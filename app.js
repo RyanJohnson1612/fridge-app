@@ -5,6 +5,7 @@ const path = require('path');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const { shouldSendSameSiteNone } = require('should-send-same-site-none');
 
 // db connection
 const db = require("./configs/db.config");
@@ -33,6 +34,7 @@ app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(shouldSendSameSiteNone);
 
 app.use('/api/users', usersRouter(db));
 app.use('/api/fridges', fridgesRouter(db));
